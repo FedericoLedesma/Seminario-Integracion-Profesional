@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class AdminPermissionController extends Controller
 {
@@ -14,6 +15,8 @@ class AdminPermissionController extends Controller
     public function index()
     {
         //
+    	$permisos=Permission::all();
+    	return  view('admin.permisos.index', compact('permisos'));
     }
 
     /**
@@ -24,6 +27,7 @@ class AdminPermissionController extends Controller
     public function create()
     {
         //
+    	return view('admin.permisos.create');
     }
 
     /**
@@ -32,9 +36,14 @@ class AdminPermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//crear Request para validar los datos recibidos
     {
         //
+       	Permission::create([
+       			'name' => $request['name'],
+       			
+       	]);
+       	return redirect('/admin/permisos');
     }
 
     /**

@@ -24,7 +24,7 @@
 }
 -->
 </style>
-<form method="get" action={{ route('role.create') }}>
+<form method="get" action={{ route('roles.create') }}>
 	
 		<button class="btn btn-primary" type="submit">Agregar Rol</button>
 		
@@ -41,28 +41,26 @@
 							<tr>
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>						
-								<th scope="col">Guar Name</th>
+								<th scope="col">Guard Name</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
-								<th scope="col">Modificar</th>
+								<th scope="col">Ver</th>
 								<th scope="col">Eliminar</th>
 								
 							</tr>
 						</thead>
 					
 						<tbody>
-						@if($users)
-							@foreach($users as $user)
+						@if($roles)
+							@foreach($roles as $role)
 							<tr>
 								<td>{{$role->id}}</td>
 								<td>{{$role->name}}</td>
-								<td>{{$role->guar_name}}</td>
+								<td>{{$role->guard_name}}</td>
 								<td>{{$role->created_at}}</td>
 								<td>{{$role->updated_at}}</td>
+								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$role], $attributes = []);!!}
 								
-								<!-- <td>{!!	link_to_route('users.edit', $title = 'Modificar', $parameters = [$user], $attributes = []);!!}</td>
-								
-								 <td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user], $attributes = []);!!} -->
 								<td>{!!	Form::submit('Borrar')!!}</td>
 							</tr>
 								@endforeach

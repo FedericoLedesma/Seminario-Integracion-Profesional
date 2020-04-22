@@ -24,7 +24,7 @@
 }
 -->
 </style>
-<form method="get" action={{ route('permission.create') }}>
+<form method="get" action={{ route('permisos.create') }}>
 	
 		<button class="btn btn-primary" type="submit">Agregar Permission</button>
 		
@@ -41,34 +41,30 @@
 							<tr>
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>						
-								<th scope="col">Guar Name</th>
+								<th scope="col">Guard Name</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
-								<th scope="col">Modificar</th>
 								<th scope="col">Eliminar</th>
 								
 							</tr>
 						</thead>
 					
 						<tbody>
-						@if($users)
-							@foreach($users as $user)
+						@if($permisos)
+							@foreach($permisos as $permission)
 							<tr>
 								<td>{{$permission->id}}</td>
 								<td>{{$permission->name}}</td>
-								<td>{{$permission->guar_name}}</td>
+								<td>{{$permission->guard_name}}</td>
 								<td>{{$permission->created_at}}</td>
 								<td>{{$permission->updated_at}}</td>
 								
-								<!-- <td>{!!	link_to_route('users.edit', $title = 'Modificar', $parameters = [$user], $attributes = []);!!}</td>
-								
-								 <td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user], $attributes = []);!!} -->
-								<td>{!!	Form::submit('Borrar')!!}</td>
+								<td>{!!	Form::submit('X')!!}</td>
 							</tr>
 								@endforeach
 							@endif
 						
-						
+						</tbody>
 					
 					</table>
 				</div>

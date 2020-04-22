@@ -50,9 +50,9 @@ body {
               </li>
               <li><a href="{{ route('users.index') }}">Usuarios</a>
               </li>
-               <li><a href="#">Roles</a>
+               <li><a href="{{ route('roles.index') }}">Roles</a>
               </li>
-               <li><a href="#">Permisos</a>
+               <li><a href="{{ route('permisos.index') }}">Permisos</a>
               </li>
              
             </ul>

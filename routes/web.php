@@ -1,5 +1,5 @@
 <?php
-
+use Spatie\Permission\Models\Permission;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('home');
 	}return view('auth.login');
 });
-
 Auth::routes();
 //falta un middleware que permita ver si esta en sesion
 Route::get('/home', 'HomeController@index')->name('home');

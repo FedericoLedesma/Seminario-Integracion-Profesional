@@ -5,36 +5,32 @@
 <!-- validar los campos y establecer el campo contraseña -->
 <!-- mostrar una tabla con los roles que existen -->
 	   @include('layouts.error')
-	  	@if($user)
+	  	@if($role)
 	  	
 	  	
 	    <table>
 	    	<tr>
-	    		<td>ID USUARIO </td>
-				<td>{{$user->id}}</td>
-			</tr>
-			<tr>
-				<td>DNI </td>
-				<td>{{$user->dni}}</td>
+	    		<td>ID </td>
+				<td>{{$role->id}}</td>
 			</tr>
 			<tr>
 				<td>NOMBRE </td>
-				<td>{{$user->name}}</td>
-			<!-- </tr>
-			 <tr>
-				<td>ROLE_ID </td>
-				<td>{{$user->role_id}}</td>
-			</tr>-->
+				<td>{{$role->name}}</td>
+			</tr>
+			<tr>
+				<td>PERMISOS </td>
+				<td>ACA VAN LOS PERMISOS</td>
+			
 			<tr>
 				<td>CREADO </td>
-				<td>{{$user->created_at}}</td>
+				<td>{{$role->created_at}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$user->updated_at}}</td>
+				<td>{{$role->updated_at}}</td>
 			</tr>			
 			
 		</table>
-	{!!link_to_route('users.edit', $title = 'MODIFICAR', $parameters = [$user], $attributes = [])!!}
+	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role], $attributes = [])!!}
 @endif
 @endsection

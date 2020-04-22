@@ -72,6 +72,8 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
+    	$user=User::find($id);
+    	return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -84,6 +86,12 @@ class AdminUsersController extends Controller
     public function update(Request $request, $id)
     {
         //traer del proyecto de nutricion
+    	$user=User::find($id);
+    	$user->name=$request->name;
+    	
+    	
+    	$user->save();
+    	return redirect('/admin/users');
     }
 
     /**
