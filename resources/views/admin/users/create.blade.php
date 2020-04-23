@@ -19,6 +19,28 @@
 		   	
 		   	</tr>
 		   	<tr>
+		   	<td>	
+		    {!!	Form::label('role', 'ROL')!!}
+		    </td>
+		   	<td>		   	
+		   	@if($roles)
+		   
+	
+		   		<select name="role_id">
+		   	@foreach ($roles as $role)
+		
+    		<!-- Opciones de la lista -->
+			    <option value="{{$role->id}}" >{{$role->name}}</option> <!-- Opción por defecto -->
+			    
+			    
+			 
+		   	@endforeach
+		   	 </select>
+		   	 	@endIf
+		   	</td>
+		   	</tr>
+		   
+		   	<tr>
 	    	<td>	
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>

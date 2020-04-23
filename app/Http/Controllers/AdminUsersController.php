@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
+use Spatie\Permission\Models\Role;
 use App\User;
 
 
@@ -17,7 +18,7 @@ class AdminUsersController extends Controller
     {
         //
     	$users=User::all();
-    	 
+    	//$roles->getRoleNames();
     	return  view('admin.users.index', compact('users'));
     }
 
@@ -29,7 +30,8 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-    	return view('admin.users.create');
+        $roles=Role::all();
+    	return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -42,11 +44,14 @@ class AdminUsersController extends Controller
     {
         
     	$data=$request->all();
-    	User::create([
+    	$user=User::create([
     			'dni'=>$data['dni'],
     			'name' => $data['name'],
     			'password' => bcrypt($data['password'])
     	]);
+    	$role=Role::find($data['role_id']);
+    	$user->assignRole($role->name);
+    	$user->save();
     	return redirect('/admin/users');
     }
 
@@ -73,7 +78,8 @@ class AdminUsersController extends Controller
     {
         //
     	$user=User::find($id);
-    	return view('admin.users.edit',compact('user'));
+    	$roles=Role::all();
+    	return view('admin.users.edit',compact('user','roles'));
     }
 
     /**
@@ -88,8 +94,8 @@ class AdminUsersController extends Controller
         //traer del proyecto de nutricion
     	$user=User::find($id);
     	$user->name=$request->name;
-    	
-    	
+    	$role=Role::find($request['role_id']);
+    	$user->assignRole($role->name);    	
     	$user->save();
     	return redirect('/admin/users');
     }

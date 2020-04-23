@@ -40,9 +40,9 @@
 						<thead >
 							<tr>
 								<th scope="col">id</th>
-								<!--  <th scope="col">Role id</th>-->
 								<th scope="col">DNI</th>
 								<th scope="col">Nombre</th>
+								<th scope="col">Rol</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
 								<th scope="col">Modificar</th>
@@ -56,15 +56,15 @@
 							@foreach($users as $user)
 							<tr>
 								<td>{{$user->id}}</td>
-								<!--  <td>{{$user->role_id}}</td>-->
 								<td>{{$user->dni}}</td>
 								<td>{{$user->name}}</td>
+								{{$roles=$user->getRoleNames()}}
+								@foreach($roles as $rol)
+								<td>{{$rol}}</td>
+								@endforeach
 								<td>{{$user->created_at}}</td>
 								<td>{{$user->updated_at}}</td>
-								
-								<!-- <td>{!!	link_to_route('users.edit', $title = 'Modificar', $parameters = [$user], $attributes = []);!!}</td>
-								 -->
-								 <td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user], $attributes = []);!!}
+								<td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user], $attributes = []);!!}
 								<td>{!!	Form::submit('Borrar')!!}</td>
 							</tr>
 								@endforeach

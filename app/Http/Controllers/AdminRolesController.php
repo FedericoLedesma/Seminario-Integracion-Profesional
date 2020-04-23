@@ -47,6 +47,7 @@ class AdminRolesController extends Controller
     public function store(Request $request)
     {
         //
+       
     	Role::create([
     			'name' => $request['name'],
     	
