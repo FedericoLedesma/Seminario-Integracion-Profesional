@@ -60,8 +60,10 @@
 								<td>{{$role->created_at}}</td>
 								<td>{{$role->updated_at}}</td>
 								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$role], $attributes = []);!!}
+								{!! Form::model($role, ['route' => ['roles.destroy', $role->id], 'method'=> 'DELETE'])!!}
 								
 								<td>{!!	Form::submit('Borrar')!!}</td>
+								{!! Form::close() !!}
 							</tr>
 								@endforeach
 							@endif

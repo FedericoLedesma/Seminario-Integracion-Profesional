@@ -65,9 +65,14 @@
 								<td>{{$rol}}</td>
 								@endforeach
 								<td>{{$user->created_at}}</td>
-								<td>{{$user->updated_at}}</td>
+								<td>{{$user->updated_at}}</td>								
 								<td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user], $attributes = []);!!}
-								<td>{!!	Form::submit('Borrar')!!}</td>
+								
+								
+								{!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method'=> 'DELETE'])!!}
+								<td>{!!	Form::submit('ELIMINAR')!!}</td>
+								{!! Form::close() !!}
+								
 							</tr>
 								@endforeach
 							@endif

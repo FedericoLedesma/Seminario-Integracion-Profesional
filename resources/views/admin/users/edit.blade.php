@@ -67,5 +67,5 @@
 		 	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = [])!!}
 		 </div>
 	 </div>
-
+	{!! Form::close() !!}
 @endsection

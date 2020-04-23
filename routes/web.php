@@ -27,3 +27,10 @@ Route::match(array('PUT', 'PATCH'), "/user/config/{id}", array(
 		'uses' => 'UserController@update',
 		'as' => 'user.update'
 ));
+
+Route::get('/perfil/cambiarpassword',["as"=>"user.cambiarpass", "uses"=>'UserController@cambiarPassword'] );
+
+Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
+		'uses' => 'UserController@updatePassword',
+		'as' => 'user.updatepass'
+));

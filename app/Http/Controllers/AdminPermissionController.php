@@ -66,6 +66,8 @@ class AdminPermissionController extends Controller
     public function edit($id)
     {
         //
+    	$permission=Permission::find($id);
+    	return view('admin.permisos.edit',compact('permission'));
     }
 
     /**
@@ -78,6 +80,10 @@ class AdminPermissionController extends Controller
     public function update(Request $request, $id)
     {
         //
+    	$permission=Permission::find($id);
+    	$permission->name=$request['name'];
+    	$permission->save();
+    	return redirect('/admin/permisos');
     }
 
     /**
@@ -89,5 +95,7 @@ class AdminPermissionController extends Controller
     public function destroy($id)
     {
         //
+        Permission::destroy($id);
+        return redirect('/admin/permisos');
     }
 }

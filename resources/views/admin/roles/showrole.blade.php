@@ -15,11 +15,13 @@
 	   @include('layouts.error')
 	  	@if($role)
 	  	
-	  	<table>
+
  
 
 	    <div class="table-responsive">
+	    <h2>Rol  {{$role->name}}</h2>
         <div class="col-md-3 col-md-offset-1">
+         <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    		<td>ID </td>
@@ -45,24 +47,25 @@
 		</table>
 		</div>
 		</div>
+		</div>
 	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role], $attributes = [])!!}
 	
-	
+	<h3>Permisos asociados</h3>
 	@if($permisos)
 	<div class="table-resposive">
-        <div class="col-md-4 col-md-offset-4">
-        <h3>Permisos asociados</h3>
-	    <table class="table table-bordered table-hover table-striped">
-	    @foreach($permisos as $permiso)
-	    	<tr>
-	    		<td>NOMBRE </td>
-				<td>{{$permiso}}</td>
-			</tr>
-			
-			@endforeach
-		</table>
+        <div class="panel-heading">
+		    <table class="table table-bordered table-striped">
+		    @foreach($permisos as $permiso)
+		    	<tr>
+			 		<td>
+			 			<label>{{$permiso}}</label>
+			 		</td>
+				</tr>
+				
+				@endforeach
+			</table>
 		</div>
-		</div>
+	</div>
 	@endif
 	
 	

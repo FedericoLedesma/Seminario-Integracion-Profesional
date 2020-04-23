@@ -47,8 +47,8 @@ class AdminUsersController extends Controller
     	$user=User::create([
     			'dni'=>$data['dni'],
     			'name' => $data['name'],
-    			'password' => bcrypt($data['password'])
-    	]);
+    			'password' => bcrypt($data['dni'])
+    	]);    	
     	$roles=$user->getRoleNames();
     	foreach ($roles as $roleName){
     		$user->removeRole($roleName);
@@ -108,8 +108,7 @@ class AdminUsersController extends Controller
     	$user->assignRole($role->name);    	
     	$user->save();
     	return redirect('/admin/users');
-    }
-
+    }	
     /**
      * Remove the specified resource from storage.
      *
@@ -118,6 +117,7 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        ////traer del proyecto de nutricion
+       User::destroy($id);
+       return redirect('/admin/users');;
     }
 }

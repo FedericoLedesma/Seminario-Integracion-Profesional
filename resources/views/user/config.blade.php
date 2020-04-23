@@ -50,7 +50,7 @@
 		    </tr>		    
 		   	<tr>
 		   	<td>
-		   	{!!link_to_route('users.show', $title = 'CAMBIAR CONTRASENA', $parameters = [$user], $attributes = [])!!}
+		   	{!!link_to_route('user.cambiarpass', $title = 'CAMBIAR CONTRASENA', $parameters = [$user], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		   	<tr>

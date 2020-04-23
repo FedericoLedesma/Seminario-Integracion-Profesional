@@ -80,8 +80,26 @@ class AdminRolesController extends Controller
     {
         //
         $permisos=Permission::all();
+        
     	$role=Role::find($id);
-    	return view('admin.roles.edit',compact('role','permisos'));
+    	$permisosAsociados=$role->getAllPermissions();
+    	
+    	//   Realizo lo siguiente para quitar de la lista los permisos que el rol ya dispone
+    	$i=0;
+    	foreach ($permisos as $per){
+    
+    		foreach ($permisosAsociados as $perAs){
+	    		
+	    			if($per->id== $perAs->id){
+	    				
+	    				unset($permisos[$i]);
+	    			}
+    		}
+    		$i++;
+    	}
+    	
+    	
+    	return view('admin.roles.edit',compact('role','permisos','permisosAsociados'));
     }
 
     /**
@@ -94,11 +112,27 @@ class AdminRolesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
+    	$quitarPermisos=$request['quitarPermisos'];
+    	$agregarPermisos=$request['agregarPermisos'];
+    	
     	$role=Role::find($id);
-    	$role->name=$request->name;
-    	 
-    	 
+    	$role->name=$request['name'];
+    	
+    	if(!empty($quitarPermisos)){
+    		foreach ($quitarPermisos as $permission){
+    			 
+    			$role->revokePermissionTo($permission);
+    	
+    		}
+    	}
+    	if(!empty($agregarPermisos)){
+	    	foreach ($agregarPermisos as $permiso){
+	    		$role->givePermissionTo($permiso); 
+	    	}
+    	}
     	$role->save();
+    	
     	return redirect('/admin/roles');
     }
 
@@ -111,5 +145,7 @@ class AdminRolesController extends Controller
     public function destroy($id)
     {
         //
+        Role::destroy($id);
+        return redirect('/admin/roles');
     }
 }

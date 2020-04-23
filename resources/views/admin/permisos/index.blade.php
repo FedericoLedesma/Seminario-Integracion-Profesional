@@ -16,27 +16,27 @@
 <link rel="stylesheet" href="css/bootstrap-theme.min.css" crossorigin="anonymous">
 <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 <style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-	 
-	 
-}
--->
+	<!--
+	.table{
+		 background-color: #E3EEE9;
+		 
+		 
+	}
+	-->
 </style>
 <form method="get" action={{ route('permisos.create') }}>
 	
-		<button class="btn btn-primary" type="submit">Agregar Permission</button>
+		<button class="btn btn-primary" type="submit">Agregar Permiso</button>
 		
 	
 </form>
 <div class="container">
-    <!--  <div class="row">-->
+ 
     <div class="table-responsive">
          <div class="col-md-8 col-md-offset-2">
-             <!--<div class="panel panel-default">-->
+             
 				 <div class="panel-heading">
-					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">--> 
+					<table class="table table-striped table-hover "> 
 						<thead >
 							<tr>
 								<th scope="col">id</th>
@@ -44,6 +44,7 @@
 								<th scope="col">Guard Name</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
+								<th scope="col">Modificar</th>
 								<th scope="col">Eliminar</th>
 								
 							</tr>
@@ -59,7 +60,13 @@
 								<td>{{$permission->created_at}}</td>
 								<td>{{$permission->updated_at}}</td>
 								
+								{!! Form::model($permission, ['route' => ['permisos.edit', $permission->id], 'method'=> 'GET'])!!}
+								<td>{!!	Form::submit('MODIFICAR')!!}</td>
+								{!! Form::close() !!}
+								
+								{!! Form::model($permission, ['route' => ['permisos.destroy', $permission->id], 'method'=> 'DELETE'])!!}
 								<td>{!!	Form::submit('X')!!}</td>
+								{!! Form::close() !!}
 							</tr>
 								@endforeach
 							@endif
@@ -71,6 +78,5 @@
 				</div>
 			  </div>
 				 </div> 
-				<!--</div>-->
 @endsection
 

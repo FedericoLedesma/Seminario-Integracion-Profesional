@@ -48,14 +48,6 @@
 		   	{!!	Form::text('name')!!}
 		   	</td>
 		   	</tr>
-		   	<tr>
-	    	<td>	
-		    {!!	Form::label('password', 'PASSWORD')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::text('password')!!}
-		   	</td>
-		   	</tr>
 		   <!--	<tr>
 	    	  <td>	
 		    {!!	Form::label('role', 'ROL')!!}
