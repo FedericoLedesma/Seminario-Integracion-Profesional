@@ -1,5 +1,4 @@
 <?php
-use Spatie\Permission\Models\Permission;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +23,7 @@ Route::resource('/admin/roles', 'AdminRolesController');
 Route::resource('/admin/permisos', 'AdminPermissionController');
 Route::get('/user/config',["as"=>"user.config", "uses"=>'UserController@config'] );
 Route::get('/perfil',["as"=>"user.perfil", "uses"=>'UserController@index'] );
+Route::match(array('PUT', 'PATCH'), "/user/config/{id}", array(
+		'uses' => 'UserController@update',
+		'as' => 'user.update'
+));

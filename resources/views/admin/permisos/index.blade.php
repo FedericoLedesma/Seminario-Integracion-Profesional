@@ -36,7 +36,7 @@
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-					<table class="table table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">--> 
+					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">--> 
 						<thead >
 							<tr>
 								<th scope="col">id</th>

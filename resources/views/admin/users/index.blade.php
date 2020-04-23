@@ -58,7 +58,9 @@
 								<td>{{$user->id}}</td>
 								<td>{{$user->dni}}</td>
 								<td>{{$user->name}}</td>
-								{{$roles=$user->getRoleNames()}}
+								<?php 
+								$roles=$user->getRoleNames();							
+								?>								
 								@foreach($roles as $rol)
 								<td>{{$rol}}</td>
 								@endforeach

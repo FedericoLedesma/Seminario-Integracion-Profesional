@@ -29,7 +29,7 @@ class UserController extends Controller
 		//$user->role_id=$request->role_id;
 	
 		$user->save();
-		return redirect('/admin/users');
+		return redirect('/perfil');
 		 
 	}
 	public function store(Request $request)

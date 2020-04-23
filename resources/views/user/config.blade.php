@@ -4,9 +4,9 @@
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
 <!-- validar los campos y establecer el campo contraseña -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method'=> 'PUT'])!!}
+	 	 {!! Form::model($user, ['route' => ['user.update', $user->id], 'method'=> 'PUT'])!!}
 	 	@if($user)
-	    <h1>EDITAR usuarios</h1>
+	    <h1>Configuracion de mi perfil</h1>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
@@ -17,12 +17,22 @@
 		   	{!!	Form::label($user->id)!!}
 		   	</td>
 		   	</tr>
+		   	<tr>
+			<td> {!! Form::label('role', 'ROLE') !!} </td>
+				<?php 
+					$roles=$user->getRoleNames();							
+				?>								
+				@foreach($roles as $rol)
+			<td> {!!	Form::label($rol)!!}</td>
+				@endforeach
+				
+			</tr>
 	    	<tr>
 	    	<td>	
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
-		   	{!!	Form::label($user->dni)!!}
+		  {!!	Form::text('dni',$user->dni)!!}
 		   	</td>		   	
 		   	</tr>
 		   	<tr>
@@ -32,20 +42,18 @@
 		    <td>
 		   	{!!	Form::text('name',$user->name)!!}
 		   	</td>
-		   	</tr>
-		 <!--   <tr>
-	    	<td>	
-		    {!!	Form::label('role_id', 'ID_ROL')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::text('role_id',$user->role_id)!!}
-		   	</td>
-		   	</tr> -->
-		   	
+		   	</tr>		 	
 		   	<tr>
 	    	<td>	
 		     <td>{!!Form::submit('Guardar')!!}
 		    </td>
+		    </tr>		    
+		   	<tr>
+		   	<td>
+		   	{!!link_to_route('users.show', $title = 'CAMBIAR CONTRASENA', $parameters = [$user], $attributes = [])!!}
+		   	</td>
+		   	</tr>
+		   	<tr>
 		    <td>
 		   	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = [])!!}
 		   	</td>

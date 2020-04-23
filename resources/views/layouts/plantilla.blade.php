@@ -22,6 +22,11 @@ nav.navbar {
 body {
   background-color: #C1F5DF;
 }
+.table{
+	 background-color: #E3EEE9;
+	 
+	 
+}
 </style>
 
 <body>

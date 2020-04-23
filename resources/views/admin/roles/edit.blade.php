@@ -6,9 +6,11 @@
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method'=> 'PUT'])!!}
 	 	@if($role)
-	    <h1>EDITAR usuarios</h1>
+	    <h1>Editar ROL</h1>
 	      @include('layouts.error')
-	    <table>
+	    <div class="table-responsive">
+        <div class="col-md-3 col-md-offset-1">
+	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    	<td>	
 		    {!!	Form::label('id', 'ID')!!}
@@ -36,6 +38,15 @@
 		   	</tr>
 		 </table>
 		 @endif
-	 
-
+		 @if($permisos)
+		 @foreach($permisos as $permiso)
+		 <div class="form-check">
+		 	<input class="form-check-input" type="checkbox" value="{{$permiso->id}}" id="defaultCheck1">
+		  	<label class="form-check-label" for="defaultCheck1">
+		   		{{$permiso->name}}
+		  	</label>
+		  	@endforeach
+		@endif
+		</div>
+		</div>
 @endsection

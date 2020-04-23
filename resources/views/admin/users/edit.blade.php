@@ -8,7 +8,9 @@
 	 	@if($user)
 	    <h1>EDITAR usuarios</h1>
 	      @include('layouts.error')
-	    <table>
+	    <div class="table-responsive">
+        <div class="col-md-3 col-md-offset-1">
+	    <table class="table table-bordered table-striped">
 	    	<tr>
 	    	<td>	
 		    {!!	Form::label('id', 'ID')!!}
@@ -58,12 +60,12 @@
 	    	<td>	
 		     <td>{!!Form::submit('Guardar')!!}
 		    </td>
-		    <td>
-		   	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = [])!!}
-		   	</td>
+		    
 		   	</tr>
 		 </table>
 		 @endif
-	 
+		 	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = [])!!}
+		 </div>
+	 </div>
 
 @endsection

@@ -49,6 +49,10 @@ class AdminUsersController extends Controller
     			'name' => $data['name'],
     			'password' => bcrypt($data['password'])
     	]);
+    	$roles=$user->getRoleNames();
+    	foreach ($roles as $roleName){
+    		$user->removeRole($roleName);
+    	}    	
     	$role=Role::find($data['role_id']);
     	$user->assignRole($role->name);
     	$user->save();
@@ -94,6 +98,12 @@ class AdminUsersController extends Controller
         //traer del proyecto de nutricion
     	$user=User::find($id);
     	$user->name=$request->name;
+    	
+    	$roles=$user->getRoleNames();
+    	foreach ($roles as $roleName){
+    		$user->removeRole($roleName);
+    	}
+    	
     	$role=Role::find($request['role_id']);
     	$user->assignRole($role->name);    	
     	$user->save();
