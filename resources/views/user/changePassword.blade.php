@@ -33,11 +33,11 @@
 			</div>
 		   	</td>
 		</tr> 
-		<tr>
-		 <button type="submit" class="btn btn-primary">Submit</button>
-		</tr>
+		
 		</table>	
-		   	
+
+		 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
 	@endif
 	 
 

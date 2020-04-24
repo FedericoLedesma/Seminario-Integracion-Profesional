@@ -12,6 +12,10 @@ class AdminRolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	public function __construct()
+	{
+		$this->middleware(['role:Administrador'],['only'=>['index','create','store','show','edit','update','destroy']]);
+	}
     public function index()
     {
         /** debo mostrar todos los roles

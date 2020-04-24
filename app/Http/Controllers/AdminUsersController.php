@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
+use App\Http\Requests\UserRequest;
 use Spatie\Permission\Models\Role;
 use App\User;
 
@@ -40,7 +41,7 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)//construir un Userrequest para validar la entrada de datos 
+    public function store(UserRequest $request)//construir un Userrequest para validar la entrada de datos 
     {
         
     	$data=$request->all();
@@ -95,7 +96,7 @@ class AdminUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //traer del proyecto de nutricion
+        
     	$user=User::find($id);
     	$user->name=$request->name;
     	

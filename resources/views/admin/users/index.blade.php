@@ -2,9 +2,11 @@
 
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
-<!-- mostrar una tabla con los roles que existen -->
+
+<!-- mostrar una tabla con los roles que existen 
+oculatar componentes segun los permisos
+
+-->
 	   
 	  	<title>PAGINA PRINCIPAL ADMINISTRADOR</title>
 	    

@@ -16,11 +16,24 @@ Route::get('/', function () {
 	}return view('auth.login');
 });
 Auth::routes();
-//falta un middleware que permita ver si esta en sesion
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/admin/users', 'AdminUsersController');
-Route::resource('/admin/roles', 'AdminRolesController');
-Route::resource('/admin/permisos', 'AdminPermissionController');
+
+/**
+ * Rutas para un usuario con rol administrador
+ */
+
+Route::group(['middleware' => ['role:Administrador']], function () {
+	//
+	Route::resource('/admin/users', 'AdminUsersController');
+	Route::resource('/admin/roles', 'AdminRolesController');
+	Route::resource('/admin/permisos', 'AdminPermissionController');
+	
+});
+/**
+ * RUTAS PARA UN USUARIO LOGGEADO
+ * 
+ */
 Route::get('/user/config',["as"=>"user.config", "uses"=>'UserController@config'] );
 Route::get('/perfil',["as"=>"user.perfil", "uses"=>'UserController@index'] );
 Route::match(array('PUT', 'PATCH'), "/user/config/{id}", array(
@@ -34,3 +47,4 @@ Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
 		'uses' => 'UserController@updatePassword',
 		'as' => 'user.updatepass'
 ));
+
