@@ -14,7 +14,11 @@ class AdminRolesController extends Controller
      */
 	public function __construct()
 	{
-		$this->middleware(['role:Administrador'],['only'=>['index','create','store','show','edit','update','destroy']]);
+		$this->middleware(['permission:alta_roles'],['only'=>['index','create','store','show']]);
+		$this->middleware(['permission:baja_roles'],['only'=>['index','destroy']]);
+		$this->middleware(['permission:modificacion_roles'],['only'=>['index','edit','update','show']]);
+		$this->middleware(['permission:asignar_permisos_roles'],['only'=>['index','edit','update','show']]);
+		$this->middleware(['permission:quitar_permisos_roles'],['only'=>['index','edit','update','show']]);
 	}
     public function index()
     {
@@ -116,27 +120,27 @@ class AdminRolesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
-    	$quitarPermisos=$request['quitarPermisos'];
-    	$agregarPermisos=$request['agregarPermisos'];
-    	
-    	$role=Role::find($id);
-    	$role->name=$request['name'];
-    	
-    	if(!empty($quitarPermisos)){
-    		foreach ($quitarPermisos as $permission){
-    			 
-    			$role->revokePermissionTo($permission);
-    	
-    		}
-    	}
-    	if(!empty($agregarPermisos)){
-	    	foreach ($agregarPermisos as $permiso){
-	    		$role->givePermissionTo($permiso); 
+    	if(!($id=='1')){
+	    	$quitarPermisos=$request['quitarPermisos'];
+	    	$agregarPermisos=$request['agregarPermisos'];
+	    	
+	    	$role=Role::find($id);
+	    	$role->name=$request['name'];
+	    	
+	    	if(!empty($quitarPermisos)){
+	    		foreach ($quitarPermisos as $permission){
+	    			 
+	    			$role->revokePermissionTo($permission);
+	    	
+	    		}
 	    	}
+	    	if(!empty($agregarPermisos)){
+		    	foreach ($agregarPermisos as $permiso){
+		    		$role->givePermissionTo($permiso); 
+		    	}
+	    	}
+	    	$role->save();
     	}
-    	$role->save();
-    	
     	return redirect('/admin/roles');
     }
 
@@ -149,7 +153,9 @@ class AdminRolesController extends Controller
     public function destroy($id)
     {
         //
-        Role::destroy($id);
+        if(!($id=='1')){
+        	Role::destroy($id);
+        }
         return redirect('/admin/roles');
     }
 }

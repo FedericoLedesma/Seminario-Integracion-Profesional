@@ -15,6 +15,14 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	public function __construct()
+	{
+		$this->middleware(['permission:alta_usuarios'],['only'=>['index','create','store','show']]);
+		$this->middleware(['permission:baja_usuarios'],['only'=>['index','destroy']]);
+		$this->middleware(['permission:modificacion_usuarios'],['only'=>['index','edit','update','show']]);
+		$this->middleware(['permission:asignar_roles_usuarios'],['only'=>['index','edit','update','show']]);
+		$this->middleware(['permission:quitar_roles_usuarios'],['only'=>['index','edit','update','show']]);
+	}
     public function index()
     {
         //
@@ -96,19 +104,21 @@ class AdminUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-    	$user=User::find($id);
-    	$user->name=$request->name;
-    	
-    	$roles=$user->getRoleNames();
-    	foreach ($roles as $roleName){
-    		$user->removeRole($roleName);
-    	}
-    	
-    	$role=Role::find($request['role_id']);
-    	$user->assignRole($role->name);    	
-    	$user->save();
-    	return redirect('/admin/users');
+        if(!($id=='1')){
+        	$user=User::find($id);
+        	$user->name=$request->name;
+        	 
+        	$roles=$user->getRoleNames();
+        	foreach ($roles as $roleName){
+        		$user->removeRole($roleName);
+        	}
+        	 
+        	$role=Role::find($request['role_id']);
+        	$user->assignRole($role->name);
+        	$user->save();
+        	
+        }
+        return redirect('/admin/users');
     }	
     /**
      * Remove the specified resource from storage.
@@ -118,7 +128,9 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-       User::destroy($id);
+    	if(!($id=='1')){
+    		User::destroy($id);
+    	}
        return redirect('/admin/users');;
     }
 }

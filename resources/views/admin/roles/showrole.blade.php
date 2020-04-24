@@ -32,10 +32,6 @@
 				<td>{{$role->name}}</td>
 			</tr>
 			<tr>
-				<td>PERMISOS </td>
-				<td>ACA VAN LOS PERMISOS</td>
-			
-			<tr>
 				<td>CREADO </td>
 				<td>{{$role->created_at}}</td>
 			</tr>

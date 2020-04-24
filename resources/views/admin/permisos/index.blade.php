@@ -26,7 +26,7 @@
 </style>
 <form method="get" action={{ route('permisos.create') }}>
 	
-		<button class="btn btn-primary" type="submit">Agregar Permiso</button>
+	<!--  NO SE PUEDEN AGREGAR PERMISOS 	<button class="btn btn-primary" type="submit">Agregar Permiso</button>-->
 		
 	
 </form>
@@ -42,10 +42,10 @@
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>						
 								<th scope="col">Guard Name</th>
-								<th scope="col">Creado</th>
+								<!--  <th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
 								<th scope="col">Modificar</th>
-								<th scope="col">Eliminar</th>
+								<th scope="col">Eliminar</th>-->
 								
 							</tr>
 						</thead>
@@ -57,7 +57,7 @@
 								<td>{{$permission->id}}</td>
 								<td>{{$permission->name}}</td>
 								<td>{{$permission->guard_name}}</td>
-								<td>{{$permission->created_at}}</td>
+								<!--  <td>{{$permission->created_at}}</td>
 								<td>{{$permission->updated_at}}</td>
 								
 								{!! Form::model($permission, ['route' => ['permisos.edit', $permission->id], 'method'=> 'GET'])!!}
@@ -66,7 +66,7 @@
 								
 								{!! Form::model($permission, ['route' => ['permisos.destroy', $permission->id], 'method'=> 'DELETE'])!!}
 								<td>{!!	Form::submit('X')!!}</td>
-								{!! Form::close() !!}
+								{!! Form::close() !!}-->
 							</tr>
 								@endforeach
 							@endif
