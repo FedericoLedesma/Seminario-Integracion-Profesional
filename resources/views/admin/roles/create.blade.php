@@ -6,7 +6,7 @@
 <!-- mostrar una tabla con los roles que existen -->
 	  
 	    {!!Form::open(['method'=>'post','action'=>'AdminRolesController@store'])!!}
-	    <h1>Agregar permiso</h1>
+	    <h1>Agregar rol</h1>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
