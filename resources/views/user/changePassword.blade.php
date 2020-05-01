@@ -1,12 +1,15 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
+@section('titulo')
+Configuracion de mi perfil
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
 <!-- validar los campos y establecer el campo contraseña -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($user, ['route' => ['user.updatepass', $user->id], 'method'=> 'PUT'])!!}
+	{!! Form::model($user, ['route' => ['user.updatepass', $user->id], 'method'=> 'PUT'])!!}
 	@if($user)
-	<h1>Configuracion de mi perfil</h1>
+	<h2>Cambiar password</h2>
 	@include('layouts.error')
 	<table>
 		<tr>

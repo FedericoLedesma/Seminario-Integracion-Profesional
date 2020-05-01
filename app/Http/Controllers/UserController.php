@@ -61,4 +61,5 @@ class UserController extends Controller
 			return redirect('/config');//mostrar un mensaje de error al actualizar
 			//}
 	}
+	
 }

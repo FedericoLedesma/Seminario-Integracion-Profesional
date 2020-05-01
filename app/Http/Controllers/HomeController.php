@@ -30,9 +30,10 @@ class HomeController extends Controller
     	foreach($roles as $rol){
     		$role=$rol;
     	}
+    	$roleName=$role;
     	switch($role){
     		case "Administrador":
-    			return view('home');
+    			return view('home',compact('roleName'));//cambie home por prueba 
     			break;
     		default: return view('homedefault');
     	}

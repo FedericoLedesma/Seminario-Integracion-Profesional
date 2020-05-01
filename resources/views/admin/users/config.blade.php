@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->

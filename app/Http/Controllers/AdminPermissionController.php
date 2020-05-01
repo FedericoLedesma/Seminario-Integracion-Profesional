@@ -29,7 +29,8 @@ class AdminPermissionController extends Controller
         //esto se deben desactivar todas las rutas de abm de permisos
        
     	//return view('admin.permisos.create');
-    	return view('admin.permisos.index');
+    	//return view('admin.permisos.index');
+    	return redirect('/admin/permisos');
     }
 
     /**
@@ -46,7 +47,8 @@ class AdminPermissionController extends Controller
        			
        	]);
        	return redirect('/admin/permisos');**/
-    	return view('admin.permisos.index');
+    	return redirect('/admin/permisos');
+    	//return view('admin.permisos.index');
     }
 
     /**
@@ -58,6 +60,7 @@ class AdminPermissionController extends Controller
     public function show($id)
     {
         //
+    	return redirect('/admin/permisos');
     }
 
     /**
@@ -68,12 +71,14 @@ class AdminPermissionController extends Controller
      */
     public function edit($id)
     {
+    	
         //
         /**
     	$permission=Permission::find($id);
     	return view('admin.permisos.edit',compact('permission'));
     	**/
-    	return view('admin.permisos.index');
+    	return redirect('/admin/permisos');
+    	//return view('admin.permisos.index');
     }
 
     /**
@@ -89,9 +94,10 @@ class AdminPermissionController extends Controller
         /*
     	$permission=Permission::find($id);
     	$permission->name=$request['name'];
-    	$permission->save();
-    	return redirect('/admin/permisos');*/
-    	return view('admin.permisos.index');
+    	$permission->save();*/
+    	
+    	//return view('admin.permisos.index');
+    	return redirect('/admin/permisos');
     }
 
     /**

@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
         		'dni'=>'required|numeric|max:999999999999|unique:users',
         		'name'=>'required',
-        		'password'=>'required',
+        		//'password'=>'required',
         		
             //
         ];

@@ -15,10 +15,14 @@ Route::get('/', function () {
     return view('home');
 	}return view('auth.login');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+/*Route::get('/prueba',function(){
 
+	return view('prueba');
+});*/
 /**
  * Rutas para un usuario con rol administrador
  */
@@ -28,11 +32,11 @@ Route::group(['middleware' => ['role:Administrador']], function () {
 	Route::resource('/admin/users', 'AdminUsersController');
 	Route::resource('/admin/roles', 'AdminRolesController');
 	Route::resource('/admin/permisos', 'AdminPermissionController');
-	
+
 });
 /**
  * RUTAS PARA UN USUARIO LOGGEADO
- * 
+ *
  */
 Route::get('/user/config',["as"=>"user.config", "uses"=>'UserController@config'] );
 Route::get('/perfil',["as"=>"user.perfil", "uses"=>'UserController@index'] );
@@ -47,4 +51,3 @@ Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
 		'uses' => 'UserController@updatePassword',
 		'as' => 'user.updatepass'
 ));
-

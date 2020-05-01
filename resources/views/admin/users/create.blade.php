@@ -1,11 +1,17 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
+@section('titulo')
+Agregar usuarios
+@endsection
 @section('content')
 
 
 <!-- mostrar una tabla con los roles que existen -->
 	  
 	    {!!Form::open(['method'=>'post','action'=>'AdminUsersController@store'])!!}
-	    <h1>Agregar usuarios</h1>
+	
+	    <div class="alert alert-info col-md-8" role="alert">
+		  Recuerde que la contrase&ntilde;a predeterminada es el DNI del usuario
+		</div>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>

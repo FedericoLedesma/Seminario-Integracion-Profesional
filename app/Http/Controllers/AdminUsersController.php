@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Spatie\Permission\Models\Role;
 use App\User;
@@ -27,8 +27,8 @@ class AdminUsersController extends Controller
     {
         //
     	$users=User::all();
-    	//$roles->getRoleNames();
-    	return  view('admin.users.index', compact('users'));
+
+    	return  view('admin.users.index', compact('users'));//view('admin.users.index', compact('users'));
     }
 
     /**
@@ -49,19 +49,19 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)//construir un Userrequest para validar la entrada de datos 
+    public function store(UserRequest $request)//construir un Userrequest para validar la entrada de datos
     {
-        
+
     	$data=$request->all();
     	$user=User::create([
     			'dni'=>$data['dni'],
     			'name' => $data['name'],
     			'password' => bcrypt($data['dni'])
-    	]);    	
+    	]);
     	$roles=$user->getRoleNames();
     	foreach ($roles as $roleName){
     		$user->removeRole($roleName);
-    	}    	
+    	}
     	$role=Role::find($data['role_id']);
     	$user->assignRole($role->name);
     	$user->save();
@@ -107,19 +107,19 @@ class AdminUsersController extends Controller
         if(!($id=='1')){
         	$user=User::find($id);
         	$user->name=$request->name;
-        	 
+
         	$roles=$user->getRoleNames();
         	foreach ($roles as $roleName){
         		$user->removeRole($roleName);
         	}
-        	 
+
         	$role=Role::find($request['role_id']);
         	$user->assignRole($role->name);
         	$user->save();
-        	
+
         }
         return redirect('/admin/users');
-    }	
+    }
     /**
      * Remove the specified resource from storage.
      *

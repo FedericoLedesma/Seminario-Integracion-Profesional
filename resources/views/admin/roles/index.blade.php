@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
 
 @section('content')
 
@@ -12,9 +12,7 @@
 	      @include('layouts.error')
 	     
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css" crossorigin="anonymous">
-		<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+
 		<style>
 <!--
 .table{

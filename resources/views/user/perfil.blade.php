@@ -1,4 +1,7 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
+@section('titulo')
+MI PERFIL
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
@@ -7,7 +10,7 @@
 	   @include('layouts.error')
 	  	@if($user)
 	  	
-	  	<h1>MI PERFIL</h1>
+
 	    <table>
 	    	<tr>
 	    		<td>ID USUARIO </td>
