@@ -2,15 +2,15 @@
 @section('content')
 
 <!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
-	  
+
 	    {!!Form::open(['method'=>'post','action'=>'AdminRolesController@store'])!!}
 	    <h1>Agregar rol</h1>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'Nombre')!!}
 		    </td>
 		    <td>
@@ -18,11 +18,11 @@
 		   	</td>
 		   	</tr>
 		   	<tr>
-	    	<td>	
-		    {!!	Form::submit('Crear Rol')!!}
+	    	<td>
+		    {!!	Form::submit('Crear Rol',['class' => 'btn btn-success'])!!}
 		    </td>
 		    <td>
-		   	{!!	Form::reset('Borrar')!!}
+		   	{!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}
 		   	</td>
 		   	</tr>
 		 </table>

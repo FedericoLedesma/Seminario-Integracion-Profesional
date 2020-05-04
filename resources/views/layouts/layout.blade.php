@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+	@yield('token')
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Font Awesome Icons -->
@@ -19,10 +19,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
- 
-    
-
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -42,16 +38,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-1">
+   <!--   <form class="form-inline ml-1">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="buscar" class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
-    </form>
+    </form>-->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -64,22 +60,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </a>
         <div class="dropdown-menu dropdown-menu dropdown-menu-right">
           <a href="{{ route('user.perfil') }}" class="dropdown-item">
-            
+
          	Perfil
 			<i class="fas fa-angle-right"></i>
           </a>
           <div class="dropdown-divider"></div>
           <a href="{{ route('user.config') }}" class="dropdown-item">
-             
+
         	Configuracion
         	<i class="fas fa-angle-right"></i>
           </a>
 
           <div class="dropdown-divider"></div>
-          <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer"   
+          <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer"
           		onclick="event.preventDefault();
                 	document.getElementById('logout-form').submit();">
-	          
+
 	          Logout
 	          <i class="fas fa-sign-out-alt"></i>
           </a>
@@ -143,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link buscar_user"  data-id="buscar_user">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar Usuario</p>
                 </a>
@@ -172,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
                <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link buscar_role"  data-id="buscar_role">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar Rol</p>
                 </a>
@@ -212,6 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">@yield('titulo')</h1>
+
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -255,7 +252,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-     
+
     </div>
     <!-- Default to the left -->
     <strong></strong>
@@ -271,6 +268,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+
+<script src="{{asset('js/script.js')}}"></script>
+
+@yield('script')
+
 
 
 </body>

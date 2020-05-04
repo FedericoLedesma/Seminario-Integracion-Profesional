@@ -5,13 +5,11 @@ MI PERFIL
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	   @include('layouts.error')
 	  	@if($user)
-	  	
-
-	    <table>
+	  	<table>
 	    	<tr>
 	    		<td>ID USUARIO </td>
 				<td>{{$user->id}}</td>
@@ -26,13 +24,13 @@ MI PERFIL
 			 </tr>
 			 <tr>
 				<td>ROL </td>
-				<?php 
-					$roles=$user->getRoleNames();							
-				?>								
+				<?php
+					$roles=$user->getRoleNames();
+				?>
 					@foreach($roles as $rol)
 				<td>{{$rol}}</td>
 					@endforeach
-				
+
 			</tr>
 			<tr>
 				<td>CREADO </td>
@@ -41,9 +39,11 @@ MI PERFIL
 			<tr>
 				<td>MODIFICADO </td>
 				<td>{{$user->updated_at}}</td>
-			</tr>			
-			
+			</tr>
+
 		</table>
-	{!!link_to_route('user.config', $title = 'MODIFICAR', $parameters = [$user], $attributes = [])!!}
+		@if(!($user->id==1))
+			{!!link_to_route('user.config', $title = 'MODIFICAR', $parameters = [$user],['class' => 'btn btn-warning'], $attributes = [])!!}
+		@endif
 @endif
 @endsection

@@ -19,10 +19,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-/*Route::get('/prueba',function(){
+Route::get('/prueba',function(){
 
 	return view('prueba');
-});*/
+});
 /**
  * Rutas para un usuario con rol administrador
  */
@@ -32,6 +32,10 @@ Route::group(['middleware' => ['role:Administrador']], function () {
 	Route::resource('/admin/users', 'AdminUsersController');
 	Route::resource('/admin/roles', 'AdminRolesController');
 	Route::resource('/admin/permisos', 'AdminPermissionController');
+
+	Route::get('/users/buscar','AdminUsersController@buscar')->name('user.buscar');
+	Route::post('/users/buscar','AdminUsersController@buscar')->name('user.buscar');
+
 
 });
 /**

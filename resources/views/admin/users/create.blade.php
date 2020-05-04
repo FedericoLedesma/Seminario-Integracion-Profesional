@@ -6,60 +6,61 @@ Agregar usuarios
 
 
 <!-- mostrar una tabla con los roles que existen -->
-	  
+
 	    {!!Form::open(['method'=>'post','action'=>'AdminUsersController@store'])!!}
-	
+
 	    <div class="alert alert-info col-md-8" role="alert">
 		  Recuerde que la contrase&ntilde;a predeterminada es el DNI del usuario
 		</div>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('dni')!!}
 		   	</td>
-		   	
+
 		   	</tr>
 		   	<tr>
-		   	<td>	
+		   	<td>
 		    {!!	Form::label('role', 'ROL')!!}
 		    </td>
-		   	<td>		   	
+		   	<td>
 		   	@if($roles)
-		   
-	
-		   		<select name="role_id">
+
+
+		   		<select class="browser-default custom-select" name="role_id">
+					<!--	<option selected>Seleccione el Rol</option>validar-->
 		   	@foreach ($roles as $role)
-		
+
     		<!-- Opciones de la lista -->
-			<option value="{{$role->id}}" >{{$role->name}}</option> <!-- Opción por defecto -->
-			    
-			    
-			 
+					<option value="{{$role->id}}" >{{$role->name}}</option> <!-- Opciï¿½n por defecto -->
+
+
+
 		   	@endforeach
 		   	 </select>
 		   	 	@endIf
 		   	</td>
 		   	</tr>
-		   
+
 		   	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('name')!!}
 		   	</td>
 		   	</tr>
-		  
+
 		   	<tr>
-	    	<td>	
-		    {!!	Form::submit('Crear usuario')!!}
+	    	<td>
+		    {!!	Form::submit('Crear usuario',['class' => 'btn btn-success'])!!}
 		    </td>
 		    <td>
-		   	{!!	Form::reset('Borrar')!!}
+		   	{!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}
 		   	</td>
 		   	</tr>
 		 </table>

@@ -23,12 +23,39 @@ class AdminUsersController extends Controller
 		$this->middleware(['permission:asignar_roles_usuarios'],['only'=>['index','edit','update','show']]);
 		$this->middleware(['permission:quitar_roles_usuarios'],['only'=>['index','edit','update','show']]);
 	}
-    public function index()
+    public function index(Request $request)
     {
-        //
-    	$users=User::all();
+    	$query = $request->get('search');
+			$busqueda_por= $request->get('busqueda_por');
+			if($request){
+				switch ($busqueda_por) {
+					case 'busqueda_id':
+						$users=User::where('id','LIKE','%'.$query.'%')
+						->orderBy('id','asc')
+						->get();
+							$busqueda_por="ID";
+						break;
+					case 'busqueda_dni':
+						$users=User::where('dni','LIKE','%'.$query.'%')
+						->orderBy('id','asc')
+						->get();
+						break;
+						$busqueda_por="DNI";
+					case 'busqueda_name':
+							$users=User::where('name','LIKE','%'.$query.'%')
+							->orderBy('id','asc')
+							->get();
+								$busqueda_por="NOMBRE";
+						break;
+					default:
+						$users=User::all();
+						break;
+				}
 
-    	return  view('admin.users.index', compact('users'));//view('admin.users.index', compact('users'));
+			}
+    //	$users=User::all();
+    	$users_total=User::all()->count();
+    	return  view('admin.users.index', compact('users','users_total','query','busqueda_por'));//view('admin.users.index', compact('users'));
     }
 
     /**
@@ -129,8 +156,34 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
     	if(!($id=='1')){
+    		$user=User::find($id);
     		User::destroy($id);
     	}
-       return redirect('/admin/users');;
-    }
+    	return response()->json([
+    			'success' => 'Usuario eliminado con exito!'
+    	]);
+    	//return redirect('/admin/users');
+		}
+		public function buscar(Request $request){
+
+		/*	switch ($busqueda_por) {
+				case 'busqueda_id':
+					$users=array();
+					$users[]=User::find($id);
+					break;
+				case 'busqueda_dni':
+					$users=array();
+					$users[]=User::where('dni', $id)->first();
+					break;
+				case 'busqueda_dni':
+					$users=User::where('name', $id)->get();
+					break;
+				default:$users=array();
+					break;
+			}*/
+			//return response()->json_encode($users);
+			return response()->json([
+					'success' => 'funciona!'
+			]);
+		}
 }
