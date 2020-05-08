@@ -5,15 +5,15 @@ Configuracion de mi perfil
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($user, ['route' => ['user.update', $user->id], 'method'=> 'PUT'])!!}
 	 	@if($user)
-	
+
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('id', 'ID')!!}
 		    </td>
 		    <td>
@@ -22,38 +22,38 @@ Configuracion de mi perfil
 		   	</tr>
 		   	<tr>
 			<td> {!! Form::label('role', 'ROLE') !!} </td>
-				<?php 
-					$roles=$user->getRoleNames();							
-				?>								
+				<?php
+					$roles=$user->getRoleNames();
+				?>
 				@foreach($roles as $rol)
 			<td> {!!	Form::label($rol)!!}</td>
 				@endforeach
-				
+
 			</tr>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
 		  {!!	Form::text('dni',$user->dni)!!}
-		   	</td>		   	
+		   	</td>
 		   	</tr>
 		   	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('name',$user->name)!!}
 		   	</td>
-		   	</tr>		 	
+		   	</tr>
 		   	<tr>
-	    	<td>	
+	    	<td>
 		     <td>{!!Form::submit('Guardar')!!}
 		    </td>
-		    </tr>		    
+		    </tr>
 		   	<tr>
 		   	<td>
-		   	{!!link_to_route('user.cambiarpass', $title = 'CAMBIAR CONTRASENA', $parameters = [$user], $attributes = [])!!}
+		   	{!!link_to_route('user.cambiarpass', $title = 'CAMBIAR CONTRASE&Ntilde;A', $parameters = [$user], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		   	<tr>
@@ -63,6 +63,6 @@ Configuracion de mi perfil
 		   	</tr>
 		 </table>
 		 @endif
-	 
+
 
 @endsection

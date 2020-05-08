@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           		onclick="event.preventDefault();
                 	document.getElementById('logout-form').submit();">
 
-	          Logout
+	          Cerrar sesi&oacute;n
 	          <i class="fas fa-sign-out-alt"></i>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -225,6 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home') }}">Home</a></li>
+              @yield('navegacion')
               <li class="breadcrumb-item active">Pagina_Actual</li><!-- Aca hay que programar la navegacion -->
             </ol>
           </div><!-- /.col -->

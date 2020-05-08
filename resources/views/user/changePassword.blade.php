@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 @section('titulo')
-Configuracion de mi perfil
+Configuraci&oacute;n de mi perfil
 @endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	{!! Form::model($user, ['route' => ['user.updatepass', $user->id], 'method'=> 'PUT'])!!}
 	@if($user)
@@ -15,7 +15,7 @@ Configuracion de mi perfil
 		<tr>
 		   	<td>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">Password Actual</label>
+			    <label for="exampleInputPassword1">Contrase&ntilde;a Actual</label>
 			    <input type="password" name="mypassword"class="form-control" id="exampleInputPassword1">
 			</div>
 		   	</td>
@@ -23,7 +23,7 @@ Configuracion de mi perfil
 		<tr>
 		   	<td>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">Password Nuevo</label>
+			    <label for="exampleInputPassword1">Contrase&ntilde;a Nueva</label>
 			    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
 			</div>
 		   	</td>
@@ -31,17 +31,17 @@ Configuracion de mi perfil
 		<tr>
 		   	<td>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">Repetir Password</label>
+			    <label for="exampleInputPassword1">Repetir Contrase&ntilde;a</label>
 			    <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1">
 			</div>
 		   	</td>
-		</tr> 
-		
-		</table>	
+		</tr>
+
+		</table>
 
 		 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
 
 	@endif
-	 
+
 
 @endsection

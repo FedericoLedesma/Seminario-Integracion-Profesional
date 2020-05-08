@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- EDIT DEL ROLE -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method'=> 'PUT'])!!}
 	 	@if($role)
@@ -12,25 +12,25 @@
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('id', 'ID')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::label($role->id)!!}
 		   	</td>
 		   	</tr>
-	    
+
 		   	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('name',$role->name)!!}
 		   	</td>
-		   	</tr>		   	
+		   	</tr>
 		   	<tr>
-	    	<td>	
-		     <td>{!!Form::submit('Guardar')!!}
+	    	<td>
+		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
 		    <td>
 		   	{!!link_to_route('roles.show', $title = 'CANCELAR', $parameters = [$role], $attributes = [])!!}
@@ -38,7 +38,7 @@
 		   	</tr>
 		 </table>
 		 @endif
-		 
+
 		 @if($permisosAsociados)
 		  <table class="table table-bordered table-hover table-striped">
 		   <tr>
@@ -55,8 +55,8 @@
 		   			</td>
 		   		</tr>
 			@endif
-		   	
-		   	
+
+
 		   	   @foreach($permisosAsociados as $permisoAsociado)
 		   <tr>
 		   		<td>
@@ -68,14 +68,14 @@
 		   		<td>
 		   			<input class="form-check-input" type="checkbox" name="quitarPermisos[]"value="{{$permisoAsociado->id}}" id="defaultCheck1">
 		   		</td>
-		   </tr>		   
+		   </tr>
 		   	@endforeach
-		  </table>		 		  
+		  </table>
 		@endif
-		 
-		 
-		 
-		 
+
+
+
+
 		 @if($permisos)
 		  <table class="table table-bordered table-hover table-striped">
 		   <tr>
@@ -92,9 +92,9 @@
 				   		{{$permiso->name}}
 				  	</label>
 		   		</td>
-		   </tr>		   
+		   </tr>
 		   	@endforeach
-		  </table>		 		  
+		  </table>
 		@endif
 		</div>
 		</div>

@@ -148,6 +148,7 @@ class AdminUsersController extends Controller
     {
         if(!($id=='1')){
         	$user=User::find($id);
+					$user->dni=$request->dni;
         	$user->name=$request->name;
 
         	$roles=$user->getRoleNames();

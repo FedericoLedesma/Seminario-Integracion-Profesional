@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+@section('navegacion')
+  <li class="breadcrumb-item active">Pagina_Actual</li>
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
@@ -24,7 +27,7 @@
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
-		   	{!!	Form::label($user->dni)!!}
+		   	{!!	Form::text('dni',$user->dni)!!}
 		   	</td>
 		   	</tr>
 		   	<tr>
@@ -61,7 +64,7 @@
 		   	</tr>
 		   	<tr>
 	    	<td>
-		     <td>{!!Form::submit('Guardar')!!}
+		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
 
 		   	</tr>

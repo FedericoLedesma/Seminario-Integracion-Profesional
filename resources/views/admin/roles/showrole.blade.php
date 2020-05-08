@@ -2,21 +2,21 @@
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 <style>
 <!--
 	.table-resposive{
 		float:left;
 	}
-	
+
 -->
 </style>
 	   @include('layouts.error')
 	  	@if($role)
-	  	
 
- 
+
+
 
 	    <div class="table-responsive">
 	    <h2>Rol  {{$role->name}}</h2>
@@ -38,14 +38,14 @@
 			<tr>
 				<td>MODIFICADO </td>
 				<td>{{$role->updated_at}}</td>
-			</tr>			
-			
+			</tr>
+
 		</table>
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role], $attributes = [])!!}
-	
+	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role],['class' => 'btn btn-warning'], $attributes = [])!!}
+
 	<h3>Permisos asociados</h3>
 	@if($permisos)
 	<div class="table-resposive">
@@ -57,14 +57,14 @@
 			 			<label>{{$permiso}}</label>
 			 		</td>
 				</tr>
-				
+
 				@endforeach
 			</table>
 		</div>
 	</div>
 	@endif
-	
-	
-	
+
+
+
 @endif
 @endsection
