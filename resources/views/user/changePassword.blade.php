@@ -2,6 +2,11 @@
 @section('titulo')
 Configuraci&oacute;n de mi perfil
 @endsection
+@section('navegacion')
+<li class="breadcrumb-item"><a href="{{route('users.index') }}">Usuarios</a></li>
+<li class="breadcrumb-item"><a href="{{'/admin/users/'.$user->id }}">User {{$user->id}}</a></li>
+<li class="breadcrumb-item active">Editar</li>
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->

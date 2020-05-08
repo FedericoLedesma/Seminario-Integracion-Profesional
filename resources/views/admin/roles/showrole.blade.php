@@ -1,4 +1,8 @@
 @extends('layouts.layout')
+@section('navegacion')
+    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
+		<li class="breadcrumb-item active">Ver Rol</li>
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->

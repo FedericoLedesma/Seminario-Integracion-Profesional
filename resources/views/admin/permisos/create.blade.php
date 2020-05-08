@@ -2,6 +2,10 @@
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
+@section('navegacion')
+<li class="breadcrumb-item"><a href="{{route('permisos.index') }}">Permisos</a></li>
+<li class="breadcrumb-item active">Crear</li>
+@endsection
 @section('content')
 
 

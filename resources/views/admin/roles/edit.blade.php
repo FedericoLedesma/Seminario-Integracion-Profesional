@@ -1,4 +1,8 @@
 @extends('layouts.layout')
+@section('navegacion')
+    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
+		<li class="breadcrumb-item active">Editar Rol</li>
+@endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->

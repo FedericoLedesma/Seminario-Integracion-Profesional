@@ -1,8 +1,13 @@
 @extends('layouts.layout')
+@section('navegacion')
+<li class="breadcrumb-item"><a href="{{route('users.index') }}">Usuarios</a></li>
+<li class="breadcrumb-item"><a href="{{'/admin/users/'.$user->id }}">User {{$user->id}}</a></li>
+<li class="breadcrumb-item active">Config</li>
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method'=> 'PUT'])!!}
 	 	@if($user)
@@ -10,7 +15,7 @@
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('id', 'ID')!!}
 		    </td>
 		    <td>
@@ -18,15 +23,15 @@
 		   	</td>
 		   	</tr>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::label($user->dni)!!}
-		   	</td>		   	
+		   	</td>
 		   	</tr>
 		   	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
@@ -34,16 +39,16 @@
 		   	</td>
 		   	</tr>
 		 <!--   <tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('role_id', 'ID_ROL')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('role_id',$user->role_id)!!}
 		   	</td>
 		   	</tr> -->
-		   	
+
 		   	<tr>
-	    	<td>	
+	    	<td>
 		     <td>{!!Form::submit('Guardar')!!}
 		    </td>
 		    <td>
@@ -52,6 +57,6 @@
 		   	</tr>
 		 </table>
 		 @endif
-	 
+
 
 @endsection

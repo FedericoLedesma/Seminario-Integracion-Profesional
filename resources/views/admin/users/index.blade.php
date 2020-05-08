@@ -2,6 +2,9 @@
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
+@section('navegacion')
+<li class="breadcrumb-item active">Usuarios</li>
+@endsection
 @section('titulo')
 USUARIOS REGISTRADOS
 @endsection

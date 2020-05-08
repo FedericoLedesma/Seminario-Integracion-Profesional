@@ -226,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home') }}">Home</a></li>
               @yield('navegacion')
-              <li class="breadcrumb-item active">Pagina_Actual</li><!-- Aca hay que programar la navegacion -->
+              
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

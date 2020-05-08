@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+@section('navegacion')
+    <li class="breadcrumb-item active">Permisos</li>
+@endsection
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection

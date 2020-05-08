@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('navegacion')
-  <li class="breadcrumb-item active">Pagina_Actual</li>
+    <li class="breadcrumb-item"><a href="{{route('users.index') }}">Usuarios</a></li>
+		<li class="breadcrumb-item active">Editar Usuario</li>
 @endsection
 @section('content')
 
