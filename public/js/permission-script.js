@@ -5,9 +5,9 @@ $(document).ready(function(){
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 		});
-	if(getQueryVariable()=="buscar_role")
+	if(getQueryVariable()=="buscar_permiso")
 	{
-		document.getElementById("roleid").focus();
+		document.getElementById("permisoid").focus();
 	}
 
 });
@@ -31,11 +31,11 @@ $('.eliminar').click(function(e){
 
 	var row = $(this).parents('tr');
 	var token = $(this).data("token");
-	var role_id = $(this).data("id");
+	var permiso_id = $(this).data("id");
 	//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 	//validar el usuario
-	var url_destroy = "roles/:id";
-	url_destroy = url_destroy.replace(':id',role_id);
+	var url_destroy = "permisos/:id";
+	url_destroy = url_destroy.replace(':id',permiso_id);
 
 $('#alert').show();
 		$.ajax({
@@ -43,15 +43,15 @@ $('#alert').show();
 			url: url_destroy,
 			dataType: 'json',
 				success: function (data) {
-						if (data.estado=='true'){
+							if (data.estado=='true'){
 								row.fadeOut();
 								$('#alert').html(data.success);
 								console.log(data.success);
 							}else{
 								$('#alert').html(data.success);
-									console.log(data.success);
+								console.log(data.success);
 							}
-						},
+							},
 							error: function (data) {
 									console.log('Error:', data);
 							}

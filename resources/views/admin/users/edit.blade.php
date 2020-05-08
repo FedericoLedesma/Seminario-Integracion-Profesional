@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contraseña -->
+<!-- validar los campos y establecer el campo contraseï¿½a -->
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method'=> 'PUT'])!!}
 	 	@if($user)
@@ -12,7 +12,7 @@
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-striped">
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('id', 'ID')!!}
 		    </td>
 		    <td>
@@ -20,15 +20,15 @@
 		   	</td>
 		   	</tr>
 	    	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::label($user->dni)!!}
-		   	</td>		   	
+		   	</td>
 		   	</tr>
 		   	<tr>
-	    	<td>	
+	    	<td>
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
@@ -36,31 +36,34 @@
 		   	</td>
 		   	</tr>
 		   	<tr>
-		   	<td>	
+		   	<td>
 		    {!!	Form::label('role', 'ROL')!!}
 		    </td>
-		   	<td>		   	
+		   	<td>
+
+
 		   	@if($roles)
-		   
-	
-		   		<select name="role_id">
+		   	<select name="role_id">
 		   	@foreach ($roles as $role)
-		
+
     		<!-- Opciones de la lista -->
-			    <option value="{{$role->id}}" >{{$role->name}}</option> <!-- Opción por defecto -->
-			    
-			    
-			 
+				@if($role->name==$rol)
+			   <option value="{{$role->id}}" selected >{{$role->name}}</option>
+				 @else
+				 	<option value="{{$role->id}}" >{{$role->name}}</option>  <!-- Opciï¿½n por defecto -->
+				 @endif
+
+
 		   	@endforeach
 		   	 </select>
 		   	 	@endIf
 		   	</td>
 		   	</tr>
 		   	<tr>
-	    	<td>	
+	    	<td>
 		     <td>{!!Form::submit('Guardar')!!}
 		    </td>
-		    
+
 		   	</tr>
 		 </table>
 		 @endif

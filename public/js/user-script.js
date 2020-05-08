@@ -43,10 +43,14 @@
 	    	url: url_destroy,
 	    	dataType: 'json',
 		    	success: function (data) {
-
+						if (data.estado=='true'){
 						   		row.fadeOut();
-	        		$('#alert').html(data.success);
-							  console.log(data.success);
+	        			$('#alert').html(data.success);
+							  	console.log(data.success);
+								}else{
+									$('#alert').html(data.success);
+										console.log(data.success);
+								}
                 },
                 error: function (data) {
                     console.log('Error:', data);

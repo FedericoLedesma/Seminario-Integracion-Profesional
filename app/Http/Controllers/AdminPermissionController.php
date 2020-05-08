@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class AdminPermissionController extends Controller
@@ -12,11 +13,38 @@ class AdminPermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function __construct()
+   	{
+   		 $this->middleware('auth');
+   	}
+
+    public function index(Request $request)
     {
         //
-    	$permisos=Permission::all();
-    	return  view('admin.permisos.index', compact('permisos'));
+        $query = $request->get('search');
+  			$busqueda_por= $request->get('busqueda_por');
+        if($request){
+  				switch ($busqueda_por) {
+  					case 'busqueda_id':
+  						$permisos=Permission::where('id','LIKE','%'.$query.'%')
+  						->orderBy('id','asc')
+  						->get();
+  							$busqueda_por="ID";
+  						break;
+  					case 'busqueda_name':
+  						$permisos=Permission::where('name','LIKE','%'.$query.'%')
+  						->orderBy('id','asc')
+  						->get();
+  						break;
+  						$busqueda_por="NOMBRE";
+
+  					default:
+  						$permisos=Permission::all();
+  						break;
+  				}
+        }
+        	return  view('admin.permisos.index', compact('permisos','query','busqueda_por'));
+
     }
 
     /**
@@ -27,8 +55,12 @@ class AdminPermissionController extends Controller
     public function create()
     {
         //esto se deben desactivar todas las rutas de abm de permisos
-       
-    	//return view('admin.permisos.create');
+        $user=Auth::user();
+        $acciones=['alta','baja','modificacion','ver'];
+        $tablas=['usuarios','roles','permisos'];
+        if ($user->can('alta_permisos')){
+    	     return view('admin.permisos.create',compact('acciones','tablas'));
+         }
     	//return view('admin.permisos.index');
     	return redirect('/admin/permisos');
     }
@@ -42,11 +74,16 @@ class AdminPermissionController extends Controller
     public function store(Request $request)//crear Request para validar los datos recibidos
     {
         //
-       	/**Permission::create([
-       			'name' => $request['name'],
-       			
-       	]);
-       	return redirect('/admin/permisos');**/
+        $name=$request['name_accion']."_".$request['name_table'];
+        $permisos=Permission::where('name','LIKE',$name)
+        ->orderBy('id','asc')
+        ->get();
+        if(count($permisos)==0){
+         	Permission::create([
+         			'name' => $name,
+         	]);
+      }
+
     	return redirect('/admin/permisos');
     	//return view('admin.permisos.index');
     }
@@ -71,7 +108,7 @@ class AdminPermissionController extends Controller
      */
     public function edit($id)
     {
-    	
+
         //
         /**
     	$permission=Permission::find($id);
@@ -95,7 +132,7 @@ class AdminPermissionController extends Controller
     	$permission=Permission::find($id);
     	$permission->name=$request['name'];
     	$permission->save();*/
-    	
+
     	//return view('admin.permisos.index');
     	return redirect('/admin/permisos');
     }
@@ -109,9 +146,17 @@ class AdminPermissionController extends Controller
     public function destroy($id)
     {
         //
-        /*
-        Permission::destroy($id);
-        return redirect('/admin/permisos');*/
-    	return view('admin.permisos.index');
+        $user=Auth::user();
+        if ($user->can('baja_permisos')){
+          Permission::destroy($id);
+          return response()->json([
+              'estado'=>'true',
+              'success' => 'Permiso eliminado con exito!'
+          ]);
+        }return response()->json([
+						'estado'=>'false',
+	    			'success' => 'No tiene permiso para eliminar Permiso'
+	    	]);
+        //return redirect('/admin/permisos');
     }
 }

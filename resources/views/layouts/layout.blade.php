@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -163,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="{{ route('roles.create') }}" class="nav-link">
-                  <i class="far fa-grin-tongue nav-icon"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Rol</p>
                 </a>
               </li>
@@ -188,6 +188,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ route('permisos.index') }}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ver todos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('permisos.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar Permiso</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="#" class="nav-link buscar_permiso"  data-id="buscar_permiso">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar Permiso</p>
                 </a>
               </li>
              </ul>

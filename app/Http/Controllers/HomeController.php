@@ -33,10 +33,10 @@ class HomeController extends Controller
     	$roleName=$role;
     	switch($role){
     		case "Administrador":
-    			return view('home',compact('roleName'));//cambie home por prueba 
+    			return view('home',compact('roleName'));//cambie home por prueba
     			break;
-    		default: return view('homedefault');
+    		default: return view('home',compact('roleName'));
     	}
-        
+
     }
 }

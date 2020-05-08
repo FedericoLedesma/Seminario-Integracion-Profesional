@@ -20,3 +20,10 @@ $('.buscar_role').click(function(e){
 	 location.href="/admin/roles?get="+$(this).data("id");
 
 });
+$('.buscar_permiso').click(function(e){
+
+	e.preventDefault();//evita cargar la pagina
+	console.log($(this).data("id"));
+	 location.href="/admin/permisos?get="+$(this).data("id");
+
+});

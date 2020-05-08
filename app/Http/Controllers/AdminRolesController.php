@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\RoleRequest;
+use App\Http\Requests\RoleEditRequest;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 use Spatie\Permission\Models\Permission;
 class AdminRolesController extends Controller
 {
@@ -14,11 +18,12 @@ class AdminRolesController extends Controller
      */
 	public function __construct()
 	{
-		$this->middleware(['permission:alta_roles'],['only'=>['index','create','store','show']]);
+	/*	$this->middleware(['permission:alta_roles'],['only'=>['index','create','store','show']]);
 		$this->middleware(['permission:baja_roles'],['only'=>['index','destroy']]);
 		$this->middleware(['permission:modificacion_roles'],['only'=>['index','edit','update','show']]);
 		$this->middleware(['permission:asignar_permisos_roles'],['only'=>['index','edit','update','show']]);
-		$this->middleware(['permission:quitar_permisos_roles'],['only'=>['index','edit','update','show']]);
+		$this->middleware(['permission:quitar_permisos_roles'],['only'=>['index','edit','update','show']]);*/
+		 $this->middleware('auth');
 	}
     public function index(Request $request)
     {
@@ -65,8 +70,10 @@ class AdminRolesController extends Controller
      */
     public function create()
     {
-        //
-    	return view('admin.roles.create');
+      $user=Auth::user();
+			if ($user->can('alta_roles')){
+				return view('admin.roles.create');
+			}	return redirect('/admin/roles');
     }
 
     /**
@@ -75,7 +82,7 @@ class AdminRolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
         //
 
@@ -110,27 +117,29 @@ class AdminRolesController extends Controller
     public function edit($id)
     {
         //
-        $permisos=Permission::all();
+				$user=Auth::user();
+				if ($user->can('modificacion_roles')){
+	        $permisos=Permission::all();
 
-    	$role=Role::find($id);
-    	$permisosAsociados=$role->getAllPermissions();
+		    	$role=Role::find($id);
+		    	$permisosAsociados=$role->getAllPermissions();
 
-    	//   Realizo lo siguiente para quitar de la lista los permisos que el rol ya dispone
-    	$i=0;
-    	foreach ($permisos as $per){
+		    	//   Realizo lo siguiente para quitar de la lista los permisos que el rol ya dispone
+		    	$i=0;
+		    	foreach ($permisos as $per){
 
-    		foreach ($permisosAsociados as $perAs){
+		    		foreach ($permisosAsociados as $perAs){
 
-	    			if($per->id== $perAs->id){
+			    			if($per->id== $perAs->id){
 
-	    				unset($permisos[$i]);
-	    			}
-    		}
-    		$i++;
-    	}
+			    				unset($permisos[$i]);
+			    			}
+		    		}
+		    		$i++;
+		    	}
 
-
-    	return view('admin.roles.edit',compact('role','permisos','permisosAsociados'));
+		    	return view('admin.roles.edit',compact('role','permisos','permisosAsociados'));
+				}return redirect('/admin/roles');
     }
 
     /**
@@ -140,10 +149,10 @@ class AdminRolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleEditRequest $request, $id)
     {
         //
-    	if(!($id=='1')){
+    //	if(!($id=='1')){
 	    	$quitarPermisos=$request['quitarPermisos'];
 	    	$agregarPermisos=$request['agregarPermisos'];
 
@@ -163,7 +172,7 @@ class AdminRolesController extends Controller
 		    	}
 	    	}
 	    	$role->save();
-    	}
+    //	}
     	return redirect('/admin/roles');
     }
 
@@ -175,13 +184,29 @@ class AdminRolesController extends Controller
      */
     public function destroy($id)
     {
-			if(!($id=='1')){
-				$role=Role::find($id);
-				Role::destroy($id);
-			}
-			return response()->json([
-					'success' => 'Rol eliminado con exito!'
-			]);
+			$user=Auth::user();
+			if ($user->can('baja_roles')){
+					if(!($id=='1')){
+						$role=Role::find($id);
+						$users = User::role($role->name)->get();
+						if(count($users)==0){
+							Role::destroy($id);
+							return response()->json([
+								'estado'=>'true',
+								'success' => 'Rol eliminado con exito!'
+							]);
+						}else{
+							return response()->json([
+								'estado'=>'false',
+								'success' => 'No se pudo eliminar el rol, tiene usuarios asignados !'
+							]);
+						}
+					}
+
+				}return response()->json([
+					'estado'=>'false',
+					'success' => 'No tiene permisos para eliminar ROL!'
+				]);
 			//return redirect('/admin/users');
 		}
 }

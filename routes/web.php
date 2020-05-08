@@ -27,7 +27,7 @@ Route::get('/prueba',function(){
  * Rutas para un usuario con rol administrador
  */
 
-Route::group(['middleware' => ['role:Administrador']], function () {
+//Route::group(['middleware' => ['role:Administrador']], function () {
 	//
 	Route::resource('/admin/users', 'AdminUsersController');
 	Route::resource('/admin/roles', 'AdminRolesController');
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['role:Administrador']], function () {
 	Route::post('/users/buscar','AdminUsersController@buscar')->name('user.buscar');
 
 
-});
+//});
 /**
  * RUTAS PARA UN USUARIO LOGGEADO
  *

@@ -75,7 +75,6 @@ USUARIOS REGISTRADOS
 
 							</tr>
 						</thead>
-
 						<tbody>
 						@if($users)
 							@foreach($users as $user)

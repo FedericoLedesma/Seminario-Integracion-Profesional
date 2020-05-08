@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserEditRequest;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 
@@ -17,11 +19,13 @@ class AdminUsersController extends Controller
      */
 	public function __construct()
 	{
-		$this->middleware(['permission:alta_usuarios'],['only'=>['index','create','store','show']]);
-		$this->middleware(['permission:baja_usuarios'],['only'=>['index','destroy']]);
-		$this->middleware(['permission:modificacion_usuarios'],['only'=>['index','edit','update','show']]);
-		$this->middleware(['permission:asignar_roles_usuarios'],['only'=>['index','edit','update','show']]);
-		$this->middleware(['permission:quitar_roles_usuarios'],['only'=>['index','edit','update','show']]);
+	//	$this->middleware(['permission:alta_usuarios'],['only'=>['index','create','store','show']]);
+	//	$this->middleware(['permission:baja_usuarios'],['only'=>['index','destroy']]);
+		//$this->middleware(['permission:modificacion_usuarios'],['only'=>['index','edit','update','show']]);
+		//$this->middleware(['permission:asignar_roles_usuarios'],['only'=>['index','edit','update','show']]);
+		//$this->middleware(['permission:quitar_roles_usuarios'],['only'=>['index','edit','update','show']]);
+		//	$this->middleware(['permission:ejemplo'],['only'=>['index','edit','update','show']]);
+		 $this->middleware('auth');
 	}
     public function index(Request $request)
     {
@@ -66,8 +70,11 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
+				$user=Auth::user();
+				if ($user->can('alta_usuarios')){
         $roles=Role::all();
     	return view('admin.users.create',compact('roles'));
+		}return redirect('/admin/users');
     }
 
     /**
@@ -117,9 +124,17 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
-    	$user=User::find($id);
-    	$roles=Role::all();
-    	return view('admin.users.edit',compact('user','roles'));
+			$user=Auth::user();
+			if ($user->can('modificacion_usuarios')){
+	    	$user=User::find($id);
+				$roles_user=$user->getRoleNames();
+				$rol;
+				foreach ($roles_user as $role_user) {
+					$rol=$role_user;
+				}
+	    	$roles=Role::all();
+	    	return view('admin.users.edit',compact('user','roles','rol'));
+			}return redirect('/admin/users');
     }
 
     /**
@@ -129,7 +144,7 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
         if(!($id=='1')){
         	$user=User::find($id);
@@ -155,13 +170,22 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-    	if(!($id=='1')){
-    		$user=User::find($id);
-    		User::destroy($id);
-    	}
-    	return response()->json([
-    			'success' => 'Usuario eliminado con exito!'
-    	]);
+			$user=Auth::user();
+			if ($user->can('baja_usuarios')){
+	    	if(!($id=='1')){
+	    		$user=User::find($id);
+	    		User::destroy($id);
+	    	}
+				return response()->json([
+						'estado'=>'true',
+						'success' => 'Usuario eliminado con exito!'
+				]);
+			}
+	    	return response()->json([
+						'estado'=>'false',
+	    			'success' => 'No tiene permiso para eliminar usuario'
+	    	]);
+
     	//return redirect('/admin/users');
 		}
 		public function buscar(Request $request){
