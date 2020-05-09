@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
     	]);
     	DB::table('roles')->insert([
-    			'name' => 'Administrador',
+    			'name' => 'Super-User',
     			'guard_name'=>'web',
     	]);
 
@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
     			'name' => 'alta_usuarios',
     			'guard_name'=>'web',
     	]);
+      DB::table('permissions')->insert([
+          'name' => 'ver_usuarios',
+          'guard_name'=>'web',
+      ]);
 
     	DB::table('permissions')->insert([
     			'name' => 'modificacion_usuarios',
@@ -48,6 +52,10 @@ class DatabaseSeeder extends Seeder
     			'name' => 'modificacion_roles',
     			'guard_name'=>'web',
     	]);
+      DB::table('permissions')->insert([
+    			'name' => 'ver_roles',
+    			'guard_name'=>'web',
+    	]);
 
       DB::table('permissions')->insert([
           'name' => 'alta_permisos',
@@ -57,11 +65,11 @@ class DatabaseSeeder extends Seeder
           'name' => 'baja_permisos',
           'guard_name'=>'web',
       ]);
+
       DB::table('permissions')->insert([
-          'name' => 'modificacion_permisos',
+          'name' => 'ver_permisos',
           'guard_name'=>'web',
       ]);
-
 
     }
 }

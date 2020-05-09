@@ -86,9 +86,9 @@
 							  <td>{{$permission->created_at}}</td>
 
 								{!! Form::model($permission, ['route' => ['permisos.destroy', $permission->id], 'method'=> 'DELETE'])!!}
-
+                @if((!($permission->id==9))&&(!($permission->id==10)))
 								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $permission->id }}">X</button></td>
-
+                @endif
 								{!! Form::close() !!}
 
 							</tr>

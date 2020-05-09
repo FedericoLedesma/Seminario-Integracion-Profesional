@@ -21,6 +21,8 @@ class AdminPermissionController extends Controller
     public function index(Request $request)
     {
         //
+        $user=Auth::user();
+        if ($user->can('ver_permisos')){
         $query = $request->get('search');
   			$busqueda_por= $request->get('busqueda_por');
         if($request){
@@ -44,7 +46,8 @@ class AdminPermissionController extends Controller
   				}
         }
         	return  view('admin.permisos.index', compact('permisos','query','busqueda_por'));
-
+        }
+        return  redirect('/home');
     }
 
     /**
@@ -57,7 +60,7 @@ class AdminPermissionController extends Controller
         //esto se deben desactivar todas las rutas de abm de permisos
         $user=Auth::user();
         $acciones=['alta','baja','modificacion','ver'];
-        $tablas=['usuarios','roles','permisos'];
+        $tablas=['usuarios','roles'];
         if ($user->can('alta_permisos')){
     	     return view('admin.permisos.create',compact('acciones','tablas'));
          }

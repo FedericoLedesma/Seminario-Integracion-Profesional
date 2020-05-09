@@ -35,6 +35,8 @@ class AdminRolesController extends Controller
 
 
         **/
+				$user=Auth::user();
+        if ($user->can('ver_roles')){
 				$query = $request->get('search');
 				$busqueda_por= $request->get('busqueda_por');
 				if($request){
@@ -60,6 +62,7 @@ class AdminRolesController extends Controller
 				}
   		$roles_total=Role::all()->count();
     	return  view('admin.roles.index', compact('roles','roles_total','query','busqueda_por'));
+		}return redirect('/home');
 
     }
 
@@ -119,6 +122,7 @@ class AdminRolesController extends Controller
         //
 				$user=Auth::user();
 				if ($user->can('modificacion_roles')){
+					if(!($id==1)){
 	        $permisos=Permission::all();
 
 		    	$role=Role::find($id);
@@ -139,6 +143,7 @@ class AdminRolesController extends Controller
 		    	}
 
 		    	return view('admin.roles.edit',compact('role','permisos','permisosAsociados'));
+				}
 				}return redirect('/admin/roles');
     }
 

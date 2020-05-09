@@ -29,6 +29,8 @@ class AdminUsersController extends Controller
 	}
     public function index(Request $request)
     {
+			$user=Auth::user();
+			if ($user->can('ver_usuarios')){
     	$query = $request->get('search');
 			$busqueda_por= $request->get('busqueda_por');
 			if($request){
@@ -59,7 +61,8 @@ class AdminUsersController extends Controller
 			}
     //	$users=User::all();
     	$users_total=User::all()->count();
-    	return  view('admin.users.index', compact('users','users_total','query','busqueda_por'));//view('admin.users.index', compact('users'));
+    	return  view('admin.users.index', compact('users','users_total','query','busqueda_por'));
+		}return redirect('/home');//view('admin.users.index', compact('users'));
     }
 
     /**
