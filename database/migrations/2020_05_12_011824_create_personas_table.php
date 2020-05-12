@@ -18,7 +18,7 @@ class CreatePersonasTable extends Migration
             $table->bigInteger('dni');
             $table->string('apellido',50);
             $table->string('name',50);
-            $table->string('observacion',100);
+            $table->string('observacion',100)->nullable($value = true);
             $table->string('direccion',50);
             $table->string('email');
             $table->string('provincia',50);

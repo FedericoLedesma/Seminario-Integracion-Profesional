@@ -14,22 +14,22 @@ class CreatePersonaHasSectorsTable extends Migration
     public function up()
     {
         Schema::create('persona_has_sectors', function (Blueprint $table) {
-            $table->unsignedBigInteger('persona_id');
             $table->unsignedInteger('sector_id');
+            $table->unsignedBigInteger('persona_id');
             $table->date('fecha');
-
-            $table->foreign('persona_id')
-                ->references('id')
-                ->on('personas')
-                ->onDelete('cascade');
 
             $table->foreign('sector_id')
                 ->references('id')
                 ->on('sectors')
                 ->onDelete('cascade');
 
+            $table->foreign('persona_id')
+                ->references('id')
+                ->on('personas')
+                ->onDelete('cascade');
 
-            $table->primary(['persona_id', 'sector_id','fecha'], 'persona_has_sectors_persona_id_sector_id_fecha_primary');
+
+            $table->primary(['sector_id','persona_id','fecha'], 'persona_has_sectors_sector_id_persona_id_fecha_primary');
         });
     }
     /**
@@ -39,6 +39,6 @@ class CreatePersonaHasSectorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas_has_sectors');
+        Schema::dropIfExists('persona_has_sectors');
     }
 }
