@@ -29,7 +29,20 @@ class Prueba extends Seeder
 
 
       	]);
+        DB::table('personas')->insert([
+            'name' => 'personaje_prueba',
+            'dni'=>'123456',
+            'apellido'=>'unlu',
+            'direccion'=>'calle',
+            'email'=>'prueba@gmail.com',
+            'provincia'=>'Buenos aires',
+            'localidad'=>'Lujan',
+            'sexo'=>'M',
+            'fecha_nac'=>'1997-08-05',
+            'tipo_dni_id'=>'1',
 
+
+        ]);
 
     }
 }
