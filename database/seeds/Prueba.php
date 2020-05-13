@@ -33,6 +33,8 @@ class Prueba extends Seeder
               'name' => 'patologia_1',
 
             ]);
-
+        $persona= Persona::findById(1);
+        echo $persona->name;
+        echo $persona->apellido;
     }
 }
