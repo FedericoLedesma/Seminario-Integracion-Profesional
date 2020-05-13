@@ -17,6 +17,7 @@ class Persona extends Model
         } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }
+        
 
     }
 }
