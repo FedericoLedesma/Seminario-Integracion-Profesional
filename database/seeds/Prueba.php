@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Persona;
+use App\TipoDni;
+use App\Patologia;
 class Prueba extends Seeder
 {
     /**
@@ -12,37 +14,25 @@ class Prueba extends Seeder
     public function run()
     {
         //
-        DB::table('tipo_dnis')->insert([
+        $dni=TipoDni::create([
           'name'=>'dni',
         ]);
-        DB::table('personas')->insert([
-      			'name' => 'prueba',
-            'dni'=>'1234',
-            'apellido'=>'unlu',
-            'direccion'=>'calle falsa',
-            'email'=>'hola@gmail.com',
-            'provincia'=>'Buenos aires',
-            'localidad'=>'Lujan',
-            'sexo'=>'M',
-            'fecha_nac'=>'1997-08-02',
-            'tipo_dni_id'=>'1',
-
-
-      	]);
-        DB::table('personas')->insert([
-            'name' => 'personaje_prueba',
-            'dni'=>'123456',
+        $persona=Persona::create([
+            'name' => 'p_prueba',
+            'dni'=>'1253456',
             'apellido'=>'unlu',
             'direccion'=>'calle',
-            'email'=>'prueba@gmail.com',
+            'email'=>'prueb-a@gmail.com',
             'provincia'=>'Buenos aires',
             'localidad'=>'Lujan',
             'sexo'=>'M',
             'fecha_nac'=>'1997-08-05',
             'tipo_dni_id'=>'1',
+          ]);
+          $patologia=Patologia::create([
+              'name' => 'patologia_1',
 
-
-        ]);
+            ]);
 
     }
 }
