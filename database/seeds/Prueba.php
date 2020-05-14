@@ -5,6 +5,8 @@ use App\Persona;
 use App\TipoDni;
 use App\Patologia;
 use App\TipoPatologia;
+use App\Paciente;
+use App\Acompanante;
 class Prueba extends Seeder
 {
     /**
@@ -26,6 +28,5 @@ class Prueba extends Seeder
         }
       }
     
-
     }
 }
