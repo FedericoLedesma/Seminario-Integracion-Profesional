@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Persona;
 use App\TipoDni;
 use App\Patologia;
+use App\TipoPatologia;
 class Prueba extends Seeder
 {
     /**
@@ -24,5 +25,7 @@ class Prueba extends Seeder
           // code...
         }
       }
+    
+
     }
 }
