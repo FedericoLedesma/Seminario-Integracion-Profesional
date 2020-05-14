@@ -22,12 +22,13 @@ class CreateMovimientosTable extends Migration
           $table->unsignedBigInteger('user_id');
           $table->unsignedInteger('tipo_movimiento_id');
 
-          $table->index(['fecha','horario_id','racion_id'],'index_movimientos');
+          $table->unique(['horario_id','racion_id','fecha'],'index_movimientos');
 
-          $table->foreign('fecha','horario_id','racion_id')
-              ->references('fecha','horario_id','racion_id')
-              ->on('raciones_disponibles')
-              ->onDelete('cascade');
+          $table->primary(['horario_id','racion_id','fecha','created_at','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
+
+          $table->foreign('horario_id','racion_id','fecha')
+              ->references('horario_id','racion_id','fecha')
+              ->on('raciones_disponibles');
 
           $table->foreign('user_id')
               ->references('id')
@@ -39,7 +40,7 @@ class CreateMovimientosTable extends Migration
               ->on('tipo_movimientos')
               ->onDelete('cascade');
 
-          $table->primary(['racion_id','fecha','horario_id','created_at','user_id','tipo_movimiento_id'],'movimiento_racion_id_fecha_horario_id_created_at_user_id_tipo_movimiento_id_primary');
+          
 
         });
     }
