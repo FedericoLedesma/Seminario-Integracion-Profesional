@@ -15,10 +15,12 @@ class Persona extends Model
     ];
     public static function findById(int $id)
     {
-         $persona = static::where('id', $id)->first();
-         if($persona){
-           return $persona;
-       } return null;
+      if($id){
+        $persona = static::where('id', $id)->first();
+        if($persona){
+             return $persona;
+        }
+      }return null;
     }
     public static function findByEmail(string $email)
     {

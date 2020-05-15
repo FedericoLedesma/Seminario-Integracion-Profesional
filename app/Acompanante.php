@@ -22,4 +22,20 @@ class Acompanante extends Model
        }
      }return null;
   }
+  public function scopeFindByPaciente($query,$paciente_id)
+  {
+    if($paciente_id){
+      return $query->where('paciente_id',$paciente_id)
+      ->orderBy('fecha', 'asc');
+    }return null;
+  }
+  public function scopeFindByPacienteEntreFechas($query,$paciente_id,$fecha_desde,$fecha_hasta)
+  {
+    if((($paciente_id)&&($fecha_desde))&&($fecha_hasta)){
+      return $query->where('paciente_id',$paciente_id)
+      ->where('fecha','>=',$fecha_desde)
+      ->where('fecha','<=',$fecha_hasta)
+      ->orderBy('fecha', 'asc');
+    }return null;
+  }
 }
