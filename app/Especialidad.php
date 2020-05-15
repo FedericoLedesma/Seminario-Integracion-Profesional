@@ -32,7 +32,7 @@ class Especialidad extends Model
     public function scopeFindByProfesion($query,$profesion_id)
     {
       if($profesion_id){
-        return $query->where('name',$profesion_id)
+        return $query->where('profesion_id',$profesion_id)
         ->orderBy('id', 'asc');
       }return null;
     }

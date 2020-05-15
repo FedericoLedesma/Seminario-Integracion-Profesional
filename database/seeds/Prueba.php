@@ -7,7 +7,8 @@ use App\Patologia;
 use App\TipoPatologia;
 use App\Paciente;
 use App\Acompanante;
-use App\PersonaPatologia;
+use App\RacionesDisponibles;
+
 class Prueba extends Seeder
 {
     /**
@@ -18,17 +19,13 @@ class Prueba extends Seeder
     public function run()
     {
         //
-      $personas=Persona::findByProvincia('buenos aires')->get();
-      if($personas){
-        foreach ($personas as $person) {
-            echo $person->id;
-            echo $person->dni;
-            echo $person->name;
 
-          // code...
-        }
+
+      $fecha= new DateTime('2020-05-15');
+      $racionesDisponibles=RacionesDisponibles::allDisponibles(2,$fecha)->get();
+      if($racionesDisponibles){
+        echo $racionesDisponibles;
       }
-      
 
 
 
