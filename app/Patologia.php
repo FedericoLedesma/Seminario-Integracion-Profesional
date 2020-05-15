@@ -19,12 +19,14 @@ class Patologia extends Model
            return $patologia;
        } return null;
     }
+
     public function scopeFindByName($query,$name)
     {
       if($name){
         return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
       }return null;
     }
+
     public function scopeFindByTipoPatologia($query,$tipo_patologia_id)
     {
       if($tipo_patologia_id){

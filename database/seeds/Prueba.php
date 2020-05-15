@@ -7,7 +7,7 @@ use App\Patologia;
 use App\TipoPatologia;
 use App\Paciente;
 use App\Acompanante;
-use App\Cama;
+use App\PersonaPatologia;
 class Prueba extends Seeder
 {
     /**
@@ -28,11 +28,7 @@ class Prueba extends Seeder
           // code...
         }
       }
-      $camas= Cama::findBySectorHabitacion(1,1)->get();
-      if($camas){
-
-        echo $camas;
-      }
+      
 
 
 
