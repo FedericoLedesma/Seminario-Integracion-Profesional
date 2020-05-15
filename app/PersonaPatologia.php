@@ -12,6 +12,8 @@ class PersonaPatologia extends Model
         'patologia_id', 'persona_id', 'fecha',
     ];
 
+    public $timestamps = false;
+
     public static function findByIdPersonaPatologiaFecha($patologia_id, $persona_id,$fecha)
     {
         if((($patologia_id)&&($persona_id))&&($fecha)){

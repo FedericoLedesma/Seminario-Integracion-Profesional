@@ -21,6 +21,7 @@ class CreateMovimientosTable extends Migration
           $table->dateTime('created_at');
           $table->unsignedBigInteger('user_id');
           $table->unsignedInteger('tipo_movimiento_id');
+          $table->unsignedInteger('cantidad');
 
           $table->unique(['horario_id','racion_id','fecha'],'index_movimientos');
 
@@ -40,7 +41,7 @@ class CreateMovimientosTable extends Migration
               ->on('tipo_movimientos')
               ->onDelete('cascade');
 
-          
+
 
         });
     }

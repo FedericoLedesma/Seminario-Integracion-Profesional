@@ -11,6 +11,9 @@ class PersonalProfesion extends Model
     protected $fillable = [
         'personal_id','profesion_id',
     ];
+
+    public $timestamps = false;
+
     public static function findById($personal_id,$profesion_id)
     {
         if(($personal_id)&&($profesion_id)){

@@ -12,6 +12,7 @@ class Movimiento extends Model
       'horario_id','racion_id', 'fecha','created_at',
       'user_id','tipo_movimiento_id','cantidad',
   ];
+  public $timestamps = false;
   public static function findById($horario_id,$racion_id, $fecha,$created_at,
     $user_id,$tipo_movimiento_id)
   {

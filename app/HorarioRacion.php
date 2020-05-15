@@ -11,6 +11,7 @@ class HorarioRacion extends Model
     protected $fillable = [
         'horario_id', 'racion_id',
     ];
+    public $timestamps = false;
     public static function findById($horario_id,$racion_id)
     {
          $horarioRacion = static::where('horario_id', $horario_id)

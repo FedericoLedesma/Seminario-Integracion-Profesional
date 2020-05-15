@@ -11,6 +11,7 @@ class RacionAlimento extends Model
     protected $fillable = [
         'racion_id', 'alimento_id', 'cantidad',
     ];
+    public $timestamps = false;
     public static function findById($racion_id,$alimento_id)
     {
          $racion_alimento= static::where('racion_id', $racion_id)
