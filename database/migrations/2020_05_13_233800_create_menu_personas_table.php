@@ -23,7 +23,7 @@ class CreateMenuPersonasTable extends Migration
             $table->unsignedBigInteger('dieta_id');
             $table->boolean('realizado');
             $table->timestamps();
-            
+
             $table->foreign('fecha','horario_id','racion_id')
                 ->references('fecha','horario_id','racion_id')
                 ->on('raciones_disponibles')

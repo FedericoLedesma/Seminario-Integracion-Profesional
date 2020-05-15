@@ -22,7 +22,7 @@ class Prueba extends Seeder
 
 
       $fecha= new DateTime('2020-05-15');
-      $racionesDisponibles=RacionesDisponibles::allDisponibles(2,$fecha)->get();
+      $racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
       if($racionesDisponibles){
         echo $racionesDisponibles;
       }
