@@ -4,7 +4,9 @@ use Illuminate\Database\Seeder;
 use App\Persona;
 use App\TipoDni;
 use App\Patologia;
-class Prueba extends Seeder
+use App\Horario;
+use App\Racion;
+class PersonaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -33,8 +35,29 @@ class Prueba extends Seeder
               'name' => 'patologia_1',
 
             ]);
-        $persona= Persona::findById(1);
-        echo $persona->name;
-        echo $persona->apellido;
+        Racion::create([
+          'name'=>'pollo',
+          'observacion'=>'pollo con arroz',
+        ]);
+        Racion::create([
+          'name'=>'guiso',
+          'observacion'=>'guiso arroz',
+        ]);
+        Racion::create([
+          'name'=>'fideos con tuco',
+          'observacion'=>'fideos',
+        ]);
+        Horario::create([
+          'name'=>'desayuno'
+        ]);
+        Horario::create([
+          'name'=>'almuerzo'
+        ]);
+        Horario::create([
+          'name'=>'merienda'
+        ]);
+        Horario::create([
+          'name'=>'cena'
+        ]);
     }
 }

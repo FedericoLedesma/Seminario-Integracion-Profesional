@@ -16,7 +16,7 @@ class CreateRacionAlimentosTable extends Migration
         Schema::create('racion_alimentos', function (Blueprint $table) {
             $table->unsignedBigInteger('racion_id');
             $table->unsignedBigInteger('alimento_id');
-            $table->float('peso',5,2);
+            $table->float('cantidad',5,2);
             $table->timestamps();
 
             $table->primary(['racion_id','alimento_id'],'racion_alimento_racion_id_alimento_idprimary_');
