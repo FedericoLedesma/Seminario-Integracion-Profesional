@@ -16,11 +16,11 @@ class UserTable extends Seeder
     {
         //
         $user=User::find('1');
-        $role=Role::find('1');
-        $user->assignRole($role->name);
+        $role=Role::create(['name'=>'Administrador']);
         $permisos=Permission::all();
         foreach($permisos as $permiso){
         	$role->givePermissionTo($permiso);
         }
+        $user->assignRole('Administrador');
     }
 }
