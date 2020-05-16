@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRacionsTable extends Migration
+class CreateTiposMovimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateRacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('racions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('tipos_movimientos', function (Blueprint $table) {
+            $table->Increments('id');
             $table->string('name',50);
-            $table->string('observacion',100);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateRacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racions');
+        Schema::dropIfExists('tipos_movimientos');
     }
 }

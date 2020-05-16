@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenuPersonasTable extends Migration
+class CreateMenusPersonasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMenuPersonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_personas', function (Blueprint $table) {
+        Schema::create('menus_personas', function (Blueprint $table) {
 
             $table->unsignedBigInteger('persona_id');
             $table->unsignedInteger('horario_id');
@@ -36,7 +36,7 @@ class CreateMenuPersonasTable extends Migration
 
             $table->foreign('personal_id')
                 ->references('id')
-                ->on('personals')
+                ->on('personal')
                 ->onDelete('cascade');
 
             $table->foreign('dieta_id')
@@ -44,7 +44,7 @@ class CreateMenuPersonasTable extends Migration
                 ->on('dietas')
                 ->onDelete('cascade');
 
-            $table->primary(['fecha','persona_id','horario_id'], 'menu_personas_fecha_persona_id_horario_id_primary');
+            $table->primary(['fecha','persona_id','horario_id'], 'menus_personas_fecha_persona_id_horario_id_primary');
 
         });
     }
@@ -56,6 +56,6 @@ class CreateMenuPersonasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_personas');
+        Schema::dropIfExists('menus_personas');
     }
 }

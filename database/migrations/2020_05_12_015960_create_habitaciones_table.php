@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCamas extends Migration
+class CreateHabitacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,20 @@ class CreateCamas extends Migration
      */
     public function up()
     {
-        Schema::create('camas', function (Blueprint $table) {
-            $table->unsignedInteger('cama_id');
+        Schema::create('habitaciones', function (Blueprint $table) {
             $table->unsignedInteger('habitacion_id');
             $table->unsignedInteger('sector_id');
+            $table->string('name',50);
+            $table->string('descripcion',50)->nullable($value = true);
             $table->timestamps();
-
-            $table->foreign('habitacion_id')
-                ->references('habitacion_id')
-                ->on('habitacions')
-                ->onDelete('cascade');
 
             $table->foreign('sector_id')
                 ->references('id')
-                ->on('sectors')
+                ->on('sectores')
                 ->onDelete('cascade');
 
-            $table->primary(['cama_id','habitacion_id','sector_id'], 'camas_cama_id_habitacion_id_sector_id_primary');
+              //$table->primary(['paciente_id','fecha'], 'acompanantes_paciente_id_fecha_primary');
+              $table->primary(['habitacion_id','sector_id'], 'habitaciones_habitacion_id_sector_id_primary');
         });
     }
 
@@ -40,6 +37,6 @@ class CreateCamas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('camas');
+        Schema::dropIfExists('habitaciones');
     }
 }

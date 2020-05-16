@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoDnisTable extends Migration
+class CreateSectoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTipoDnisTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_dnis', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('sectores', function (Blueprint $table) {
+            $table->Increments('id');
             $table->string('name',50);
+            $table->string('descripcion',50);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateTipoDnisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_dnis');
+        Schema::dropIfExists('sectores');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonaPatologiasTable extends Migration
+class CreatePersonasPatologiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePersonaPatologiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('persona_patologias', function (Blueprint $table) {
+        Schema::create('personas_patologias', function (Blueprint $table) {
           $table->unsignedInteger('patologia_id');
           $table->unsignedBigInteger('persona_id');
           $table->date('fecha');
@@ -29,7 +29,7 @@ class CreatePersonaPatologiasTable extends Migration
               ->onDelete('cascade');
 
 
-          $table->primary(['patologia_id','persona_id','fecha'], 'persona_patolgias_patologia_id_persona_id_fecha_primary');
+          $table->primary(['patologia_id','persona_id','fecha'], 'personas_patolgias_patologia_id_persona_id_fecha_primary');
 
         });
     }
@@ -41,6 +41,6 @@ class CreatePersonaPatologiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persona_patologias');
+        Schema::dropIfExists('personas_patologias');
     }
 }

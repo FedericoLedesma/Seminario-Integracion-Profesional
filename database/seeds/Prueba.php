@@ -8,7 +8,7 @@ use App\TipoPatologia;
 use App\Paciente;
 use App\Acompanante;
 use App\RacionesDisponibles;
-
+use App\MenuPersona;
 class Prueba extends Seeder
 {
     /**
@@ -19,16 +19,6 @@ class Prueba extends Seeder
     public function run()
     {
         //
-
-
-      $fecha= new DateTime('2020-05-15');
-      $racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
-      if($racionesDisponibles){
-        echo $racionesDisponibles;
-      }
-
-
-
 
     }
 }
