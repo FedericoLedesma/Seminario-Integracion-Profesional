@@ -39,4 +39,32 @@ class RacionesDisponibles extends Model
         ->orderBy('racion_id', 'asc');
       }return null;
     }
+
+    /**
+     * Funcionalidad principal.
+     * Recomendar ración.
+     * 
+     * @param $fecha
+     * 
+     * @return Racion[ ]
+     * 
+     */
+
+    private function recuperar_raciones_disponibles($fecha){
+      $raciones = array();
+      try{
+        foreach($raciones_disponibles as $rd){
+          //Comparar el día, mes (y quizás año)
+          if ((Carbon::createFromFormat('d-m-Y', $rd))==(Carbon::createFromFormat('d-m-Y', $fecha))){
+            arrayPush($raciones,$rd);
+          }
+        }
+      }
+      catch(Throwable $e){
+
+      }
+      return $raciones;
+    }
+
+
 }
