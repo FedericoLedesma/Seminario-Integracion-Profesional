@@ -38,7 +38,7 @@ class CreateMovimientosTable extends Migration
 
           $table->foreign('tipo_movimiento_id')
               ->references('id')
-              ->on('tipo_movimientos')
+              ->on('tipos_movimientos')
               ->onDelete('cascade');
 
 

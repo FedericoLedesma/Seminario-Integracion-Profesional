@@ -22,7 +22,7 @@ class CreatePatologiasTable extends Migration
 
             $table->foreign('tipo_patologia_id')
                 ->references('id')
-                ->on('tipo_patologias')
+                ->on('tipos_patologias')
                 ->onDelete('cascade');
 
         });

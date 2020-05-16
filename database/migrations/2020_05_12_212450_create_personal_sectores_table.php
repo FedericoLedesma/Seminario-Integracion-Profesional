@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalHasProfesionsTable extends Migration
+class CreatePersonalSectoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,25 @@ class CreatePersonalHasProfesionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_has_profesions', function (Blueprint $table) {
+        Schema::create('personal_sectores', function (Blueprint $table) {
+            $table->unsignedInteger('sector_id');
             $table->unsignedBigInteger('personal_id');
-            $table->unsignedInteger('profesion_id');
+            $table->date('fecha');
+
+            $table->foreign('sector_id')
+                ->references('id')
+                ->on('sectores')
+                ->onDelete('cascade');
 
             $table->foreign('personal_id')
                 ->references('id')
-                ->on('personals')
+                ->on('personal')
                 ->onDelete('cascade');
 
-            $table->foreign('profesion_id')
-                ->references('id')
-                ->on('profesions')
-                ->onDelete('cascade');
 
-            $table->primary(['personal_id','profesion_id'], 'personal_has_profesions_personal_id_profesion_id_primary');
-
+            $table->primary(['sector_id','personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -39,6 +39,6 @@ class CreatePersonalHasProfesionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_has_profesions');
+        Schema::dropIfExists('personal_sectores');
     }
 }

@@ -117,6 +117,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                 <!--              usuarios        -->
+                 <li>Admin</li>
           <li class="nav-item has-treeview menu-close">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
@@ -146,6 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          <!--                      -->
            <li class="nav-item has-treeview menu-close">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-id-card-alt"></i>
@@ -204,6 +207,102 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
              </ul>
           </li>
+          <!--              personas        -->
+         <li class="nav-item has-treeview menu-close">
+           <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-users"></i>
+             <p>
+               Personas
+               <i class="right fas fa-angle-left"></i>
+             </p>
+           </a>
+           <ul class="nav nav-treeview">
+             <li class="nav-item">
+               <a href="#" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Ver todas</p>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="#" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Agregar Persona</p>
+               </a>
+             </li>
+           </ul>
+         </li>
+         <!--           fin personas           -->
+         <!--              personal        -->
+        <li class="nav-item has-treeview menu-close">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Personal
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ver todos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Agregar Personal</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!--           fin persona           -->
+        <!--              personal        -->
+       <li class="nav-item has-treeview menu-close">
+         <a href="#" class="nav-link">
+           <i class="nav-icon fas fa-users"></i>
+           <p>
+             NUTRICION
+             <i class="right fas fa-angle-left"></i>
+           </p>
+         </a>
+         <ul class="nav nav-treeview">
+           <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Menus</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Dietas</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Raciones</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Horarios</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Movimientos</p>
+             </a>
+           </li>
+         </ul>
+       </li>
+       <!--           fin persona           -->
+
+
+
 
         </ul>
       </nav>
@@ -226,7 +325,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home') }}">Home</a></li>
               @yield('navegacion')
-              
+
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

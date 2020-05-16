@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHorarioRacion extends Migration
+class CreateDietasActivasRacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreateHorarioRacion extends Migration
      */
     public function up()
     {
-        Schema::create('horario_racion', function (Blueprint $table) {
-            $table->unsignedInteger('horario_id');
+        Schema::create('dietas_activas_raciones', function (Blueprint $table) {
+            $table->unsignedBigInteger('dieta_id');
             $table->unsignedBigInteger('racion_id');
+            $table->date('fecha');
 
-            $table->foreign('horario_id')
+            $table->foreign('dieta_id')
                 ->references('id')
-                ->on('horarios')
+                ->on('dietas')
                 ->onDelete('cascade');
 
             $table->foreign('racion_id')
                 ->references('id')
-                ->on('racions')
+                ->on('raciones')
                 ->onDelete('cascade');
-            $table->index(['horario_id','racion_id'],'horario_racion_index');
-            $table->primary(['horario_id','racion_id'], 'horario_racion_horario_id_racion_id_primary');
+
+            $table->primary(['dieta_id','racion_id','fecha'], 'dietas_activas_raciones_dieta_id_racion_id_fecha_primary');
 
         });
     }
@@ -39,6 +40,6 @@ class CreateHorarioRacion extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('horario_racion');
+        Schema::dropIfExists('dietas_activas_raciones');
     }
 }

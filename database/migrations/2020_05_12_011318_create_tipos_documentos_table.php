@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoMovimientosTable extends Migration
+class CreateTiposDocumentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateTipoMovimientosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_movimientos', function (Blueprint $table) {
-            $table->Increments('id');
+        Schema::create('tipos_documentos', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name',50);
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateTipoMovimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_movimientos');
+        Schema::dropIfExists('tipos_documentos');
     }
 }

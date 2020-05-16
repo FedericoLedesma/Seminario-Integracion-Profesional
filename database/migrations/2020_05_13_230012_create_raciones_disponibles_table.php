@@ -27,15 +27,15 @@ class CreateRacionesDisponiblesTable extends Migration
 
             $table->foreign('racion_id')
                 ->references('racion_id')
-                ->on('horario_racion')
+                ->on('horarios_raciones')
                 ->onDelete('cascade');
 
             $table->foreign('horario_id')
                 ->references('horario_id')
-                ->on('horario_racion')
+                ->on('horarios_raciones')
                 ->onDelete('cascade');
 
-            
+
 
             $table->primary(['horario_id','racion_id','fecha'], 'raciones_disponibles_horario_id_racion_id_fecha_primary');
 

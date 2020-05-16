@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDietaActivaRacionTable extends Migration
+class CreateDietasActivasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateDietaActivaRacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('dieta_activa_racion', function (Blueprint $table) {
+        Schema::create('dietas_activas', function (Blueprint $table) {
             $table->unsignedBigInteger('dieta_id');
-            $table->unsignedBigInteger('racion_id');
             $table->date('fecha');
+            $table->date('fecha_final')->nullable($value=true);
+            $table->string('observacion',100);
+            $table->timestamps();
 
             $table->foreign('dieta_id')
                 ->references('id')
                 ->on('dietas')
                 ->onDelete('cascade');
 
-            $table->foreign('racion_id')
-                ->references('id')
-                ->on('racions')
-                ->onDelete('cascade');
-
-            $table->primary(['dieta_id','racion_id','fecha'], 'dieta_activa_racion_dieta_id_racion_id_fecha_primary');
+            $table->primary(['dieta_id','fecha'], 'dietas_activas_dieta_id_fecha_primary');
 
         });
     }
@@ -40,6 +37,6 @@ class CreateDietaActivaRacionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dieta_activa_racion');
+        Schema::dropIfExists('dietas_activas');
     }
 }
