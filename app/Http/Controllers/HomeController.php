@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
     	$user=Auth::user();
     	$roles=$user->getRoleNames();
-    	$role = null;
+    	$role;
     	foreach($roles as $rol){
     		$role=$rol;
     	}
