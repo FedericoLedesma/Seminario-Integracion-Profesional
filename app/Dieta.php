@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Dieta_racion;
 
 class Dieta extends Model
 {
@@ -33,4 +34,26 @@ class Dieta extends Model
       ->orderBy('id', 'asc');
     }return null;
   }
+
+  /**
+   * @return Racion[]
+   */
+
+  public function get_raciones(){
+    $raciones = array();
+    $rac_die = array();
+    try{
+
+    }
+    catch(Throwable $e){
+      $rac_die = Dieta_racion::where('dieta_id','=',$this->id)
+        ->get();
+      foreach ($rac_die as $rd){
+        array_push($raciones, $rd->get_racion());
+      }
+    }
+    return $raciones;
+  }
+
+
 }

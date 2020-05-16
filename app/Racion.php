@@ -24,6 +24,28 @@ class Racion extends Model
       return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
     }return null;
   }
-  
 
+  public static function intercept_raciones($conj_a, $conj_b){
+    $intercepcion = array();
+    foreach($conj_a as $a){
+      foreach($conj_b as $b){
+        if ($a->id == $b->id){
+          array_push($intercepcion,$a);
+        }
+      }
+    }
+    return $intercepcion;
+  }
+
+  public static function union_raciones($conj_a, $conj_b){
+    $intercepcion = array();
+    foreach($conj_a as $a){
+      array_push($intercepcion,$a);
+    }
+    foreach($conj_b as $b){
+      array_push($intercepcion,$b);
+    } 
+    return $intercepcion;
+  }
+  
 }

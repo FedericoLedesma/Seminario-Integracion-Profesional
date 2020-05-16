@@ -12,6 +12,9 @@ class MenuPersona extends Model
       'persona_id','horario_id','racion_id', 'fecha','personal_id',
       'dieta_id','realizado',
   ];
+
+  public static $dias = 30;
+
   public static function findById($horario_id,$persona_id,$fecha)
   {
        $menu_personas = static::where('horario_id', $horario_id)
@@ -71,5 +74,35 @@ class MenuPersona extends Model
       return $query->where('persona_id',$persona_id)
       ->orderBy('fecha', 'asc');
     }return null;
+  }
+
+
+  /**
+   * 
+   * 
+   * @return Racion
+   */
+  public static function get_racion_menos_consumida($persona,$raciones){
+    $racion = array();
+    $c = -1;
+    foreach($raciones as $r){
+      $cantidad = static::where([
+        ['persona_id','=',$persona->id],
+        ['fecha','>=',Carbon::now()->subDays(30)],
+        ['racion_id','=',$r->id]
+      ])
+        ->count();
+      if($c==-1){
+        $c = $cantidad;
+        $racion = $r;
+      }
+      else{
+        if ($cantidad<$c){
+          $c = $cantidad;
+          $racion = $r;
+        }
+      }
+    }
+    return $racion;
   }
 }

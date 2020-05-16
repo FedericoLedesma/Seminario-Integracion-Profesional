@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\PersonaPatologia;
 use Carbon\Carbon;
 use App\RacionesDisponibles;
+use App\Racion;
+use App\MenuPersona;
 
 class Persona extends Model
 {
@@ -175,20 +177,44 @@ class Persona extends Model
       */
 
       public function recomendar_racion($fecha,$horario){
-          $raciones_disponibles_hoy = array();
-          $raciones_disponibles_segun_una_pat = array();
-          $raciones_disponibles_segun_varias_pat = array();
-          $racion_recomendada = array();
-          $patologias_pac = array();
+          $raciones_disponibles = array();
+          $racion_recomendada = null;
           try{
-            $raciones_disponibles_hoy = RacionesDisponibles::recuperar_raciones_disponibles($fecha);
+            $raciones_disponibles = RacionesDisponibles::recuperar_raciones_disponibles($fecha);
             $patologias_pac = $this->get_patologias();
+            foreach($patologias_pac as $p){
+              Racion::intercept_raciones($raciones_disponibles,$p->get_raciones_por_patologia());
+            }
+
+            $raciones_disponibles = Racion::union_raciones($raciones_disponibles,$this->get_ultimas_raciones_consumidas());
+
+            $racion_recomendada = MenuPersona::get_racion_menos_consumida($this,$raciones_disponibles);
 
           }
           catch(Throwable $e){
 
           }
           return $racion_recomendada;
+      }
+
+      /**
+       * 
+       * @return Racion[]
+       */
+
+      public function get_ultimas_raciones_consumidas(){
+        $raciones = array();
+        $sub = MenuPersona::select(DB::raw('racion_id'))
+          ->where([
+            ['persona_id','=',$this->id],
+            ['fecha','>=',Carbon::now()->subDays(30)]
+          ])
+          ->groupBy('racion_id')
+          ->get();
+        foreach($sub as $r){
+          array_push($raciones,Racion::findById($r));
+        }
+        return $raciones;
       }
 
 }
