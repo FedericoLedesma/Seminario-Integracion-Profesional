@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Persona;
+use App\TipoDocumento;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -60,7 +61,9 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        $tipos_documentos=TipoDocumento::all();
+        return view('admin_personas.personas.create',compact('tipos_documentos'));
+
     }
 
     /**
@@ -72,6 +75,7 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         //
+        return redirect('/home');
     }
 
     /**
