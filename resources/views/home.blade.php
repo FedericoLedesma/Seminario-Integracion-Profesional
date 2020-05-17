@@ -13,11 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
-                    Esta conectado 
+
+                    Esta conectado
                     <label>{{Auth::user()->name}}</label>
                 </div>
-             
+
             </div>
         </div>
     </div>
