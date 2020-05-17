@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HorarioRacion extends Model
 {
-    protected $table = "horario_racion";
+    protected $table = "horarios_raciones";
 
     protected $fillable = [
         'horario_id', 'racion_id',

@@ -18,7 +18,17 @@ class Prueba extends Seeder
      */
     public function run()
     {
-        //
+      $fecha= new DateTime('2020-05-15');
+    $racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
+    if($racionesDisponibles){
+      echo $racionesDisponibles;
+    }
+
+    $menuPersona=MenuPersona::allFecha($fecha)->get();
+    if($menuPersona){
+      echo $menuPersona;
+    }
+
 
     }
 }

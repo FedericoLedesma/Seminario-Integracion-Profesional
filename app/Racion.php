@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Racion extends Model
 {
-  protected $table = "racions";
+  protected $table = "raciones";
 
   protected $fillable = [
       'id', 'name', 'observacion',
@@ -24,6 +24,6 @@ class Racion extends Model
       return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
     }return null;
   }
-  
+
 
 }

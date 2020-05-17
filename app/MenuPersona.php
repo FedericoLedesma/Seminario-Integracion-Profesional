@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuPersona extends Model
 {
-  protected $table = "menu_personas";
+  protected $table = "menus_personas";
 
   protected $fillable = [
       'persona_id','horario_id','racion_id', 'fecha','personal_id',

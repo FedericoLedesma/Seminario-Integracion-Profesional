@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Persona;
 use App\Personal;
-use App\TipoDni;
+use App\TipoDocumento;
 use App\Patologia;
 use App\Horario;
 use App\Racion;
@@ -21,7 +21,7 @@ class Prueb extends Seeder
     public function run()
     {
       //--------TIPO DNI---------------
-      $dni=TipoDni::create([
+      $dni=TipoDocumento::create([
         'name'=>'dni',
       ]);
       //--------PERSONA----------------
@@ -35,7 +35,7 @@ class Prueb extends Seeder
           'localidad'=>'Lujan',
           'sexo'=>'M',
           'fecha_nac'=>'1997-08-05',
-          'tipo_dni_id'=>'1',
+          'tipo_documento_id'=>'1',
         ]);
         $persona=Persona::create([
             'name' => 'persona2',
@@ -47,7 +47,7 @@ class Prueb extends Seeder
             'localidad'=>'Lujan',
             'sexo'=>'M',
             'fecha_nac'=>'1997-02-01',
-            'tipo_dni_id'=>'1',
+            'tipo_documento_id'=>'1',
           ]);
           $persona=Persona::create([
               'name' => 'persona3',
@@ -59,7 +59,7 @@ class Prueb extends Seeder
               'localidad'=>'Merlo',
               'sexo'=>'M',
               'fecha_nac'=>'2000-02-01',
-              'tipo_dni_id'=>'1',
+              'tipo_documento_id'=>'1',
             ]);
         //--------PATOLOGIA----------------
         $patologia=Patologia::create([

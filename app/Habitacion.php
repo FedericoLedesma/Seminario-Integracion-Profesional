@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Habitacion extends Model
 {
     //
-    protected $table = "habitacions";
+    protected $table = "habitaciones";
 
     protected $fillable = [
         'habitacion_id', 'sector_id','name','descripcion',

@@ -29,7 +29,7 @@ class CreatePersonalSectoresTable extends Migration
                 ->onDelete('cascade');
 
 
-            $table->primary(['sector_id','personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
+            $table->primary(['personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
         });
     }
     /**
