@@ -45,4 +45,5 @@ class Movimiento extends Model
       ->orderBy('created_at', 'asc');
     }return null;
   }
+
 }
