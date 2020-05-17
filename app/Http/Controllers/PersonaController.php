@@ -74,8 +74,25 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('/home');
+        $data=$request->all();
+        $persona=Persona::create([
+            'name' => $data['name'],
+            'numero_doc'=>$data['numero_doc'],
+            'apellido'=>$data['apellido'],
+            'direccion'=>$data['direccion'],
+            'email'=>$data['email'],
+            'provincia'=>$data['provincia'],
+            'localidad'=>$data['localidad'],
+            'sexo'=>$data['sexo'],
+            'fecha_nac'=>$data['fecha_nac'],
+            'tipo_documento_id'=>$data['tipo_documento_id'],
+          ]);
+
+        $persona->save();
+        return redirect('/personas');
+
+
+
     }
 
     /**
