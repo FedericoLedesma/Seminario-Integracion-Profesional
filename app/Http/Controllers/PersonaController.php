@@ -150,10 +150,8 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-      if(!($id=='1')){
-        $persona=Persona::find($id);
-        Persona::destroy($id);
-      }
+
+      $persona->destroyPersona();
       return response()->json([
           'estado'=>'true',
           'success' => 'Persona eliminada con exito!'

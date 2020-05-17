@@ -94,8 +94,9 @@
 								<td>{{$persona->email}}</td>
 								<td>{!!link_to_route('personas.show', $title = 'VER', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($persona, ['route' => ['personas.destroy', $persona->id], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>
+								{!! Form::model($persona, ['route' => ['personas.destroy', $persona], 'method'=> 'DELETE'])!!}
+						<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>
+									<!--<td><button type="submit" class="btn btn-danger eliminar">Eliminar</button></td>-->
 								{!! Form::close() !!}
 							</tr>
 								@endforeach

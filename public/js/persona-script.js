@@ -35,13 +35,14 @@
 		//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 		//validar el usuario
 		var url_destroy = "personas/:id";
-		url_destroy = url_destroy.replace(':id',persona);
-
+		url_destroy = url_destroy.replace(':id',persona.id);
+		console.log(persona);
 	$('#alert').show();
 	    $.ajax({
 	    	type: 'DELETE',
 	    	url: url_destroy,
 	    	dataType: 'json',
+					data:{data:persona},
 		    	success: function (data) {
 						if (data.estado=='true'){
 						   		row.fadeOut();
