@@ -103,7 +103,7 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-      //
+      return  view('admin_personas.personas.show', compact('persona'));
     }
 
     /**
@@ -114,7 +114,7 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
-        //
+          return view('admin_personas.personas.edit',compact('persona'));
     }
 
     /**

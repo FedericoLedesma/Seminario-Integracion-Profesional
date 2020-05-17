@@ -1,105 +1,77 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
-		<li class="breadcrumb-item active">Editar Rol</li>
+    <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Personas</a></li>
+		<li class="breadcrumb-item active">Editar Persona</li>
 @endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method'=> 'PUT'])!!}
-	 	@if($role)
-	    <h1>Editar Rol  {{$role->name}}</h1>
+	 	 {!! Form::model($persona, ['route' => ['personas.update', $persona->id], 'method'=> 'PUT'])!!}
+	 	@if($persona)
+	    <h1>Editar Persona  {{$persona->name}}</h1>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
-	    	<tr>
-	    	<td>
-		    {!!	Form::label('id', 'ID')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::label($role->id)!!}
-		   	</td>
-		   	</tr>
-
-		   	<tr>
-	    	<td>
-		    {!!	Form::label('name', 'NOMBRE')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::text('name',$role->name)!!}
-		   	</td>
-		   	</tr>
+        <tr>
+	    		<td>ID </td>
+				<td>{{$persona->id}}</td>
+  			</tr>
+        <tr>
+  				<td>Tipo Doc </td>
+  				<td>{{$persona->tipo_documento_id}}</td>
+  			</tr>
+        <tr>
+  				<td>Numero_doc </td>
+  				<td>	{!!	Form::text('numero_doc',$persona->numero_doc)!!}</td>
+  			</tr>
+  			<tr>
+  				<td>Apellido </td>
+  				<td>{!!	Form::text('apellido',$persona->apellido)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Nombre </td>
+  				<td>{!!	Form::text('name',$persona->name)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Observacion </td>
+  				<td>{!!	Form::text('observacion',$persona->observacion)!!}</td>
+  			</tr>
+        <tr>
+  				<td>EMail </td>
+  				<td>{!!	Form::text('email',$persona->email)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Provincia </td>
+  				<td>{!!	Form::text('provincia',$persona->provincia)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Localidad </td>
+  				<td>{!!	Form::text('localidad',$persona->localidad)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Sexo </td>
+  				<td>{!!	Form::text('sexo',$persona->sexo)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Fecha de Nacimiento </td>
+  				<td>{!!	Form::text('fecha_nac',$persona->fecha_nac)!!}</td>
+  			</tr>
 		   	<tr>
 	    	<td>
 		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
+        </tr>
+        <tr>
 		    <td>
-		   	{!!link_to_route('roles.show', $title = 'CANCELAR', $parameters = [$role], $attributes = [])!!}
+		   	{!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		 </table>
 		 @endif
 
-		 @if($permisosAsociados)
-		  <table class="table table-bordered table-hover table-striped">
-		   <tr>
-		    	<td>
-		    	Permisos asociados al rol {{$role->name}}
-		   		</td>
-		   		<td>
-		   			Quitar Permiso
-		   		</td>
-		   </tr>
-		   		@if (count($permisosAsociados)==0)
-		   		<tr>
-		   			<td>NO TIENE PERMISOS ASOCIADOS
-		   			</td>
-		   		</tr>
-			@endif
-
-
-		   	   @foreach($permisosAsociados as $permisoAsociado)
-		   <tr>
-		   		<td>
-		   		<div class="form-check">
-				 	<label class="form-check-label" for="defaultCheck1">
-				   		{{$permisoAsociado->name}}
-				  	</label>
-		   		</td>
-		   		<td>
-		   			<input class="form-check-input" type="checkbox" name="quitarPermisos[]"value="{{$permisoAsociado->id}}" id="defaultCheck1">
-		   		</td>
-		   </tr>
-		   	@endforeach
-		  </table>
-		@endif
-
-
-
-
-		 @if($permisos)
-		  <table class="table table-bordered table-hover table-striped">
-		   <tr>
-		    	<td>
-		    	Permisos disponibles
-		   		</td>
-		   </tr>
-		   	   @foreach($permisos as $permiso)
-		   <tr>
-		   		<td>
-		   		<div class="form-check">
-				 	<input class="form-check-input" type="checkbox" name="agregarPermisos[]" value="{{$permiso->id}}" id="defaultCheck{{$permiso->id}}">
-				  	<label class="form-check-label" for="defaultCheck{{$permiso->id}}">
-				   		{{$permiso->name}}
-				  	</label>
-		   		</td>
-		   </tr>
-		   	@endforeach
-		  </table>
-		@endif
 		</div>
 		</div>
 @endsection
