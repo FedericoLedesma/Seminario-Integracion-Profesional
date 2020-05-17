@@ -52,7 +52,9 @@ class PatologiaController extends Controller
      */
     public function create()
     {
-        //
+         $tipos_patologias=TipoPatologia::all();
+          return view('admin_patologias.patologias.create',compact('tipos_patologias'));
+
     }
 
     /**
@@ -63,7 +65,15 @@ class PatologiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $patologia=Patologia::create([
+            'name' => $data['name'],
+            'descripcion'=>$data['descripcion'],
+            'tipo_patologia_id'=>$data['tipo_patologia_id'],
+          ]);
+
+        $patologia->save();
+        return redirect('/patologias');
     }
 
     /**
