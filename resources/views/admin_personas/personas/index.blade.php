@@ -11,7 +11,7 @@
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
 
-	  	
+
 
 	    <h1>Personas registradas</h1>
 	      @include('layouts.error')
@@ -42,7 +42,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-	<!--	<div id="alert" name="alert-roles" class="alert alert-info">Roles con el {{$busqueda_por}} = {{$query}}</div>-->
+		<div id="alert" name="alert-personas" class="alert alert-info">Personas con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
@@ -95,7 +95,7 @@
 								<td>{!!link_to_route('personas.show', $title = 'VER', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($persona, ['route' => ['personas.destroy', $persona->id], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona->id }}">Eliminar</button></td>
+								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>
 								{!! Form::close() !!}
 							</tr>
 								@endforeach
@@ -109,6 +109,6 @@
 				<!--</div>-->
 @endsection
 @section('script')
-
+ <script src="{{asset('js/persona-script.js')}}"></script>
 
 @endsection

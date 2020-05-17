@@ -90,9 +90,6 @@ class PersonaController extends Controller
 
         $persona->save();
         return redirect('/personas');
-
-
-
     }
 
     /**
@@ -125,7 +122,7 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Persona $persona)
+    public function update(Request $request, Persona $persona)//crear un request para validar
     {
         if($persona){
           $persona->numero_doc=$request->numero_doc;
@@ -153,6 +150,18 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-        //
+      if(!($id=='1')){
+        $persona=Persona::find($id);
+        Persona::destroy($id);
+      }
+      return response()->json([
+          'estado'=>'true',
+          'success' => 'Persona eliminada con exito!'
+      ]);
     }
+    /*  return response()->json([
+          'estado'=>'false',
+          'success' => 'No tiene permiso para eliminar usuario'
+      ]);
+    }*/
 }
