@@ -60,3 +60,4 @@ Route::resource('MenuPersona','MenuPersonaController');
 Route::get('/MenuPersona/show/{horario_id}/{persona_id}/{fecha}','MenuPersonaController@show');
 
 Route::resource('/personas', 'PersonaController');
+Route::resource('/patologias', 'PatologiaController');
