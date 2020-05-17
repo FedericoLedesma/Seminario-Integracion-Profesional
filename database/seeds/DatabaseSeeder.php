@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -70,6 +74,14 @@ class DatabaseSeeder extends Seeder
           'name' => 'ver_permisos',
           'guard_name'=>'web',
       ]);
+
+	  $user=User::find('1');
+	  $role=Role::create(['name'=>'Administrador']);
+	  $permisos=Permission::all();
+	  foreach($permisos as $permiso){
+		  $role->givePermissionTo($permiso);
+	  }
+	  $user->assignRole('Administrador');
 
     }
 }

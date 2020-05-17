@@ -55,3 +55,6 @@ Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
 		'uses' => 'UserController@updatePassword',
 		'as' => 'user.updatepass'
 ));
+
+Route::resource('MenuPersona','MenuPersonaController');
+Route::get('/MenuPersona/show/{horario_id}/{persona_id}/{fecha}','MenuPersonaController@show');

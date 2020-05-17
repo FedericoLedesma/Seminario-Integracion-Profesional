@@ -12,6 +12,9 @@ class MenuPersona extends Model
       'persona_id','horario_id','racion_id', 'fecha','personal_id',
       'dieta_id','realizado',
   ];
+
+  public static $dias = 30;
+
   public static function findById($horario_id,$persona_id,$fecha)
   {
        $menu_personas = static::where('horario_id', $horario_id)
@@ -72,4 +75,73 @@ class MenuPersona extends Model
       ->orderBy('fecha', 'asc');
     }return null;
   }
+
+
+  /**
+   * 
+   * 
+   * @return Racion 
+   */
+  public static function get_racion_menos_consumida($persona,$raciones){
+    $racion = array();
+    $c = -1;
+    foreach($raciones as $r){
+      $cantidad = static::where([
+        ['persona_id','=',$persona->id],
+        ['fecha','>=',Carbon::now()->subDays(30)],
+        ['racion_id','=',$r->id]
+      ])
+        ->count();
+      if($c==-1){
+        $c = $cantidad;
+        $racion = $r;
+      }
+      else{
+        if ($cantidad<$c){
+          $c = $cantidad;
+          $racion = $r;
+        }
+      }
+    }
+    return $racion;
+  }
+
+
+  /**
+   * 
+   * @return Racion
+   */
+
+  public function get_racion(){
+    $racion = null;
+    $racion = Racion::findById($this->racion_id);
+    return $racion;
+  }
+
+  /**
+   * 
+   * @return String
+   */
+
+  public function get_racion_name(){
+    $racion_name = "no hay racion";
+    $aux = null;
+    $aux = $this->get_racion();
+    if ($aux){
+      $racion_name = $aux->name;
+    }
+    return $racion_name;
+  }
+
+  public function get_persona(){
+    $racion = null;
+    $racion = Persona::findById($this->persona_id);
+    return $racion;
+  }
+
+  public function get_horario(){
+    $horario = Horario::findById($this->horario_id);
+    return $horario;
+  }
+
 }
