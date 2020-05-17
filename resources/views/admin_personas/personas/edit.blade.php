@@ -21,7 +21,23 @@
   			</tr>
         <tr>
   				<td>Tipo Doc </td>
-  				<td>{{$persona->tipo_documento_id}}</td>
+  				<td>
+          @if($tipos_documentos)
+            <select name="tipo_documento_id">
+              @foreach ($tipos_documentos as $tipo_documento)
+
+              <!-- Opciones de la lista -->
+                @if($tipo_documento->id==$persona->tipo_documento_id)
+                <option value="{{$tipo_documento->id}}" selected >{{$tipo_documento->name}}</option>
+                @else
+                <option value="{{$tipo_documento->id}}" >{{$tipo_documento->name}}</option>  <!-- Opci�n por defecto -->
+                @endif
+              @endforeach
+            </select>
+          @endIf
+        </td>
+
+
   			</tr>
         <tr>
   				<td>Numero_doc </td>
@@ -38,6 +54,10 @@
         <tr>
   				<td>Observacion </td>
   				<td>{!!	Form::text('observacion',$persona->observacion)!!}</td>
+  			</tr>
+        <tr>
+  				<td>Direccion </td>
+  				<td>{!!	Form::text('direccion',$persona->direccion)!!}</td>
   			</tr>
         <tr>
   				<td>EMail </td>

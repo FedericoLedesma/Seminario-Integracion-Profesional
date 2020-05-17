@@ -114,7 +114,8 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
-          return view('admin_personas.personas.edit',compact('persona'));
+      $tipos_documentos=TipoDocumento::all();
+          return view('admin_personas.personas.edit',compact('persona','tipos_documentos'));
     }
 
     /**
@@ -126,7 +127,22 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
-        //
+        if($persona){
+          $persona->numero_doc=$request->numero_doc;
+          $persona->tipo_documento_id=$request->tipo_documento_id;
+          $persona->apellido=$request->apellido;
+          $persona->name=$request->name;
+          $persona->observacion=$request->observacion;
+          $persona->direccion=$request->direccion;
+          $persona->email=$request->email;
+          $persona->provincia=$request->provincia;
+          $persona->localidad=$request->localidad;
+          $persona->sexo=$request->sexo;
+          $persona->fecha_nac=$request->fecha_nac;
+          $persona->save();
+
+        }
+        return redirect('/personas');
     }
 
     /**
