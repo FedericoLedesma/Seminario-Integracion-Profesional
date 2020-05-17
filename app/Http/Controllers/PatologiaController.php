@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Patologia;
+use App\TipoPatologia;
 use Illuminate\Http\Request;
 
 class PatologiaController extends Controller
@@ -73,7 +74,7 @@ class PatologiaController extends Controller
      */
     public function show(Patologia $patologia)
     {
-
+        return  view('admin_patologias.patologias.show', compact('patologia'));
     }
 
     /**
@@ -84,7 +85,9 @@ class PatologiaController extends Controller
      */
     public function edit(Patologia $patologia)
     {
-        //
+      $tipos_patologias=TipoPatologia::all();
+          return view('admin_patologias.patologias.edit',compact('patologia','tipos_patologias'));
+
     }
 
     /**
@@ -96,7 +99,13 @@ class PatologiaController extends Controller
      */
     public function update(Request $request, Patologia $patologia)
     {
-        //
+        if($patologia){
+          $patologia->name=$request->name;
+          $patologia->tipo_patologia_id=$request->tipo_patologia_id;
+          $patologia->save();
+
+        }
+        return redirect('/patologias');
     }
 
     /**

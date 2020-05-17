@@ -1,84 +1,50 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Personas</a></li>
-		<li class="breadcrumb-item active">Editar Persona</li>
+    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
+		<li class="breadcrumb-item active">Editar Patologia</li>
 @endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($persona, ['route' => ['personas.update', $persona->id], 'method'=> 'PUT'])!!}
-	 	@if($persona)
-	    <h1>Editar Persona  {{$persona->name}}</h1>
+	 	 {!! Form::model($patologia, ['route' => ['patologias.update', $patologia->id], 'method'=> 'PUT'])!!}
+	 	@if($patologia)
+	    <h1>Editar Patologia  {{$patologia->name}}</h1>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
         <tr>
 	    		<td>ID </td>
-				<td>{{$persona->id}}</td>
+				<td>{{$patologia->id}}</td>
   			</tr>
         <tr>
-  				<td>Tipo Doc </td>
+  				<td>Tipo Patologia </td>
   				<td>
-          @if($tipos_documentos)
-            <select name="tipo_documento_id">
-              @foreach ($tipos_documentos as $tipo_documento)
+          @if($tipos_patologias)
+            <select name="tipo_patologia_id">
+              @foreach ($tipos_patologias as $tipo_patologia)
 
               <!-- Opciones de la lista -->
-                @if($tipo_documento->id==$persona->tipo_documento_id)
-                <option value="{{$tipo_documento->id}}" selected >{{$tipo_documento->name}}</option>
+                @if($tipo_patologia->id==$patologia->tipo_patologia_id)
+                <option value="{{$tipo_patologia->id}}" selected >{{$tipo_patologia->name}}</option>
                 @else
-                <option value="{{$tipo_documento->id}}" >{{$tipo_documento->name}}</option>  <!-- Opci�n por defecto -->
+                <option value="{{$tipo_patologia->id}}" >{{$tipo_patologia->name}}</option>  <!-- Opci�n por defecto -->
                 @endif
               @endforeach
             </select>
           @endIf
         </td>
 
-
-  			</tr>
-        <tr>
-  				<td>Numero_doc </td>
-  				<td>	{!!	Form::text('numero_doc',$persona->numero_doc)!!}</td>
-  			</tr>
-  			<tr>
-  				<td>Apellido </td>
-  				<td>{!!	Form::text('apellido',$persona->apellido)!!}</td>
-  			</tr>
         <tr>
   				<td>Nombre </td>
-  				<td>{!!	Form::text('name',$persona->name)!!}</td>
+  				<td>{!!	Form::text('name',$patologia->name)!!}</td>
   			</tr>
         <tr>
-  				<td>Observacion </td>
-  				<td>{!!	Form::text('observacion',$persona->observacion)!!}</td>
-  			</tr>
-        <tr>
-  				<td>Direccion </td>
-  				<td>{!!	Form::text('direccion',$persona->direccion)!!}</td>
-  			</tr>
-        <tr>
-  				<td>EMail </td>
-  				<td>{!!	Form::text('email',$persona->email)!!}</td>
-  			</tr>
-        <tr>
-  				<td>Provincia </td>
-  				<td>{!!	Form::text('provincia',$persona->provincia)!!}</td>
-  			</tr>
-        <tr>
-  				<td>Localidad </td>
-  				<td>{!!	Form::text('localidad',$persona->localidad)!!}</td>
-  			</tr>
-        <tr>
-  				<td>Sexo </td>
-  				<td>{!!	Form::text('sexo',$persona->sexo)!!}</td>
-  			</tr>
-        <tr>
-  				<td>Fecha de Nacimiento </td>
-  				<td>{!!	Form::text('fecha_nac',$persona->fecha_nac)!!}</td>
-  			</tr>
+          <td>Descripcion </td>
+          <td>{!!	Form::text('descripcion',$patologia->descripcion)!!}</td>
+        </tr>
 		   	<tr>
 	    	<td>
 		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
@@ -86,7 +52,7 @@
         </tr>
         <tr>
 		    <td>
-		   	{!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = [])!!}
+		   	{!!link_to_route('patologias.show', $title = 'CANCELAR', $parameters = [$patologia], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		 </table>

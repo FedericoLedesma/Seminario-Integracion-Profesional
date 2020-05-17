@@ -32,7 +32,7 @@
 		var row = $(this).parents('tr');
 		var token = $(this).data("token");
 		var patologia = $(this).data("id");
-		//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
+		
 		//validar el usuario
 		var url_destroy = "patologias/:id";
 		url_destroy = url_destroy.replace(':id',patologia.id);

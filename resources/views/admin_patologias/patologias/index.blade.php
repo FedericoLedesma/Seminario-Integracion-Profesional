@@ -72,6 +72,7 @@
 							<tr>
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
+								<th scope="col">Descripcion</th>
 								<th scope="col">Tipo de Patologia</th>
 								<th scope="col">Accion</th>
 								<th scope="col"></th>
@@ -85,6 +86,7 @@
 							<tr>
 								<td>{{$patologia->id}}</td>
 								<td>{{$patologia->name}}</td>
+								<td>{{$patologia->descripcion}}</td>
 								<td>{{$patologia->tipo_patologia_id}}</td>
 								<td>{!!link_to_route('patologias.show', $title = 'VER', $parameters = [$patologia],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 

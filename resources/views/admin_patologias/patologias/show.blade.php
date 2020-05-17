@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Persona</a></li>
-		<li class="breadcrumb-item active">Ver Persona</li>
+    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
+		<li class="breadcrumb-item active">Ver Patologia</li>
 @endsection
 @section('content')
 
@@ -17,72 +17,42 @@
 -->
 </style>
 	   @include('layouts.error')
-	  	@if($persona)
+	  	@if($patologia)
 	    <div class="table-responsive">
-	    <h2>Persona:  {{$persona->name}}</h2>
+	    <h2>Patologia:  {{$patologia->name}}</h2>
         <div class="col-md-3 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    		<td>ID </td>
-				<td>{{$persona->id}}</td>
+				<td>{{$patologia->id}}</td>
 			</tr>
       <tr>
-				<td>Tipo Doc </td>
-				<td>{{$persona->tipo_documento_id}}</td>
-			</tr>
-      <tr>
-				<td>Numero_doc </td>
-				<td>{{$persona->numero_doc}}</td>
-			</tr>
-			<tr>
-				<td>Apellido </td>
-				<td>{{$persona->apellido}}</td>
+				<td>Tipo Patologia </td>
+				<td>{{$patologia->tipo_patologia_id}}</td>
 			</tr>
       <tr>
 				<td>Nombre </td>
-				<td>{{$persona->name}}</td>
+				<td>{{$patologia->name}}</td>
 			</tr>
       <tr>
-				<td>Observacion </td>
-				<td>{{$persona->observacion}}</td>
-			</tr>
-      <tr>
-				<td>EMail </td>
-				<td>{{$persona->email}}</td>
-			</tr>
-      <tr>
-				<td>Provincia </td>
-				<td>{{$persona->provincia}}</td>
-			</tr>
-      <tr>
-				<td>Localidad </td>
-				<td>{{$persona->localidad}}</td>
-			</tr>
-      <tr>
-				<td>Sexo </td>
-				<td>{{$persona->sexo}}</td>
-			</tr>
-      <tr>
-				<td>Fecha de Nacimiento </td>
-				<td>{{$persona->fecha_nac}}</td>
+				<td>Descripcion </td>
+				<td>{{$patologia->descripcion}}</td>
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$persona->created_at}}</td>
+				<td>{{$patologia->created_at}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$persona->updated_at}}</td>
+				<td>{{$patologia->updated_at}}</td>
 			</tr>
 
 		</table>
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('personas.edit', $title = 'MODIFICAR', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
-
-	{!!link_to_route('personas.edit', $title = 'Ver Patologias', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
+	{!!link_to_route('patologias.edit', $title = 'MODIFICAR', $parameters = [$patologia],['class' => 'btn btn-warning'], $attributes = [])!!}
 
 
 
