@@ -21,14 +21,16 @@ class Prueba extends Seeder
       $fecha= new DateTime('2020-05-15');
     $racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
     if($racionesDisponibles){
-      echo $racionesDisponibles;
+      //echo $racionesDisponibles;
     }
 
     $menuPersona=MenuPersona::allFecha($fecha)->get();
     if($menuPersona){
-      echo $menuPersona;
+    //  echo $menuPersona;
     }
-
-
+    $tipoPatologia=TipoPatologia::findById(4);
+    $tipoPatologia->delete();
+    $patologias=Patologia::findByTipoPatologia(4)->get();
+    echo count($patologias);
     }
 }

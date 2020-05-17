@@ -24,4 +24,10 @@ class TipoPatologia extends Model
       return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
     }return null;
   }
+
+  public function delete(){
+    $destroy = static::where('id', $this->id)->delete();
+  }
+
+
 }

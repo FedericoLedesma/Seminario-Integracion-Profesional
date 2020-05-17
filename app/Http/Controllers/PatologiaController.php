@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Patologia;
 use App\TipoPatologia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PatologiaController extends Controller
 {
@@ -126,6 +127,7 @@ class PatologiaController extends Controller
      */
     public function destroy(Patologia $patologia)
     {
+          Log::info($patologia);
       $patologia->delete();
       return response()->json([
           'estado'=>'true',
