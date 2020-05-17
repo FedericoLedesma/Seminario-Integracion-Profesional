@@ -73,7 +73,27 @@ class DatabaseSeeder extends Seeder
       DB::table('permissions')->insert([
           'name' => 'ver_permisos',
           'guard_name'=>'web',
-      ]);
+	  ]);
+	  
+	  DB::table('permissions')->insert([
+		'name' => 'ver_menu_persona',
+		'guard_name'=>'web',
+	  ]);
+
+	  DB::table('permissions')->insert([
+		'name' => 'modificacion_menu_persona',
+		'guard_name'=>'web',
+	  ]);
+
+	  DB::table('permissions')->insert([
+		'name' => 'alta_menu_persona',
+		'guard_name'=>'web',
+	  ]);
+
+	  DB::table('permissions')->insert([
+		'name' => 'baja_menu_persona',
+		'guard_name'=>'web',
+	  ]);
 
 	  $user=User::find('1');
 	  $role=Role::create(['name'=>'Administrador']);
