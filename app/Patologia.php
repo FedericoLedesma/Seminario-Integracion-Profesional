@@ -34,10 +34,14 @@ class Patologia extends Model
       }return null;
     }
 
+    public function delete(){
+      $destroy = static::where('id', $this->id)->delete();
+
+    }
 
     /**
-     * 
-     * 
+     *
+     *
      * @return dieta
      */
 
@@ -50,14 +54,14 @@ class Patologia extends Model
         ->orderByRaw('fecha DESC')
         ->select('dietas.id')
         ->first();
-      
+
       $dieta = Dieta::findById($ids);
-      
+
       return $dieta;
     }
 
     /**
-     * 
+     *
      * @return Racion[]
      */
 
@@ -69,11 +73,11 @@ class Patologia extends Model
         ->whereNull('dieta_activas.fecha_final')
         ->select('dietas.id')
         ->get();
-      
+
       foreach($ids as $id){
         array_push($raciones, Dieta::findById($id)->get_raciones());
       }
-      
+
       return $raciones;
     }
 }

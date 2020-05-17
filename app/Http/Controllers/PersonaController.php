@@ -151,7 +151,7 @@ class PersonaController extends Controller
     public function destroy(Persona $persona)
     {
 
-      $persona->destroyPersona();
+      $persona->delete();
       return response()->json([
           'estado'=>'true',
           'success' => 'Persona eliminada con exito!'

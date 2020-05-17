@@ -175,9 +175,9 @@ class Persona extends Model
       * @return Racion
       *
       */
-      public function destroyPersona(){
+      public function delete(){
         $destroy = static::where('id', $this->id)->delete();
-        
+
       }
 
       public function recomendar_racion($fecha,$horario){

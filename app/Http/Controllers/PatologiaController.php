@@ -12,9 +12,36 @@ class PatologiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+      $query = $request->get('search');
+      $busqueda_por= $request->get('busqueda_por');
+      if($request){
+        switch ($busqueda_por) {
+          case 'busqueda_id':
+            $patologias=Patologia::where('id','LIKE','%'.$query.'%')
+              ->orderBy('id','asc')
+              ->get();
+            $busqueda_por="ID";
+            break;
+          case 'busqueda_name':
+              $patologias=Patologia::findByName($query)->get();
+              $busqueda_por="NOMBRE";
+            break;
+            case 'busqueda_tipo_patologia':
+                $patologias=Patologia::findByTipoPatologia($query)->get();
+                $busqueda_por="TIPO DE PATOLOGIA";
+              break;
+          default:
+            $patologias=Patologia::all();
+            break;
+        }
+
+      }
+    //	$users=User::all();
+      $patologias_total=Patologia::all()->count();
+      return  view('admin_patologias.patologias.index', compact('patologias','patologias_total','query','busqueda_por'));
+
     }
 
     /**
@@ -46,7 +73,7 @@ class PatologiaController extends Controller
      */
     public function show(Patologia $patologia)
     {
-        //
+
     }
 
     /**
@@ -80,6 +107,10 @@ class PatologiaController extends Controller
      */
     public function destroy(Patologia $patologia)
     {
-        //
+      $patologia->delete();
+      return response()->json([
+          'estado'=>'true',
+          'success' => 'Patologia eliminada con exito!'
+      ]);
     }
 }

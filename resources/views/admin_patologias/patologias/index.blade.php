@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Personas</li>
+<li class="breadcrumb-item active">Patologias</li>
 @endsection
 @section('content')
 
@@ -13,7 +13,7 @@
 
 
 
-	    <h1>Personas registradas</h1>
+	    <h1>Patologias registradas</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
@@ -27,22 +27,22 @@
 }
 -->
 </style>
-<form method="get" action={{ route('personas.create') }}>
+<form method="get" action={{ route('patologias.create') }}>
 
-		<button class="btn btn-primary" type="submit">Agregar Persona</button>
+		<button class="btn btn-primary" type="submit">Agregar Patologia</button>
 
 
 </form>
 <div>
 	<p>
 		<span id="personas-total">
-			<!-- Aca deben ir el total de personas -->
+			<!-- Aca deben ir el total de Patologias -->
 
 		</span>
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-personas" class="alert alert-info">Personas con el {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-patologia" class="alert alert-info">Patologias con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
@@ -52,7 +52,7 @@
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'personas.index','method'=>'GET']) !!}
+				 {!!Form::open(['route'=>'patologias.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -60,7 +60,7 @@
 						 <option value="busqueda_name" >Nombre</option>
 					 </select>
 
-						 {!!	Form::text('personaid',null,['id'=>'personaid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
+						 {!!	Form::text('patologiaid',null,['id'=>'patologiaid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
 						 <div class="input-group-append">
 							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						 </div>
@@ -71,11 +71,8 @@
 						<thead >
 							<tr>
 								<th scope="col">id</th>
-								<th scope="col">N.Doc</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Apellido</th>
-								<th scope="col">Fecha Nac.</th>
-								<th scope="col">EMail</th>
+								<th scope="col">Tipo de Patologia</th>
 								<th scope="col">Accion</th>
 								<th scope="col"></th>
 
@@ -83,20 +80,17 @@
 						</thead>
 
 						<tbody>
-						@if($personas)
-							@foreach($personas as $persona)
+						@if($patologias)
+							@foreach($patologias as $patologia)
 							<tr>
-								<td>{{$persona->id}}</td>
-								<td>{{$persona->numero_doc}}</td>
-								<td>{{$persona->name}}</td>
-								<td>{{$persona->apellido}}</td>
-								<td>{{$persona->fecha_nac}}</td>
-								<td>{{$persona->email}}</td>
-								<td>{!!link_to_route('personas.show', $title = 'VER', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{{$patologia->id}}</td>
+								<td>{{$patologia->name}}</td>
+								<td>{{$patologia->tipo_patologia_id}}</td>
+								<td>{!!link_to_route('patologias.show', $title = 'VER', $parameters = [$patologia],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($persona, ['route' => ['personas.destroy', $persona], 'method'=> 'DELETE'])!!}
-						<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>
-									<!--<td><button type="submit" class="btn btn-danger eliminar">Eliminar</button></td>-->
+								{!! Form::model($patologia, ['route' => ['patologias.destroy', $patologia], 'method'=> 'DELETE'])!!}
+								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $patologia }}">Eliminar</button></td>
+
 								{!! Form::close() !!}
 							</tr>
 								@endforeach
@@ -110,6 +104,6 @@
 				<!--</div>-->
 @endsection
 @section('script')
- <script src="{{asset('js/persona-script.js')}}"></script>
+ <script src="{{asset('js/patologia-script.js')}}"></script>
 
 @endsection

@@ -7,7 +7,7 @@
 	    });
 		if(getQueryVariable()=="buscar_patologia")
 		{
-			document.getElementById("patologiid").focus();
+			document.getElementById("patologiaid").focus();
 		}
 
 	});
@@ -35,7 +35,7 @@
 		//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 		//validar el usuario
 		var url_destroy = "patologias/:id";
-		url_destroy = url_destroy.replace(':id',patoligia.id);
+		url_destroy = url_destroy.replace(':id',patologia.id);
 		console.log(patologia);
 	$('#alert').show();
 	    $.ajax({
