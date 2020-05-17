@@ -15,8 +15,8 @@ class Persona extends Model
     protected $table = "personas";
 
     protected $fillable = [
-        'id', 'dni', 'apellido', 'name', 'observacion', 'direccion', 'email', 'provincia',
-        'localidad', 'sexo','fecha_nac','tipo_dni',
+        'id', 'numero_doc', 'apellido', 'name', 'observacion', 'direccion', 'email', 'provincia',
+        'localidad', 'sexo','fecha_nac','tipo_documento_id',
     ];
     public static function findById(int $id)
     {
@@ -72,11 +72,11 @@ class Persona extends Model
 
     /**
      * Funcion que tiene como objetivo agregar una patología.
-     * 
+     *
      * Luego la patología debe ser recuperable.
-     * 
+     *
      * Se agregó como fecha el momento actual.
-     * 
+     *
      * @return boolean devuelve verdadero si tuvo éxito.
      */
 
@@ -96,11 +96,11 @@ class Persona extends Model
 
     /**
      * Funcion que tiene como objetivo agregar una patología.
-     * 
+     *
      * Luego la patología debe ser recuperable.
-     * 
+     *
      * Se permite ingresar una fecha concreta.
-     * 
+     *
      * @return boolean devuelve verdadero si tuvo éxito.
      */
 
@@ -116,15 +116,15 @@ class Persona extends Model
 
     /**
      * Función con objeto de borrar una relación entre persona y patología en caso de ser necesario.
-     * 
+     *
      * No debería usarse siempre, ya que la relación debería tener cierta historicidad.
-     * 
+     *
      * @return boolean devuelve verdadero si tuvo éxito.
-     * 
+     *
      */
 
     public function del_patologia($patologia){
-    
+
       try{
         $pp = null; //Cargo la variable con nulo
         $pp = PersonaPatologia::where('patologia_id','=',$patologia->id)
@@ -145,14 +145,14 @@ class Persona extends Model
 
     /**
      * Función con objetivo de recuperar una colección con todas las patologías de un usuario
-     * 
-     * 
+     *
+     *
      * @return array<Patologia>
-     * 
+     *
      */
 
      public function get_patologias(){
-      $res = array(); 
+      $res = array();
       try{
         $pat_id = PersonaPatologia::where('persona_id','=',$this->id)
                 ->get();
@@ -168,7 +168,7 @@ class Persona extends Model
 
      /**
       * Funcionalidad principal.
-      * 
+      *
       * @param $fecha tipo date
       * @param $horario tipo Horario
       *
@@ -198,7 +198,7 @@ class Persona extends Model
       }
 
       /**
-       * 
+       *
        * @return Racion[]
        */
 

@@ -31,38 +31,38 @@ class AdminUsersController extends Controller
     {
 			$user=Auth::user();
 			if ($user->can('ver_usuarios')){
-    	$query = $request->get('search');
-			$busqueda_por= $request->get('busqueda_por');
-			if($request){
-				switch ($busqueda_por) {
-					case 'busqueda_id':
-						$users=User::where('id','LIKE','%'.$query.'%')
-						->orderBy('id','asc')
-						->get();
-							$busqueda_por="ID";
-						break;
-					case 'busqueda_dni':
-						$users=User::where('dni','LIKE','%'.$query.'%')
-						->orderBy('id','asc')
-						->get();
-						break;
-						$busqueda_por="DNI";
-					case 'busqueda_name':
-							$users=User::where('name','LIKE','%'.$query.'%')
+	    	$query = $request->get('search');
+				$busqueda_por= $request->get('busqueda_por');
+				if($request){
+					switch ($busqueda_por) {
+						case 'busqueda_id':
+							$users=User::where('id','LIKE','%'.$query.'%')
 							->orderBy('id','asc')
 							->get();
-								$busqueda_por="NOMBRE";
-						break;
-					default:
-						$users=User::all();
-						break;
-				}
+								$busqueda_por="ID";
+							break;
+						case 'busqueda_dni':
+							$users=User::where('dni','LIKE','%'.$query.'%')
+							->orderBy('id','asc')
+							->get();
+							break;
+							$busqueda_por="DNI";
+						case 'busqueda_name':
+								$users=User::where('name','LIKE','%'.$query.'%')
+								->orderBy('id','asc')
+								->get();
+									$busqueda_por="NOMBRE";
+							break;
+						default:
+							$users=User::all();
+							break;
+					}
 
-			}
-    //	$users=User::all();
-    	$users_total=User::all()->count();
-    	return  view('admin.users.index', compact('users','users_total','query','busqueda_por'));
-		}return redirect('/home');//view('admin.users.index', compact('users'));
+				}
+	    //	$users=User::all();
+	    	$users_total=User::all()->count();
+	    	return  view('admin.users.index', compact('users','users_total','query','busqueda_por'));
+			}return redirect('/home');//view('admin.users.index', compact('users'));
     }
 
     /**
