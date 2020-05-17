@@ -76,6 +76,9 @@ class MenuPersona extends Model
     }return null;
   }
 
+  /**
+  Métodos de instancia según nuestro modelo de funciones.
+  */
 
   /**
    * 
@@ -105,6 +108,31 @@ class MenuPersona extends Model
     }
     return $racion;
   }
+
+
+  /**
+   * 
+   * @return boolean
+   */
+  public function descontar_disponibilidad_racion(){
+    return $this->get_disponibilidad_racion()->descontar_disponibilidad();
+  }
+  
+  /**
+   * 
+   * @return boolean
+   */
+  public function registrar_movimiento($usuario, $tipo_movimiento){
+    return $this->get_disponibilidad_racion()->registrar_movimiento($usuario, $tipo_movimiento);
+  }
+
+  /**
+   getters y settes
+
+   *
+   * Para evitar código repetido, ya que se repite mucho el tema de los get/set de las FK
+   * 
+   */
 
 
   /**
@@ -139,9 +167,76 @@ class MenuPersona extends Model
     return $racion;
   }
 
+  public function get_personal(){
+    $racion = null;
+    $racion = Personal::findById($this->personal_id);
+    return $racion;
+  }
+
   public function get_horario(){
     $horario = Horario::findById($this->horario_id);
     return $horario;
   }
 
+  public function get_disponibilidad_racion(){
+    $r = RacionesDisponibles::findById($this->horario_id,$this->racion_id,$this->fecha);
+    return $r;
+  }
+
+  public function set_disponibilidad_racion($racion,$horario,$fecha){
+    $this->racion_id = $racion->id;
+    $this->horario_id = $horario->id;
+    $this->fecha = $fecha;
+  }
+
+  public function set_persona($persona){
+    $this->persona_id = $persona->id;
+  }
+
+  public function set_personal($personal){
+    $this->personal_id = $personal->id;
+  }
+
+  public function is_realizado(){
+    return $this->realizado;
+  }
+
+
+  /**
+   Métodos de clase, según nuestro MenuController de nuestro modelo de funciones.
+   */
+
+
+  /**
+   * Crea un menú persona.
+   * 
+   * @param Persona tipo App\Persona obligatorio
+   * @param Racion tipo App\Racion obligatorio
+   * @param Horario tipo App\Horario obligatorio
+   * @param fecha tipo date obligatorio
+   * 
+   * 
+   * @return App\MenuPersona
+   * 
+   * 
+   */
+
+   public static function createMenuPersona($Persona,$Racion,$Horario,$fecha){
+    if (($Persona<>null)&($Racion<>null)&($Horario<>null)&($fecha<>null)){
+      $new_menu = MenuPersona::create([
+        'persona_id'=>$Persona->id,
+        'horario_id'=>$Horario->id,
+        'racion_id'=>$Racion->id,
+        'fecha'=>$fecha
+      ]);
+      return $new_menu;
+    }
+    return;
+   }
+
+   public static function get_menu_recomendado($persona,$fecha,$horario){
+    $racion = $persona->recomendar_racion($fecha,$horario);
+    return static::createMenuPersona($persona,$racion,$horario,$fecha);
+   }
+  
 }

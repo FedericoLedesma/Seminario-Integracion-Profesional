@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MenuPersona;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class MenuPersonaController extends Controller
 {
@@ -12,11 +14,36 @@ class MenuPersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $menuPersona = MenuPersona::orderBy('fecha','DESC')->paginate(10);
-        return view('MenuPersona.index',compact('menuPersona'));
+        $user = Auth::user();
+        Log::info($user);
+        if ($user->can('ver_menu_persona')){
+            $query = $request->get('search');
+            $busqueda_por= $request->get('busqueda_por');
+            if($request){
+                switch ($busqueda_por) {
+                    case 'busqueda_id_persona':
+                        $menues=MenuPersona::find_by();
+                            $busqueda_por="ID_PERSONA";
+                        break;
+                    case 'busqueda_name':
+                            $menues=MenuPersona::where('name','LIKE','%'.$query.'%')
+                            ->orderBy('id','asc')
+                            ->get();
+                                $busqueda_por="NOMBRE";
+                        break;
+                    default:
+                    $roles=Role::all();
+                    $query=null;
+                        break;
+                }
+            }
+            return view('MenuPersona.index',compact('menuPersona','menues'));
+        }
+        Log::debug($user->name . ' NO tiene permisos para ver menues');
+        return redirect('/home');
     }
 
     /**
@@ -59,9 +86,12 @@ class MenuPersonaController extends Controller
      * @param  $fecha
      * @return \Illuminate\Http\Response
      */
-    public function show($horario_id,$persona_id,$fecha)
+    public function show($id_compuesta)
     {
         //
+        $horario_id = $id_compuesta['horario_id'];
+        $persona_id = $id_compuesta['persona_id'];
+        $fecha = $id_compuesta['fecha'];
         $mp = MenuPersona::findById($horario_id,$persona_id,$fecha);
         if ($mp==null){
             echo 'no hay menu persona';
@@ -82,9 +112,12 @@ class MenuPersonaController extends Controller
      * @param  $fecha
      * @return \Illuminate\Http\Response
      */
-    public function edit($horario_id,$persona_id,$fecha)
+    public function edit($compuesta)
     {
         //
+        $horario_id = $compuesta['horario_id'];
+        $persona_id = $compuesta['persona_id'];
+        $fecha = $compuesta['fecha'];
         $menuPersona = MenuPersona::find($horario_id,$persona_id,$fecha);
         return view('MenuPersona.edit',compact('menuPersona'));
     }
@@ -98,7 +131,7 @@ class MenuPersonaController extends Controller
      * @param  $fecha
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $horario_id,$persona_id,$fecha)
+    public function update(Request $request, $compuesta)
     {
         //
         $this->validate($request,[
@@ -108,6 +141,9 @@ class MenuPersonaController extends Controller
             'fecha'=>'required',
             'realizado'=>'required',
         ]);
+        $horario_id = $compuesta['horario_id'];
+        $persona_id = $compuesta['persona_id'];
+        $fecha = $compuesta['fecha'];
         MenuPersona::find($horario_id,$persona_id,$fecha)->update($request->all());
         return redirect()->route('MenuPersona.index')
             ->with('success','Menu persona actualizado satisfactoriamente');
@@ -121,9 +157,12 @@ class MenuPersonaController extends Controller
      * @param  $fecha
      * @return \Illuminate\Http\Response
      */
-    public function destroy($horario_id,$persona_id,$fecha)
+    public function destroy($compuesta)
     {
         //
+        $horario_id = $compuesta['horario_id'];
+        $persona_id = $compuesta['persona_id'];
+        $fecha = $compuesta['fecha'];
         MenuPersona::find($horario_id,$persona_id,$fecha)->delete();
         return redirect()->route('MenuPersona.index')
             ->with('success','Menu persona borrado satisfactoriamente');

@@ -50,7 +50,7 @@ class RacionesDisponibles extends Model
      * 
      */
 
-    private function recuperar_raciones_disponibles($fecha){
+    public function recuperar_raciones_disponibles($fecha){
       $raciones = array();
       try{
         foreach($raciones_disponibles as $rd){
@@ -66,5 +66,32 @@ class RacionesDisponibles extends Model
       return $raciones;
     }
 
+    public function descontar_disponibilidad(){
+
+      if ($this->cantidad_restante > 0){
+        $this->cantidad_restante--;
+        $this->cantidad_realizados++;
+        return true;
+      }
+
+      return false;
+    }
+
+    public function registrar_movimiento($usuario, $tipo_movimiento){
+      $m = Movimiento::create([
+        'horario_id'=>$this->horario_id,
+        'racion_id'=>$this->racion_id,
+        'fecha'=>$this->fecha,
+        'created_at'=>Carbon::now(),
+        'user_id'=>$usuario->id,
+        'tipo_movimiento_id'=>$tipo_movimiento->id,
+        'cantidad'=>1,
+      ]);
+      if ($m){
+        Log::debug('Creado registrar movimiento ' . '$m');
+        return true;
+      }
+      return false;
+    }
 
 }
