@@ -78,9 +78,11 @@ class TipoPatologiaController extends Controller
      * @param  \App\TipoPatologia  $tipoPatologia
      * @return \Illuminate\Http\Response
      */
-    public function show(TipoPatologia $tipoPatologia)
+    public function show($id)
     {
-        //
+      //--error al recibir por parametro un TipoPatologia, llega la variable vacia
+      $tipoPatologia=TipoPatologia::findById($id);
+      return  view('admin_patologias.tipo_patologias.show', compact('tipoPatologia'));
     }
 
     /**
@@ -89,9 +91,11 @@ class TipoPatologiaController extends Controller
      * @param  \App\TipoPatologia  $tipoPatologia
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoPatologia $tipoPatologia)
+    public function edit($id)
     {
-        //
+      $tipoPatologia=TipoPatologia::findById($id);
+      return view('admin_patologias.tipo_patologias.edit',compact('tipoPatologia'));
+
     }
 
     /**
@@ -103,7 +107,13 @@ class TipoPatologiaController extends Controller
      */
     public function update(Request $request, TipoPatologia $tipoPatologia)
     {
+      if($tipoPatologia){
+        $tipoPatologia->name=$request->name;
+        $tipoPatologia->observacion=$request->observacion;
+        $tipoPatologia->save();
 
+      }
+      return redirect('/tipospatologias');
     }
 
     /**

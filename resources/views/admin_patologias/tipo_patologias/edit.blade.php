@@ -8,42 +8,25 @@
 <!-- EDIT DEL ROLE -->
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($patologia, ['route' => ['patologias.update', $patologia->id], 'method'=> 'PUT'])!!}
-	 	@if($patologia)
-	    <h1>Editar Patologia  {{$patologia->name}}</h1>
+
+	 	{!! Form::model($tipoPatologia, ['route' => ['tipospatologias.update', $tipoPatologia->id], 'method'=> 'PUT'])!!}
+	 	@if($tipoPatologia)
+	    <h1>Editar Tipo Patologia  {{$tipoPatologia->name}}</h1>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
         <tr>
 	    		<td>ID </td>
-				<td>{{$patologia->id}}</td>
+				<td>{{$tipoPatologia->id}}</td>
   			</tr>
-        <tr>
-  				<td>Tipo Patologia </td>
-  				<td>
-          @if($tipos_patologias)
-            <select name="tipo_patologia_id">
-              @foreach ($tipos_patologias as $tipo_patologia)
-
-              <!-- Opciones de la lista -->
-                @if($tipo_patologia->id==$patologia->tipo_patologia_id)
-                <option value="{{$tipo_patologia->id}}" selected >{{$tipo_patologia->name}}</option>
-                @else
-                <option value="{{$tipo_patologia->id}}" >{{$tipo_patologia->name}}</option>  <!-- Opci�n por defecto -->
-                @endif
-              @endforeach
-            </select>
-          @endIf
-        </td>
-
-        <tr>
+                <tr>
   				<td>Nombre </td>
-  				<td>{!!	Form::text('name',$patologia->name)!!}</td>
+  				<td>{!!	Form::text('name',$tipoPatologia->name)!!}</td>
   			</tr>
         <tr>
           <td>Descripcion </td>
-          <td>{!!	Form::text('descripcion',$patologia->descripcion)!!}</td>
+          <td>{!!	Form::text('observacion',$tipoPatologia->observacion)!!}</td>
         </tr>
 		   	<tr>
 	    	<td>
@@ -52,7 +35,7 @@
         </tr>
         <tr>
 		    <td>
-		   	{!!link_to_route('patologias.show', $title = 'CANCELAR', $parameters = [$patologia], $attributes = [])!!}
+		   	{!!link_to_route('tipospatologias.show', $title = 'CANCELAR', $parameters = [$tipoPatologia], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		 </table>
