@@ -65,6 +65,17 @@ class Racion extends Model
     }
     return $intercepcion;
   }
-  
+
+  public static function buscar_por_fecha_horario($fecha, $horario){
+    if(($horario)&&($fecha)){
+      $aux = RacionesDisponibles::buscar_por_fecha_horario($fecha, $horario);
+      $res = Array();
+      foreach($aux as $rd){
+        array_push($res,$rd->get_racion());
+      }
+      return $res;
+    }
+    return null;
+}
 
 }

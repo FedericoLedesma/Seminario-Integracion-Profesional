@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MenuPersona;
 use App\Horario;
+use App\Paciente;
+use App\Racion;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class MenuPersonaController extends Controller
 {
@@ -61,9 +64,26 @@ class MenuPersonaController extends Controller
     {
         //
         $raciones_disponibles = null;
-        $pacientes = null;
+        $pacientes = Paciente::get_pacientes_internados();
+        $fecha = $request->get('calendario');
+        $horario= Horario::findById($request->get('horario'));
         $horarios = Horario::all();
-        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios'));
+        Log::debug('Se quiere crear un menu persona. Request: '.$request);
+        Log::debug('Fecha: '.$fecha);
+        Log::debug('Horario: '.$horario);
+        if($fecha)
+            if($horarios){
+                Log::debug('Pase a buscar raciones');
+                $raciones_disponibles = Racion::buscar_por_fecha_horario($fecha,$horario);
+                foreach($raciones_disponibles as $r)
+                    Log::debug('Ración disponible: '.$r);
+                $horario = Array($horario);
+                return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha'));
+            }
+        $fecha = Carbon::now();
+        $horarios = Horario::all();
+        $horario = Array();
+        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha'));
     }
 
     /**
@@ -156,4 +176,6 @@ class MenuPersonaController extends Controller
         return redirect()->route('MenuPersona.index')
             ->with('success','Menu persona borrado satisfactoriamente');
     }
+
+
 }

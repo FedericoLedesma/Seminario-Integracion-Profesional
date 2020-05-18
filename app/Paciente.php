@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\HistoriaInternacion;
+use App\Persona;
 
 class Paciente extends Model
 {
@@ -18,4 +20,14 @@ class Paciente extends Model
          return $sector;
      } return null;
   }
+
+  public static function get_pacientes_internados(){
+    $historial = HistoriaInternacion::get_pacientes_internados();
+    $res = Array();
+    foreach($historial as $h){
+      array_push($res,Persona::findById($h->paciente_id));
+    }
+    return $res;
+  }
+
 }

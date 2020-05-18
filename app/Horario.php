@@ -24,4 +24,12 @@ class Horario extends Model
         return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
       }return null;
     }
+
+    public static function buscar_por_nombre($name){
+      if($name){
+        return static::where('name','LIKE','%'.$name.'%')
+          ->orderBy('id', 'asc')
+          ->first();
+      }return null;
+    }
 }
