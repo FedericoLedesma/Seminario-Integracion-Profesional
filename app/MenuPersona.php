@@ -316,5 +316,23 @@ class MenuPersona extends Model
     Log::debug('Se encontraron los siguientes menues persona: '.$menues);
     return $menues;
   }
+
+
+  public static function create($persona_id, $racion_id, $horario_id, $fecha, $personal_id){
+    Log::debug('Se quiere insertar una nueva tupla en menus_persona: id de persona: '.$persona_id);
+    Log::debug(' id de racion: '.$racion_id);
+    Log::debug(' id horario: '.$horario_id);
+    Log::debug(' fecha: '.$fecha);
+    Log::debug(' id de personal: '.$personal_id);
+    $r = static::insert([
+      'persona_id' => $persona_id,
+      'racion_id'=>$racion_id,
+      'horario_id'=>$horario_id,
+      'fecha'=>$fecha,
+      'personal_id'=>$personal_id,
+      'realizado'=>false,
+    ]);
+    Log::debug('La query dio como resultado: '.$r);
+  }
   
 }

@@ -63,12 +63,12 @@ class MenuPersonaController extends Controller
     public function create(Request $request)
     {
         //
-        $raciones_disponibles = null;
+        $raciones_disponibles = Array();
         $pacientes = Paciente::get_pacientes_internados();
         $fecha = $request->get('calendario');
-        $horario= Horario::findById($request->get('horario'));
+        $horario= Horario::findById($request->get('horario_id'));
         $horarios = Horario::all();
-        Log::debug('Se quiere crear un menu persona. Request: '.$request);
+        #Log::debug('Se quiere crear un menu persona. Request: '.$request);
         Log::debug('Fecha: '.$fecha);
         Log::debug('Horario: '.$horario);
         if($fecha)
@@ -95,15 +95,21 @@ class MenuPersonaController extends Controller
     public function store(Request $request)
     {
         //
+        Log::debug('Se quiere ingresar un nuevo menu persona: '.$request);
+        $user = Auth::user();
+        Log::debug('Usuario: '.$user);
         $this->validate($request,[
             'persona_id'=>'required',
-            'horario_id'=>'required',
+            'horario'=>'required',
             'racion_id'=>'required',
-            'fecha'=>'required',
-            'realizado'=>'required',
+            'fecha'=>'required'
         ]);
-        MenuPersona::create($request->all());
-        return redirect()->route('MenuPersona.index')
+        $persona_id = $request->get('persona_id');
+        $horario_id = $request->get('horario');
+        $racion_id = $request->get('racion_id');
+        $fecha = $request->get('fecha');
+        MenuPersona::create($persona_id,$racion_id,$horario_id,$fecha,$user->id);
+        return redirect()->route('menu_persona.index')
             ->with('success','Menu persona registrado satisfactoriamente');
     }
 

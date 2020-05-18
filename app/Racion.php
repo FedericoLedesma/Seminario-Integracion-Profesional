@@ -75,7 +75,7 @@ class Racion extends Model
       }
       return $res;
     }
-    return null;
+    return Array();
 }
 
 }
