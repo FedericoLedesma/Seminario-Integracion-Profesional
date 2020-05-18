@@ -63,3 +63,4 @@ Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
 Route::resource('/tipospatologias', 'TipoPatologiaController');
 Route::resource('/alimentos', 'AlimentoController');
+Route::resource('/sectores', 'SectorController');
