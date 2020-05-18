@@ -21,12 +21,12 @@ class CreatePersonasPatologiasTable extends Migration
           $table->foreign('patologia_id')
               ->references('id')
               ->on('patologias')
-              ->onDelete('cascade');
+              ->onDelete('restrict');
 
           $table->foreign('persona_id')
               ->references('id')
               ->on('personas')
-              ->onDelete('cascade');
+              ->onDelete('restrict');
 
 
           $table->primary(['patologia_id','persona_id','fecha'], 'personas_patolgias_patologia_id_persona_id_fecha_primary');

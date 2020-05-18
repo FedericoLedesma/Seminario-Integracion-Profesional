@@ -27,7 +27,7 @@ class Prueb extends Seeder
       //--------PERSONA----------------
       $persona=Persona::create([
           'name' => 'p_prueba',
-          'dni'=>'1253456',
+          'numero_doc'=>'1253456',
           'apellido'=>'unlu',
           'direccion'=>'calle',
           'email'=>'prueb-a@gmail.com',
@@ -39,7 +39,7 @@ class Prueb extends Seeder
         ]);
         $persona=Persona::create([
             'name' => 'persona2',
-            'dni'=>'123497',
+            'numero_doc'=>'123497',
             'apellido'=>'unlu',
             'direccion'=>'calle',
             'email'=>'email@hola.com',
@@ -51,7 +51,7 @@ class Prueb extends Seeder
           ]);
           $persona=Persona::create([
               'name' => 'persona3',
-              'dni'=>'456789',
+              'numero_doc'=>'456789',
               'apellido'=>'apellido_3',
               'direccion'=>'calle3',
               'email'=>'email3@hola.com',

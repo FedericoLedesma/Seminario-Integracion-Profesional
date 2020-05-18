@@ -62,3 +62,4 @@ Route::get('/MenuPersona/show/{horario_id}/{persona_id}/{fecha}','MenuPersonaCon
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
 Route::resource('/tipospatologias', 'TipoPatologiaController');
+Route::resource('/alimentos', 'AlimentoController');
