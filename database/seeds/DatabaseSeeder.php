@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+#use Database\Menu_personaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -102,6 +103,11 @@ class DatabaseSeeder extends Seeder
 		  $role->givePermissionTo($permiso);
 	  }
 	  $user->assignRole('Administrador');
-
-    }
+/*
+		$this->call([
+			Menu_personaSeeder::class
+		]);*/
+		
+	}
+		
 }
