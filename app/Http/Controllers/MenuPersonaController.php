@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MenuPersona;
+use App\Horario;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -19,14 +21,16 @@ class MenuPersonaController extends Controller
         //
         $user = Auth::user();
         Log::info($user);
+        $menues = Array();
+        $query = $request->get('search');
+        $busqueda_por= $request->get('busqueda_por');
         if ($user->can('ver_menu_persona')){
-            $query = $request->get('search');
-            $busqueda_por= $request->get('busqueda_por');
             if($request){
                 switch ($busqueda_por) {
-                    case 'busqueda_id_persona':
-                        $menues=MenuPersona::find_by();
-                            $busqueda_por="ID_PERSONA";
+                    case 'busqueda_nombre_persona':
+                        Log::debug("Se realizará unas búsqueda por nombre de persona. Query:[".$query.']');
+                        $menues=MenuPersona::buscar_por_persona_nombre_y_apellido($query);
+                            $busqueda_por="nombres o apellidos";
                         break;
                     case 'busqueda_name':
                             $menues=MenuPersona::where('name','LIKE','%'.$query.'%')
@@ -40,7 +44,9 @@ class MenuPersonaController extends Controller
                         break;
                 }
             }
-            return view('MenuPersona.index',compact('menuPersona','menues'));
+            foreach ($menues as $menu)
+             Log::debug('Se devuelven: '.$menu);
+            return view('menu_persona.index',compact('menues','query','busqueda_por'));
         }
         Log::debug($user->name . ' NO tiene permisos para ver menues');
         return redirect('/home');
@@ -51,10 +57,13 @@ class MenuPersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        return view('MenuPersona.create');
+        $raciones_disponibles = null;
+        $pacientes = null;
+        $horarios = Horario::all();
+        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios'));
     }
 
     /**
@@ -81,35 +90,19 @@ class MenuPersonaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  $horario_id
-     * @param  $persona_id
-     * @param  $fecha
+     * @param  App\MenuPersona $mp
      * @return \Illuminate\Http\Response
      */
-    public function show($id_compuesta)
+    public function show($id_persona,$id_horario,$fecha)
     {
         //
-        $horario_id = $id_compuesta['horario_id'];
-        $persona_id = $id_compuesta['persona_id'];
-        $fecha = $id_compuesta['fecha'];
-        $mp = MenuPersona::findById($horario_id,$persona_id,$fecha);
-        if ($mp==null){
-            echo 'no hay menu persona';
-        }
-        else {/*
-        $mp = [];
-        $mp = json_decode($menuPersona->getBody()->getContents())[0];*/
-        return view('MenuPersona.show')
-            ->with('mp', $mp);
-        }
+        $mp = MenuPersona::findById($id_horario,$id_persona,$fecha);
+        return  view('menu_persona.show', compact('mp'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  $horario_id
-     * @param  $persona_id
-     * @param  $fecha
      * @return \Illuminate\Http\Response
      */
     public function edit($compuesta)
@@ -126,9 +119,6 @@ class MenuPersonaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  $horario_id
-     * @param  $persona_id
-     * @param  $fecha
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $compuesta)
@@ -152,14 +142,13 @@ class MenuPersonaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  $horario_id
-     * @param  $persona_id
-     * @param  $fecha
+
      * @return \Illuminate\Http\Response
      */
-    public function destroy($compuesta)
+    public function destroy(MenuPersona $compuesta)
     {
         //
+        Log::debug('Recibido: '.$compuesta);
         $horario_id = $compuesta['horario_id'];
         $persona_id = $compuesta['persona_id'];
         $fecha = $compuesta['fecha'];
