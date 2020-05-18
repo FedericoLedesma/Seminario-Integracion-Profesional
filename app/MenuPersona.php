@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class MenuPersona extends Model
 {
@@ -161,10 +162,22 @@ class MenuPersona extends Model
     return $racion_name;
   }
 
+  public function isRealizado_str(){
+    if ($this->realizado)
+      return 'si';
+    #else
+    return 'no';
+  }
+
   public function get_persona(){
     $racion = null;
     $racion = Persona::findById($this->persona_id);
     return $racion;
+  }
+
+  public function get_persona_nombre_completo(){
+    $persona = $this->get_persona();
+    return $persona->name . ' ' . $persona->apellido;
   }
 
   public function get_personal(){
@@ -176,6 +189,10 @@ class MenuPersona extends Model
   public function get_horario(){
     $horario = Horario::findById($this->horario_id);
     return $horario;
+  }
+
+  public function get_horario_name(){
+    return $this->get_horario()->name;
   }
 
   public function get_disponibilidad_racion(){
@@ -238,5 +255,84 @@ class MenuPersona extends Model
     $racion = $persona->recomendar_racion($fecha,$horario);
     return static::createMenuPersona($persona,$racion,$horario,$fecha);
    }
+
+  /**
+   * Busca todos los menues persona según un string que tiene nombres y apellidos separados por espacios.
+   * 
+   * @param String nombres y apellidos separados por espacio.
+   * 
+   * @return array App\MenuPersona
+   * 
+   */
+
+  public static function buscar_por_persona_nombre_y_apellido($nombre_apellido){
+    Log::debug("Se recibio un ".$nombre_apellido.', y luego se buscarán las personas que tengan esos nombres o apellidos');
+    $menues = Array();
+    $personas = Persona::buscar_por_nombre_y_apellido($nombre_apellido);
+    #Log::debug("Se buscará por ".$personas);
+    foreach($personas as $persona){
+      Log::debug("Buscando todos los menues de los ".implode($persona));
+      $menues = static::union_menu_persona($menues, static::buscar_por_persona($persona));
+    }
+    #Log::debug('Se devuelven: '.implode(', ', $menues));
+    return $menues;
+  }
+
+  public static function union_menu_persona($a,$b){
+    $menues = Array();
+    foreach($a as $x){
+      if (!in_array($x,$menues)){
+        array_push($menues,$x);
+      }
+    }
+    foreach($b as $x){
+      if (!in_array($x,$menues)){
+        array_push($menues,$x);
+      }
+    }
+    return $menues;
+  }
+
+  /**
+   * 
+   * Busca todas las raciones que hayan sido consumidas por una persona
+   * 
+   * Recibe un objeto Persona
+   * 
+   * @param persona App\Persona
+   * 
+   * @return array MenuPersona
+   * 
+   */
+
+  public static function buscar_por_persona($persona){
+    Log::debug('Se recibió '.implode($persona));
+    #$munues = Array();
+    $menues = static::where('persona_id','=',$persona['id'])
+      ->orderBy('fecha','desc')
+      ->get()
+      #->toArray()
+      ;
+    Log::debug('Se encontraron los siguientes menues persona: '.$menues);
+    return $menues;
+  }
+
+
+  public static function create($persona_id, $racion_id, $horario_id, $fecha, $personal_id){
+    Log::debug('Se quiere insertar una nueva tupla en menus_persona: id de persona: '.$persona_id);
+    Log::debug(' id de racion: '.$racion_id);
+    Log::debug(' id horario: '.$horario_id);
+    Log::debug(' fecha: '.$fecha);
+    Log::debug(' id de personal: '.$personal_id);
+    $r = static::insert([
+      'persona_id' => $persona_id,
+      'racion_id'=>$racion_id,
+      'horario_id'=>$horario_id,
+      'fecha'=>$fecha,
+      'personal_id'=>$personal_id,
+      'realizado'=>false,
+    ]);
+    Log::debug('La query dio como resultado: '.$r);
+  }
   
 }

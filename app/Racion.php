@@ -25,6 +25,24 @@ class Racion extends Model
     }return null;
   }
 
+  /**
+   métodos de instancia
+   * 
+   * 
+   */
+
+  
+
+  
+
+
+  /**
+   métodos estáticos 
+   * 
+   * 
+   */
+
+
   public static function intercept_raciones($conj_a, $conj_b){
     $intercepcion = array();
     foreach($conj_a as $a){
@@ -47,5 +65,17 @@ class Racion extends Model
     }
     return $intercepcion;
   }
+
+  public static function buscar_por_fecha_horario($fecha, $horario){
+    if(($horario)&&($fecha)){
+      $aux = RacionesDisponibles::buscar_por_fecha_horario($fecha, $horario);
+      $res = Array();
+      foreach($aux as $rd){
+        array_push($res,$rd->get_racion());
+      }
+      return $res;
+    }
+    return Array();
+}
 
 }

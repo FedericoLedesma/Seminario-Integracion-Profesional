@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Horario;
+use Illuminate\Support\Facades\Log;
 
 class RacionesDisponibles extends Model
 {
@@ -66,6 +68,10 @@ class RacionesDisponibles extends Model
       return $raciones;
     }
 
+    public function get_racion(){
+      return Racion::findById($this->racion_id);
+    }
+
     public function descontar_disponibilidad(){
 
       if ($this->cantidad_restante > 0){
@@ -92,6 +98,16 @@ class RacionesDisponibles extends Model
         return true;
       }
       return false;
+    }
+
+    public static function buscar_por_fecha_horario($fecha, $horario){
+        Log::debug('Buscando raciones en la fecha '.$fecha.' y horario '.$horario->name);
+        if(($horario)&&($fecha)){
+          return static::where('fecha','=',$fecha)->
+            where('horario_id',$horario->id)->
+            get();
+        }
+        return null;
     }
 
 }

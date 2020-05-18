@@ -4,6 +4,16 @@
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
+<style>
+<!--
+	.table-resposive{
+		float:left;
+	}
+
+-->
+</style>
+
+
 	   @include('layouts.error')
 	  	@if($mp)
 	  	

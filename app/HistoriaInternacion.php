@@ -41,4 +41,9 @@ class HistoriaInternacion extends Model
     }return null;
   }
 
+  public static function get_pacientes_internados(){
+    return static::where('fecha_egreso','=',null)
+             ->get();
+  }
+
 }

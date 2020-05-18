@@ -20,7 +20,7 @@ class CreateMenusPersonasTable extends Migration
             $table->unsignedBigInteger('racion_id');
             $table->date('fecha');
             $table->unsignedBigInteger('personal_id');
-            $table->unsignedBigInteger('dieta_id');
+            #$table->unsignedBigInteger('dieta_id');
             $table->boolean('realizado');
             $table->timestamps();
 
@@ -39,10 +39,10 @@ class CreateMenusPersonasTable extends Migration
                 ->on('personal')
                 ->onDelete('cascade');
 
-            $table->foreign('dieta_id')
+            /*$table->foreign('dieta_id')
                 ->references('id')
                 ->on('dietas')
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
 
             $table->primary(['fecha','persona_id','horario_id'], 'menus_personas_fecha_persona_id_horario_id_primary');
 
