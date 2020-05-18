@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
           'name' => 'ver_permisos',
           'guard_name'=>'web',
 	  ]);
-	  
+
 	  DB::table('permissions')->insert([
 		'name' => 'ver_menu_persona',
 		'guard_name'=>'web',
@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
 	  ]);
 
 	  $user=User::find('1');
-	  $role=Role::create(['name'=>'Administrador']);
+	  $role=Role::create(['name'=>'Super-Admin']);
 	  $permisos=Permission::all();
 	  foreach($permisos as $permiso){
 		  $role->givePermissionTo($permiso);

@@ -127,11 +127,17 @@ class PatologiaController extends Controller
      */
     public function destroy(Patologia $patologia)
     {
-          Log::info($patologia);
+      try {
       $patologia->delete();
       return response()->json([
           'estado'=>'true',
           'success' => 'Patologia eliminada con exito!'
       ]);
+      }catch (\Exception $e) {
+        return response()->json([
+          'estado'=>'false',
+          'success' => 'No se puede eliminar esta patologia !'
+        ]);
+      }
     }
 }
