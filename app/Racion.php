@@ -25,6 +25,24 @@ class Racion extends Model
     }return null;
   }
 
+  /**
+   métodos de instancia
+   * 
+   * 
+   */
+
+  
+
+  
+
+
+  /**
+   métodos estáticos 
+   * 
+   * 
+   */
+
+
   public static function intercept_raciones($conj_a, $conj_b){
     $intercepcion = array();
     foreach($conj_a as $a){
@@ -47,5 +65,6 @@ class Racion extends Model
     }
     return $intercepcion;
   }
+  
 
 }

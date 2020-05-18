@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\RacionesDisponibles;
 use App\Racion;
 use App\MenuPersona;
+use Illuminate\Support\Facades\Log;
 
 class Persona extends Model
 {
@@ -35,35 +36,37 @@ class Persona extends Model
        } return null;
     }
 
-    public function scopeFindByProvincia($query,$provincia)
+    public static function scopeFindByProvincia($query,$provincia)
     {
       if($provincia){
         return $query->where('provincia','LIKE','%'.$provincia.'%')->orderBy('id', 'asc');
       }return null;
     }
 
-    public function scopeFindByName($query,$name)
+    public static function scopeFindByName($query,$name)
     {
+      Log::debug('Buscando por nombre a '.$name);
       if($name){
         return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
       }return null;
     }
 
-    public function scopeFindByApellido($query,$apellido)
+    public static function scopeFindByApellido($query,$apellido)
     {
+      Log::debug('Buscando por apellido a '.$apellido);
       if($apellido){
         return $query->where('apellido','LIKE','%'.$apellido.'%')->orderBy('id', 'asc');
       }return null;
     }
 
-    public function scopeFindBySexo($query,$sexo)
+    public static function scopeFindBySexo($query,$sexo)
     {
       if($sexo){
         return $query->where('sexo','LIKE','%'.$sexo.'%');
       }return null;
     }
 
-    public function scopeFindByLocalidad($query,$localidad)
+    public static function scopeFindByLocalidad($query,$localidad)
     {
       if($localidad){
         return $query->where('localidad','LIKE','%'.$localidad.'%')->orderBy('id', 'asc');
@@ -166,6 +169,10 @@ class Persona extends Model
       return $res;
      }
 
+     public function get_id(){
+       return $this->id;
+     }
+
      /**
       * Funcionalidad principal.
       *
@@ -220,5 +227,57 @@ class Persona extends Model
         }
         return $raciones;
       }
+  
+  /**
+   métodos estáticos
+   */
+  /**
+   * Recibe un string con los nombres de una persona, separados por espacios.
+   * Devuelve las personas que tengan esos nombres.
+   * 
+   * @param nombre_y_apellido nombres separados por espacios.
+   * 
+   * @return Persona[ ]
+   */
+  public static function buscar_por_nombre_y_apellido($nombre_y_apellido){
+    Log::debug('Buscando por nombre y apellido a '.$nombre_y_apellido);
+    $personas = Array();
+    //Separo todos los strings pasados separados por comas
+    $campos = explode(' ',$nombre_y_apellido.' ',-1);
+    Log::debug('String separado en '.implode($campos));
+    foreach($campos as $campo){
+      $res_no = static::buscar_por_nombre($campo);
+      $res_ap = static::buscar_por_apellido($campo);
+      $personas = $res_no->toArray() + $res_ap->toArray();
+      Log::debug('Campos de $persona: '.implode($personas[0]));
+    }
+    return $personas;
+  }
+
+  public static function buscar_por_nombre($name)
+  {
+    Log::debug('Buscando por nombre a '.$name[0]);
+    if($name){
+      $r = static::where('name','LIKE','%'.$name.'%')
+        ->orderBy('id', 'asc')
+        ->get()
+        #->toArray()
+        ;
+
+      return $r;
+    }return null;
+  }
+
+  public static function buscar_por_apellido($apellido)
+  {
+    Log::debug('Buscando por apellido a '.$apellido);
+    if($apellido){
+      return static::where('apellido','LIKE','%'.$apellido.'%')
+        ->orderBy('id', 'asc')
+        ->get()
+        #->toArray()
+        ;
+    }return null;
+  }
 
 }
