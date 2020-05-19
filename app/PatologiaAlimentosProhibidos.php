@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Patologia;
+use App\Alimento;
 
 class PatologiaAlimentosProhibidos extends Model
 {
@@ -27,5 +29,15 @@ class PatologiaAlimentosProhibidos extends Model
          return $query->where('patologia_id',$patologia_id)
          ->orderBy('alimento_id', 'asc');
        }return null;
+     }
+
+     public static function get_alimentos_por_patologia(Patologia $patologia){
+        $target = static::where('patologia_id','=',$patologia->id)->
+          get();
+        $res = Array();
+        foreach($target as $t){
+          array_push($res,Alimento::findById($t->alimento_id));
+        }
+        return $res;
      }
 }

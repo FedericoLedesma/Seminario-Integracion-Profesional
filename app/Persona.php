@@ -155,6 +155,7 @@ class Persona extends Model
      */
 
      public function get_patologias(){
+      Log::debug('Se entró a recuperar las patologias de la persona: '.$this->id.', nombre: '.$this->name.' '.$this->apellido);
       $res = array();
       try{
         $pat_id = PersonaPatologia::where('persona_id','=',$this->id)
@@ -191,13 +192,8 @@ class Persona extends Model
           $raciones_disponibles = array();
           $racion_recomendada = null;
           try{
-            $raciones_disponibles = RacionesDisponibles::recuperar_raciones_disponibles($fecha);
-            $patologias_pac = $this->get_patologias();
-            foreach($patologias_pac as $p){
-              Racion::intercept_raciones($raciones_disponibles,$p->get_raciones_por_patologia());
-            }
 
-            $raciones_disponibles = Racion::union_raciones($raciones_disponibles,$this->get_ultimas_raciones_consumidas());
+            $raciones_disponibles = $this->get_raciones_disponibles($fecha,$horario);
 
             $racion_recomendada = MenuPersona::get_racion_menos_consumida($this,$raciones_disponibles);
 
@@ -208,6 +204,39 @@ class Persona extends Model
           return $racion_recomendada;
       }
 
+      public function get_raciones_disponibles($fecha,$horario){
+        Log::debug('Se buscarán las raciones diponibles de <'.$this->id.'> '.$this->name);
+        $raciones_disponibles = array();
+        $conj_rac_dis = Array();
+        try{
+          $lista_raciones_disponibles = RacionesDisponibles::buscar_por_fecha_horario($fecha,$horario);
+          $patologias_pac = $this->get_patologias();
+          foreach ($lista_raciones_disponibles as $rac_dis) {
+            // code...
+            array_push($conj_rac_dis,$rac_dis->get_racion());
+            Log::debug('Racion disponible: '.$rac_dis);
+          }
+
+          foreach($patologias_pac as $p){
+            Racion::intercept_raciones($conj_rac_dis,$p->get_raciones_por_patologia());
+            Log::debug('Patologia: '.p);
+          }
+
+          /*$lista_raciones_disponibles = Racion::union_raciones($lista_raciones_disponibles,$this->get_ultimas_raciones_consumidas());
+          if(sizeof($lista_raciones_disponibles)>0)
+            foreach ($lista_raciones_disponibles as $rac_dis) {
+              // code...
+                Log::debug('Persona->get_raciones_disponibles: '.$rac_dis);
+                if($rac_dis<>null)
+                  Array_push($raciones_disponibles,Racion::findById($rac_dis->racion_id));
+            }*/
+        }
+        catch(Throwable $e){
+
+        }
+        return $conj_rac_dis;
+      }
+
       /**
        *
        * @return Racion[]
@@ -215,15 +244,13 @@ class Persona extends Model
 
       public function get_ultimas_raciones_consumidas(){
         $raciones = array();
-        $sub = MenuPersona::select(DB::raw('racion_id'))
-          ->where([
-            ['persona_id','=',$this->id],
-            ['fecha','>=',Carbon::now()->subDays(30)]
-          ])
-          ->groupBy('racion_id')
+        $sub = MenuPersona::#select(DB::raw('racion_id'))->
+          where('persona_id','=',$this->id)->
+          where('fecha','>=',Carbon::now()->subDays(30))
+          #->groupBy('racion_id')
           ->get();
         foreach($sub as $r){
-          array_push($raciones,Racion::findById($r));
+            array_push($raciones,Racion::findById($r->racion_id));
         }
         return $raciones;
       }

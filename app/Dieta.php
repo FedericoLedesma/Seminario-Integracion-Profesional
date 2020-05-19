@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Dieta_racion;
+use App\Patologia;
 
 class Dieta extends Model
 {
@@ -55,5 +56,12 @@ class Dieta extends Model
     return $raciones;
   }
 
+  public function get_patologia(){
+    return Patologia::findById($this->patologia_id);
+  }
+
+  public function get_alimentos_prohibidos(){
+    return $this->get_patologia()->get_alimentos_prohibidos();
+  }
 
 }

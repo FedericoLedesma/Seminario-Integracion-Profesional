@@ -56,9 +56,10 @@ Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
 		'as' => 'user.updatepass'
 ));
 
-Route::resource('menu_persona','MenuPersonaController');
+Route::resource('/menu_persona','MenuPersonaController');
 #Route::resource('menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
-Route::get('menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
+Route::get('/menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
+Route::get('/menu_persona/destroy/{persona}/{horario}/{fecha}','MenuPersonaController@destroy');
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
