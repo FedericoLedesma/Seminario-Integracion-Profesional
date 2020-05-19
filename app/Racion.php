@@ -47,6 +47,28 @@ class Racion extends Model
      return in_array($alimento,$this->get_lista_alimentos());
    }
 
+
+
+   /**
+   * Función que indica la pertenencia de varios aliemntos a la ración
+   *
+   * @param App\Alimento[] $alimentos
+   *
+   * @return boolean devuelve true si pertenece
+   */
+
+   public function contiene_determinada_lista_alimento(array $alimentos){
+     $flag = false;
+     $list = $this->get_lista_alimentos();
+     foreach ($alimentos as $a) {
+       $flag |= in_array($alimento,$list);
+     }
+     in_array($alimento,$this->get_lista_alimentos());
+     return $flag;
+   }
+
+
+
    /**
    * Getter de alimentos
    *
@@ -88,9 +110,10 @@ class Racion extends Model
     $intercepcion = array();
     foreach($conj_a as $a){
       foreach($conj_b as $b){
-        if ($a->id == $b->id){
+        if ($a == $b){
           array_push($intercepcion,$a);
         }
+        Log::debug('Comparando racion '.$a.' con  racion '.$b);
       }
     }
     return $intercepcion;

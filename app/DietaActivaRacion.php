@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DietaActiva;
+use App\Racion;
 
 class DietaActivaRacion extends Model
 {
     protected $table = "dietas_activas_raciones";
 
     protected $fillable = [
-        'dieta_id', 'fecha','fecha_final','observacion',
+        'dieta_id', 'fecha','fecha_final','observacion','racion_id'
     ];
 
     public static function findByDietaFecha($dieta_id,$fecha)
@@ -48,5 +50,20 @@ class DietaActivaRacion extends Model
       }return null;
     }
 
+    public function get_dieta_activa(){
+      return DietaActiva::findByIdFecha($this->dieta_id,$this->fecha);
+    }
+
+    public function get_patologia(){
+      return $this->get_dieta_activa()->get_patologia();
+    }
+
+    public function get_alimentos_prohibidos(){
+      $this->get_dieta_activa()->get_alimentos_prohibidos();
+    }
+
+    public function get_racion(){
+      return Racion::findById($this->racion_id);
+    }
 
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Dieta;
 
 class DietaActiva extends Model
 {
@@ -43,5 +44,18 @@ class DietaActiva extends Model
         ->where('fecha_final','<>', null)
         ->orderBy('fecha', 'asc');
       }return null;
+    }
+
+    public function get_dieta(){
+      $d = Dieta::findById($this->dieta_id);
+      return $d;
+    }
+
+    public function get_patologia(){
+      return $this->get_dieta()->get_patologia();
+    }
+
+    public function get_alimentos_prohibidos(){
+      return $this->get_patologia()->get_alimentos_prohibidos();
     }
 }
