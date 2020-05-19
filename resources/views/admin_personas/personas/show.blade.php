@@ -29,7 +29,7 @@
 			</tr>
       <tr>
 				<td>Tipo Doc </td>
-				<td>{{$persona->tipo_documento_id}}</td>
+				<td>{{$persona->tipoDocumento->name}}</td>
 			</tr>
       <tr>
 				<td>Numero_doc </td>

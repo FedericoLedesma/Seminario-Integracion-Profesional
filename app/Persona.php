@@ -322,4 +322,9 @@ class Persona extends Model
      return $this->patologias()->wherePivot('fecha','=',$fecha)->get();
   }
 
+  public function tipoDocumento()
+  {
+    return $this->belongsTo('App\TipoDocumento', 'tipo_documento_id');
+  }
+
 }
