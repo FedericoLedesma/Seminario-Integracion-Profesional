@@ -29,7 +29,7 @@ class Horario extends Model
       if($name){
         return static::where('name','LIKE','%'.$name.'%')
           ->orderBy('id', 'asc')
-          ->first();
+          ->get();
       }return null;
     }
 }

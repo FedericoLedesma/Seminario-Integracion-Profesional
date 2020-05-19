@@ -1,13 +1,9 @@
 <head>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 </head>
-
 
 @extends('layouts.layout')
 @section('navegacion')
@@ -26,14 +22,14 @@
 		<div class="input-group mb-3">
 
 			<input class="date form-control" type="text" id="calendario" name="calendario">
-			<script type="text/javascript" id="calendario_" name="calendario_"> 
-				var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});  
-			</script>  
+			<script type="text/javascript" id="calendario_" name="calendario_">
+				var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
+			</script>
 
 			<select class="browser-default custom-select" id="horario_id" name="horario_id">
 				@foreach($horarios as $horario)
-				<option value= {{$horario->id}} >{{$horario->name}}</option>	
-				@endforeach		
+				<option value= {{$horario->id}} >{{$horario->name}}</option>
+				@endforeach
 			</select>
 		<div class="input-group-append">
 		{!!	Form::submit('Ir a dia/horario',['class'=>'btn btn-success btn-buscar'])!!}
@@ -52,7 +48,7 @@
 							<option value= {{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
 						@endforeach
 					</select>
-					</td>					
+					</td>
 					<td>
 					{!!	Form::label('racion_id', 'Racion')!!}
 					<select class="browser-default custom-select" id="racion_id" name="racion_id">

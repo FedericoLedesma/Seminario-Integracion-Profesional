@@ -1,3 +1,10 @@
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+
+</head>
+
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -61,10 +68,17 @@
 						 <option value="busqueda_fecha" >Buscar por fecha</option>
 					 </select>
 
+
 						 {!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
 						 <div class="input-group-append">
 							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						 </div>
+
+
+						 <input class="date form-control" type="text" id="fecha" name="fecha">
+					 	 <script type="text/javascript" id="calendario_" name="calendario_">
+					 			var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
+					 	 </script>
 					 </div>
 					{!! Form::close() !!}
 
@@ -92,15 +106,26 @@
 								<td>{{$menu_persona->get_racion_name()}}</td>
 								<td>{{$menu_persona['fecha']}}</td>
 								<td>{{$menu_persona->isRealizado_str()}}</td>
-								
-								{!! Form::close() !!}
+								<td>
+								<form method="delete" action={{ route('menu_persona.destroy', 'destroy/'.$menu_persona->persona_id.'/'.$menu_persona->horario_id.'/'.$menu_persona->fecha) }}>
 
+										<button class="btn btn-primary" type="submit"> Eliminar </button>
+
+
+								</form>
+								</td>
+
+							{!! Form::close() !!}
 							</tr>
 								@endforeach
 							@endif
 
 					</table>
 				</div>
+				@if($info<>null)
+					<p>Info: </p>
+					<p>{{$info['message']}}</p>
+				@endif
 				</div>
 			  </div>
 				 </div>

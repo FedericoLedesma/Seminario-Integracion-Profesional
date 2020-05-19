@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use App\Horario;
 
 class MenuPersona extends Model
 {
@@ -82,9 +83,9 @@ class MenuPersona extends Model
   */
 
   /**
-   * 
-   * 
-   * @return Racion 
+   *
+   *
+   * @return Racion
    */
   public static function get_racion_menos_consumida($persona,$raciones){
     $racion = array();
@@ -112,19 +113,27 @@ class MenuPersona extends Model
 
 
   /**
-   * 
+   *
    * @return boolean
    */
   public function descontar_disponibilidad_racion(){
     return $this->get_disponibilidad_racion()->descontar_disponibilidad();
   }
-  
+
   /**
-   * 
+   *
    * @return boolean
    */
   public function registrar_movimiento($usuario, $tipo_movimiento){
     return $this->get_disponibilidad_racion()->registrar_movimiento($usuario, $tipo_movimiento);
+  }
+
+  public function tengo_la_fecha($fecha){
+    if($fecha<>null){
+      //falta validar
+      return $this->fecha==$fecha;
+    }
+    return null;
   }
 
   /**
@@ -132,12 +141,12 @@ class MenuPersona extends Model
 
    *
    * Para evitar código repetido, ya que se repite mucho el tema de los get/set de las FK
-   * 
+   *
    */
 
 
   /**
-   * 
+   *
    * @return Racion
    */
 
@@ -148,7 +157,7 @@ class MenuPersona extends Model
   }
 
   /**
-   * 
+   *
    * @return String
    */
 
@@ -226,16 +235,16 @@ class MenuPersona extends Model
 
   /**
    * Crea un menú persona.
-   * 
+   *
    * @param Persona tipo App\Persona obligatorio
    * @param Racion tipo App\Racion obligatorio
    * @param Horario tipo App\Horario obligatorio
    * @param fecha tipo date obligatorio
-   * 
-   * 
+   *
+   *
    * @return App\MenuPersona
-   * 
-   * 
+   *
+   *
    */
 
    public static function createMenuPersona($Persona,$Racion,$Horario,$fecha){
@@ -258,11 +267,11 @@ class MenuPersona extends Model
 
   /**
    * Busca todos los menues persona según un string que tiene nombres y apellidos separados por espacios.
-   * 
+   *
    * @param String nombres y apellidos separados por espacio.
-   * 
+   *
    * @return array App\MenuPersona
-   * 
+   *
    */
 
   public static function buscar_por_persona_nombre_y_apellido($nombre_apellido){
@@ -294,15 +303,15 @@ class MenuPersona extends Model
   }
 
   /**
-   * 
+   *
    * Busca todas las raciones que hayan sido consumidas por una persona
-   * 
+   *
    * Recibe un objeto Persona
-   * 
+   *
    * @param persona App\Persona
-   * 
+   *
    * @return array MenuPersona
-   * 
+   *
    */
 
   public static function buscar_por_persona($persona){
@@ -334,5 +343,54 @@ class MenuPersona extends Model
     ]);
     Log::debug('La query dio como resultado: '.$r);
   }
-  
+
+  public static function buscar_por_nombre_de_horario($query){
+    $horarios = Horario::buscar_por_nombre($query);
+    $menues = Array();
+    foreach ($horarios as $horario){
+      $sub = static::where('horario_id','=',$horario->id)
+        ->get();
+      foreach ($sub as $m) {
+        array_push($menues, $m);
+      }
+    }
+    return $menues;
+  }
+
+
+  /**
+  *   Busca los menúes dada una fecha pasada como parámetro
+  *   @param query String yyyy-mm-dd
+  *   @return MenuRacion[]
+  */
+  public static function buscar_por_fecha($query){
+    $menues = static::where('fecha','=',$query)
+      ->orderBy('fecha','desc')
+      ->get();
+    return $menues;
+  }
+
+
+  /**
+  * Busca un menu persona, y si existe en la base de datos, la borrar
+  *
+  *
+  * @param App\MenuPersona $menu_persona
+  *
+  * @return boolean, true si tuvo éxito de lo contrario false.
+  *
+  */
+
+  public static function borrar(MenuPersona $menu_persona){
+    if ($menu_persona<>null){
+      static::
+        where('persona_id','=',$menu_persona->persona_id)->
+        where('horario_id','=',$menu_persona->horario_id)->
+        where('fecha','=',$menu_persona->fecha)->
+        delete();
+      return true;
+    }
+    return false;
+  }
+
 }
