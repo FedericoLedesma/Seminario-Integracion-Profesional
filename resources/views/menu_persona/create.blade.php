@@ -28,7 +28,7 @@
 			<select class="browser-default custom-select" id="persona_id" name="persona_id">
 				<option value='0'> ninguno </option>
 				@foreach($pacientes as $paciente)
-					<option value= {{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
+					<option value={{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
 				@endforeach
 			</select>
 
@@ -88,9 +88,11 @@
 					</td>
 					<td>
 					{!!	Form::label('paciente', 'Paciente')!!}
-					<select class="browser-default custom-select" id="horario" name="horario">
+					<select class="browser-default custom-select" id="persona_id" name="persona_id">
 						@if($persona_seleccionada['id']>0)
 						<option value= {{$persona_seleccionada['id'] }}> {{$persona_seleccionada['nombre']}} </option>
+						@else
+						<option value='-1' }}> Ninguno </option>
 						@endif
 					</select>
 					</td>
