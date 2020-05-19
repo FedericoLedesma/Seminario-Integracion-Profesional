@@ -9,6 +9,7 @@ use App\Paciente;
 use App\Acompanante;
 use App\RacionesDisponibles;
 use App\MenuPersona;
+use Illuminate\Support\Facades\Log;
 class Prueba extends Seeder
 {
     /**
@@ -18,8 +19,8 @@ class Prueba extends Seeder
      */
     public function run()
     {
-      $fecha= new DateTime('2020-05-15');
-    $racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
+      $fecha= new DateTime(date("Y-m-d"));
+    /*$racionesDisponibles=RacionesDisponibles::allDisponibles(1,$fecha)->get();
     if($racionesDisponibles){
       //echo $racionesDisponibles;
     }
@@ -32,5 +33,25 @@ class Prueba extends Seeder
     $tipoPatologia->delete();
     $patologias=Patologia::findByTipoPatologia(4)->get();
     echo count($patologias);
+*/
+    $persona=Persona::findById(3);
+
+    if($persona){
+      $patologias=$persona->getPatologiasFecha($fecha);
+      foreach($patologias as $patologia){
+        echo $patologia->id;
+      }
+
+
+
     }
+    $patologia=Patologia::findById(4);
+    try{
+    $persona->patologias()->attach($patologia,['fecha' => $fecha]);
+    } catch (\Exception $e) {
+      echo "duplicate error";
+    }
+    }
+
+
 }

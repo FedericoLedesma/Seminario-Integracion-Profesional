@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Persona;
 use App\TipoDocumento;
+use App\Patologia;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PersonaController extends Controller
 {
@@ -112,7 +115,24 @@ class PersonaController extends Controller
     public function edit(Persona $persona)
     {
       $tipos_documentos=TipoDocumento::all();
-          return view('admin_personas.personas.edit',compact('persona','tipos_documentos'));
+      $patologias=Patologia::all();
+      $patologiasPersona=$persona->patologias;
+/**
+  Resta de patologias
+**/
+      $i=0;
+      foreach ($patologias as $patologia){
+
+        foreach ($patologiasPersona as $patologiaPersona){
+
+            if($patologia->id== $patologiaPersona->id){
+
+              unset($patologias[$i]);
+            }
+        }
+        $i++;
+      }
+          return view('admin_personas.personas.edit',compact('persona','tipos_documentos','patologias'));
     }
 
     /**
@@ -138,6 +158,41 @@ class PersonaController extends Controller
           $persona->fecha_nac=$request->fecha_nac;
           $persona->save();
 
+          $fecha= new DateTime(date("Y-m-d"));
+
+          $quitarPatologias=$request->quitarPatologias;
+          $patologiasPersona=$persona->getPatologiasFecha($fecha);
+
+          /**
+          Por cada patologia que tiene la persona y por cada patologia a quitar
+          pregunto si son iguales y si lo son le agrego una fecha hasta
+          La fecha deberia ser pasada por parametro
+          **/
+          if($quitarPatologias){
+            foreach ($quitarPatologias as $patologia) {
+
+              foreach($patologiasPersona as $patologiaPersona){
+                  if($patologia==$patologiaPersona->id){
+                    $persona->patologias()->updateExistingPivot($patologia, ['hasta'=>$fecha]);
+                  }
+              }
+
+            }
+          }
+          /**
+
+          **/
+          $patologias=$request->agregarPatologias;
+
+          if($patologias){
+            foreach ($patologias as $patologia) {
+              try{
+              $persona->patologias()->attach($patologia,['fecha' => $fecha]);
+              } catch (\Exception $e) {
+
+              }
+            }
+          }
         }
         return redirect('/personas');
     }

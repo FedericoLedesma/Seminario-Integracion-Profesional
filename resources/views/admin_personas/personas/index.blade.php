@@ -47,11 +47,11 @@
 </div>
 
 <div class="container">
-    <!--  <div class="row">-->
-    <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
-             <!--<div class="panel panel-default">-->
-				 <div class="panel-heading">
+
+	<div class="table-responsive">
+  	<div class="col-md-8 col-md-offset-2">
+
+ <div class="panel-heading">
 				 {!!Form::open(['route'=>'personas.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
@@ -103,11 +103,11 @@
 							@endif
 
 					</table>
-				</div>
-				</div>
-			  </div>
-				 </div>
-				<!--</div>-->
+			</div>
+		</div>
+	</div>
+</div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/persona-script.js')}}"></script>

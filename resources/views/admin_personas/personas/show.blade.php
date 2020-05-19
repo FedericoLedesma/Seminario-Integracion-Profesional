@@ -20,7 +20,7 @@
 	  	@if($persona)
 	    <div class="table-responsive">
 	    <h2>Persona:  {{$persona->name}}</h2>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
@@ -64,6 +64,14 @@
 				<td>{{$persona->sexo}}</td>
 			</tr>
       <tr>
+				<td>Patologias </td>
+				<td>
+          @foreach($persona->patologias as $patologia)
+            {{$patologia->name }}</br>
+          @endforeach
+        </td>
+			</tr>
+      <tr>
 				<td>Fecha de Nacimiento </td>
 				<td>{{$persona->fecha_nac}}</td>
 			</tr>
@@ -82,7 +90,6 @@
 		</div>
 	{!!link_to_route('personas.edit', $title = 'MODIFICAR', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
 
-	{!!link_to_route('personas.edit', $title = 'Ver Patologias', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
 
 
 

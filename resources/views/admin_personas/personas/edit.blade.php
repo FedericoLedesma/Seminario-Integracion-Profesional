@@ -13,7 +13,7 @@
 	    <h1>Editar Persona  {{$persona->name}}</h1>
 	      @include('layouts.error')
 	    <div class="table-responsive">
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
         <tr>
 	    		<td>ID </td>
@@ -79,19 +79,57 @@
   				<td>Fecha de Nacimiento </td>
   				<td>{!!	Form::text('fecha_nac',$persona->fecha_nac)!!}</td>
   			</tr>
-		   	<tr>
-	    	<td>
-		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
-		    </td>
-        </tr>
-        <tr>
-		    <td>
-		   	{!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = [])!!}
-		   	</td>
-		   	</tr>
 		 </table>
 		 @endif
 
+      <table class="table table-bordered table-hover table-striped">
+       <tr>
+          <td>
+            Quitar Patologias que tiene {{$persona->name}}
+          </td>
+       </tr>
+       @foreach($persona->patologias as $patologia)
+          <tr>
+            <tr>
+               <td>
+               <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="quitarPatologias[]" value="{{$patologia->id}}" id="defaultCheck{{$patologia->id}}">
+                 <label class="form-check-label" for="defaultCheck{{$patologia->id}}">
+                   {{$patologia->name}}
+                 </label>
+               </td>
+            </tr>
+          </tr>
+      @endforeach
+    </table>
+
+
+    @if($patologias)
+     <table class="table table-bordered table-hover table-striped">
+      <tr>
+         <td>
+         Asociar Patologias
+         </td>
+      </tr>
+          @foreach($patologias as $patologia)
+      <tr>
+         <td>
+         <div class="form-check">
+         <input class="form-check-input" type="checkbox" name="agregarPatologias[]" value="{{$patologia->id}}" id="defaultCheck{{$patologia->id}}">
+           <label class="form-check-label" for="defaultCheck{{$patologia->id}}">
+             {{$patologia->name}}
+           </label>
+         </td>
+      </tr>
+       @endforeach
+     </table>
+    @endif
+
+
+    {!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		</div>
 		</div>
+    <div class="col-md-6 col-md-offset-6">
+    {!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = ['class'=>'btn btn-warning'])!!}
+  </div>
 @endsection

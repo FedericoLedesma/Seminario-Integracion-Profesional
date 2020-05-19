@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class PersonaPatologia extends Model
+class PersonaPatologia extends Pivot
 {
     protected $table = "personas_patologias";
 
@@ -26,7 +26,6 @@ class PersonaPatologia extends Model
          }
        }return null;
     }
-
     public function scopeFindByPersona($query,$persona_id)
     {
       if($persona_id){

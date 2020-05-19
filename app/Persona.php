@@ -227,16 +227,16 @@ class Persona extends Model
         }
         return $raciones;
       }
-  
+
   /**
    métodos estáticos
    */
   /**
    * Recibe un string con los nombres de una persona, separados por espacios.
    * Devuelve las personas que tengan esos nombres.
-   * 
+   *
    * @param nombre_y_apellido nombres separados por espacios.
-   * 
+   *
    * @return Persona[ ]
    */
   public static function buscar_por_nombre_y_apellido($nombre_y_apellido){
@@ -278,6 +278,21 @@ class Persona extends Model
         #->toArray()
         ;
     }return null;
+  }
+  /**
+  Metodo para realizar consultas a la tabla Pivot
+  se puede filtrar la consulta utilizando el metodo wherePivot
+
+
+  **/
+  public function patologias()
+  {
+    return $this->belongsToMany('App\Patologia', 'personas_patologias')
+    ->withPivot('fecha','hasta')->wherePivot('hasta','=',null);
+  }
+  public function getPatologiasFecha($fecha)
+  {
+     return $this->patologias()->wherePivot('fecha','=',$fecha)->get();
   }
 
 }

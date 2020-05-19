@@ -17,6 +17,7 @@ class CreatePersonasPatologiasTable extends Migration
           $table->unsignedInteger('patologia_id');
           $table->unsignedBigInteger('persona_id');
           $table->date('fecha');
+          $table->date('hasta')->nullable($value = true);
 
           $table->foreign('patologia_id')
               ->references('id')
