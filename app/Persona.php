@@ -155,6 +155,7 @@ class Persona extends Model
      */
 
      public function get_patologias(){
+      Log::debug('Se entró a recuperar las patologias de la persona: '.$this->id.', nombre: '.$this->name.' '.$this->apellido);
       $res = array();
       try{
         $pat_id = PersonaPatologia::where('persona_id','=',$this->id)
@@ -191,13 +192,8 @@ class Persona extends Model
           $raciones_disponibles = array();
           $racion_recomendada = null;
           try{
-            $raciones_disponibles = RacionesDisponibles::recuperar_raciones_disponibles($fecha);
-            $patologias_pac = $this->get_patologias();
-            foreach($patologias_pac as $p){
-              Racion::intercept_raciones($raciones_disponibles,$p->get_raciones_por_patologia());
-            }
 
-            $raciones_disponibles = Racion::union_raciones($raciones_disponibles,$this->get_ultimas_raciones_consumidas());
+            $raciones_disponibles = $this->get_raciones_disponibles($fecha,$horario);
 
             $racion_recomendada = MenuPersona::get_racion_menos_consumida($this,$raciones_disponibles);
 
@@ -208,6 +204,28 @@ class Persona extends Model
           return $racion_recomendada;
       }
 
+      public function get_raciones_disponibles($fecha,$horario){
+        Log::debug('Se buscarán las raciones diponibles de <'.$this->id.'> '.$this->name);
+        $raciones_disponibles = array();
+        try{
+          $lista_raciones_disponibles = RacionesDisponibles::buscar_por_fecha_horario($fecha,$horario);
+          $patologias_pac = $this->get_patologias();
+          foreach($patologias_pac as $p){
+            Racion::intercept_raciones($lista_raciones_disponibles,$p->get_raciones_por_patologia());
+          }
+
+          $lista_raciones_disponibles = Racion::union_raciones($lista_raciones_disponibles,$this->get_ultimas_raciones_consumidas());
+          foreach ($lista_raciones_disponibles as $rac_dis) {
+            // code...
+            Array_push($raciones_disponibles,Racion::findById($rac_dis->racion_id));
+          }
+        }
+        catch(Throwable $e){
+
+        }
+        return $raciones_disponibles;
+      }
+
       /**
        *
        * @return Racion[]
@@ -215,28 +233,26 @@ class Persona extends Model
 
       public function get_ultimas_raciones_consumidas(){
         $raciones = array();
-        $sub = MenuPersona::select(DB::raw('racion_id'))
-          ->where([
-            ['persona_id','=',$this->id],
-            ['fecha','>=',Carbon::now()->subDays(30)]
-          ])
-          ->groupBy('racion_id')
+        $sub = MenuPersona::#select(DB::raw('racion_id'))->
+          where('persona_id','=',$this->id)->
+          where('fecha','>=',Carbon::now()->subDays(30))
+          #->groupBy('racion_id')
           ->get();
         foreach($sub as $r){
-          array_push($raciones,Racion::findById($r));
+          array_push($raciones,Racion::findById($r->racion_id));
         }
         return $raciones;
       }
-  
+
   /**
    métodos estáticos
    */
   /**
    * Recibe un string con los nombres de una persona, separados por espacios.
    * Devuelve las personas que tengan esos nombres.
-   * 
+   *
    * @param nombre_y_apellido nombres separados por espacios.
-   * 
+   *
    * @return Persona[ ]
    */
   public static function buscar_por_nombre_y_apellido($nombre_y_apellido){

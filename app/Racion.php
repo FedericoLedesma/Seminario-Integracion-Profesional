@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Alimento;
+use App\RacionAlimento;
 
 class Racion extends Model
 {
@@ -27,19 +29,45 @@ class Racion extends Model
 
   /**
    métodos de instancia
-   * 
-   * 
+   *
+   *
    */
 
-  
 
-  
+   /**
+   * Función que indica la pertenencia de un aliemnto a la ración
+   *
+   * @param App\Alimento $alimento
+   *
+   * @return boolean devuelve true si pertenece
+   */
+
+   public function contiene_determinado_alimento(Alimento $alimento){
+     return in_array($alimento,$this->get_lista_alimentos());
+   }
+
+   /**
+   * Getter de alimentos
+   *
+   * @return App\Alimento[]
+   */
+
+   public function get_lista_alimentos(){
+     $alimentos = Array();
+     $lista_rac_ali = RacionAlimento::get_lista_alimentos_por_id_racion($this->id);
+     foreach ($lista_rac_ali as $x) {
+       // code...
+       array_push($alimentos,Alimento::findById($x->alimento_id));
+     }
+     return $alimentos;
+   }
+
 
 
   /**
-   métodos estáticos 
-   * 
-   * 
+   métodos estáticos
+   *
+   *
    */
 
 

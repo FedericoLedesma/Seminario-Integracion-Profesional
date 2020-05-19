@@ -36,4 +36,18 @@ class RacionAlimento extends Model
         ->orderBy('racion_id', 'asc');
       }return null;
     }
+
+    public static function get_lista_alimentos_por_id_racion($id_racion){
+      $lista_racion_alimento = Array();
+      try{
+        $lista_racion_alimento = static::
+          where('racion_id','=',$racion_id)->
+          get();
+      }
+      catch(Throwable $e){
+
+      }
+      return $lista_racion_alimento;
+    }
+
 }
