@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PatologiaAlimentosProhibidos;
 
 class Patologia extends Model
 {
@@ -80,4 +81,16 @@ class Patologia extends Model
 
       return $raciones;
     }
+
+    /**
+     *
+     * @return App\Alimento[]
+     */
+
+     public function get_alimentos_prohibidos(){
+       $ali_pro = Array();
+       $ali_pro = PatologiaAlimentosProhibidos::get_alimentos_por_patologia($this);
+       return $ali_pro;
+     }
+
 }

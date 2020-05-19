@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Alimento;
 use App\RacionAlimento;
+use App\Patologia;
 
 class Racion extends Model
 {
@@ -62,6 +63,18 @@ class Racion extends Model
      return $alimentos;
    }
 
+   public function add_alimento(Alimento $alimento, int $cantidad){
+     if (($alimento<>null)||($cantidad>0)){
+       RacionAlimento::create([
+         'racion_id'=>$this->id,
+         'alimento_id'=>$alimento->id,
+         'cantidad'=>$cantidad,
+       ]);
+      return true;
+      }
+      return false;
+   }
+
 
 
   /**
@@ -104,6 +117,33 @@ class Racion extends Model
       return $res;
     }
     return Array();
-}
+  }
+
+  /**
+  *
+  *   Busca todas las raciones compatibles con la patología
+  *
+  *   @param App\Patologia $patologia
+  *
+  *
+  *   @return App\Racion[]
+  *
+  */
+
+  public static function get_compatibles_con_patologia(Patologia $patologia){
+    $all = static::all();
+    $ali_pro = $patologia->get_alimentos_prohibidos();
+    $res = Array();
+    foreach ($all as $r) {
+      // code...
+      foreach ($ali_pro as $a) {
+        // code...
+        if (!($r->contiene_determinado_alimento($a))){
+          array_push($res,$r);
+        }
+      }
+    }
+    return $res;
+  }
 
 }
