@@ -4,7 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+use App\RacionesDisponibles;
+use App\Observers\RacionesDisponiblesObserver;
+use App\MenuPersona;
+use App\Observers\MenuPersonaObserver;
+use App\DietaActivaRacion;
+use App\Observers\DietaActivaRacionObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        RacionesDisponibles::observe(RacionesDisponiblesObserver::class);
+        MenuPersona::observe(MenuPersonaObserver::class);
+        DietaActivaRacion::observe(DietaActivaRacionObserver::class);
     }
 }
