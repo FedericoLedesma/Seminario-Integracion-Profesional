@@ -23,7 +23,7 @@
 					array.push(a[i].value);
 					console.log(array);
 			}
-	
+
 			var ruta="/raciones/:id/guardaralimentos";
 			ruta= ruta.replace(':id',id);
 			$.ajax({
@@ -195,3 +195,29 @@
 
 	        });
 	});
+		$('.nuevoAlimento').click(function(e){
+			//evita cargar la pagina
+			var name=	document.getElementById("nameAlimento").value;
+			console.log(name);
+			var url="/alimentos";
+			$.ajax({
+	    	type: 'POST',
+	    	url: url,
+	    	dataType: 'json',
+				data:{name},
+		    	success: function (data) {
+						if (data.estado=='true'){
+						   		
+							  	console.log(data.success);
+								}else{
+										console.log(data.success);
+								}
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+
+	        });
+
+
+		});

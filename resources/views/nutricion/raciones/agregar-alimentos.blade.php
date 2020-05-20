@@ -42,9 +42,15 @@
          </tbody>
 
        </table>
-       <div class="input-group mb-3">
-         <a href="" class="btn btn-success agregar" data-id="{{$racion->id}}" >Agregar</a>
-       </div>
+			 <table class="table table-striped table-hover ">
+				 <tr>
+				 	<td><a href="" class="btn btn-success agregar" data-id="{{$racion->id}}" >Agregar</a></td>
+					<td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
+					    Crear Alimento
+					</a></td>
+				 </tr>
+			 </table>
+
        <h4>Alimentos agregados</h4>
        <table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
          <thead >
@@ -74,6 +80,36 @@
     <div class="col-md-6 col-md-offset-6">
 
   </div>
+
+	<div class="modal fade" id="create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+							<h4>Crear Alimento</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>×</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+							<table>
+								<tr>
+									<td>
+											{!!	Form::label('name', 'Nombre')!!}
+									</td>
+									<td>
+										<input type="text" id="nameAlimento" name="name">
+									</td>
+								</tr>
+							</table>
+
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary nuevoAlimento" >Guardar</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
  <script src="{{asset('js/racion-script.js')}}"></script>
