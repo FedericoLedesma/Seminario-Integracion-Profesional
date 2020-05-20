@@ -168,5 +168,14 @@ class Racion extends Model
     }
     return $res;
   }
+  public function alimentos()
+  {
+    return $this->belongsToMany('App\Alimento', 'raciones_alimentos')
+    ->withPivot('cantidad');
+  }
+  public function getAlimento($id)
+  {
+    return $this->alimentos()->where('alimento_id',$id);
+  }
 
 }

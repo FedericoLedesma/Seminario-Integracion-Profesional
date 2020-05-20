@@ -129,4 +129,29 @@ class AlimentoController extends Controller
         ]);
       }
     }
+
+    public function buscar(Request $request)
+    {
+      if($request->ajax()) {
+
+        $busqueda_por=$request->data[0];
+          $query=$request->data[1];
+          if(($busqueda_por)&&($query)){
+            switch ($busqueda_por) {
+              case 'busqueda_id':
+                return  $alimentos=Alimento::where('id','LIKE','%'.$query.'%')
+                  ->orderBy('id','asc')
+                  ->get();
+                break;
+              case 'busqueda_name':
+                return  $alimentos=Alimento::findByName($query)->get();
+                break;
+              default:
+                return  $alimentos=Alimento::all();
+                break;
+              }
+          }
+          return response()->$alimentos->toJson();
+        }
+    }
 }
