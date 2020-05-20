@@ -24,6 +24,7 @@ class MenuPersonaController extends Controller
         //
         $user = Auth::user();
         Log::info($user);
+        Log::info($request);
         if ($user==null){
           Log::debug('No se ha logeado');
           return redirect('/home');
@@ -119,18 +120,20 @@ class MenuPersonaController extends Controller
               else
               {
                   Log::debug('Pase a buscar raciones');
-                  $persona = Persona::findById($persona_id);
+                  $persona = Persona::findById((int)$persona_id);
                   $persona_seleccionada = [
                     'nombre'=>$persona->name.' ',$persona->apellido,
                     'id'=>$persona->id
                   ];
+                  Log::debug('ID de la persona seleccionada: '.$persona_seleccionada['id']);
                   #$raciones_disponibles = Racion::buscar_por_fecha_horario($fecha,$horario);
                   $raciones_disponibles = $persona->get_raciones_disponibles($fecha,$horario);
                   $rac_rec = $persona->recomendar_racion($fecha,$horario);
-                  $racion_recomendada = [
-                    'nombre'=>$rac_rec->name,
-                    'id'=>$rac_rec->id
-                  ];
+                  if($rac_rec<>null)
+                    $racion_recomendada = [
+                      'nombre'=>$rac_rec->name,
+                      'id'=>$rac_rec->id
+                    ];
                   Log::debug('Acá salí de buscar las raciones recomendadas');
                   foreach($raciones_disponibles as $r)
                       Log::debug('Ración disponible: '.$r);
@@ -155,17 +158,30 @@ class MenuPersonaController extends Controller
         Log::debug('Se quiere ingresar un nuevo menu persona: '.$request);
         $user = Auth::user();
         Log::debug('Usuario: '.$user);
+        $persona_id = $request->get('persona_id');
+        $horario_id = $request->get('horario');
+        $racion_id = $request->get('racion_id');
+        $fecha = $request->get('fecha');
+        Log::debug('$persona_id: '.$persona_id);
+        Log::debug('$horario_id: '.$horario_id);
+        Log::debug('$racion_id: '.$racion_id);
+        Log::debug('$fecha: '.$fecha);
         $this->validate($request,[
             'persona_id'=>'required',
             'horario'=>'required',
             'racion_id'=>'required',
             'fecha'=>'required'
         ]);
-        $persona_id = $request->get('persona_id');
-        $horario_id = $request->get('horario');
-        $racion_id = $request->get('racion_id');
-        $fecha = $request->get('fecha');
-        MenuPersona::create($persona_id,$racion_id,$horario_id,$fecha,$user->id);
+        $data = [
+          'persona_id'=>$persona_id,
+          'horario_id'=>$racion_id,
+          'racion_id'=>$horario_id,
+          'fecha'=>$fecha,
+          'personal_id'=>$user->id,
+          'realizado'=>false,
+        ];
+        $mp = new MenuPersona($data);
+        $mp->save();
         return redirect()->route('menu_persona.index')
             ->with('success','Menu persona registrado satisfactoriamente');
     }
