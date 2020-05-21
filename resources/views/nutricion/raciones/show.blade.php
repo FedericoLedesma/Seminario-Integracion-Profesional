@@ -35,7 +35,6 @@
 				<td>Observacion </td>
 				<td>{{$racion->observacion}}</td>
 			</tr>
-      $racion
       <tr>
 				<td>Alimentos </td>
 				<td>

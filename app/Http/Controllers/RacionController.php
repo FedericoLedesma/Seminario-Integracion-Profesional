@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Racion;
+use App\RacionesDisponibles;
 use Illuminate\Http\Request;
 use App\Alimento;
 use Illuminate\Support\Facades\Log;

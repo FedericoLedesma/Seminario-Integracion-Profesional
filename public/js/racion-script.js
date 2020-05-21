@@ -207,7 +207,7 @@
 				data:{name},
 		    	success: function (data) {
 						if (data.estado=='true'){
-						   		
+
 							  	console.log(data.success);
 								}else{
 										console.log(data.success);

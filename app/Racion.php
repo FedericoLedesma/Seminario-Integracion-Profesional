@@ -177,5 +177,9 @@ class Racion extends Model
   {
     return $this->alimentos()->where('alimento_id',$id);
   }
+  public function horarios()
+  {
+    return $this->belongsToMany('App\Horario', 'horarios_raciones');
+  }
 
 }
