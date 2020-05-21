@@ -176,6 +176,15 @@ class Racion extends Model
     }
     return $res;
   }
+  public function alimentos()
+  {
+    return $this->belongsToMany('App\Alimento', 'raciones_alimentos')
+    ->withPivot('cantidad');
+  }
+  public function getAlimento($id)
+  {
+    return $this->alimentos()->where('alimento_id',$id);
+  }
 
   public static function resta_total_contra_lista($lista){
     $res = Array();

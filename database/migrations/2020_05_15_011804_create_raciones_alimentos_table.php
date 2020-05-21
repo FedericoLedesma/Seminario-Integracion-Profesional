@@ -23,7 +23,8 @@ class CreateRacionesAlimentosTable extends Migration
 
             $table->foreign('racion_id')
                 ->references('id')
-                ->on('raciones');
+                ->on('raciones')
+                ->onDelete('cascade');
 
             $table->foreign('alimento_id')
                 ->references('id')

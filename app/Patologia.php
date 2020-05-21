@@ -92,5 +92,10 @@ class Patologia extends Model
        $ali_pro = PatologiaAlimentosProhibidos::get_alimentos_por_patologia($this);
        return $ali_pro;
      }
+     public function personas()
+     {
+       return $this->belongsToMany('App\Persona', 'personas_patologias')
+       ->withPivot('fecha','hasta')->wherePivot('hasta','=',null);
+     }
 
 }

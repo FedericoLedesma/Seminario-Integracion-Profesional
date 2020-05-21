@@ -66,6 +66,12 @@ Route::resource('/patologias', 'PatologiaController');
 Route::resource('/tipospatologias', 'TipoPatologiaController');
 Route::resource('/alimentos', 'AlimentoController');
 Route::resource('/sectores', 'SectorController');
+Route::resource('/raciones', 'RacionController');
+Route::get('/raciones/{racion}/agregaralimentos',["as"=>"racion.agregarAlimentos", "uses"=> 'RacionController@agregarAlimentos']);
+Route::PUT('/raciones/{racion}/guardaralimentos', 'RacionController@guardarAlimentos');
+Route::PUT('/raciones/{racion}/quitaralimento', 'RacionController@quitarAlimento');
+
+Route::POST('/buscarAlimento', 'AlimentoController@buscar');
 
 
 Route::get('/test/datepicker', function () {

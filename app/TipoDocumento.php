@@ -25,4 +25,7 @@ class TipoDocumento extends Model
       ->orderBy('id', 'asc');
     }return null;
   }
+  public function personas(){
+    return $this->hasMany('App\Personas');
+  }
 }
