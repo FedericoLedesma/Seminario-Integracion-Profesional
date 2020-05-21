@@ -134,16 +134,19 @@
 
 		var row = $(this).parents('tr');
 		var token = $(this).data("token");
-		var racion = $(this).data("id");
+		var racionDisponible = $(this).data("id");
+		var url_destroy = "/raciones-disponibles/destroy/:racion_id/:horario_id/:fecha";
+		url_destroy = url_destroy.replace(':racion_id',racionDisponible.racion_id);
+		url_destroy = url_destroy.replace(':horario_id',racionDisponible.horario_id);
+		url_destroy = url_destroy.replace(':fecha',racionDisponible.fecha);
 
-		var url_destroy = "raciones/:id";
-		url_destroy = url_destroy.replace(':id',racion.id);
-		console.log(racion);
+		console.log(racionDisponible);
 	$('#alert').show();
 	    $.ajax({
 	    	type: 'DELETE',
 	    	url: url_destroy,
 	    	dataType: 'json',
+				data:{racionDisponible},
 		    	success: function (data) {
 						if (data.estado=='true'){
 						   		row.fadeOut();
@@ -193,7 +196,6 @@
 									var miOption=document.createElement("option");
 									miOption.setAttribute("value",item.id);
 									miOption.setAttribute("label",item.name);
-									//miOption2.setAttribute("selected","true");
 									miSelect.appendChild(miOption);
 									i++;
 								}

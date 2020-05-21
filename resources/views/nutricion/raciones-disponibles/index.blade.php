@@ -3,12 +3,12 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Raciones</li>
+<li class="breadcrumb-item active">Raciones Disponibles</li>
 @endsection
 @section('content')
 
 
-	    <h1>Raciones registradas</h1>
+	    <h1>Raciones Disponibles registradas</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->

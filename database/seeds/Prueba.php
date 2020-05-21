@@ -34,12 +34,10 @@ class Prueba extends Seeder
     $patologias=Patologia::findByTipoPatologia(4)->get();
     echo count($patologias);
 */
-    $persona=Persona::findById(3);
-$rd=RacionesDisponibles::findById(1,3,$fecha);
-    echo $rd;
 
-    $rd->cantidad_realizados=5;
-    $rd->guardar();
+    $rd=RacionesDisponibles::findById(3,1,$fecha);
+
+    $rd->eliminar();
     echo $rd;
     }
 

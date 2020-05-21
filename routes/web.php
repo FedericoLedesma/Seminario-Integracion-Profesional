@@ -73,7 +73,7 @@ Route::PUT('/raciones/{racion}/quitaralimento', 'RacionController@quitarAlimento
 Route::resource('/raciones-disponibles', 'RacionesDisponiblesController');
 Route::get('/ver-raciones-disponibles', 'RacionesDisponiblesController@getRacionesDisponibles');
 Route::get('/raciones-disponibles/show/{racion}/{horario}/{fecha}',["as"=>"raciones-disponibles.show", "uses"=>'RacionesDisponiblesController@show']);
-Route::get('/raciones-disponibles/destroy/{racion}/{horario}/{fecha}','RacionesDisponiblesController@destroy');
+Route::DELETE('/raciones-disponibles/destroy/{racion}/{horario}/{fecha}','RacionesDisponiblesController@destroy');
 Route::PUT('/raciones-disponibles/update/{racion}/{horario}/{fecha}','RacionesDisponiblesController@update');
 
 

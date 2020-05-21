@@ -67,6 +67,14 @@ class RacionesDisponibles extends Model
       }
       return $raciones;
     }
+    public function eliminar(){
+      $deleted = DB::delete('delete from '.$this->table.' where racion_id = :racion_id AND horario_id= :horario_id AND fecha = :fecha',
+      [
+        'racion_id' => $this->racion_id,
+        'horario_id'=> $this->horario_id,
+        'fecha'=>$this->fecha,     
+      ]);
+    }
     public function scopeGetRacionesDisponiblesFecha($query, $fecha)
     {
         return $raciones_disponibles = $query->where('fecha','=',$fecha)

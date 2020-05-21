@@ -160,10 +160,27 @@ class RacionesDisponiblesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+      Log::info('Destroy Raciones disponibles');
+      Log::info($request);
+      $rd=$request->racionDisponible;
+      $racionDisponible=RacionesDisponibles::findById($rd['horario_id'],$rd['racion_id'],$rd['fecha']);
+      try{
+        $racionDisponible->eliminar();
+        return response()->json([
+              'estado'=>'true',
+              'success' => 'Disponinilidad de racion eliminada con exito!'
+          ]);
+      } catch (\Exception $e) {
+        return response()->json([
+          'estado'=>'false',
+          'success' => 'No se pudo eliminar la disponibilidad de la racion !'
+        ]);
+      }
+
     }
+
     public function getRacionesDisponibles(Request $request){
         Log::info($request);
         $idHorario=$request->data[0];
