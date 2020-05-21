@@ -98,6 +98,14 @@ class Racion extends Model
    }
 
 
+   public function actualizar_lista_alimentos($nueva_lista){
+     RacionAlimento::delete_by_racion_id($this->id);
+     foreach ($nueva_lista as $alimento) {
+       $this->add_alimento($alimento, 1);
+     }
+   }
+
+
 
   /**
    métodos estáticos
@@ -164,6 +172,25 @@ class Racion extends Model
         if (!($r->contiene_determinado_alimento($a))){
           array_push($res,$r);
         }
+      }
+    }
+    return $res;
+  }
+
+  public static function resta_total_contra_lista($lista){
+    $res = Array();
+    $all = static::all();
+    foreach ($all as $r) {
+      // code...
+      $flag = true;
+      foreach ($lista as $x) {
+        // code...
+        if ($x==$r){
+          $flag=false;
+        }
+      }
+      if ($flag==true){
+        array_push($res,$r);
       }
     }
     return $res;

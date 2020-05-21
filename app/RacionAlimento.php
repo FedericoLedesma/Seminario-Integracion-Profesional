@@ -41,13 +41,28 @@ class RacionAlimento extends Model
       $lista_racion_alimento = Array();
       try{
         $lista_racion_alimento = static::
-          where('racion_id','=',$racion_id)->
+          where('racion_id','=',$id_racion)->
           get();
       }
       catch(Throwable $e){
 
       }
       return $lista_racion_alimento;
+    }
+
+    public static function findBy_racion_id($racion_id)
+    {
+     $racion_alimento= static::where('racion_id', $racion_id)
+      ->get();
+     return $racion_alimento;
+    }
+
+    public static function delete_by_racion_id($racion_id){
+      $lista = static::findBy_racion_id($racion_id);
+      foreach($lista as $x){
+        $x->where('racion_id','=',$x->racion_id)
+        ->delete();
+      }
     }
 
 }

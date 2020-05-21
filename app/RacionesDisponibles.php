@@ -16,13 +16,15 @@ class RacionesDisponibles extends Model
     ];
     public static function findById($horario_id,$racion_id,$fecha)
     {
-         $raciones_disponibles = static::where('horario_id', $horario_id)
-         ->where('racion_id', $racion_id)
+         $raciones_disponibles = static::where('horario_id','=', $horario_id)
+         ->where('racion_id','=', $racion_id)
          ->where('fecha','=', $fecha)
+         ->get()
          ->first();
-         if($raciones_disponibles){
+         Log::debug('Recuperada la racionDisponible: '.$raciones_disponibles);
+         #if($raciones_disponibles){
            return $raciones_disponibles;
-       } return null;
+       #} return null;
     }
     public function scopeAllDisponibles($query,$horario_id,$fecha)
     {
@@ -45,11 +47,11 @@ class RacionesDisponibles extends Model
     /**
      * Funcionalidad principal.
      * Recomendar ración.
-     * 
+     *
      * @param $fecha
-     * 
+     *
      * @return Racion[ ]
-     * 
+     *
      */
 
     public function recuperar_raciones_disponibles($fecha){
