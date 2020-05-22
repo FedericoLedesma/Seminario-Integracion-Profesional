@@ -34,23 +34,11 @@ class Prueba extends Seeder
     $patologias=Patologia::findByTipoPatologia(4)->get();
     echo count($patologias);
 */
-    $persona=Persona::findById(3);
 
-    if($persona){
-      $patologias=$persona->getPatologiasFecha($fecha);
-      foreach($patologias as $patologia){
-        echo $patologia->id;
-      }
+    $rd=RacionesDisponibles::findById(3,1,$fecha);
 
-
-
-    }
-    $patologia=Patologia::findById(4);
-    try{
-    $persona->patologias()->attach($patologia,['fecha' => $fecha]);
-    } catch (\Exception $e) {
-      echo "duplicate error";
-    }
+    $rd->eliminar();
+    echo $rd;
     }
 
 

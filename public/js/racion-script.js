@@ -207,7 +207,7 @@
 				data:{name},
 		    	success: function (data) {
 						if (data.estado=='true'){
-						   		
+
 							  	console.log(data.success);
 								}else{
 										console.log(data.success);
@@ -219,5 +219,68 @@
 
 	        });
 
-
 		});
+
+		$('.quitarHorario').click(function(e){
+
+			e.preventDefault();//evita cargar la pagina
+
+			if(!confirm("¿Esta seguro que desea quitar el Horario?")){
+				return false;
+			}
+
+			var row = $(this).parents('tr');
+			var token = $(this).data("token");
+			var racion = $(this).data("racion");
+			var horario=$(this).data("horario");
+
+			var url_quitar = "/raciones/:id/quitarhorario";
+			url_quitar = url_quitar.replace(':id',racion.id);
+			console.log(racion);
+		$('#alert').show();
+		    $.ajax({
+		    	type: 'PUT',
+		    	url: url_quitar,
+		    	dataType: 'json',
+					data:{data:[racion.id,horario.id]},
+			    	success: function (data) {
+							if (data.estado=='true'){
+							   		row.fadeOut();
+		        			$('#alert').html(data.success);
+								  	console.log(data.success);
+									}else{
+										$('#alert').html(data.success);
+											console.log(data.success);
+									}
+	                },
+	                error: function (data) {
+	                    console.log('Error:', data);
+	                }
+
+		        });
+		});
+
+		$('.guardarHorarioRacion').on('click', function (e){
+				e.preventDefault();
+
+				var racion= $(this).data("racion");
+				var horario_id=document.getElementById("select-horarios").value;
+				console.log(horario_id);
+				var ruta="/raciones/:id/guardarhorario";
+				ruta= ruta.replace(':id',racion.id);
+				$.ajax({
+					type: 'PUT',
+					url: ruta,
+					dataType: 'json',
+					data:{data:[racion.id,horario_id]},
+						success: function (data) {
+								console.log(data);
+								location.reload(true);
+									},
+									error: function (data) {
+											console.log('Error:', data);
+									}
+
+						});
+
+			});

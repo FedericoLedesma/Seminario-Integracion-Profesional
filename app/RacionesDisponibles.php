@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Horario;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
 class RacionesDisponibles extends Model
 {
     protected $table = "raciones_disponibles";
@@ -69,11 +69,27 @@ class RacionesDisponibles extends Model
       }
       return $raciones;
     }
-
+    public function eliminar(){
+      $deleted = DB::delete('delete from '.$this->table.' where racion_id = :racion_id AND horario_id= :horario_id AND fecha = :fecha',
+      [
+        'racion_id' => $this->racion_id,
+        'horario_id'=> $this->horario_id,
+        'fecha'=>$this->fecha,     
+      ]);
+    }
+    public function scopeGetRacionesDisponiblesFecha($query, $fecha)
+    {
+        return $raciones_disponibles = $query->where('fecha','=',$fecha)
+        ->orderBy('horario_id', 'asc');
+    }
     public function get_racion(){
       return Racion::findById($this->racion_id);
     }
-
+    public function fecha()
+    {
+      $fecha_ = date("d/m/Y", strtotime($this->fecha));
+      return $fecha_;
+    }
     public function descontar_disponibilidad(){
 
       if ($this->cantidad_restante > 0){
@@ -84,7 +100,16 @@ class RacionesDisponibles extends Model
 
       return false;
     }
-
+    public function guardar(){
+      DB::table($this->table)
+              ->where('racion_id', $this->racion_id)
+              ->where('horario_id', $this->horario_id)
+              ->where('fecha','=', $this->fecha)
+              ->update(['stock_original' => $this->stock_original,
+              'cantidad_restante' => $this->cantidad_restante,
+              'cantidad_realizados'=>$this->cantidad_realizados,
+              ]);
+    }
     public function registrar_movimiento($usuario, $tipo_movimiento){
       $m = Movimiento::create([
         'horario_id'=>$this->horario_id,
@@ -111,5 +136,10 @@ class RacionesDisponibles extends Model
         }
         return null;
     }
-
+    public function racion(){
+      return $this->belongsTo('App\Racion', 'racion_id');
+    }
+    public function horario(){
+      return $this->belongsTo('App\Horario', 'horario_id');
+    }
 }
