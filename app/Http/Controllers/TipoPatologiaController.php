@@ -14,6 +14,15 @@ class TipoPatologiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_tipos-patologias'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_tipos-patologias'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_tipos-patologias'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_tipos-patologias'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');

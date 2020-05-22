@@ -14,6 +14,15 @@ class PatologiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_patologias'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_patologias'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_patologias'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_patologias'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');

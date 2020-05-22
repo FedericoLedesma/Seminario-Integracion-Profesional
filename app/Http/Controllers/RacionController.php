@@ -16,6 +16,14 @@ class RacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_raciones'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_raciones'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_raciones'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_raciones'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');

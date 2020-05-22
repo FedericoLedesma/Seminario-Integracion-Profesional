@@ -45,7 +45,7 @@ class Alimento extends Model
     return $res;
   }
 
-  function static get_raciones_prohibidas($alimento){
+  public static function get_raciones_prohibidas($alimento){
         return RacionAlimento::get_raciones_prohibidas($alimento->id);
      }
 }

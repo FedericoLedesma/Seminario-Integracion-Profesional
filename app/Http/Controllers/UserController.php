@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
-    
+
 	public function index(){
 		$user=Auth::user();
 		if ($user){
@@ -29,14 +29,14 @@ class UserController extends Controller
 	{
 		//
 		$user=User::find($id);
-		$user->name=$request->name;	
+		$user->name=$request->name;
 		$user->save();
 		return redirect('/perfil');
-		 
+
 	}
 	public function store(UserRequest $request)
 	{
-	
+
 		$data=$request->all();
 		User::create([
 				'dni'=>$data['dni'],
@@ -51,7 +51,7 @@ class UserController extends Controller
 	}
 	public function updatePassword(PasswordRequest $request, $id)
 	{
-		
+
 		if (Hash::check($request->mypassword,Auth::user()->password)){
 			$user=Auth::user();
 			$user->password=bcrypt($request->password);
@@ -61,5 +61,5 @@ class UserController extends Controller
 			return redirect('/config');//mostrar un mensaje de error al actualizar
 			//}
 	}
-	
+
 }

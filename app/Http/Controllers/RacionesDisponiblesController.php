@@ -14,6 +14,15 @@ class RacionesDisponiblesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_raciones-disponibles'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_raciones-disponibles'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_raciones-disponibles'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_raciones-disponibles'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       Log::info($request);

@@ -7,8 +7,10 @@ use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserEditRequest;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Personal;
+use App\Persona;
 use App\User;
-
+use Illuminate\Support\Facades\Log;
 
 class AdminUsersController extends Controller
 {
@@ -76,7 +78,7 @@ class AdminUsersController extends Controller
 				$user=Auth::user();
 				if ($user->can('alta_usuarios')){
         $roles=Role::all();
-    	return view('admin.users.create',compact('roles'));
+    	return view('admin.users.create',compact('roles'))->with('mensaje','');
 		}return redirect('/admin/users');
     }
 
@@ -90,18 +92,34 @@ class AdminUsersController extends Controller
     {
 
     	$data=$request->all();
-    	$user=User::create([
-    			'dni'=>$data['dni'],
-    			'name' => $data['name'],
-    			'password' => bcrypt($data['dni'])
-    	]);
-    	$roles=$user->getRoleNames();
-    	foreach ($roles as $roleName){
-    		$user->removeRole($roleName);
-    	}
-    	$role=Role::find($data['role_id']);
-    	$user->assignRole($role->name);
-    	$user->save();
+			$persona=Persona::findByNumeroDoc($data['dni']);
+			Log::info("Store user");
+			Log::info($persona);
+			if($persona){
+				$personal=Personal::findById($persona->id);
+				if($personal){
+					$user=User::create([
+							'dni'=>$data['dni'],
+							'name' => $data['name'],
+							'personal_id'=>$personal->id,
+							'password' => bcrypt($data['dni'])
+					]);
+					$roles=$user->getRoleNames();
+					foreach ($roles as $roleName){
+						$user->removeRole($roleName);
+					}
+					$role=Role::find($data['role_id']);
+					$user->assignRole($role->name);
+					$user->save();
+				}else{
+						$roles=Role::all();
+						return view('admin.users.create',compact('roles'))->with('mensaje', 'No se encontro un Personal registrado con ese numero de doc');
+				}
+			}else {
+					$roles=Role::all();
+					return view('admin.users.create',compact('roles'))->with('mensaje', 'No se encontro una persona registrada con ese numero de documento');
+			}
+
     	return redirect('/admin/users');
     }
 

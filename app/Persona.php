@@ -50,7 +50,14 @@ class Persona extends Model
         return $query->where('name','LIKE','%'.$name.'%')->orderBy('id', 'asc');
       }return null;
     }
-
+    public static function findByNumeroDoc($numero_doc)
+    {
+      Log::debug('Buscando por numero_doc a '.$numero_doc);
+      if($numero_doc){
+        $persona =  static::where('numero_doc',$numero_doc)->first();
+        return $persona;
+      }return null;
+    }
     public static function scopeFindByApellido($query,$apellido)
     {
       Log::debug('Buscando por apellido a '.$apellido);

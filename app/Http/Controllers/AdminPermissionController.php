@@ -60,7 +60,8 @@ class AdminPermissionController extends Controller
         //esto se deben desactivar todas las rutas de abm de permisos
         $user=Auth::user();
         $acciones=['alta','baja','modificacion','ver'];
-        $tablas=['usuarios','roles'];
+        $tablas=['usuarios','roles','patologias','personas','raciones','alimentos',
+        'tipos-patologias','raciones-disponibles','sectores'];
         if ($user->can('alta_permisos')){
     	     return view('admin.permisos.create',compact('acciones','tablas'));
          }
