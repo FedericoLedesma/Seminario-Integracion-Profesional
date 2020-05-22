@@ -62,6 +62,8 @@ Route::get('/menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaControll
 Route::get('/menu_persona/destroy/{persona}/{horario}/{fecha}','MenuPersonaController@destroy');
 Route::get('/informes/generar','InformeController@create')
 	->name('InformeController.create');
+Route::get('/informes/settear','InformeController@set_realizado')
+	->name('InformeController.set');
 Route::resource('/informes','InformeController');
 
 #Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use App\Horario;
 use Carbon\Carbon;
+use App\Informes\InformeRacion;
 
 class MenuPersona extends Model
 {
@@ -412,13 +413,45 @@ class MenuPersona extends Model
 
   public static function generar_informe($fecha_inicial, $fecha_final, $horario_inicial, $horario_final)
   {
-    $conjunto = static::where('fecha','>',$fecha_inicial)
-                  ->where('fecha','<',$fecha_final)
-                  ->where('horario_id','>',$horario_inicial)
-                  ->where('horario_id','<',$horario_final)
+    $conjunto = static::where('fecha','>=',$fecha_inicial)
+                  ->where('fecha','<=',$fecha_final)
+                  ->where('horario_id','>=',$horario_inicial)
+                  ->where('horario_id','<=',$horario_final)
+                  ->orderBy('realizado', 'desc')
                   ->orderBy('racion_id', 'desc')
                   ->get();
+    Log::debug('Se creó un conjunto de menú persona. Variables: '.$fecha_inicial .' '. $fecha_final .' '. $horario_inicial .' '. $horario_final);
+    foreach ($conjunto as $c) {
+      // code...
+      Log::debug($c);
+    }
     return InformeRacion::create_informe_racion($conjunto,$fecha_inicial, $fecha_final, $horario_inicial, $horario_final);
+  }
+
+  public static function set_realizado_by_id($fecha,$horario,$racion,bool $valor){
+    static::
+      where('fecha','=',$fecha)->
+      where('horario_id','=',$horario)->
+      where('racion_id','=',$racion)->
+      update(['realizado'=> $valor]);
+  }
+
+  public function set_realizado(bool $valor){
+    static::
+      where('fecha','=',$this->fecha)->
+      where('horario_id','=',$this->horario_id)->
+      where('persona_id','=',$this->persona_id)->
+      update(['realizado'=> $valor]);
+  }
+
+  function getJsonData(){
+    $var = get_object_vars($this);
+    foreach ($var as &$value) {
+        if (is_object($value) && method_exists($value,'getJsonData')) {
+            $value = $value->getJsonData();
+        }
+    }
+    return $var;
   }
 
 }
