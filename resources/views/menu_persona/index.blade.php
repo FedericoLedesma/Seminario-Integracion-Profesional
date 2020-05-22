@@ -1,7 +1,9 @@
 <head>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 </head>
 
 @extends('layouts.layout')
@@ -9,7 +11,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Roles</li>
+<li class="breadcrumb-item active">Planillas</li>
 @endsection
 @section('content')
 
@@ -33,12 +35,12 @@
 }
 -->
 </style>
-<form method="get" action={{ route('menu_persona.create') }}>
+<container justify-content="space-evenly">
+	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu persona (planilla)</a>
 
-		<button class="btn btn-primary" type="submit">Agregar menu persona (planilla)</button>
+	<a href="{{action('InformeController@index')}}" class="btn btn-primary">Informes</a>
 
-
-</form>
+</container>
 <div>
 	<p>
 		<span id="menu_persona-total">
