@@ -6,6 +6,7 @@ use App\Racion;
 use App\RacionesDisponibles;
 use Illuminate\Http\Request;
 use App\Alimento;
+use App\Horario;
 use Illuminate\Support\Facades\Log;
 
 class RacionController extends Controller
@@ -89,8 +90,9 @@ class RacionController extends Controller
      */
     public function edit($id)
     {
+        $horarios=Horario::all();
         $racion=Racion::findById($id);
-        return view('nutricion.raciones.edit', compact('racion'));
+        return view('nutricion.raciones.edit', compact('racion','horarios'));
     }
 
     /**
@@ -205,6 +207,39 @@ class RacionController extends Controller
         return response([
           'alimentos'=>$alimentos->toArray(),
         ]);
+      }
+
+      public function quitarHorario(Request $request){
+        Log::info($request);
+        $idRacion=$request->data[0];
+        $idHorario=$request->data[1];
+        $racion=Racion::findById($idRacion);
+        $racion->horarios()->detach($idHorario);
+        return response()->json([
+            'estado'=>'true',
+            'success' => 'Horario quitado con exito!'
+        ]);
+      }
+      public function guardarHorario(Request $request){
+        Log::info("function guardarHorario");
+        Log::info($request->data[1]);
+        $racion_id=$request->data[0];
+        $racion=Racion::findById($racion_id);
+        Log::info($racion);
+        $horario_id=$request->data[1];
+        Log::info($horario_id);
+        try{
+            $racion->horarios()->attach($horario_id);
+            return response()->json([
+                'estado'=>'true',
+                'success' => 'Horario agregado con exito!'
+            ]);
+        }catch (\Exception $e) {
+          return response()->json([
+              'estado'=>'false',
+              'success' => 'Hubo un error'
+          ]);
+        }
       }
 
 }

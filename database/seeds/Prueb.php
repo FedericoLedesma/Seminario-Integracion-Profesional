@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Persona;
+use App\Alimento;
 use App\Personal;
 use App\TipoDocumento;
 use App\Patologia;
@@ -21,9 +22,6 @@ class Prueb extends Seeder
     public function run()
     {
       //--------TIPO DNI---------------
-      $dni=TipoDocumento::create([
-        'name'=>'dni',
-      ]);
       //--------PERSONA----------------
       $persona=Persona::create([
           'name' => 'p_prueba',
@@ -70,6 +68,43 @@ class Prueb extends Seeder
               'name' => 'diabetes',
 
             ]);
+
+            //--alimentos
+
+            Alimento::create([
+              'name'=>'papa',
+            ]);
+            Alimento::create([
+              'name'=>'arroz',
+            ]);
+            Alimento::create([
+              'name'=>'fideos',
+            ]);
+            Alimento::create([
+              'name'=>'pure de tomate',
+            ]);
+            Alimento::create([
+              'name'=>'cebolla',
+            ]);
+            Alimento::create([
+              'name'=>'carne',
+            ]);
+            Alimento::create([
+              'name'=>'pollo',
+            ]);
+            Alimento::create([
+              'name'=>'leche',
+            ]);
+            Alimento::create([
+              'name'=>'sal',
+            ]);
+            Alimento::create([
+              'name'=>'pera',
+            ]);
+            Alimento::create([
+              'name'=>'pan',
+            ]);
+
       //--------RACION----------------
       Racion::create([
         'name'=>'pollo',
@@ -102,6 +137,9 @@ class Prueb extends Seeder
       ]);
       Horario::create([
         'name'=>'cena'
+      ]);
+      Horario::create([
+        'name'=>'colacion'
       ]);
       //--------HORARIO RACION----------------
       HorarioRacion::create([
@@ -178,10 +216,7 @@ class Prueb extends Seeder
         'cantidad_restante'=>10,
         'cantidad_realizados'=>0,
       ]);
-      //---------PERSONAL------------------------------------
-      Personal::create([
-        'id'=>1,
-      ]);
+      //---------PERSONAL-----------------------------------
       Personal::create([
         'id'=>2,
       ]);

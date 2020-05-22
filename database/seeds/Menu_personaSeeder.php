@@ -35,8 +35,8 @@ class Menu_personaSeeder extends Seeder
         ]);
 
         $rac_dis = RacionesDisponibles::create([
-            'racion_id'=>$racion->id, 
-            'fecha'=>Carbon::now(), 
+            'racion_id'=>$racion->id,
+            'fecha'=>Carbon::now(),
             'horario_id'=>$horario->id,
             'stock_original'=>1000,
             'cantidad_restante'=>1000,
@@ -56,7 +56,7 @@ class Menu_personaSeeder extends Seeder
             'direccion'=>'10 n° 100',
             'email'=>'a',
             'provincia'=>'a',
-            'localidad'=>' a', 
+            'localidad'=>' a',
             'sexo'=>'a',
             'fecha_nac'=>Carbon::now()
         ]);
@@ -70,20 +70,20 @@ class Menu_personaSeeder extends Seeder
             'direccion'=>'11 n° 100',
             'email'=>'a',
             'provincia'=>'a',
-            'localidad'=>'a', 
+            'localidad'=>'a',
             'sexo'=>'a',
             'fecha_nac'=>Carbon::now()
         ]);
-        
+
         $personal = Personal::create([
             'id'=>$personal_aux->id,
             'matricula'=>55555555
         ]);
-        
+
         MenuPersona::create([
             'persona_id'=>$persona->id,
             'horario_id'=>$rac_dis->horario_id,
-            'racion_id'=>$rac_dis->racion_id, 
+            'racion_id'=>$rac_dis->racion_id,
             'fecha'=>$rac_dis->fecha,
             'personal_id'=>2,
             #'dieta_id',
