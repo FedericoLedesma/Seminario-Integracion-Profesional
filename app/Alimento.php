@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\RacionAlimento;
 
 class Alimento extends Model
 {
@@ -43,4 +44,8 @@ class Alimento extends Model
     }
     return $res;
   }
+
+  function static get_raciones_prohibidas($alimento){
+        return RacionAlimento::get_raciones_prohibidas($alimento->id);
+     }
 }

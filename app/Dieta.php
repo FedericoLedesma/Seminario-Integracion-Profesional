@@ -40,6 +40,10 @@ class Dieta extends Model
    * @return Racion[]
    */
 
+  public function get_raciones_prohibidas(){
+    return $this->get_patologia()->get_raciones_prohibidas();
+  }
+
   public function get_raciones(){
     $raciones = array();
     $rac_die = array();

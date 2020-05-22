@@ -40,4 +40,8 @@ class PatologiaAlimentosProhibidos extends Model
         }
         return $res;
      }
+
+     function static get_raciones_prohibidas($alimento){
+        return Alimento::get_raciones_prohibidas($alimento);
+     }
 }

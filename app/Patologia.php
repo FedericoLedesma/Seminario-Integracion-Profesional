@@ -92,6 +92,16 @@ class Patologia extends Model
        $ali_pro = PatologiaAlimentosProhibidos::get_alimentos_por_patologia($this);
        return $ali_pro;
      }
+
+    public function get_raciones_prohibidas(){
+       $res = Array();
+       $ali_pro = PatologiaAlimentosProhibidos::get_alimentos_por_patologia($this);
+       foreach ($ali_pro as $a) {
+         $rac_ali = PatologiaAlimentosProhibidos::get_racion_por_alimento($a);
+       }
+       return $res;
+     }
+
      public function personas()
      {
        return $this->belongsToMany('App\Persona', 'personas_patologias')

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Racion;
+use App\Horario;
 
 class HorarioRacion extends Model
 {
@@ -35,6 +37,37 @@ class HorarioRacion extends Model
         return $query->where('racion_id',$racion_id)
         ->orderBy('horario_id', 'asc');
       }return null;
+    }
+
+    /**
+    *
+    Métodos de instancia
+    *
+    *
+    */
+
+    public function get_racion(){
+      return Racion::findById($this->racion_id);
+    }
+
+    public function get_racion_name(){
+      return $this->get_racion()->name;
+    }
+
+    public function get_racion_id(){
+      return $this->get_racion()->id;
+    }
+
+    public function get_horario(){
+      return Horario::findById($this->horario_id);
+    }
+
+    public function get_horario_name(){
+      return $this->get_horario()->name;
+    }
+
+    public function get_horario_id(){
+      return $this->get_horario()->id;
     }
 
 
