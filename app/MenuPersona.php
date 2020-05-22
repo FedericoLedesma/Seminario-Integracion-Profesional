@@ -172,6 +172,21 @@ class MenuPersona extends Model
     return $racion_name;
   }
 
+    /**
+     *
+     * @return int
+     */
+
+    public function get_racion_id(){
+      $racion_id = -1;
+      $aux = null;
+      $aux = $this->get_racion();
+      if ($aux){
+        $racion_id = $aux->id;
+      }
+      return $racion_id;
+    }
+
   public function isRealizado_str(){
     if ($this->realizado)
       return 'si';
@@ -392,6 +407,18 @@ class MenuPersona extends Model
       return true;
     }
     return false;
+  }
+
+
+  public static function generar_informe($fecha_inicial, $fecha_final, $horario_inicial, $horario_final)
+  {
+    $conjunto = static::where('fecha','>',$fecha_inicial)
+                  ->where('fecha','<',$fecha_final)
+                  ->where('horario_id','>',$horario_inicial)
+                  ->where('horario_id','<',$horario_final)
+                  ->orderBy('racion_id', 'desc')
+                  ->get();
+    return InformeRacion::create_informe_racion($conjunto,$fecha_inicial, $fecha_final, $horario_inicial, $horario_final);
   }
 
 }

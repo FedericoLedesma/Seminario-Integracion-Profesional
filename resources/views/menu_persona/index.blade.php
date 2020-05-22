@@ -2,7 +2,6 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-
 </head>
 
 @extends('layouts.layout')
@@ -133,5 +132,19 @@
 @endsection
 @section('script')
  <script src="{{asset('js/role-script.js')}}"></script>
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+ <script type="text/javascript" src="dist/js/multiselect.min.js"></script>
 
+
+
+ <script type="text/javascript">
+ $(document).ready(function() {
+     // make code pretty
+     window.prettyPrint && prettyPrint();
+
+     $('.multiselect').multiselect();
+ });
+ </script>
 @endsection
