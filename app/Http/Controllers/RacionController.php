@@ -119,10 +119,11 @@ class RacionController extends Controller
 
           foreach ($racion->alimentos as $alimento) {
             Log::info($request['cantidad-'.$alimento->id]);
-            $cantidad=$request['cantidad-'.$alimento->id];
-
-            $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
-            // code...
+            if(!($request['cantidad-'.$alimento->id]=='')){
+              
+              $cantidad=$request['cantidad-'.$alimento->id];
+              $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
+            }
 
           }
           return redirect('/raciones');
