@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Roles</li>
+<li class="breadcrumb-item active">Planillas</li>
 @endsection
 @section('content')
 
@@ -27,12 +27,12 @@
 }
 -->
 </style>
-<form method="get" action={{ route('menu_persona.create') }}>
+<container justify-content="space-evenly">
+	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu persona (planilla)</a>
 
-		<button class="btn btn-primary" type="submit">Agregar menu persona (planilla)</button>
+	<a href="{{action('InformeController@index')}}" class="btn btn-primary">Informes</a>
 
-
-</form>
+</container>
 <div>
 	<p>
 		<span id="menu_persona-total">

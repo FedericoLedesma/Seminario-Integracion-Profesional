@@ -12,7 +12,6 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Roles</li>
 @endsection
 @section('content')
 
@@ -60,29 +59,31 @@
 				 {!!Form::open(['route'=>'InformeController.create','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
-					 <input class="date form-control" type="text" id="fecha_inicio" name="fecha_inicio">
+					 <input class="date form-control" type="text" id="fecha_inicio" name="fecha_inicio" value={{$fecha_actual}}>
 					 <script type="text/javascript" id="calendario_" name="calendario_">
 					 	 var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
 					 </script>
 
 					 <select class="browser-default custom-select" id="horario_inicio" name="horario_inicio">
 						 @foreach($horarios as $horario)
-						 <option value={{$horario}} > {{$horario->name}}</option>
+						 <option value={{$horario->id}} > {{$horario->name}}</option>
 						 @endforeach
 					 </select>
 
-					 <input class="date form-control" type="text" id="fecha" name="fecha">
+					 <input class="date form-control" type="text" id="fecha_fin" name="fecha_fin"  value={{$fecha_actual}}>
 					 <script type="text/javascript" id="calendario_" name="calendario_">
 					 	 var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
 					 </script>
 
  					 <select class="browser-default custom-select" id="horario_fin" name="horario_fin">
  						 @foreach($horarios as $horario)
- 						 <option value={{$horario}} > {{$horario->name}}</option>
+ 						 <option value={{$horario->id}} > {{$horario->name}}</option>
  						 @endforeach
  					 </select>
 
 					 </div>
+
+					{!!	Form::submit('Generar un informe entre las fechas',['class'=>'btn btn-success btn-buscar'])!!}
 					{!! Form::close() !!}
 
 
