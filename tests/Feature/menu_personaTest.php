@@ -28,4 +28,8 @@ class menu_persona extends TestCase
       DataBase\custom_seeder::cargar_admin_y_permisos();
       $this->assertGreaterThanOrEqual(1, User::all()->count());
     }
+
+    public function test_database(){
+      DataBase\custom_seeder::cargar_raciones_disponibles();
+    }
 }
