@@ -46,7 +46,8 @@
                    {{$alimento->name}}
                </td>
                <td>
-                 {!!Form::text('cantidad-'.$alimento->id,$racion->getAlimento($alimento->id)->first()->pivot->cantidad)!!}
+
+								 <input type="number" value="{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}" name="cantidad-{{$alimento->id}}" min="0"  step="0.1"><label>Kg.</label>
                </td>
                	<td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-racion="{{ $racion }}">X</button></td>
             </tr>
