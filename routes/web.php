@@ -61,6 +61,8 @@ Route::resource('/menu_persona','MenuPersonaController');
 Route::get('/menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
 Route::get('/menu_persona/destroy/{persona}/{horario}/{fecha}','MenuPersonaController@destroy');
 
+Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
+
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
 Route::resource('/tipospatologias', 'TipoPatologiaController');
