@@ -25,7 +25,7 @@ class CreateRacionesDisponiblesTable extends Migration
             $table->unique(['fecha','horario_id','racion_id'],'index_raciones_disponibles_');
             $table->index(['horario_id','racion_id','fecha'],'raciones_disponibles_horario_id_racion_id_fecha_index');
 
-            $table->foreign('racion_id')
+            /*$table->foreign('racion_id')
                 ->references('racion_id')
                 ->on('horarios_raciones')
                 ->onDelete('cascade');
@@ -33,8 +33,11 @@ class CreateRacionesDisponiblesTable extends Migration
             $table->foreign('horario_id')
                 ->references('horario_id')
                 ->on('horarios_raciones')
+                ->onDelete('cascade');*/
+            $table->foreign(['racion_id','horario_id'])
+                ->references(['racion_id','horario_id'])
+                ->on('horarios_raciones')
                 ->onDelete('cascade');
-
 
 
             $table->primary(['horario_id','racion_id','fecha'], 'raciones_disponibles_horario_id_racion_id_fecha_primary');

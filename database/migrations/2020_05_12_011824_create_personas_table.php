@@ -24,7 +24,7 @@ class CreatePersonasTable extends Migration
             $table->string('provincia',50);
             $table->string('localidad',50);
             $table->string('sexo',25);
-            $table->date('fecha_nac');
+            $table->date('fecha_nac')->nullable();
             $table->unsignedInteger('tipo_documento_id');
             $table->foreign('tipo_documento_id')->references('id')->on('tipos_documentos');
             $table->timestamps();
