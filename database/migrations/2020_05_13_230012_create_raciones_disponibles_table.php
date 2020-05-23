@@ -14,9 +14,9 @@ class CreateRacionesDisponiblesTable extends Migration
     public function up()
     {
         Schema::create('raciones_disponibles', function (Blueprint $table) {
+            $table->unsignedInteger('horario_id');
             $table->unsignedBigInteger('racion_id')->index();
             $table->date('fecha');
-            $table->unsignedInteger('horario_id');
             $table->unsignedInteger('stock_original')->nullable($value = true);
             $table->unsignedInteger('cantidad_restante')->nullable($value = true);
             $table->unsignedInteger('cantidad_realizados')->nullable($value = true);

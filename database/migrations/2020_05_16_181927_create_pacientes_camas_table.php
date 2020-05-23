@@ -27,8 +27,8 @@ class CreatePacientesCamasTable extends Migration
                 ->references('id')
                 ->on('pacientes');
 
-            $table->foreign('cama_id','habitacion_id','sector_id')
-                ->references('cama_id','habitacion_id','sector_id')
+            $table->foreign(['cama_id','habitacion_id','sector_id'])
+                ->references(['cama_id','habitacion_id','sector_id'])
                 ->on('camas');
 
 
