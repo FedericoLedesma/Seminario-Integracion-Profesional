@@ -38,6 +38,7 @@ class MenuPersonaController extends Controller
           'message'=>'Bienvenido al índice de menus personas',
           'estado'=>'1'
         ];
+        $fecha_actual = Carbon::now();
         if ($user->can('ver_menu_persona')){
             if($request){
                 switch ($busqueda_por) {
@@ -78,7 +79,7 @@ class MenuPersonaController extends Controller
               'message'=>'Se hizo una busqueda',
               'estado'=>'5'
             ];
-            return view('menu_persona.index',compact('menues','query','busqueda_por','info'));
+            return view('menu_persona.index',compact('menues','query','busqueda_por','info','fecha_actual'));
         }
         Log::debug($user->name . ' NO tiene permisos para ver menues');
         return redirect('/home');
@@ -106,6 +107,7 @@ class MenuPersonaController extends Controller
           'nombre'=>'ninguno',
           'id'=>'-1'
         ];
+        $fecha_actual = carbon::now();
         #Log::debug('Se quiere crear un menu persona. Request: '.$request);
         Log::debug('Fecha: '.$fecha);
         Log::debug('Horario: '.$horario);
@@ -138,12 +140,12 @@ class MenuPersonaController extends Controller
                   foreach($raciones_disponibles as $r)
                       Log::debug('Ración disponible: '.$r);
                   $horario = Array($horario);
-                  return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada'));
+                  return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
               }
         $fecha = Carbon::now();
         $horarios = Horario::all();
         $horario = Array();
-        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada'));
+        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
     }
 
     /**

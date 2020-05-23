@@ -21,7 +21,7 @@
 
 	  	<title>Menu persona</title>
 
-	    <h1>Menues de persona (planillas) existentes</h1>
+	    <h1>Menus de persona (planillas) existentes</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
@@ -71,15 +71,17 @@
 
 
 						 {!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
+
+
+						 					 <input class="date form-control" type="text" id="fecha" name="fecha" value={{$fecha_actual}}>
+						 				 	 <script type="text/javascript" id="calendario_" name="calendario_">
+						 				 			var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
+						 				 	 </script>
 						 <div class="input-group-append">
 							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						 </div>
 
 
-						 <input class="date form-control" type="text" id="fecha" name="fecha">
-					 	 <script type="text/javascript" id="calendario_" name="calendario_">
-					 			var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
-					 	 </script>
 					 </div>
 					{!! Form::close() !!}
 
@@ -123,10 +125,7 @@
 
 					</table>
 				</div>
-				@if($info<>null)
-					<p>Info: </p>
-					<p>{{$info['message']}}</p>
-				@endif
+
 				</div>
 			  </div>
 				 </div>

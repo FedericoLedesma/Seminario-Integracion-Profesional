@@ -10,8 +10,8 @@
 
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
-		<li class="breadcrumb-item active">Crear Rol</li>
+    <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Planillas</a></li>
+		<li class="breadcrumb-item active">Cargar planillas</li>
 @endsection
 @section('content')
 
@@ -25,13 +25,13 @@
 		<div class="input-group mb-3">
 
 			<select class="browser-default custom-select" id="persona_id" name="persona_id">
-				<option value='0'> ninguno </option>
+				<option value='0'> paciente </option>
 				@foreach($pacientes as $paciente)
 					<option value={{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
 				@endforeach
 			</select>
 
-			<input class="date form-control" type="text" id="calendario" name="calendario">
+			<input class="date form-control" type="text" id="calendario" name="calendario" value={{$fecha_actual}}>
 			<script type="text/javascript" id="calendario_" name="calendario_">
 				var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
 			</script>
