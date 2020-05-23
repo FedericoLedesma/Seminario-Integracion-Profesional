@@ -232,24 +232,7 @@ class Prueb extends Seeder
         'personal_id'=>1,
       ]);
       //------MENU PERSONA----------------------
-      MenuPersona::create([
-        'persona_id'=>1,
-        'horario_id'=>4,
-        'racion_id'=>4,
-        'fecha'=>'2020-05-15',
-        'personal_id'=>1,
-        'dieta_id'=>1,
-        'realizado'=>false,
-      ]);
-      MenuPersona::create([
-        'persona_id'=>1,
-        'horario_id'=>1,
-        'racion_id'=>2,
-        'fecha'=>'2020-05-15',
-        'personal_id'=>1,
-        'dieta_id'=>1,
-        'realizado'=>false,
-      ]);
+    
 
     }
 }

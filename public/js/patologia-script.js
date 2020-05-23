@@ -9,6 +9,104 @@
 		{
 			document.getElementById("patologiaid").focus();
 		}
+		$('.agregar').on('click', function (e){
+				e.preventDefault();
+			$('#tablealimentosAgregados tr').remove();
+				console.log( $(this).data("id"));
+				var id= $(this).data("id");
+				var array=[];
+
+				var a=document.querySelectorAll('input[type=checkbox]:checked');
+				console.log(a);
+				for (var i = 0; i < a.length; i++) {
+					console.log(a[i].value);
+					array.push(a[i].value);
+					console.log(array);
+			}
+
+			var ruta="/patologias/:id/guardaralimentos-prohibidos";
+			ruta= ruta.replace(':id',id);
+			$.ajax({
+				type: 'PUT',
+				url: ruta,
+				dataType: 'json',
+				data:{data:[id,array]},
+					success: function (data) {
+							console.log(data);
+
+							data.alimentos.forEach(myFunction)
+
+							function myFunction(item, i) {
+								console.log(item.id);
+								var fila="<tr><td>"+item.name+"</td><td>";
+
+								var btn = document.createElement("TR");
+								btn.innerHTML=fila;
+								document.getElementById("tablealimentosAgregados").appendChild(btn);
+							//	document.getElementById("tablealimentos").appendChild(checkbox);
+								i++;
+								$('#tablealimentos tr').remove();
+							}
+
+								},
+								error: function (data) {
+										console.log('Error:', data);
+								}
+
+					});
+
+			});
+
+
+			$('.buscar').on('click', function (e){
+					e.preventDefault();
+					$('#tablealimentos tr').remove();
+					const buscar = document.getElementById("busqueda_por").value;
+					const search = document.getElementById("alimentoid").value;
+					console.log(buscar);
+					console.log(search);
+					var ruta="/buscarAlimento";
+					$('#tablealimentos tr').each(function(){
+						$(this).find('tr').each(function(){
+						console.log($(this).find('tr').checkbox);
+							})
+						})
+					$.ajax({
+						type: 'POST',
+						url: ruta,
+						dataType: 'json',
+						data:{data:[buscar,search]},
+							success: function (data) {
+									console.log(data);
+
+									var i=0;
+									data.forEach(myFunction)
+
+									function myFunction(item, i) {
+										console.log(item.id);
+										var fila="<tr><td>"+item.name+"</td><td>";
+
+										var btn = document.createElement("TR");
+										btn.innerHTML=fila;
+
+										var checkbox = document.createElement('input');
+										checkbox.type = "checkbox";
+										checkbox.value = item.id;
+
+										checkbox.name = "agregarAlimentos[]";
+										btn.appendChild(checkbox);
+										document.getElementById("tablealimentos").appendChild(btn);
+
+										i++;
+									}
+
+										},
+										error: function (data) {
+												console.log('Error:', data);
+										}
+
+							});
+			})
 
 	});
 	function getQueryVariable() {

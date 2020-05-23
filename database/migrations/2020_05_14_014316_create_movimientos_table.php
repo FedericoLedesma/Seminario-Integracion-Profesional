@@ -18,14 +18,14 @@ class CreateMovimientosTable extends Migration
           $table->unsignedInteger('horario_id');
           $table->unsignedBigInteger('racion_id');
           $table->date('fecha');
-          $table->dateTime('created_at');
+          $table->dateTime('creado');
           $table->unsignedBigInteger('user_id');
           $table->unsignedInteger('tipo_movimiento_id');
           $table->unsignedInteger('cantidad');
 
-          $table->unique(['horario_id','racion_id','fecha'],'index_movimientos');
+        
 
-          $table->primary(['horario_id','racion_id','fecha','created_at','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
+          $table->primary(['horario_id','racion_id','fecha','creado','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
 
           $table->foreign('horario_id','racion_id','fecha')
               ->references('horario_id','racion_id','fecha')

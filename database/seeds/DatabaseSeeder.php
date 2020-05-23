@@ -120,6 +120,122 @@ class DatabaseSeeder extends Seeder
 		'guard_name'=>'web',
 	  ]);
 
+    //---------permisos Personas---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_personas',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_personas',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_personas',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_personas',
+        'guard_name'=>'web',
+    ]);
+
+    //---------permisos alimentos---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_alimentos',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_alimentos',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_alimentos',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_alimentos',
+        'guard_name'=>'web',
+    ]);
+    //---------permisos raciones---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_raciones',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_raciones',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_raciones',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_raciones',
+        'guard_name'=>'web',
+    ]);
+    //---------permisos patologias---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_patologias',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_patologias',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_patologias',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_patologias',
+        'guard_name'=>'web',
+    ]);
+    //---------permisos racionDisponible---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_raciones-disponibles',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_raciones-disponibles',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_raciones-disponibles',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_raciones-disponibles',
+        'guard_name'=>'web',
+    ]);
+    //---------permisos tipos de patologias---------------------------
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_tipos-patologias',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_tipos-patologias',
+        'guard_name'=>'web',
+    ]);
+
+    DB::table('permissions')->insert([
+        'name' => 'alta_tipos-patologias',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_tipos-patologias',
+        'guard_name'=>'web',
+    ]);
+    //--------Tipos de Movimientos----------------------
+    DB::table('tipos_movimientos')->insert([
+        'name' => 'Agregar al stock',
+    ]);
+    DB::table('tipos_movimientos')->insert([
+        'name' => 'Entregar racion (descontar)',
+    ]);
 	  $user=User::find('1');
 	  $role=Role::create(['name'=>'Super-Admin']);
 	  $permisos=Permission::all();

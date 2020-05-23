@@ -10,7 +10,11 @@ Agregar usuarios
 
 
 <!-- mostrar una tabla con los roles que existen -->
-
+	@if($mensaje)
+	<div class="alert alert-danger col-md-8" role="alert">
+	{{$mensaje}}
+	</div>
+	@endif
 	    {!!Form::open(['method'=>'post','action'=>'AdminUsersController@store'])!!}
 
 	    <div class="alert alert-info col-md-8" role="alert">

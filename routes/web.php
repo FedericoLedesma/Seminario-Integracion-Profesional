@@ -70,6 +70,9 @@ Route::resource('/informes','InformeController');
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
+Route::get('/patologias/{patologia}/agregarAlimentosProhibidos',["as"=>"patologia.agregarAlimentosProhibidos", "uses"=> 'PatologiaController@agregarAlimentosProhibidos']);
+Route::PUT('/patologias/{patologia}/guardaralimentos-prohibidos', 'PatologiaController@guardarAlimentos');
+Route::PUT('/patologias/{patologia}/quitaralimento', 'PatologiaController@quitarAlimento');
 Route::resource('/tipospatologias', 'TipoPatologiaController');
 Route::resource('/alimentos', 'AlimentoController');
 Route::resource('/sectores', 'SectorController');
@@ -87,7 +90,7 @@ Route::PUT('/raciones-disponibles/update/{racion}/{horario}/{fecha}','RacionesDi
 
 
 Route::POST('/buscarAlimento', 'AlimentoController@buscar');
-
+Route::get('/movimientos',["as"=>"movimientos.index", "uses"=>'MovimientoController@index']);
 
 Route::get('/test/datepicker', function () {
     return view('datepicker');

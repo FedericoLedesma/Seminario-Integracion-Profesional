@@ -16,6 +16,15 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_personas'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_personas'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_personas'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_personas'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');

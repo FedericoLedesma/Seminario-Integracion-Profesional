@@ -16,6 +16,14 @@ class RacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_raciones'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_raciones'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_raciones'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_raciones'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');
@@ -111,10 +119,11 @@ class RacionController extends Controller
 
           foreach ($racion->alimentos as $alimento) {
             Log::info($request['cantidad-'.$alimento->id]);
-            $cantidad=$request['cantidad-'.$alimento->id];
-
-            $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
-            // code...
+            if(!($request['cantidad-'.$alimento->id]=='')){
+              
+              $cantidad=$request['cantidad-'.$alimento->id];
+              $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
+            }
 
           }
           return redirect('/raciones');

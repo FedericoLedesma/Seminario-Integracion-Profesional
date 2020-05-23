@@ -13,6 +13,14 @@ class SectorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_sectores'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_sectores'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_sectores'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_sectores'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       $query = $request->get('search');

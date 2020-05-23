@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 use \App\RacionesDisponibles;
 use \App\Horario;
 use \App\Racion;
+use \App\Movimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class RacionesDisponiblesController extends Controller
 {
@@ -14,6 +17,15 @@ class RacionesDisponiblesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware(['permission:alta_raciones-disponibles'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_raciones-disponibles'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_raciones-disponibles'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_raciones-disponibles'],['only'=>['index']]);
+        $this->middleware('auth');
+     }
     public function index(Request $request)
     {
       Log::info($request);
@@ -79,6 +91,8 @@ class RacionesDisponiblesController extends Controller
           $horario=$racion->horarios()->wherePivot('horario_id',$horarioId)->first();
           Log::info($horario);
           if($horario){
+            $creado=new DateTime(date("Y-m-d H:i:s"));
+            $user=Auth::user();
             $racionDisponible=RacionesDisponibles::create([
                 'horario_id' => $horarioId,
                 'fecha' => $request->data[1],
@@ -88,6 +102,17 @@ class RacionesDisponiblesController extends Controller
                 'cantidad_realizados' => 0,
               ]);
             $racionDisponible->save();
+            Log::info($racionDisponible);
+            $movimiento=Movimiento::create([
+              'horario_id' => $racionDisponible->horario_id,
+              'racion_id'=>$racionDisponible->racion_id,
+              'fecha'=> $racionDisponible->fecha,
+              'creado'=>$creado,
+              'user_id'=>$user->personal_id,
+              'tipo_movimiento_id'=>1,
+              'cantidad'=>$request->data[3],
+            ]);
+            Log::info($movimiento);
             return response([
               'data'=>'Exito',
             ]);
@@ -145,6 +170,32 @@ class RacionesDisponiblesController extends Controller
         $racionDisponible=$request->racionDisponible;
         $rd=RacionesDisponibles::findById($racionDisponible['horario_id'],$racionDisponible['racion_id'],$racionDisponible['fecha']);
         Log::info($rd->stock_original);
+        Log::info("cantidad-realizados ".$cantidad_realizados);
+        $creado=new DateTime(date("Y-m-d H:i:s"));
+        $user=Auth::user();
+        if(!(empty($cantidad_stock))){
+          $movimiento=Movimiento::create([
+            'horario_id' => $rd->horario_id,
+            'racion_id'=>$rd->racion_id,
+            'fecha'=> $rd->fecha,
+            'creado'=>$creado,
+            'user_id'=>$user->personal_id,
+            'tipo_movimiento_id'=>1,
+            'cantidad'=>$cantidad_stock,
+          ]);
+        }if(!empty($cantidad_realizados)){
+          $movimiento=Movimiento::create([
+            'horario_id' => $rd->horario_id,
+            'racion_id'=>$rd->racion_id,
+            'fecha'=> $rd->fecha,
+            'creado'=>$creado,
+            'user_id'=>$user->personal_id,
+            'tipo_movimiento_id'=>1,
+            'cantidad'=>$cantidad_realizados,
+          ]);
+        }
+
+        Log::info($movimiento);
         $rd->cantidad_realizados=$rd->cantidad_realizados+$cantidad_realizados;
         $rd->stock_original=$rd->stock_original+$cantidad_stock;
         $rd->cantidad_restante=$rd->cantidad_restante+$cantidad_stock-$cantidad_realizados;

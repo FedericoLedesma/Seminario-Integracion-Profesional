@@ -13,6 +13,15 @@ class AlimentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+   	{
+   		$this->middleware(['permission:alta_alimentos'],['only'=>['create','store']]);
+   		$this->middleware(['permission:baja_alimentos'],['only'=>['destroy']]);
+   		$this->middleware(['permission:modificacion_alimentos'],['only'=>['edit']]);
+   		$this->middleware(['permission:ver_alimentos'],['only'=>['index']]);
+   		 $this->middleware('auth');
+   	}
     public function index(Request $request)
     {
       $query = $request->get('search');
