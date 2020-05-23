@@ -23,11 +23,11 @@ class CreateMenusPersonasTable extends Migration
             #$table->unsignedBigInteger('dieta_id');
             $table->boolean('realizado');
             $table->timestamps();
-
+            $table->index(['horario_id','racion_id','fecha'],'menus_personas_index');
+            $table->unique(['horario_id','racion_id','fecha'],'menus_personas_unique');
             $table->foreign('fecha','horario_id','racion_id')
                 ->references('fecha','horario_id','racion_id')
-                ->on('raciones_disponibles')
-                ->onDelete('cascade');
+                ->on('raciones_disponibles');
 
             $table->foreign('persona_id')
                 ->references('id')

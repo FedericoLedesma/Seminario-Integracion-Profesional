@@ -20,10 +20,7 @@ class CreateRacionesDisponiblesTable extends Migration
             $table->unsignedInteger('stock_original')->nullable($value = true);
             $table->unsignedInteger('cantidad_restante')->nullable($value = true);
             $table->unsignedInteger('cantidad_realizados')->nullable($value = true);
-            $table->timestamps();
-
-            $table->unique(['fecha','horario_id','racion_id'],'index_raciones_disponibles_');
-            $table->index(['horario_id','racion_id','fecha'],'raciones_disponibles_horario_id_racion_id_fecha_index');
+            $table->timestamps();            
 
             /*$table->foreign('racion_id')
                 ->references('racion_id')
@@ -39,9 +36,9 @@ class CreateRacionesDisponiblesTable extends Migration
                 ->on('horarios_raciones')
                 ->onDelete('cascade');
 
-
             $table->primary(['horario_id','racion_id','fecha'], 'raciones_disponibles_horario_id_racion_id_fecha_primary');
-
+            $table->unique(['fecha','horario_id','racion_id'],'index_raciones_disponibles_');
+            $table->index(['horario_id','racion_id','fecha'],'raciones_disponibles_horario_id_racion_id_fecha_index');
 
         });
     }
