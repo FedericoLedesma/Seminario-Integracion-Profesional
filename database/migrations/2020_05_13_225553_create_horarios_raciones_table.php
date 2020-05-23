@@ -25,10 +25,10 @@ class CreateHorariosRacionesTable extends Migration
             $table->foreign('racion_id')
                 ->references('id')
                 ->on('raciones')
-                ->onDelete('cascade');
-            $table->index(['horario_id','racion_id'],'horarios_raciones_index');
+                ->onDelete('cascade');          
             $table->primary(['horario_id','racion_id'], 'horarios_raciones_horario_id_racion_id_primary');
-
+            $table->unique(['horario_id','racion_id'],'unique_index');
+            $table->index(['horario_id','racion_id'],'horarios_raciones_index');
         });
     }
 
