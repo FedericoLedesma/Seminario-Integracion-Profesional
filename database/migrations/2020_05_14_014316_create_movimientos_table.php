@@ -23,12 +23,12 @@ class CreateMovimientosTable extends Migration
           $table->unsignedInteger('tipo_movimiento_id');
           $table->unsignedInteger('cantidad');
 
-        
+
 
           $table->primary(['horario_id','racion_id','fecha','creado','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
 
-          $table->foreign('horario_id','racion_id','fecha')
-              ->references('horario_id','racion_id','fecha')
+          $table->foreign(['horario_id','racion_id','fecha'])
+              ->references(['horario_id','racion_id','fecha'])
               ->on('raciones_disponibles');
 
           $table->foreign('user_id')
