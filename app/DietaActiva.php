@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Dieta;
+use Illuminate\Support\Facades\DB;
 
 class DietaActiva extends Model
 {
-    protected $table = "dieta_activas";
+    protected $table = "dietas_activas";
 
     protected $fillable = [
         'dieta_id', 'fecha', 'fecha_final', 'observacion',
@@ -57,5 +58,12 @@ class DietaActiva extends Model
 
     public function get_alimentos_prohibidos(){
       return $this->get_patologia()->get_alimentos_prohibidos();
+    }
+    public function guardar(){
+      DB::table($this->table)
+              ->where('dieta_id', $this->dieta_id)
+              ->where('fecha','=', $this->fecha)
+              ->update(['fecha_final' => $this->fecha_final,
+              ]);
     }
 }

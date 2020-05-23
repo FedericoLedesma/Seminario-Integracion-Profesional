@@ -14,6 +14,9 @@
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
+          <div class="alert alert-info" role="alert">
+              Presione 'Guardar' para generar una nueva Dieta Activa
+          </div>
 	    <table class="table table-bordered table-hover table-striped">
         <tr>
 	    		<td>ID </td>
@@ -46,18 +49,42 @@
           <td>{!!	Form::text('descripcion',$patologia->descripcion)!!}</td>
         </tr>
 		   	<tr>
-	    	<td>
+
 		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
         </tr>
         <tr>
-		    <td>
-		   	{!!link_to_route('patologias.show', $title = 'CANCELAR', $parameters = [$patologia], $attributes = [])!!}
-		   	</td>
+
 		   	</tr>
 		 </table>
 		 @endif
-
+     <h6>Alimentos Prohibidos</h6>
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <td>Nombre</td>
+            <td>Quitar</td>
+          </tr>
+        </thead>
+        <tbody>
+       @foreach($patologia->alimentos as $alimento)
+          <tr>
+            <tr>
+               <td>
+                   {{$alimento->name}}
+               </td>
+              <td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-racion="{{ $patologia }}">X</button></td>
+            </tr>
+          </tr>
+      @endforeach
+        <tr>
+          <td>{!!link_to_route('patologia.agregarAlimentosProhibidos', $title = 'Agregar Alimentos', $parameters = [$patologia->id], $attributes = ['class'=>'btn btn-secondary'])!!}</td>
+  	    	<td>
+  		   	{!!link_to_route('patologias.show', $title = 'CANCELAR', $parameters = [$patologia], $attributes = [])!!}
+  		   	</td>
+        </tr>
+        </tbody>
+    </table>
 		</div>
 		</div>
 @endsection

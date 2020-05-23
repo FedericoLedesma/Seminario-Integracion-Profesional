@@ -107,5 +107,9 @@ class Patologia extends Model
        return $this->belongsToMany('App\Persona', 'personas_patologias')
        ->withPivot('fecha','hasta')->wherePivot('hasta','=',null);
      }
-
+     public function alimentos()
+     {
+       return $this->belongsToMany('App\Alimento', 'patologia_alimentos_prohibidos')
+       ->withPivot('fecha');
+     }
 }

@@ -15,7 +15,7 @@ class CreateDietasActivasTable extends Migration
     {
         Schema::create('dietas_activas', function (Blueprint $table) {
             $table->unsignedBigInteger('dieta_id');
-            $table->date('fecha');
+            $table->dateTime('fecha');
             $table->date('fecha_final')->nullable($value=true);
             $table->string('observacion',100);
             $table->timestamps();
