@@ -25,7 +25,7 @@ class CreateMenusPersonasTable extends Migration
             $table->timestamps();
 
             $table->foreign('horario_id','racion_id','fecha')
-                ->references('horario_id','fecha','racion_id')
+                ->references('horario_id','racion_id','fecha')
                 ->on('raciones_disponibles');
 
             $table->foreign('persona_id')
