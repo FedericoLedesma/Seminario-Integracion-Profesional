@@ -9,7 +9,7 @@ class Movimiento extends Model
   protected $table = "movimientos";
 
   protected $fillable = [
-      'horario_id','racion_id', 'fecha','created_at',
+      'horario_id','racion_id', 'fecha','creado',
       'user_id','tipo_movimiento_id','cantidad',
   ];
   public $timestamps = false;

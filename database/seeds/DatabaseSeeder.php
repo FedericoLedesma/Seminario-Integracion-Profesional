@@ -229,6 +229,13 @@ class DatabaseSeeder extends Seeder
         'name' => 'baja_tipos-patologias',
         'guard_name'=>'web',
     ]);
+    //--------Tipos de Movimientos----------------------
+    DB::table('tipos_movimientos')->insert([
+        'name' => 'Agregar al stock',
+    ]);
+    DB::table('tipos_movimientos')->insert([
+        'name' => 'Entregar racion (descontar)',
+    ]);
 	  $user=User::find('1');
 	  $role=Role::create(['name'=>'Super-Admin']);
 	  $permisos=Permission::all();
