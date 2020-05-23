@@ -149,12 +149,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Agregar Usuario</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link buscar_user"  data-id="buscar_user">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buscar Usuario</p>
-                </a>
-              </li>
             </ul>
           </li>
           <!--                      -->
@@ -179,12 +173,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Agregar Rol</p>
                 </a>
               </li>
-               <li class="nav-item">
-                <a href="#" class="nav-link buscar_role"  data-id="buscar_role">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buscar Rol</p>
-                </a>
-              </li>
             </ul>
           </li>
            <li class="nav-item has-treeview menu-close">
@@ -206,12 +194,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ route('permisos.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Permiso</p>
-                </a>
-              </li>
-               <li class="nav-item">
-                <a href="#" class="nav-link buscar_permiso"  data-id="buscar_permiso">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buscar Permiso</p>
                 </a>
               </li>
              </ul>
@@ -242,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          </li>
          <!--           fin personas           -->
          <!--              personal        -->
-        <li class="nav-item has-treeview menu-close">
+        <!--<li class="nav-item has-treeview menu-close">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -264,7 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
           </ul>
-        </li>
+        </li>-->
         <!--           fin persona           -->
         <!--              patologias        -->
        <li class="nav-item has-treeview menu-close">
@@ -332,13 +314,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
              </a>
            </li>
            <li class="nav-item">
-             <a href="#" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Horarios</p>
-             </a>
-           </li>
-           <li class="nav-item">
-             <a href="#" class="nav-link">
+             <a href="{{ route('movimientos.index') }}" class="nav-link">
                <i class="far fa-circle nav-icon"></i>
                <p>Movimientos</p>
              </a>

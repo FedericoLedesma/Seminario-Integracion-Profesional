@@ -45,5 +45,18 @@ class Movimiento extends Model
       ->orderBy('created_at', 'asc');
     }return null;
   }
+  public function racion()
+  {
+    return $this->belongsTo('App\Racion', 'racion_id');
+  }
+  public function horario()
+  {
+    return $this->belongsTo('App\Horario', 'horario_id');
+  }
+  public function tipoMovimiento()
+  {
+    return $this->belongsTo('App\TipoMovimiento', 'tipo_movimiento_id');
+  }
+  
 
 }

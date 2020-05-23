@@ -23,7 +23,7 @@ class CreateMovimientosTable extends Migration
           $table->unsignedInteger('tipo_movimiento_id');
           $table->unsignedInteger('cantidad');
 
-          $table->unique(['horario_id','racion_id','fecha','creado','user_id','tipo_movimiento_id'],'index_movimientos');
+        
 
           $table->primary(['horario_id','racion_id','fecha','creado','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
 
