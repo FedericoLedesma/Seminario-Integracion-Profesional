@@ -88,21 +88,24 @@ class RacionesDisponiblesController extends Controller
           $racionId=$request->data[2];
           $racion=Racion::findById($racionId);
 
-          $horario=$racion->horarios()->wherePivot('horario_id',$horarioId)->first();
-          Log::info($horario);
-          if($horario){
+          $horario_racion_id=$racion->horarios()->wherePivot('horario_id',$horarioId)->first()->pivot->id;
+          Log::info("-----Horario_Racion_id----");
+          Log::info($horario_racion_id);
+          if($horario_racion_id){
             $creado=new DateTime(date("Y-m-d H:i:s"));
             $user=Auth::user();
             $racionDisponible=RacionesDisponibles::create([
-                'horario_id' => $horarioId,
+                'horario_racion_id' => $horario_racion_id,
                 'fecha' => $request->data[1],
-                'racion_id'=>$racionId,
                 'stock_original' => $request->data[3],
                 'cantidad_restante' => $request->data[3],
                 'cantidad_realizados' => 0,
               ]);
-            $racionDisponible->save();
+
             Log::info($racionDisponible);
+            /**
+            Crear el movimiento en un observer
+            **/
             $movimiento=Movimiento::create([
               'horario_id' => $racionDisponible->horario_id,
               'racion_id'=>$racionDisponible->racion_id,
@@ -112,7 +115,7 @@ class RacionesDisponiblesController extends Controller
               'tipo_movimiento_id'=>1,
               'cantidad'=>$request->data[3],
             ]);
-            Log::info($movimiento);
+    //        Log::info($movimiento);
             return response([
               'data'=>'Exito',
             ]);
@@ -137,9 +140,9 @@ class RacionesDisponiblesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($racion_id,$horario_id,$fecha)
+    public function show($id)
     {
-      $racionDisponible=RacionesDisponibles::findById($horario_id,$racion_id,$fecha);
+      $racionDisponible=RacionesDisponibles::findById($id);
 
       return view('nutricion.raciones-disponibles.show', compact('racionDisponible'));
     }

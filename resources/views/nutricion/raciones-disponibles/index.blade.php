@@ -104,14 +104,14 @@
 						@if($racionesDisponibles)
 							@foreach($racionesDisponibles as $racionDisponible)
 							<tr>
-								<td>{{$racionDisponible->racion->name}}</td>
-								<td>{{$racionDisponible->horario->name}}</td>
+								<td>{{$racionDisponible->horario_racion->racion->name}}</td>
+								<td>{{$racionDisponible->horario_racion->horario->name}}</td>
 								<td>{{$racionDisponible->fecha()}}</td>
 								<td>{{$racionDisponible->cantidad_restante}}</td>
 
 								<td>
-								<?php $url='/raciones-disponibles/show/'.$racionDisponible->racion->id.'/'.$racionDisponible->horario->id.'/'.$racionDisponible->fecha ?>
-								{!!Form::open(array('route'=>['raciones-disponibles.show',$racionDisponible->racion->id,$racionDisponible->horario->id,$racionDisponible->fecha],'method'=>'GET'))!!}
+
+								{!!Form::open(array('route'=>['raciones-disponibles.show',$racionDisponible->id],'method'=>'GET'))!!}
 								{!!Form::button('ver',['class'=>'btn btn-primary','type'=>'submit'])!!}
 									{!! Form::close() !!}
 								</td>

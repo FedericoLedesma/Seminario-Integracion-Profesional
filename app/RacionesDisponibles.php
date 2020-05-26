@@ -14,7 +14,18 @@ class RacionesDisponibles extends Model
         'id','horario_racion_id','racion_id', 'fecha', 'horario_id','stock_original','cantidad_restante',
         'cantidad_realizados',
     ];
-    public static function findById($horario_id,$racion_id,$fecha)
+    public static function findById($id)
+    {
+        if($id){
+          $raciones_disponibles = static::where('id', $id)->first();
+          Log::debug('Recuperada la racionDisponible: '.$raciones_disponibles);
+          #if($raciones_disponibles){
+            return $raciones_disponibles;
+        #} return null;
+        }
+
+    }
+    public static function findByHorarioRacionFecha($horario_id,$racion_id,$fecha)
     {
          $raciones_disponibles = static::where('horario_id','=', $horario_id)
          ->where('racion_id','=', $racion_id)
@@ -141,5 +152,8 @@ class RacionesDisponibles extends Model
     }
     public function horario(){
       return $this->belongsTo('App\Horario', 'horario_id');
+    }
+    public function horario_racion(){
+        return $this->belongsTo('App\HorarioRacion','horario_racion_id');
     }
 }
