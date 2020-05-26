@@ -14,6 +14,7 @@ class CreateHorariosRacionesTable extends Migration
     public function up()
     {
         Schema::create('horarios_raciones', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('horario_id');
             $table->unsignedBigInteger('racion_id');
 
@@ -25,8 +26,7 @@ class CreateHorariosRacionesTable extends Migration
             $table->foreign('racion_id')
                 ->references('id')
                 ->on('raciones')
-                ->onDelete('cascade');          
-            $table->primary(['horario_id','racion_id'], 'horarios_raciones_horario_id_racion_id_primary');
+                ->onDelete('cascade');
             $table->unique(['horario_id','racion_id'],'unique_index');
             $table->index(['horario_id','racion_id'],'horarios_raciones_index');
         });

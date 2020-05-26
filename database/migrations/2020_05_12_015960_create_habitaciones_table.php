@@ -14,7 +14,7 @@ class CreateHabitacionesTable extends Migration
     public function up()
     {
         Schema::create('habitaciones', function (Blueprint $table) {
-            $table->unsignedInteger('habitacion_id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('sector_id');
             $table->string('name',50);
             $table->string('descripcion',50)->nullable($value = true);
@@ -26,8 +26,8 @@ class CreateHabitacionesTable extends Migration
                 ->onDelete('cascade');
 
               //$table->primary(['paciente_id','fecha'], 'acompanantes_paciente_id_fecha_primary');
-              $table->unique('habitacion_id','sector_id');
-              $table->primary(['habitacion_id','sector_id'], 'habitaciones_habitacion_id_sector_id_primary');
+              $table->unique('id','sector_id');
+
         });
     }
 

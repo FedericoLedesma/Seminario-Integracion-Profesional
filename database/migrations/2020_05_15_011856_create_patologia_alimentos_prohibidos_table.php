@@ -14,11 +14,12 @@ class CreatePatologiaAlimentosProhibidosTable extends Migration
     public function up()
     {
         Schema::create('patologia_alimentos_prohibidos', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('patologia_id');
             $table->unsignedBigInteger('alimento_id');
             $table->date('fecha');
             $table->timestamps();
-            $table->primary(['patologia_id','alimento_id','fecha'],'patologia_alimentos_prohibidos_primary_');
+            $table->unique(['patologia_id','alimento_id','fecha'],'patologia_alimentos_prohibidos_primary_');
 
             $table->foreign('patologia_id')
                 ->references('id')

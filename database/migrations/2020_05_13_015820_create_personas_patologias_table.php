@@ -14,6 +14,7 @@ class CreatePersonasPatologiasTable extends Migration
     public function up()
     {
         Schema::create('personas_patologias', function (Blueprint $table) {
+          $table->bigIncrements('id');
           $table->unsignedInteger('patologia_id');
           $table->unsignedBigInteger('persona_id');
           $table->date('fecha');
@@ -30,7 +31,7 @@ class CreatePersonasPatologiasTable extends Migration
               ->onDelete('restrict');
 
 
-          $table->primary(['patologia_id','persona_id','fecha'], 'personas_patolgias_patologia_id_persona_id_fecha_primary');
+          $table->unique(['patologia_id','persona_id','fecha'], 'personas_patolgias_patologia_id_persona_id_fecha_primary');
 
         });
     }

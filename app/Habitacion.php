@@ -13,8 +13,19 @@ class Habitacion extends Model
     protected $table = "habitaciones";
 
     protected $fillable = [
-        'habitacion_id', 'sector_id','name','descripcion',
+        'id','habitacion_id', 'sector_id','name','descripcion',
     ];
+    public static function findById($id)
+    {
+        if($id){
+           $habitacion = static::where('habitacion_id', $habitacion_id)
+           ->where('id',$id)
+           ->first();
+           if($habitacion){
+             return $habitacion;
+         }
+       }return null;
+    }
     public static function findByIdSector($habitacion_id, $sector_id)
     {
         if(($habitacion_id)&&($sector_id)){

@@ -14,6 +14,7 @@ class CreateDietasActivasTable extends Migration
     public function up()
     {
         Schema::create('dietas_activas', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('dieta_id');
             $table->dateTime('fecha');
             $table->date('fecha_final')->nullable($value=true);
@@ -25,7 +26,7 @@ class CreateDietasActivasTable extends Migration
                 ->on('dietas')
                 ->onDelete('cascade');
 
-            $table->primary(['dieta_id','fecha'], 'dietas_activas_dieta_id_fecha_primary');
+            $table->unique(['dieta_id','fecha'], 'dietas_activas_dieta_id_fecha_primary');
 
         });
     }

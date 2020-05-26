@@ -14,6 +14,7 @@ class CreateHistoriaInternacionTable extends Migration
     public function up()
     {
         Schema::create('historia_internacion', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('paciente_id');
             $table->date('fecha_ingreso');
             $table->float('peso',5,2)->nullable($value = true);
@@ -25,7 +26,7 @@ class CreateHistoriaInternacionTable extends Migration
                 ->on('pacientes')
                 ->onDelete('cascade');
 
-            $table->primary(['paciente_id','fecha_ingreso'], 'historia_internacion_paciente_id_fecha_ingreso_primary');
+            $table->unique(['paciente_id','fecha_ingreso'], 'historia_internacion_paciente_id_fecha_ingreso_primary');
         });
     }
 

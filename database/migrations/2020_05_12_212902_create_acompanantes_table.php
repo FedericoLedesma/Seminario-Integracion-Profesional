@@ -14,6 +14,7 @@ class CreateAcompanantesTable extends Migration
     public function up()
     {
         Schema::create('acompanantes', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('acompanante_id');
             $table->unsignedBigInteger('paciente_id');
             $table->date('fecha');
@@ -30,7 +31,7 @@ class CreateAcompanantesTable extends Migration
 
             $table->timestamps();
 
-            $table->primary(['paciente_id','fecha'], 'acompanantes_paciente_id_fecha_primary');
+            $table->unique(['paciente_id','fecha'], 'acompanantes_paciente_id_fecha_primary');
         });
     }
 
