@@ -14,12 +14,13 @@ class CreateRacionesAlimentosTable extends Migration
     public function up()
     {
         Schema::create('raciones_alimentos', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('racion_id');
             $table->unsignedBigInteger('alimento_id');
             $table->float('cantidad',5,2);
             $table->timestamps();
 
-            $table->primary(['racion_id','alimento_id'],'racion_alimento_racion_id_alimento_idprimary_');
+            $table->unique(['racion_id','alimento_id'],'racion_alimento_racion_id_alimento_idunique');
 
             $table->foreign('racion_id')
                 ->references('id')

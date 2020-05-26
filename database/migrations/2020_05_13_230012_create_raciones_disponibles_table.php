@@ -14,8 +14,8 @@ class CreateRacionesDisponiblesTable extends Migration
     public function up()
     {
         Schema::create('raciones_disponibles', function (Blueprint $table) {
-            $table->unsignedInteger('horario_id');
-            $table->unsignedBigInteger('racion_id')->index();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('horario_racion_id');
             $table->date('fecha');
             $table->unsignedInteger('stock_original')->nullable($value = true);
             $table->unsignedInteger('cantidad_restante')->nullable($value = true);
@@ -31,14 +31,14 @@ class CreateRacionesDisponiblesTable extends Migration
                 ->references('horario_id')
                 ->on('horarios_raciones')
                 ->onDelete('cascade');*/
-            $table->foreign(['racion_id','horario_id'])
-                ->references(['racion_id','horario_id'])
+            $table->foreign('horario_racion_id')
+                ->references('id')
                 ->on('horarios_raciones')
                 ->onDelete('cascade');
 
-            $table->primary(['horario_id','racion_id','fecha'], 'raciones_disponibles_horario_id_racion_id_fecha_primary');
-            $table->unique(['horario_id','racion_id','fecha'],'index_raciones_disponibles_');
-            $table->index(['horario_id','racion_id','fecha'],'raciones_disponibles_horario_id_racion_id_fecha_index');
+
+            $table->unique(['horario_racion_id','fecha'],'index_raciones_disponibles_');
+            $table->index(['horario_racion_id','fecha'],'raciones_disponibles_horario_id_racion_id_fecha_index');
 
         });
     }

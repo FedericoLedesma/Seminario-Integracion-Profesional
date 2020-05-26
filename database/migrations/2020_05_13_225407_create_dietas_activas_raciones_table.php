@@ -14,13 +14,14 @@ class CreateDietasActivasRacionesTable extends Migration
     public function up()
     {
         Schema::create('dietas_activas_raciones', function (Blueprint $table) {
-            $table->unsignedBigInteger('dieta_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('dieta_activa_id');
             $table->unsignedBigInteger('racion_id');
             $table->date('fecha');
 
-            $table->foreign('dieta_id')
+            $table->foreign('dieta_activa_id')
                 ->references('id')
-                ->on('dietas')
+                ->on('dietas_activas')
                 ->onDelete('cascade');
 
             $table->foreign('racion_id')
@@ -28,7 +29,7 @@ class CreateDietasActivasRacionesTable extends Migration
                 ->on('raciones')
                 ->onDelete('cascade');
 
-            $table->primary(['dieta_id','racion_id','fecha'], 'dietas_activas_raciones_dieta_id_racion_id_fecha_primary');
+            $table->unique(['dieta_activa_id','racion_id','fecha'], 'dietas_activas_raciones_dieta_id_racion_id_fecha_primary');
 
         });
     }

@@ -14,21 +14,20 @@ class CreatePacientesCamasTable extends Migration
     public function up()
     {
         Schema::create('pacientes_camas', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('cama_id');
             $table->date('fecha');
-            $table->unsignedInteger('cama_id');
-            $table->unsignedInteger('habitacion_id');
-            $table->unsignedInteger('sector_id');
             $table->timestamps();
 
-            $table->primary(['paciente_id','fecha'],'pacientes_camas_paciente_id_fecha_primary');
+            $table->unique(['paciente_id','cama_id','fecha'],'pacientes_camas_paciente_id_fecha_unique');
 
             $table->foreign('paciente_id')
                 ->references('id')
                 ->on('pacientes');
 
-            $table->foreign(['cama_id','habitacion_id','sector_id'])
-                ->references(['cama_id','habitacion_id','sector_id'])
+            $table->foreign('cama_id')
+                ->references('id')
                 ->on('camas');
 
 

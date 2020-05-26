@@ -14,18 +14,16 @@ class CreateMenusPersonasTable extends Migration
     public function up()
     {
         Schema::create('menus_personas', function (Blueprint $table) {
-
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
-            $table->unsignedInteger('horario_id');
-            $table->unsignedBigInteger('racion_id');
-            $table->date('fecha');
+            $table->unsignedBigInteger('racion_disponible_id');
             $table->unsignedBigInteger('personal_id');
             #$table->unsignedBigInteger('dieta_id');
             $table->boolean('realizado');
             $table->timestamps();
 
-            $table->foreign(['horario_id','racion_id','fecha'])
-                ->references(['horario_id','racion_id','fecha'])
+            $table->foreign('racion_disponible_id')
+                ->references('id')
                 ->on('raciones_disponibles');
 
             $table->foreign('persona_id')
@@ -43,9 +41,7 @@ class CreateMenusPersonasTable extends Migration
                 ->on('dietas')
                 ->onDelete('cascade');*/
 
-            $table->primary(['fecha','persona_id','horario_id'], 'menus_personas_fecha_persona_id_horario_id_primary');
-            $table->index(['horario_id','racion_id','fecha'],'menus_personas_index');
-            $table->unique(['horario_id','racion_id','fecha'],'menus_personas_unique');
+            $table->unique(['persona_id','racion_disponible_id'],'menus_personas_unique');
 
         });
     }

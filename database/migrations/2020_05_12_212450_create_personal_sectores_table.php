@@ -14,6 +14,7 @@ class CreatePersonalSectoresTable extends Migration
     public function up()
     {
         Schema::create('personal_sectores', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('sector_id');
             $table->unsignedBigInteger('personal_id');
             $table->date('fecha');
@@ -29,7 +30,7 @@ class CreatePersonalSectoresTable extends Migration
                 ->onDelete('cascade');
 
 
-            $table->primary(['personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
+            $table->unique(['personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
         });
     }
     /**

@@ -14,16 +14,14 @@ class CreateCamasTable extends Migration
     public function up()
     {
         Schema::create('camas', function (Blueprint $table) {
-            $table->unsignedInteger('cama_id');
-            $table->unsignedInteger('habitacion_id');
-            $table->unsignedInteger('sector_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('habitacion_id');
             $table->timestamps();
 
-            $table->primary(['cama_id','habitacion_id','sector_id'], 'camas_cama_id_habitacion_id_sector_id_primary');
-            $table->foreign('habitacion_id','sector_id')
-                ->references('habitacion_id','sector_id')
+            $table->foreign('habitacion_id')
+                ->references('id')
                 ->on('habitaciones');
-            $table->unique(['cama_id','habitacion_id','sector_id'],'unique');
+            $table->unique(['id','habitacion_id'],'unique');
         });
     }
 
