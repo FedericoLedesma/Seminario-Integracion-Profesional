@@ -1,12 +1,15 @@
 <head>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
+	<script
+				  src="https://code.jquery.com/jquery-3.5.1.js"
+				  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+				  crossorigin="anonymous">
+	</script>
 </head>
 
 @extends('layouts.layout')
@@ -20,82 +23,50 @@
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
 
-<h1>Agregar menu persona (planilla)</h1>
+<h1>Recorridos de nutricionista</h1>
 
 	{!!Form::open(['route'=>'menu_persona.create','method'=>'GET']) !!}
 		<div class="input-group mb-3">
 
-			<select class="browser-default custom-select" id="persona_id" name="persona_id">
-				<option value='0'> ninguno </option>
-				@foreach($pacientes as $paciente)
-					<option value={{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
+			<select class="browser-default custom-select" id="sectores" name="sectores">
+				<option value='0'> Sector </option>
+				@foreach($sector as $s)
+					<option value={{$s->id}} >{{$s->name}}</option>
 				@endforeach
 			</select>
+		<div id= "habitaciones">
+			<select class="browser-default custom-select" id="habitacion" name="habitacion">
+				<option value=0 > Habitación </option>
+			</select>
+		</div>
 
-			<input class="date form-control" type="text" id="calendario" name="calendario">
+			<input class="date form-control" type="text" id="calendario" name="calendario" value={{$fecha}}>
 			<script type="text/javascript" id="calendario_" name="calendario_">
 				var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
 			</script>
 
 			<select class="browser-default custom-select" id="horario_id" name="horario_id">
+				<option value= 0> Todos </option>
 				@foreach($horarios as $horario)
 				<option value= {{$horario->id}} >{{$horario->name}}</option>
 				@endforeach
 			</select>
 		<div class="input-group-append">
 		{!!	Form::submit('Recuperar raciones disponibles',['class'=>'btn btn-success btn-buscar'])!!}
-	{!! Form::close() !!}
-	{!!Form::open(['route'=>'menu_persona.store','method'=>'POST']) !!}
+
 		</div>
 			</div>
 			@include('layouts.error')
 			<table>
-				<tr>
-					<!--<td>
-					{!!	Form::label('persona_id', 'Nombre de la persona')!!}
-					<select class="browser-default custom-select" id="persona_id" name="persona_id">
-						<option value='0'> ninguno </option>
-						@foreach($pacientes as $paciente)
-							<option value= {{$paciente->id}} >{{$paciente->name}} {{$paciente->apellido}}</option>
-						@endforeach
-					</select>
-					</td>-->
-					<td>
-					{!!	Form::label('racion_id', 'Racion')!!}
-					<select class="browser-default custom-select" id="racion_id" name="racion_id">
-						<option value= {{$racion_recomendada['id']}}> Recomendación: {{$racion_recomendada['nombre']}} </option>
-						@foreach($raciones_disponibles as $racion)
-							{{Log::debug('Dando vueltas. Racion: '.$racion)}}
-							<option value= {{$racion->id}} > {{$racion->name}}</option>
-						@endforeach
-					</select>
-					</td>
-					<td>
-					{!!	Form::label('fecha', 'Fecha')!!}
-					<select class="browser-default custom-select" id="fecha" name="fecha">
-						@if($fecha)
-						<option value= {{$fecha}}> {{$fecha}} </option>
-						@endif
-					</select>
-					</td>
-					<td>
+
 					{!!	Form::label('horario', 'Horario')!!}
-					<select class="browser-default custom-select" id="horario" name="horario">
-						@if($horario)
-						<option value= {{$horario->id}}> {{$horario->name}} </option>
-						@endif
-					</select>
+					<div id= "personas">
+						<select class="browser-default custom-select" id="persona" name="persona">
+							<option value=0 > Persona </option>
+						</select>
+					</div>
 					</td>
-					<td>
-					{!!	Form::label('paciente', 'Paciente')!!}
-					<select class="browser-default custom-select" id="persona_id" name="persona_id">
-						@if($persona_seleccionada['id']>0)
-						<option value= {{$persona_seleccionada['id'] }}> {{$persona_seleccionada['nombre']}} </option>
-						@else
-						<option value='-1' }}> Ninguno </option>
-						@endif
-					</select>
-					</td>
+
 				</tr>
 				<tr>
 					<td>
@@ -108,4 +79,49 @@
 			</table>
 		{!! Form::close() !!}
 
+
+@endsection
+
+@section('script')
+<script type="text/javascript">
+	$("document").ready(function(){
+
+
+		$("#sectores").change(function(){
+			var token = '{{csrf_token()}}';
+			$.ajax({
+				type:"get",
+				url:	"/forms/select/habitacion/" + $('#sectores').val(),
+				success:function(r){
+					$('#habitaciones').html(r);
+				}
+			});
+			$.ajax({
+				type:"get",
+				url:	"/forms/select/personas/" + $('#sectores').val(),
+				success:function(r){
+					$('#personas').html(r);
+				}
+			});
+		});
+
+		
+	})
+</script>
+<script type="text/javascript">
+	function recargarLista(){
+		alert("Select cambiaro");
+		var token = '{{csrf_token()}}';
+		var pepe ='pepe';
+		$.ajax({
+			type:"post",
+			url:	"/forms/select",
+			data:"sector=" + $('#sectores').val(),
+			success:function(r){
+				$('#habitaciones').html(r);
+			}
+		}).done(function(  ) {
+    alert( 'Termino' );
+	}
+</script>
 @endsection

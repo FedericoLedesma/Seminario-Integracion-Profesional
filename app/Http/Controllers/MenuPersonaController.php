@@ -38,7 +38,7 @@ class MenuPersonaController extends Controller
           'message'=>'Bienvenido al índice de menus personas',
           'estado'=>'1'
         ];
-        $fecha_actual = Carbon::now();
+        $fecha_actual = Carbon::now()->toDateString();
         if ($user->can('ver_menu_persona')){
             if($request){
                 switch ($busqueda_por) {
@@ -107,7 +107,7 @@ class MenuPersonaController extends Controller
           'nombre'=>'ninguno',
           'id'=>'-1'
         ];
-        $fecha_actual = carbon::now();
+        $fecha_actual = carbon::now()->toDateString();
         #Log::debug('Se quiere crear un menu persona. Request: '.$request);
         Log::debug('Fecha: '.$fecha);
         Log::debug('Horario: '.$horario);

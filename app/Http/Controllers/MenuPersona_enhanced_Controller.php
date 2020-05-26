@@ -8,6 +8,8 @@ use App\Horario;
 use App\Paciente;
 use App\Persona;
 use App\Racion;
+use App\Sector;
+use App\Habitacion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -28,58 +30,15 @@ class MenuPersona_enhanced_Controller extends Controller
     public function index(Request $request)
     {
         //
-        $menues = Array();
-        $query = $request->get('search');
-        $busqueda_por= $request->get('busqueda_por');
-        $fecha = $request->get('fecha');
-        $info = [
-          'action'=>'ok',
-          'message'=>'Bienvenido al índice de menus personas',
-          'estado'=>'1'
-        ];
         if (Auth::user()->can('ver_menu_persona')){
-            if($request){
-                switch ($busqueda_por) {
-                    case 'busqueda_nombre_persona':
-                        Log::debug("Se realizará unas búsqueda por nombre de persona. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_persona_nombre_y_apellido($query);
-                            $busqueda_por="nombres o apellidos";
-                        break;
-                    case 'busqueda_nombre_horario':
-                        Log::debug("Se realizará unas búsqueda por nombre de horario. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_nombre_de_horario($query);
-                            $busqueda_por="horario";
-                        break;
-                    case 'busqueda_fecha':
-                        Log::debug("Se realizará unas búsqueda por fecha. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_fecha($query);
-                            $busqueda_por="fecha";
-                        break;
-                    default:
-                        $roles=MenuPersona::all();
-                        $query=null;
-                      break;
-                }
-            }
-            $menues_excluidos = Array();
-            foreach ($menues as $menu){
-              if (($fecha==null)||($menu->tengo_la_fecha($fecha))){
-                Log::debug('Se devuelven: '.$menu);
-              }
-              else{
-                Log::debug('Se descarta el menú: '.$menu);
-                Array_push($menues_excluidos, $menu);
-              }
-            }
-            $menues = array_diff($menues, $menues_excluidos);
-            $info = [
-              'action'=>'ok',
-              'message'=>'Se hizo una busqueda',
-              'estado'=>'5'
-            ];
-            return view(self::path.'.index',compact('menues','query','busqueda_por','info'));
+          $menus = MenuPersona::buscar_por_fecha(Carbon::now()->toDateString());
+          Log::debug("Se buscaron las planillas del dia: ".Carbon::now()->toDateString());
+          foreach ($menus as $m) {
+            Log::debug($m);
+          }
+          return view(self::path.'.index',compact('menus'));
         }
-        Log::debug($user->name . ' NO tiene permisos para ver menues');
+
         return redirect('/home');
     }
 
@@ -92,58 +51,14 @@ class MenuPersona_enhanced_Controller extends Controller
         public function create(Request $request)
         {
             //
-            $raciones_disponibles = Array();
+            Log::debug($request);
             $pacientes = Paciente::get_pacientes_internados();
-            $fecha = $request->get('calendario');
-            $horario= Horario::findById($request->get('horario_id'));
             $horarios = Horario::all();
-            $persona_id = $request->get('persona_id');
-            $racion_recomendada = [
-              'nombre'=>'ninguno',
-              'id'=>'-1'
-            ];
-            $persona_seleccionada = [
-              'nombre'=>'ninguno',
-              'id'=>'-1'
-            ];
-            #Log::debug('Se quiere crear un menu persona. Request: '.$request);
-            Log::debug('Fecha: '.$fecha);
-            Log::debug('Horario: '.$horario);
-            if($fecha)
-                if($horarios)
-                  if(($persona_id==null)|($persona_id<1)){
-                    /*$persona_seleccionada = [
-                      'nombre'=>'ninguno',
-                      'id'=>'-1'
-                    ];*/
-                  }
-                  else
-                  {
-                      Log::debug('Pase a buscar raciones');
-                      $persona = Persona::findById((int)$persona_id);
-                      $persona_seleccionada = [
-                        'nombre'=>$persona->name.' ',$persona->apellido,
-                        'id'=>$persona->id
-                      ];
-                      Log::debug('ID de la persona seleccionada: '.$persona_seleccionada['id']);
-                      #$raciones_disponibles = Racion::buscar_por_fecha_horario($fecha,$horario);
-                      $raciones_disponibles = $persona->get_raciones_disponibles($fecha,$horario);
-                      $rac_rec = $persona->recomendar_racion($fecha,$horario);
-                      if($rac_rec<>null)
-                        $racion_recomendada = [
-                          'nombre'=>$rac_rec->name,
-                          'id'=>$rac_rec->id
-                        ];
-                      Log::debug('Acá salí de buscar las raciones recomendadas');
-                      foreach($raciones_disponibles as $r)
-                          Log::debug('Ración disponible: '.$r);
-                      $horario = Array($horario);
-                      return view(self::path.'.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada'));
-                  }
-            $fecha = Carbon::now();
-            $horarios = Horario::all();
-            $horario = Array();
-            return view(self::path.'.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada'));
+            $fecha = $request->get('fecha');
+            $sector = Sector::all();
+            if ($fecha == null)
+              $fecha = Carbon::now()->toDateString();
+            return view(self::path.'.create',compact('pacientes','horarios','fecha','sector'));
         }
 
         /**

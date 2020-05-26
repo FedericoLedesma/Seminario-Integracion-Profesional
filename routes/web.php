@@ -65,7 +65,6 @@ Route::get('/informes/generar','InformeController@create')
 Route::get('/informes/settear','InformeController@set_realizado')
 	->name('InformeController.set');
 Route::resource('/informes','InformeController');
-
 #Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
 
 Route::resource('/personas', 'PersonaController');
@@ -101,3 +100,6 @@ Route::post('/test/save', ['as' => 'save-date',
  function () {
 	 return '';
  }]);
+
+ Route::get('/forms/select/{form}/{query}', 'FormsController@showSelect');
+ Route::resource('/forms', 'FormsController');
