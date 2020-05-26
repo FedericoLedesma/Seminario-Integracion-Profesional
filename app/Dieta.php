@@ -8,7 +8,7 @@ use App\Patologia;
 
 class Dieta extends Model
 {
-  protected $table = "dietas";
+  protected $table = "dieta";
 
   protected $fillable = [
       'id', 'patologia_id', 'observacion', 'personal_id',

@@ -21,12 +21,15 @@ class CreateHistoriaInternacionTable extends Migration
             $table->date('fecha_egreso')->nullable($value = true);
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_historia_internacion');
+
             $table->foreign('paciente_id')
                 ->references('id')
-                ->on('pacientes')
+                ->on('paciente')
                 ->onDelete('cascade');
 
-            $table->unique(['paciente_id','fecha_ingreso'], 'historia_internacion_paciente_id_fecha_ingreso_primary');
+            $table->unique(['paciente_id','fecha_ingreso'], 'unique_historia_internacion_paciente_id_fecha_ingreso');
+            $table->unique(['paciente_id','fecha_egreso'], 'unique_historia_internacion_paciente_id_fecha_egreso');
         });
     }
 

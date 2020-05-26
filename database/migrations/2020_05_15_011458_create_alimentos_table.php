@@ -13,10 +13,14 @@ class CreateAlimentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('alimentos', function (Blueprint $table) {
+        Schema::create('alimento', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',50);
+            #$table->string('name',50);
+            $table->string('name');
             $table->timestamps();
+
+
+			#$table->primary(['id'],'primary_key_alimento');
         });
     }
 

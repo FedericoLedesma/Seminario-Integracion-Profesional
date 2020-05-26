@@ -18,14 +18,14 @@ class CreatePersonalTable extends Migration
 
             $table->foreign('id')
                 ->references('id')
-                ->on('personas')
+                ->on('persona')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('matricula')->nullable($value = true);
 
             $table->timestamps();
 
-            $table->primary(['id'], 'personal_id_primary');
+            #$table->primary(['id'], 'primary_key_personal');
         });
     }
 

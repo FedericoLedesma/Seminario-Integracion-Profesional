@@ -13,7 +13,7 @@ class CreateDietasActivasTable extends Migration
      */
     public function up()
     {
-        Schema::create('dietas_activas', function (Blueprint $table) {
+        Schema::create('dieta_activa', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dieta_id');
             $table->dateTime('fecha');
@@ -21,12 +21,14 @@ class CreateDietasActivasTable extends Migration
             $table->string('observacion',100);
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_dieta_activa');
+
             $table->foreign('dieta_id')
                 ->references('id')
-                ->on('dietas')
+                ->on('dieta')
                 ->onDelete('cascade');
 
-            $table->unique(['dieta_id','fecha'], 'dietas_activas_dieta_id_fecha_primary');
+            $table->unique(['dieta_id','fecha'], 'unique_dietas_activas_dieta_id_fecha');
 
         });
     }

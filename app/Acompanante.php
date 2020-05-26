@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acompanante extends Model
 {
-  protected $table = "acompanantes";
+  protected $table = "acompanante";
 
   protected $fillable = [
-      'acompanante_id', 'paciente_id','fecha',
+      'id', 'acompanante_id', 'paciente_id','fecha',
   ];
+
+  public static function buscar_por_id(int $id){
+    return static::where('id','=',$id)->get()->first();
+  }
+
   public static function findByPaciente($paciente_id,$fecha)
   {
       if(($paciente_id)&&($fecha)){

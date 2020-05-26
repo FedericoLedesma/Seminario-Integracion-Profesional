@@ -9,7 +9,7 @@ class HistoriaInternacion extends Model
   protected $table = "historia_internacion";
 
   protected $fillable = [
-      'paciente_id', 'fecha_ingreso', 'peso', 'fecha_egreso',
+      'id', 'paciente_id', 'fecha_ingreso', 'peso', 'fecha_egreso',
   ];
   public static function findByPaciente($paciente_id,$fecha_ingreso)
   {
@@ -52,7 +52,7 @@ class HistoriaInternacion extends Model
              ->get();
     if ($pac<>null)
       return true;
-    else 
+    else
       return false;
   }
 

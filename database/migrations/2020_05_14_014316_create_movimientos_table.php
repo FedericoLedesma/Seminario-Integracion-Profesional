@@ -13,21 +13,28 @@ class CreateMovimientosTable extends Migration
      */
     public function up()
     {
-        Schema::create('movimientos', function (Blueprint $table) {
+        Schema::create('movimiento', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->unsignedBigInteger('racion_disponible_id');
           $table->dateTime('creado');
           $table->unsignedBigInteger('user_id');
           $table->unsignedInteger('tipo_movimiento_id');
-          $table->unsignedInteger('cantidad');
+          $table->unsignedInteger('cantidad');#trigger: cantidad > 0
+          /*$table->unsignedBigInteger('racion_id');#trigger: que settee racion y horario id.
+          $table->unsignedBigInteger('horario_id');*/
 
+		  #$table->primary(['id'],'primary_key_movimiento');
 
-
-          $table->unique(['racion_disponible_id','creado','user_id','tipo_movimiento_id'],'movimiento_racion_primary_');
+          $table->unique(['racion_disponible_id','creado','user_id','tipo_movimiento_id'],'unique_movimiento_racion_disponible_user_tipo');
+          #$table->unique(['racion_id','horario_id','creado','user_id','tipo_movimiento_id'],'unique_movimiento_racion_horario_user_tipo');
 
           $table->foreign('racion_disponible_id')
               ->references('id')
-              ->on('raciones_disponibles');
+              ->on('racion_disponible');
+
+		  /*$table->foreign(['racion_id','horario_id'])
+              ->references(['racion_id','horario_id'])
+              ->on('racion_disponible');*/
 
           $table->foreign('user_id')
               ->references('id')
@@ -36,7 +43,7 @@ class CreateMovimientosTable extends Migration
 
           $table->foreign('tipo_movimiento_id')
               ->references('id')
-              ->on('tipos_movimientos')
+              ->on('tipo_movimiento')
               ->onDelete('cascade');
 
 

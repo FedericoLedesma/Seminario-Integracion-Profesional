@@ -13,15 +13,17 @@ class CreatePersonalSectoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_sectores', function (Blueprint $table) {
+        Schema::create('personal_sector', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('sector_id');
             $table->unsignedBigInteger('personal_id');
             $table->date('fecha');
 
+			#$table->primary(['id'],'primary_key_personal_sector');
+
             $table->foreign('sector_id')
                 ->references('id')
-                ->on('sectores')
+                ->on('sector')
                 ->onDelete('cascade');
 
             $table->foreign('personal_id')
@@ -30,7 +32,8 @@ class CreatePersonalSectoresTable extends Migration
                 ->onDelete('cascade');
 
 
-            $table->unique(['personal_id','fecha'], 'personal_sectores_sector_id_personal_id_fecha_primary');
+            $table->unique(['personal_id','fecha'], 'unique_personal_sector_ersonal_id_fecha');
+            #$table->unique(['personal_id','sector_id','fecha'], 'unique_personal_sector_sector_id_personal_id_fecha');
         });
     }
     /**

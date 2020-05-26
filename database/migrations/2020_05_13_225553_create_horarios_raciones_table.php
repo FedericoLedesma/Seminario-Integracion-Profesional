@@ -13,21 +13,23 @@ class CreateHorariosRacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('horarios_raciones', function (Blueprint $table) {
+        Schema::create('horario_racion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('horario_id');
             $table->unsignedBigInteger('racion_id');
 
+			#$table->primary(['id'],'primary_key_horario_racion');
+
             $table->foreign('horario_id')
                 ->references('id')
-                ->on('horarios')
+                ->on('horario')
                 ->onDelete('cascade');
 
             $table->foreign('racion_id')
                 ->references('id')
-                ->on('raciones')
+                ->on('racion')
                 ->onDelete('cascade');
-            $table->unique(['horario_id','racion_id'],'unique_index');
+            $table->unique(['horario_id','racion_id'],'unique_index_horario_racion');
             $table->index(['horario_id','racion_id'],'horarios_raciones_index');
         });
     }

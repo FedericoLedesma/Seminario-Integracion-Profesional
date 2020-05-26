@@ -11,7 +11,7 @@ class PatologiaAlimentosProhibidos extends Model
     protected $table = "patologia_alimentos_prohibidos";
 
     protected $fillable = [
-        'patologia_id', 'alimento_id', 'fecha',
+        'id', 'patologia_id', 'alimento_id', 'fecha',
     ];
     public static function findById($patologia_id,$alimento_id,$fecha)
     {

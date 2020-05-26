@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class Sector extends Model
 {
-  protected $table = "sectores";
+  protected $table = "sector";
 
   protected $fillable = [
       'id', 'name', 'descripcion',

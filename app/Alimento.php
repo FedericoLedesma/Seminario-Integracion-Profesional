@@ -7,7 +7,7 @@ use App\RacionAlimento;
 
 class Alimento extends Model
 {
-  protected $table = "alimentos";
+  protected $table = "alimento";
 
   protected $fillable = [
       'id', 'name',

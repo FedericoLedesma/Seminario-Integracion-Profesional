@@ -8,7 +8,7 @@ use App\Horario;
 
 class HorarioRacion extends Model
 {
-    protected $table = "horarios_raciones";
+    protected $table = "horario_racion";
 
     protected $fillable = [
         'id','horario_id', 'racion_id',
@@ -45,6 +45,10 @@ class HorarioRacion extends Model
     *
     *
     */
+
+    public function get_horario_racion_id(){
+      return $this->id;
+    }
 
     public function get_racion(){
       return Racion::findById($this->racion_id);

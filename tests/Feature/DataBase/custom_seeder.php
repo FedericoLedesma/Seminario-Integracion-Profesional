@@ -13,6 +13,7 @@ use App\Acompanante;
 use App\TipoDocumento;
 use App\HorarioRacion;
 use App\RacionesDisponibles;
+use App\HistoriaInternacion;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -390,7 +391,7 @@ class custom_seeder
       ];
     }
 
-    private static function cargar_personal(){
+    private static function cargar_personal_y_pacientes(){
       static::cargar_personas();
       $data = [
         'id'=>1,
@@ -416,6 +417,36 @@ class custom_seeder
       ];
       $p4 = new Personal($data);
       $p4->save();
+      $data = [
+        'id'=>5
+      ];
+      $p5 = new Paciente($data);
+      $p5->save();
+      $data = [
+        'id'=>6
+      ];
+      $p6 = new Paciente($data);
+      $p6->save();
+      $data = [
+        'id'=>7
+      ];
+      $p7 = new Paciente($data);
+      $p7->save();
+      $data = [
+        'id'=>8
+      ];
+      $p8 = new Paciente($data);
+      $p8->save();
+      $data = [
+        'id'=>9
+      ];
+      $p9 = new Paciente($data);
+      $p9->save();
+      $data = [
+        'id'=>10
+      ];
+      $p10= new Paciente($data);
+      $p10->save();
     }
 
     private static function cargar_horario_racion(){
@@ -543,8 +574,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 19
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-19',
@@ -557,8 +586,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 18
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-18',
@@ -571,8 +598,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 17
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-17',
@@ -585,8 +610,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 16
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-16',
@@ -599,8 +622,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 15
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-15',
@@ -613,8 +634,6 @@ class custom_seeder
         $rd->save();
 
         //Raciones para el 14
-        $rd = new RacionesDisponibles($data);
-        $rd->save();
         $data = [
             'racion_id'=>$x->get_racion_id(),
             'fecha'=>'2020-5-14',
@@ -629,6 +648,57 @@ class custom_seeder
 
     }
 
-    
+    public static function cargar_menu_persona(){
+      static::cargar_personal_y_pacientes();
+      static::cargar_raciones_disponibles();
+      $data = [
+        'paciente_id'=>5,
+        'fecha_ingreso'=>2020-1-1,
+        'peso'=>70,
+        'fecha_egreso'=>null,
+      ];
+      $h1 = new HistoriaInternacion($data);
+      $h1->save();
+      $data = [
+        'paciente_id'=>6,
+        'fecha_ingreso'=>2020-1-1,
+        'peso'=>70,
+        'fecha_egreso'=>null,
+      ];
+      $h2 = new HistoriaInternacion($data);
+      $h2->save();
+      $data = [
+        'paciente_id'=>7,
+        'fecha_ingreso'=>2020-1-1,
+        'peso'=>80,
+        'fecha_egreso'=>null,
+      ];
+      $h3 = new HistoriaInternacion($data);
+      $h3->save();
+      $data = [
+        'paciente_id'=>8,
+        'fecha_ingreso'=>2020-5-1,
+        'peso'=>70,
+        'fecha_egreso'=>2020-5-10,
+      ];
+      $h4 = new HistoriaInternacion($data);
+      $h4->save();
+      $data = [
+        'paciente_id'=>9,
+        'fecha_ingreso'=>2020-5-10,
+        'peso'=>70,
+        'fecha_egreso'=>null,
+      ];
+      $h5 = new HistoriaInternacion($data);
+      $h5->save();
+      $data = [
+        'paciente_id'=>10,
+        'fecha_ingreso'=>2020-5-10,
+        'peso'=>70,
+        'fecha_egreso'=>null,
+      ];
+      $h6 = new HistoriaInternacion($data);
+      $h6->save();
+    }
 
 }

@@ -13,7 +13,7 @@ class CreateMenusPersonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus_personas', function (Blueprint $table) {
+        Schema::create('menu_persona', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('racion_disponible_id');
@@ -22,13 +22,15 @@ class CreateMenusPersonasTable extends Migration
             $table->boolean('realizado');
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_menu_persona');
+
             $table->foreign('racion_disponible_id')
                 ->references('id')
-                ->on('raciones_disponibles');
+                ->on('racion_disponible');
 
             $table->foreign('persona_id')
                 ->references('id')
-                ->on('personas')
+                ->on('persona')
                 ->onDelete('cascade');
 
             $table->foreign('personal_id')

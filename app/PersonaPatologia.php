@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PersonaPatologia extends Pivot
 {
-    protected $table = "personas_patologias";
+    protected $table = "persona_patologia";
 
     protected $fillable = [
-        'patologia_id', 'persona_id', 'fecha',
+        'id', 'patologia_id', 'persona_id', 'fecha',
     ];
 
     public $timestamps = false;

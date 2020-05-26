@@ -13,21 +13,23 @@ class CreatePersonasPatologiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('personas_patologias', function (Blueprint $table) {
+        Schema::create('persona_patologia', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->unsignedInteger('patologia_id');
           $table->unsignedBigInteger('persona_id');
           $table->date('fecha');
           $table->date('hasta')->nullable($value = true);
 
+		  #$table->primary(['id'],'primary_key_persona_patologia');
+
           $table->foreign('patologia_id')
               ->references('id')
-              ->on('patologias')
+              ->on('patologia')
               ->onDelete('restrict');
 
           $table->foreign('persona_id')
               ->references('id')
-              ->on('personas')
+              ->on('persona')
               ->onDelete('restrict');
 
 

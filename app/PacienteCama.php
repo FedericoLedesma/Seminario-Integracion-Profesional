@@ -8,10 +8,10 @@ use App\Paciente;
 
 class PacienteCama extends Model
 {
-    protected $table = "pacientes_camas";
+    protected $table = "paciente_cama";
 
     protected $fillable = [
-        'paciente_id', 'fecha', 'cama_id','habitacion_id','sector_id',
+        'id','paciente_id', 'fecha', 'fecha_fin', 'cama_id','habitacion_id','sector_id',
     ];
 
     public static function findByPacienteFecha($paciente_id,$fecha)

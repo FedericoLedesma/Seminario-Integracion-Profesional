@@ -13,20 +13,23 @@ class CreateHabitacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('habitaciones', function (Blueprint $table) {
+        Schema::create('habitacion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('sector_id');
-            $table->string('name',50);
-            $table->string('descripcion',50)->nullable($value = true);
+            $table->string('name' ,50);
+            $table->string('descripcion' ,50)->nullable($value = true);
             $table->timestamps();
+
+			#$table->primary(['id'],'primary_key_habitacion');
 
             $table->foreign('sector_id')
                 ->references('id')
-                ->on('sectores')
+                ->on('sector')
                 ->onDelete('cascade');
 
               //$table->primary(['paciente_id','fecha'], 'acompanantes_paciente_id_fecha_primary');
-              $table->unique('id','sector_id');
+             #$table->unique('id','unique_sector_id');
+			$table->unique(['sector_id','name'],'unique_sector_id_name');
 
         });
     }

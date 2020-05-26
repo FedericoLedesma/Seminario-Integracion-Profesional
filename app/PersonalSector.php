@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalSector extends Model
 {
-  protected $table = "personal_sectores";
+  protected $table = "personal_sector";
 
   protected $fillable = [
-      'sector_id', 'personal_id','fecha',
+      'id', 'sector_id', 'personal_id','fecha',
   ];
 
   public static function findByPacienteFecha($personal_id,$fecha)

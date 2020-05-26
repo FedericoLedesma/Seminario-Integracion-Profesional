@@ -13,17 +13,17 @@ class CreatePacientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pacientes', function (Blueprint $table) {
+        Schema::create('paciente', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
 
             $table->foreign('id')
                 ->references('id')
-                ->on('personas')
+                ->on('persona')
                 ->onDelete('cascade');
 
             $table->timestamps();
 
-            $table->primary(['id'], 'pacientes_id_primary');
+            #$table->primary(['id'], 'primary_key_paciente');
         });
     }
 

@@ -13,11 +13,13 @@ class CreateSectoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('sectores', function (Blueprint $table) {
+        Schema::create('sector', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('name',50);
-            $table->string('descripcion',50);
+            $table->string('name' ,50);
+            $table->string('descripcion' ,50);
             $table->timestamps();
+
+			#$table->primary(['id'],'primary_key_sector');
         });
     }
 

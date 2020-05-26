@@ -11,7 +11,7 @@ class RacionesDisponibles extends Model
     protected $table = "racion_disponible";
 
     protected $fillable = [
-        'id','horario_racion_id','racion_id', 'fecha', 'horario_id','stock_original','cantidad_restante',
+        'id','horario_racion_id',/*'racion_id',*/ 'fecha', /*'horario_id',*/'stock_original','cantidad_restante',
         'cantidad_realizados',
     ];
     public static function findById($id)

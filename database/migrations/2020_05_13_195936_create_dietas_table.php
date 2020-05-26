@@ -13,16 +13,18 @@ class CreateDietasTable extends Migration
      */
     public function up()
     {
-        Schema::create('dietas', function (Blueprint $table) {
+        Schema::create('dieta', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('patologia_id')->nullable($value = true);
             $table->string('observacion', 100);
             $table->unsignedBigInteger('personal_id');
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_dieta');
+
             $table->foreign('patologia_id')
                 ->references('id')
-                ->on('patologias')
+                ->on('patologia')
                 ->onDelete('cascade');
 
             $table->foreign('personal_id')

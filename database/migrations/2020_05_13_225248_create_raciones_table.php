@@ -13,11 +13,15 @@ class CreateRacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('raciones', function (Blueprint $table) {
+        Schema::create('racion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',50);
-            $table->string('observacion',100);
+            #$table->string('name',50);
+            $table->string('name');
+            $table->string('observacion',100)->nullable();
             $table->timestamps();
+
+			#$table->primary(['id'],'primary_key_racion');
+
         });
     }
 

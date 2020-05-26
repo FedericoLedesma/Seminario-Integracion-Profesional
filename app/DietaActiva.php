@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class DietaActiva extends Model
 {
-    protected $table = "dietas_activas";
+    protected $table = "dieta_activa";
 
     protected $fillable = [
-        'dieta_id', 'fecha', 'fecha_final', 'observacion',
+        'id', 'dieta_id', 'fecha', 'fecha_final', 'observacion',
     ];
     public static function findById($dieta_id)
     {

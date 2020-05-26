@@ -9,7 +9,7 @@ use App\PacienteCama;
 
 class Paciente extends Model
 {
-  protected $table = "pacientes";
+  protected $table = "paciente";
 
   protected $fillable = [
       'id',

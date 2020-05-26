@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class Habitacion extends Model
 {
     //
-    protected $table = "habitaciones";
+    protected $table = "habitacion";
 
     protected $fillable = [
         'id','habitacion_id', 'sector_id','name','descripcion',

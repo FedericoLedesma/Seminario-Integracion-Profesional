@@ -8,15 +8,15 @@ use App\PacienteCama;
 
 class Cama extends Model
 {
-    protected $table = "camas";
+    protected $table = "cama";
 
     protected $fillable = [
-        'cama_id','habitacion_id', #'sector_id',
+        /*'cama_id',*/'id','habitacion_id', #'sector_id',
     ];
-    public static function findByIdHabitacionSector($cama_id,$habitacion_id, $sector_id)
+    public static function findByIdHabitacionSector($id,$habitacion_id, $sector_id)
     {
-        if((($habitacion_id)&&($sector_id))&&($cama_id)){
-           $habitacion = static::where('cama_id', $cama_id)
+        if((($habitacion_id)&&($sector_id))&&($id)){
+           $habitacion = static::where('id', $id)
            ->where('habitacion_id', $habitacion_id)
            ->where('sector_id',$sector_id)
            ->first();
@@ -31,12 +31,12 @@ class Cama extends Model
       if(($sector_id)&&($habitacion_id)){
         return $query->where('sector_id',$sector_id)
         ->where('habitacion_id',$habitacion_id)
-        ->orderBy('cama_id', 'asc');
+        ->orderBy('id', 'asc');
       }return null;
     }
 
     public static function buscar_por_id($id){
-      return static::where('cama_id','=',$id)
+      return static::where('id','=',$id)
         ->get()
         ->first();
     }
@@ -55,10 +55,10 @@ class Cama extends Model
     }
 
     public function get_pacientes(){
-      return PacienteCama::buscar_pacientes($this->cama_id);
+      return PacienteCama::buscar_pacientes($this->id);
     }
 
     public function get_pacientes_internados(){
-      return PacienteCama::buscar_paciente_actual($this->cama_id);
+      return PacienteCama::buscar_paciente_actual($this->id);
     }
 }

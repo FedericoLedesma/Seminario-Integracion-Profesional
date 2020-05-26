@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 class Persona extends Model
 {
     //
-    protected $table = "personas";
+    protected $table = "persona";
 
     protected $fillable = [
         'id', 'numero_doc', 'apellido', 'name', 'observacion', 'direccion', 'email', 'provincia',

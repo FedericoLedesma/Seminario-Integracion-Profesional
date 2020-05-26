@@ -10,10 +10,10 @@ use App\Informes\InformeRacion;
 
 class MenuPersona extends Model
 {
-  protected $table = "menus_personas";
+  protected $table = "menu_persona";
 
   protected $fillable = [
-      'persona_id','horario_id','racion_id', 'fecha','personal_id',
+      'id', 'persona_id','racion_disponible_id','personal_id',
       'dieta_id','realizado',
   ];
 

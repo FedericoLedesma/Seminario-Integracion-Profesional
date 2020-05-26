@@ -13,10 +13,13 @@ class CreateHorariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('horarios', function (Blueprint $table) {
+        Schema::create('horario', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('name',50);
+            $table->string('name' ,50);
             $table->timestamps();
+
+			#$table->primary(['id'],'primary_key_horario');
+
         });
     }
 

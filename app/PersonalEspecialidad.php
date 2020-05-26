@@ -9,7 +9,7 @@ class PersonalEspecialidad extends Model
     protected $table = "personal_especialidad";
 
     protected $fillable = [
-        'personal_id','especialidad_id',
+        'id','personal_id','especialidad_id','fecha',
     ];
 
     public $timestamps = false;

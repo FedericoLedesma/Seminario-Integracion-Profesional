@@ -13,15 +13,17 @@ class CreateCamasTable extends Migration
      */
     public function up()
     {
-        Schema::create('camas', function (Blueprint $table) {
+        Schema::create('cama', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('habitacion_id');
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_cama');
+
             $table->foreign('habitacion_id')
                 ->references('id')
-                ->on('habitaciones');
-            $table->unique(['id','habitacion_id'],'unique');
+                ->on('habitacion');
+            $table->unique(['id','habitacion_id'],'unique_cama_id_habitacion');
         });
     }
 

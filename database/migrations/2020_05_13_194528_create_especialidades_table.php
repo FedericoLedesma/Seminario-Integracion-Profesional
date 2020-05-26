@@ -13,15 +13,17 @@ class CreateEspecialidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('especialidades', function (Blueprint $table) {
+        Schema::create('especialidad', function (Blueprint $table) {
             $table->Increments('id');
             $table->unsignedInteger('profesion_id');
             $table->string('name',50);
             $table->timestamps();
 
+			#$table->primary(['id'],'primary_key_especialidad');
+
             $table->foreign('profesion_id')
                 ->references('id')
-                ->on('profesiones')
+                ->on('profesion')
                 ->onDelete('cascade');
         });
     }

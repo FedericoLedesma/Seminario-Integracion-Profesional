@@ -8,10 +8,10 @@ use App\Racion;
 
 class DietaActivaRacion extends Model
 {
-    protected $table = "dietas_activas_raciones";
+    protected $table = "dieta_activa_racion";
 
     protected $fillable = [
-        'dieta_id', 'fecha','fecha_final','observacion','racion_id'
+        'id', 'dieta_activa_id', 'racion_id', 'fecha'
     ];
 
     public static function findByDietaFecha($dieta_id,$fecha)
@@ -51,7 +51,7 @@ class DietaActivaRacion extends Model
     }
 
     public function get_dieta_activa(){
-      return DietaActiva::findByIdFecha($this->dieta_id,$this->fecha);
+      return DietaActiva::find($this->dieta_activa_id);
     }
 
     public function get_patologia(){

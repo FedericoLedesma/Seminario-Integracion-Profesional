@@ -8,7 +8,7 @@ use App\PatologiaAlimentosProhibidos;
 class Patologia extends Model
 {
     //
-    protected $table = "patologias";
+    protected $table = "patologia";
 
     protected $fillable = [
         'id', 'name', 'descripcion', 'tipo_patologia_id',

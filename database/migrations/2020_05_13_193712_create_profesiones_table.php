@@ -13,10 +13,12 @@ class CreateProfesionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('profesiones', function (Blueprint $table) {
+        Schema::create('profesion', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('name',50);
+            $table->string('name' ,50);
             $table->timestamps();
+
+			#$table->primary(['id'],'primary_key_profesion');
         });
     }
 

@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class RacionAlimento extends Model
 {
-    protected $table = "raciones_alimentos";
+    protected $table = "racion_alimento";
 
     protected $fillable = [
-        'racion_id', 'alimento_id', 'cantidad',
+        'id', 'racion_id', 'alimento_id', 'cantidad',
     ];
     public $timestamps = false;
     public static function findById($racion_id,$alimento_id)

@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Movimiento;
 
 class TipoMovimiento extends Model
 {
-    protected $table = "tipos_movimientos";
+    protected $table = "tipo_movimiento";
 
     protected $fillable = [
-        'id', 'name',
+        'id', 'name', 'query',
     ];
     public static function findById($id)
     {
@@ -24,5 +25,9 @@ class TipoMovimiento extends Model
         return $query->where('name','LIKE','%'.$name.'%')
         ->orderBy('id', 'asc');
       }return null;
+    }
+
+    public function aplicar_movimiento(Movimiento $movimiento){
+
     }
 }

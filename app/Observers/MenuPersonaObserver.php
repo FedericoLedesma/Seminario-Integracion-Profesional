@@ -27,7 +27,7 @@ class MenuPersonaObserver
           'cantidad_realizados'=>$r->cantidad_realizados+1,
           'cantidad_restante'=>$r->cantidad_restante-1
         ]);*/
-        if ($r->cantidad_restante<=0){
+        /*if ($r->cantidad_restante<=0){
           return false;
         }
         else{
@@ -36,7 +36,7 @@ class MenuPersonaObserver
           ->where('fecha','=', $menuPersona->fecha)
           ->update(['cantidad_realizados'=>$r->cantidad_realizados+1,
           'cantidad_restante'=>$r->cantidad_restante-1]);
-        }
+        }*/
         #return true;
     }
    public function creating(MenuPersona $menuPersona)
@@ -49,8 +49,9 @@ class MenuPersonaObserver
 
        Log::debug('Pase por MenuPersonaObserver en creating, '.$menuPersona);
        $r = RacionesDisponibles::findById($menuPersona->horario_id,$menuPersona->racion_id,$menuPersona->fecha);
-       if ($r->cantidad_restante<=0){
-         return false;
+       if( $r<>null)
+		   if ($r->cantidad_restante<=0){
+			 return false;
        }
    }
 

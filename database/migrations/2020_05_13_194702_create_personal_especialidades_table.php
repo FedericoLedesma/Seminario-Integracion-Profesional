@@ -13,11 +13,13 @@ class CreatePersonalEspecialidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_especialidades', function (Blueprint $table) {
+        Schema::create('personal_especialidad', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('personal_id');
             $table->unsignedInteger('especialidad_id');
             $table->date('fecha');
+
+			#$table(['id'],'primary_key_personal_especialidad');
 
             $table->foreign('personal_id')
                 ->references('id')
@@ -26,7 +28,7 @@ class CreatePersonalEspecialidadesTable extends Migration
 
             $table->foreign('especialidad_id')
                 ->references('id')
-                ->on('especialidades')
+                ->on('especialidad')
                 ->onDelete('cascade');
 
             $table->unique(['personal_id','especialidad_id','fecha'], 'personal_especialidades_primary');

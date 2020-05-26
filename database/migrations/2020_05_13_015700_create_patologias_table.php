@@ -13,7 +13,7 @@ class CreatePatologiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('patologias', function (Blueprint $table) {
+        Schema::create('patologia', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('name',50);
             $table->string('descripcion',50)->nullable($value=true);
@@ -22,8 +22,10 @@ class CreatePatologiasTable extends Migration
 
             $table->foreign('tipo_patologia_id')
                 ->references('id')
-                ->on('tipos_patologias')
+                ->on('tipo_patologia')
                 ->onDelete('cascade');
+			
+			$table->unique(['name'],'unique_patologia_name');
 
         });
     }

@@ -9,7 +9,7 @@ use App\Patologia;
 
 class Racion extends Model
 {
-  protected $table = "raciones";
+  protected $table = "racion";
 
   protected $fillable = [
       'id', 'name', 'observacion',
@@ -189,7 +189,7 @@ class Racion extends Model
   {
     return $this->belongsToMany('App\Horario', 'horarios_raciones')->withPivot('id');
   }
-  
+
   public static function resta_total_contra_lista($lista){
     $res = Array();
     $all = static::all();
