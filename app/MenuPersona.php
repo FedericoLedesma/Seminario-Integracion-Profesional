@@ -380,11 +380,9 @@ class MenuPersona extends Model
   *   @param query String yyyy-mm-dd
   *   @return MenuRacion[]
   */
-  public static function buscar_por_fecha($query){
-    $menues = static::where('fecha','=',$query)
-      ->orderBy('fecha','desc')
+  public static function buscar_por_fecha($fecha){
+    return static::where('fecha','=',$fecha)
       ->get();
-    return $menues;
   }
 
 

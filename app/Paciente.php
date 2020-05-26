@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\HistoriaInternacion;
 use App\Persona;
+use App\PacienteCama;
 
 class Paciente extends Model
 {
@@ -28,6 +29,22 @@ class Paciente extends Model
       array_push($res,Persona::findById($h->paciente_id));
     }
     return $res;
+  }
+
+  public function get_cama(){
+    return PacienteCama::buscar_ultima_cama_ocupada_por_paciente($this->id);
+  }
+
+  public function get_habitacion(){
+    return $this->get_cama()->get_habitacion();
+  }
+
+  public function is_internado(){
+    return HistoriaInternacion::is_internado($this->id);
+  }
+
+  public function get_persona(){
+    return Persona::findById($this->id);
   }
 
 }

@@ -46,4 +46,14 @@ class HistoriaInternacion extends Model
              ->get();
   }
 
+  public static function is_internado($id){
+    $pac = static::where('fecha_egreso','=',null)
+             ->where('paciente_id','=',$id)
+             ->get();
+    if ($pac<>null)
+      return true;
+    else 
+      return false;
+  }
+
 }
