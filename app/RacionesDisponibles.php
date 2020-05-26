@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 class RacionesDisponibles extends Model
 {
-    protected $table = "raciones_disponibles";
+    protected $table = "racion_disponible";
 
     protected $fillable = [
-        'racion_id', 'fecha', 'horario_id','stock_original','cantidad_restante',
+        'id','horario_racion_id','racion_id', 'fecha', 'horario_id','stock_original','cantidad_restante',
         'cantidad_realizados',
     ];
     public static function findById($horario_id,$racion_id,$fecha)
@@ -74,7 +74,7 @@ class RacionesDisponibles extends Model
       [
         'racion_id' => $this->racion_id,
         'horario_id'=> $this->horario_id,
-        'fecha'=>$this->fecha,     
+        'fecha'=>$this->fecha,
       ]);
     }
     public function scopeGetRacionesDisponiblesFecha($query, $fecha)

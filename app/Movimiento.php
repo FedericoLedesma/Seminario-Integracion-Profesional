@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movimiento extends Model
 {
-  protected $table = "movimientos";
+  protected $table = "movimiento";
 
   protected $fillable = [
-      'horario_id','racion_id', 'fecha','creado',
+      'racion_disponible_id','horario_id','racion_id', 'fecha','creado',
       'user_id','tipo_movimiento_id','cantidad',
   ];
   public $timestamps = false;
@@ -57,6 +57,6 @@ class Movimiento extends Model
   {
     return $this->belongsTo('App\TipoMovimiento', 'tipo_movimiento_id');
   }
-  
+
 
 }
