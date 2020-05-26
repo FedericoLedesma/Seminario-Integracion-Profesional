@@ -11,7 +11,7 @@ class HorarioRacion extends Model
     protected $table = "horarios_raciones";
 
     protected $fillable = [
-        'horario_id', 'racion_id',
+        'id','horario_id', 'racion_id',
     ];
     public $timestamps = false;
     public static function findById($horario_id,$racion_id)
@@ -69,7 +69,12 @@ class HorarioRacion extends Model
     public function get_horario_id(){
       return $this->get_horario()->id;
     }
-
+    public function racion(){
+      return $this->belongsTo('App\Racion', 'racion_id');
+    }
+    public function horario(){
+      return $this->belongsTo('App\Horario', 'horario_id');
+    }
 
 
 }

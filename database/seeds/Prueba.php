@@ -6,6 +6,8 @@ use App\TipoDni;
 use App\Patologia;
 use App\TipoPatologia;
 use App\Paciente;
+use App\Racion;
+use App\Alimento;
 use App\Acompanante;
 use App\RacionesDisponibles;
 use App\MenuPersona;
@@ -33,12 +35,34 @@ class Prueba extends Seeder
     $tipoPatologia->delete();
     $patologias=Patologia::findByTipoPatologia(4)->get();
     echo count($patologias);
-*/
 
-    $rd=RacionesDisponibles::findById(3,1,$fecha);
+    $p=Patologia::create([
+      'name'=>'p1',
+    ]);
 
-    $rd->eliminar();
-    echo $rd;
+    $alimento=Alimento::create([
+      'name'=>'alimento1',
+    ]);*/
+    $horarioId=1;
+    $racion=Racion::findById(1);
+
+    $horario_racion_id=$racion->horarios()->wherePivot('horario_id',$horarioId)->first()->pivot->id;
+  //  $rd->eliminar();
+    //echo $rd;
+    echo $horario_racion_id;
+
+    if($horario_racion_id){
+      $creado=new DateTime(date("Y-m-d H:i:s"));
+      $racionDisponible=RacionesDisponibles::create([
+          'horario_racion_id' => $horario_racion_id,
+          'fecha' => $fecha,
+          'stock_original' => 0,
+          'cantidad_restante' =>0,
+          'cantidad_realizados' => 0,
+        ]);
+      }
+
+
     }
 
 

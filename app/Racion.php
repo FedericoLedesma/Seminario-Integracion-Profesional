@@ -187,9 +187,9 @@ class Racion extends Model
   }
   public function horarios()
   {
-    return $this->belongsToMany('App\Horario', 'horarios_raciones');
+    return $this->belongsToMany('App\Horario', 'horarios_raciones')->withPivot('id');
   }
-
+  
   public static function resta_total_contra_lista($lista){
     $res = Array();
     $all = static::all();

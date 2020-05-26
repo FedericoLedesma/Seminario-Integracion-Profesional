@@ -9,15 +9,15 @@ class Movimiento extends Model
   protected $table = "movimientos";
 
   protected $fillable = [
-      'horario_id','racion_id', 'fecha','creado',
+      'id','racion_disponible_id','creado',
       'user_id','tipo_movimiento_id','cantidad',
   ];
   public $timestamps = false;
-  public static function findById($horario_id,$racion_id, $fecha,$created_at,
+
+  public static function findByHorarioRacionId($horario_racion_id, $fecha,$created_at,
     $user_id,$tipo_movimiento_id)
   {
-      $movimiento = static::where('horario_id', $horario_id)
-      ->where('racion_id', $racion_id)
+      $movimiento = static::where('horario_racion_id', $horario_racion_id)
       ->where('fecha','=', $fecha)
       ->where('user_id','=', $user_id)
       ->where('created_at','=', $created_at)
@@ -57,6 +57,6 @@ class Movimiento extends Model
   {
     return $this->belongsTo('App\TipoMovimiento', 'tipo_movimiento_id');
   }
-  
+
 
 }

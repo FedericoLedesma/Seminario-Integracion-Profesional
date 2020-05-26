@@ -28,11 +28,11 @@
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    		<td>Racion </td>
-				<td>{{$racionDisponible->racion->name}}</td>
+				<td>{{$racionDisponible->horario_racion->racion->name}}</td>
 			</tr>
       <tr>
 				<td>Horario </td>
-				<td>{{$racionDisponible->horario->name}}</td>
+				<td>{{$racionDisponible->horario_racion->horario->name}}</td>
 			</tr>
       <tr>
 				<td>Fecha </td>
