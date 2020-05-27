@@ -30,6 +30,12 @@ class MenuPersona extends Model
      } return null;
   }
 
+  public static function buscar_por_racion_horario_fecha($racion, $horario, $fecha){
+    $raciones_disponibles = RacionesDisponibles::buscar_por_racion_horario_fecha($racion, $horario, $fecha);
+    return static::where('racion_disponible_id','=',$raciones_disponibles->get_id())
+      ->get()->first();
+  }
+
   public function scopeAllHorarioFecha($query,$horario_id,$fecha)
   {
     if(($horario_id)&&($fecha)){
@@ -93,12 +99,15 @@ class MenuPersona extends Model
     $racion = array();
     $c = -1;
     foreach($raciones as $r){
-      $cantidad = static::where([
-        ['persona_id','=',$persona->id],
-        ['fecha','>=',Carbon::now()->subDays(30)],
-        ['racion_id','=',$r->id]
-      ])
-        ->count();
+      $rac_dis = RacionesDisponibles::buscar_por_fecha_racion(Carbon::now()->subDays(30),$r);
+      $cantidad = 0;
+      foreach ($rac_dis as $rd) {
+        $cantidad += static::where([
+          ['persona_id','=',$persona->get_id()],
+          ['racion_disponible_id','=',$rd->get_id()]
+        ])->count();
+      }
+
       if($c==-1){
         $c = $cantidad;
         $racion = $r;

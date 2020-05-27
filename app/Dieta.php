@@ -68,4 +68,50 @@ class Dieta extends Model
     return $this->get_patologia()->get_alimentos_prohibidos();
   }
 
+  //'id', 'patologia_id', 'observacion', 'personal_id',
+
+  public function get_id(){
+    return $this->id;
+  }
+
+  public function set_id(int $id){
+    $this->id = $id;
+  }
+
+  public function get_patologia_id(){
+    return $this->patologia_id;
+  }
+
+  public function set_patologia_id(int $patologia_id){
+    $this->patologia_id = $patologia_id;
+  }
+
+  public function set_patologia(Patologia $patologia){
+    $this->set_patologia_id($patologia->get_id());
+  }
+
+  public function get_observacion(){
+    return $this>->observacion;
+  }
+
+  public function set_observacion($observacion){
+    $this->observacion = $observacion;
+  }
+
+  public function get_personal_id(){
+    return $this->personal_id;
+  }
+
+  public function get_personal(){
+    return Personal::find($this->personal_id);
+  }
+
+  public function set_personal(Personal $personal){
+    $this->set_personal_id($personal->get_id());
+  }
+
+  public function set_personal_id(int $personal_id){
+    $this->personal_id = $personal_id;
+  }
+
 }

@@ -46,8 +46,24 @@ class Cama extends Model
         ->get();
     }
 
+    public function get_id(){
+      return $this->id;
+    }
+
+    public function set_id(int $id){
+      $this->id = $id;
+    }
+
     public function get_habitacion(){
       return Habitacion::buscar_por_id($this->habitacion_id);
+    }
+
+    public function set_habitacion(Habitacion $habitacion){
+      $this->set_habitacion_id($habitacion->get_id());
+    }
+
+    public function set_habitacion_id(int $habitacion_id){
+      $this->habitacion_id = $habitacion_id;
     }
 
     public function get_sector(){
