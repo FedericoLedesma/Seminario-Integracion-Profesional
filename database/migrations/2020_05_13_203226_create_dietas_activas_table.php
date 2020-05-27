@@ -40,6 +40,6 @@ class CreateDietasActivasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dietas_activas');
+        Schema::dropIfExists('dieta_activa');
     }
 }

@@ -46,6 +46,6 @@ class CreateAcompanantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acompanantes');
+        Schema::dropIfExists('acompanante');
     }
 }

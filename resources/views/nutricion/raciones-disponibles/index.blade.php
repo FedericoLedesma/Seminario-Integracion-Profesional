@@ -75,7 +75,7 @@
 									</td>
 
 								 <td>
-										{!!	Form::text('racionid',null,['id'=>'racionesid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el id'])!!}
+										{!!	Form::number('racionid',null,['id'=>'racionesid','class'=>'form-control','name'=>'search','min'=>'0','placeholder'=>'Ingrese el id'])!!}
 								 </td>
 								 <td>
 									 {!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}

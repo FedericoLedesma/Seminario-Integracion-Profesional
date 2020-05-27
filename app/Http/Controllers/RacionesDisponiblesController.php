@@ -41,7 +41,12 @@ class RacionesDisponiblesController extends Controller
               if($query==""){
                   $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
               }else {
-                $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->where('racion_id',$query)->get();
+                $racion=Racion::findById($query);
+                if($racion){
+                    $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_racion($fecha,$racion);
+                }{
+                  $racionesDisponibles=null;
+                }
               }
             break;
           default:
@@ -197,6 +202,7 @@ class RacionesDisponiblesController extends Controller
         $rd->cantidad_realizados=$rd->cantidad_realizados+$cantidad_realizados;
         $rd->stock_original=$rd->stock_original+$cantidad_stock;
         $rd->cantidad_restante=$rd->cantidad_restante+$cantidad_stock-$cantidad_realizados;
+        Log::info("racion disponible actualizada -> ".$rd);
         $rd->guardar();//Debi definir este metodo porque Laravel no acepta claves compuesta por ende no puedo utilizar el save()
         return response([
           'raciones'=>'exito',
@@ -214,13 +220,23 @@ class RacionesDisponiblesController extends Controller
       Log::info('Destroy Raciones disponibles');
       Log::info($request);
       $rd=$request->racionDisponible;
-      $racionDisponible=RacionesDisponibles::findById($rd['horario_id'],$rd['racion_id'],$rd['fecha']);
+      $racionDisponible=RacionesDisponibles::findById($rd['id']);
+      Log::info($racionDisponible);
       try{
-        $racionDisponible->eliminar();
+        $fecha_actual= new DateTime(date("Y-m-d"));
+        $fecha_racion=date_create($racionDisponible->fecha);
+        if($fecha_racion>$fecha_actual){
+        $racionDisponible->delete();
         return response()->json([
               'estado'=>'true',
               'success' => 'Disponinilidad de racion eliminada con exito!'
           ]);
+        }else{
+          return response()->json([
+                'estado'=>'false',
+                'success' => 'No se puede eliminar una Disponibilidad anterior a la fecha actual'
+            ]);
+        }
       } catch (\Exception $e) {
         return response()->json([
           'estado'=>'false',

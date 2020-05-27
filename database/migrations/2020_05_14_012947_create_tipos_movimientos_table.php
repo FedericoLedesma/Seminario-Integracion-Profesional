@@ -32,6 +32,6 @@ class CreateTiposMovimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_movimientos');
+        Schema::dropIfExists('tipo_movimiento');
     }
 }

@@ -75,7 +75,7 @@ class HorarioRacion extends Model
     public function get_horario(){return Horario::findById($this->horario_id);}
     public function get_horario_name(){return $this->get_horario()->name;}
     public function get_horario_id(){return $this->get_horario()->id;}
-    
+
     public function racion(){
       return $this->belongsTo('App\Racion', 'racion_id');
     }

@@ -33,6 +33,6 @@ class CreateTiposPatologiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_patologias');
+        Schema::dropIfExists('tipo_patologia');
     }
 }

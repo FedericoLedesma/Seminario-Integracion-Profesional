@@ -30,7 +30,8 @@ class CreateMovimientosTable extends Migration
 
           $table->foreign('racion_disponible_id')
               ->references('id')
-              ->on('racion_disponible');
+              ->on('racion_disponible')
+              ->onDelete('cascade');
 
 		  /*$table->foreign(['racion_id','horario_id'])
               ->references(['racion_id','horario_id'])
@@ -58,6 +59,6 @@ class CreateMovimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movimientos');
+        Schema::dropIfExists('movimiento');
     }
 }

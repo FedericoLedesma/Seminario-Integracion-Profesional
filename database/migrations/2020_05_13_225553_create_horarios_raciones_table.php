@@ -41,6 +41,6 @@ class CreateHorariosRacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('horarios_raciones');
+        Schema::dropIfExists('horario_racion');
     }
 }

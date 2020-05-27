@@ -54,9 +54,7 @@
       <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-stock">
           Agregar Stock
       </a></td>
-      <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-realizados">
-          Agregar cantidad Realizados
-      </a></td>
+    
       </tr>
 		</table>
 		</div>

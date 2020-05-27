@@ -43,6 +43,6 @@ class CreatePatologiaAlimentosProhibidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patologia_alimentos_prohibidos');
+        Schema::dropIfExists('patologia_alimento_prohibido');
     }
 }

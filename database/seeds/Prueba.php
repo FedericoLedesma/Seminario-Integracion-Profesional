@@ -46,22 +46,18 @@ class Prueba extends Seeder
     $horarioId=1;
     $racion=Racion::findById(1);
 
-    $horario_racion_id=$racion->horarios()->wherePivot('horario_id',$horarioId)->first()->pivot->id;
+  //  $horario_racion_id=$racion->horarios()->wherePivot('horario_id',$horarioId)->first()->pivot->id;
   //  $rd->eliminar();
     //echo $rd;
-    echo $horario_racion_id;
-
-    if($horario_racion_id){
-      $creado=new DateTime(date("Y-m-d H:i:s"));
-      $racionDisponible=RacionesDisponibles::create([
-          'horario_racion_id' => $horario_racion_id,
-          'fecha' => $fecha,
-          'stock_original' => 0,
-          'cantidad_restante' =>0,
-          'cantidad_realizados' => 0,
-        ]);
-      }
-
+    //echo $horario_racion_id;
+    $racionDisponible=RacionesDisponibles::findById(1);
+    $fech=date_create('2009-10-11');
+    if($racionDisponible->fecha>$fecha)
+    {
+      echo "La fecha de la racion es mayor";
+    }else {
+      echo "La fecha de la racion es menor";
+    }
 
     }
 

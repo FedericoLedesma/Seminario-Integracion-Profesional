@@ -43,6 +43,6 @@ class CreatePersonalEspecialidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_especialidades');
+        Schema::dropIfExists('personal_especialidad');
     }
 }
