@@ -36,4 +36,20 @@ class Horario extends Model
       return $this->belongsToMany('App\Racion', 'horarios_raciones');
     }
 
+    public function get_id(){
+      return $this->id;
+    }
+
+    public function set_id(int $id){
+      $this->id = $id;
+    }
+
+    public function get_name(){
+      return $this->name;
+    }
+
+    public function set_name($name){
+      $this->name = $name;
+    }
+
 }

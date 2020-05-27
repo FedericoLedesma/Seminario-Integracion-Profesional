@@ -105,6 +105,14 @@ class Racion extends Model
      }
    }
 
+   public function get_id(){
+     return $this->id;
+   }
+
+   public function set_id(int $id){
+     $this->id = $id;
+   }
+
 
 
   /**

@@ -39,6 +39,22 @@ class HorarioRacion extends Model
       }return null;
     }
 
+    public static function buscar_por_id_horario($horario_id){
+      return static::where('horario_id','=',$horario_id)->get();
+    }
+
+    public static function buscar_por_id_racion($racion_id){
+      return static::where('racion_id','=',$racion_id)->get();
+    }
+
+    public static function buscar_por_horario($horario){
+      return static::where('horario_id','=',$horario->get_id())->get();
+    }
+
+    public static function buscar_por_racion($racion){
+      return static::where('racion_id','=',$racion->get_id())->get();
+    }
+
     /**
     *
     Métodos de instancia
@@ -49,7 +65,10 @@ class HorarioRacion extends Model
     public function get_horario_racion_id(){
       return $this->id;
     }
-
+    /**
+     * Devuelve un objeto del tipo App\Racion
+     * @return App\Racion [devuelve la ración asosiada al horario de este objeto]
+     */
     public function get_racion(){
       return Racion::findById($this->racion_id);
     }
@@ -78,6 +97,22 @@ class HorarioRacion extends Model
     }
     public function horario(){
       return $this->belongsTo('App\Horario', 'horario_id');
+    }
+
+    public function get_id(){
+      return $this->id;
+    }
+
+    public function set_id(int $id){
+      $this->id = $id;
+    }
+
+    public function set_horario(Horario $horario){
+      $this->horario_id = $horario->get_id();
+    }
+
+    public function set_racion(Racion $racion){
+      $this->racion_id = $racion->get_id();
     }
 
 
