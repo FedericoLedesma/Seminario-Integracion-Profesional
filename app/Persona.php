@@ -321,7 +321,7 @@ class Persona extends Model
   **/
   public function patologias()
   {
-    return $this->belongsToMany('App\Patologia', 'personas_patologias')
+    return $this->belongsToMany('App\Patologia', 'persona_patologia')
     ->withPivot('fecha','hasta')->wherePivot('hasta','=',null);
   }
   public function getPatologiasFecha($fecha)
