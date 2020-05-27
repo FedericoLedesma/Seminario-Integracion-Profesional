@@ -45,6 +45,6 @@ class CreatePersonasPatologiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas_patologias');
+        Schema::dropIfExists('persona_patologia');
     }
 }

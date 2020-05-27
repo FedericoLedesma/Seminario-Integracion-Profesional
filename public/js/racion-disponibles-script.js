@@ -135,10 +135,9 @@
 		var row = $(this).parents('tr');
 		var token = $(this).data("token");
 		var racionDisponible = $(this).data("id");
-		var url_destroy = "/raciones-disponibles/destroy/:racion_id/:horario_id/:fecha";
-		url_destroy = url_destroy.replace(':racion_id',racionDisponible.racion_id);
-		url_destroy = url_destroy.replace(':horario_id',racionDisponible.horario_id);
-		url_destroy = url_destroy.replace(':fecha',racionDisponible.fecha);
+		var url_destroy = "/raciones-disponibles/destroy/:id";
+	
+		url_destroy = url_destroy.replace(':id',racionDisponible.id);
 
 		console.log(racionDisponible);
 	$('#alert').show();
@@ -321,13 +320,12 @@ $('.guardarStock').click(function(e){
 	var racionDisponible=$(this).data("id");
 	var user=$(this).data("user");
 	var cantidad_stock=document.getElementById("cantidad_stock").value;
-	console.log(racionDisponible.racion_id);
+	console.log(racionDisponible);
 	console.log(user);
 	console.log(cantidad_stock);
-	var url_update = "/raciones-disponibles/update/:racion_id/:horario_id/:fecha";
-	url_update = url_update.replace(':racion_id',racionDisponible.racion_id);
-	url_update = url_update.replace(':horario_id',racionDisponible.horario_id);
-	url_update = url_update.replace(':fecha',racionDisponible.fecha);
+	var url_update = "/raciones-disponibles/update/:id";
+
+	url_update = url_update.replace(':id',racionDisponible.id);
 	console.log(url_update);
 	$.ajax({
 		type: 'PUT',

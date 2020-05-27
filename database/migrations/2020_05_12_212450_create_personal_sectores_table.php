@@ -43,6 +43,6 @@ class CreatePersonalSectoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_sectores');
+        Schema::dropIfExists('personal_sector');
     }
 }

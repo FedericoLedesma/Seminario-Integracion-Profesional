@@ -41,6 +41,6 @@ class CreateHabitacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('habitaciones');
+        Schema::dropIfExists('habitacion');
     }
 }

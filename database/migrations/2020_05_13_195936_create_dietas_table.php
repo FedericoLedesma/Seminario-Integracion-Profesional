@@ -41,6 +41,6 @@ class CreateDietasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dietas');
+        Schema::dropIfExists('dieta');
     }
 }

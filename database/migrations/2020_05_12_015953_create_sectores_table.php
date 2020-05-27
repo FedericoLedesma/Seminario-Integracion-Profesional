@@ -30,6 +30,6 @@ class CreateSectoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sectores');
+        Schema::dropIfExists('sector');
     }
 }

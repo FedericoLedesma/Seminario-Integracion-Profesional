@@ -45,6 +45,6 @@ class CreateRacionesAlimentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raciones_alimentos');
+        Schema::dropIfExists('racion_alimento');
     }
 }

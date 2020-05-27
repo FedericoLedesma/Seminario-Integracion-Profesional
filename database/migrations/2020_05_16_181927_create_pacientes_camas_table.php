@@ -48,6 +48,6 @@ class CreatePacientesCamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacientes_camas');
+        Schema::dropIfExists('paciente_cama');
     }
 }

@@ -34,6 +34,6 @@ class CreateCamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('camas');
+        Schema::dropIfExists('cama');
     }
 }

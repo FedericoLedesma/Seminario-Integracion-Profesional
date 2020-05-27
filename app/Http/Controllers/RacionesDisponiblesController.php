@@ -197,6 +197,7 @@ class RacionesDisponiblesController extends Controller
         $rd->cantidad_realizados=$rd->cantidad_realizados+$cantidad_realizados;
         $rd->stock_original=$rd->stock_original+$cantidad_stock;
         $rd->cantidad_restante=$rd->cantidad_restante+$cantidad_stock-$cantidad_realizados;
+        Log::info("racion disponible actualizada -> ".$rd);
         $rd->guardar();//Debi definir este metodo porque Laravel no acepta claves compuesta por ende no puedo utilizar el save()
         return response([
           'raciones'=>'exito',
@@ -214,19 +215,19 @@ class RacionesDisponiblesController extends Controller
       Log::info('Destroy Raciones disponibles');
       Log::info($request);
       $rd=$request->racionDisponible;
-      $racionDisponible=RacionesDisponibles::findById($rd['horario_id'],$rd['racion_id'],$rd['fecha']);
-      try{
-        $racionDisponible->eliminar();
+      $racionDisponible=RacionesDisponibles::findById($rd['id']);
+    //  try{
+        $racionDisponible->delete();
         return response()->json([
               'estado'=>'true',
               'success' => 'Disponinilidad de racion eliminada con exito!'
           ]);
-      } catch (\Exception $e) {
+    /*  } catch (\Exception $e) {
         return response()->json([
           'estado'=>'false',
           'success' => 'No se pudo eliminar la disponibilidad de la racion !'
         ]);
-      }
+      }*/
 
     }
 

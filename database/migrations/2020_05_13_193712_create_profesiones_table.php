@@ -29,6 +29,6 @@ class CreateProfesionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profesiones');
+        Schema::dropIfExists('profesion');
     }
 }

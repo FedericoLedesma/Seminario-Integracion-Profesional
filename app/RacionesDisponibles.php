@@ -113,9 +113,7 @@ class RacionesDisponibles extends Model
     }
     public function guardar(){
       DB::table($this->table)
-              ->where('racion_id', $this->racion_id)
-              ->where('horario_id', $this->horario_id)
-              ->where('fecha','=', $this->fecha)
+              ->where('id', $this->id)
               ->update(['stock_original' => $this->stock_original,
               'cantidad_restante' => $this->cantidad_restante,
               'cantidad_realizados'=>$this->cantidad_realizados,

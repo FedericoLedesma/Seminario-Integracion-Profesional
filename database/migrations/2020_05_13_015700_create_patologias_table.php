@@ -24,7 +24,7 @@ class CreatePatologiasTable extends Migration
                 ->references('id')
                 ->on('tipo_patologia')
                 ->onDelete('cascade');
-			
+
 			$table->unique(['name'],'unique_patologia_name');
 
         });
@@ -37,6 +37,6 @@ class CreatePatologiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patologias');
+        Schema::dropIfExists('patologia');
     }
 }
