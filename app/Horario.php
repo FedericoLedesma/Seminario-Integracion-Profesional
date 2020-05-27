@@ -33,7 +33,7 @@ class Horario extends Model
       }return null;
     }
     public function raciones(){
-      return $this->belongsToMany('App\Racion', 'horarios_raciones');
+      return $this->belongsToMany('App\Racion', 'horario_racion');
     }
 
     public function get_id(){

@@ -104,12 +104,12 @@ class Patologia extends Model
 
      public function personas()
      {
-       return $this->belongsToMany('App\Persona', 'personas_patologias')
+       return $this->belongsToMany('App\Persona', 'persona_patologia')
        ->withPivot('fecha','hasta')->wherePivot('hasta','=',null);
      }
      public function alimentos()
      {
-       return $this->belongsToMany('App\Alimento', 'patologia_alimentos_prohibidos')
+       return $this->belongsToMany('App\Alimento', 'patologia_alimento_prohibido')
        ->withPivot('fecha');
      }
 }

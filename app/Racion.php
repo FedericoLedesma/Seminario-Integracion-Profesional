@@ -186,7 +186,7 @@ class Racion extends Model
   }
   public function alimentos()
   {
-    return $this->belongsToMany('App\Alimento', 'raciones_alimentos')
+    return $this->belongsToMany('App\Alimento', 'racion_alimento')
     ->withPivot('cantidad');
   }
   public function getAlimento($id)
@@ -195,7 +195,7 @@ class Racion extends Model
   }
   public function horarios()
   {
-    return $this->belongsToMany('App\Horario', 'horarios_raciones')->withPivot('id');
+    return $this->belongsToMany('App\Horario', 'horario_racion')->withPivot('id');
   }
 
   public static function resta_total_contra_lista($lista){

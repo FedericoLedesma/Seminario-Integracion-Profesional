@@ -107,9 +107,7 @@ class RacionesDisponiblesController extends Controller
             Crear el movimiento en un observer
             **/
             $movimiento=Movimiento::create([
-              'horario_id' => $racionDisponible->horario_id,
-              'racion_id'=>$racionDisponible->racion_id,
-              'fecha'=> $racionDisponible->fecha,
+              'racion_disponible_id'=>$racionDisponible->id,
               'creado'=>$creado,
               'user_id'=>$user->personal_id,
               'tipo_movimiento_id'=>1,
@@ -171,16 +169,15 @@ class RacionesDisponiblesController extends Controller
         $cantidad_stock=$request->cantidad_stock;
         $cantidad_realizados=$request->cantidad_realizados;
         $racionDisponible=$request->racionDisponible;
-        $rd=RacionesDisponibles::findById($racionDisponible['horario_id'],$racionDisponible['racion_id'],$racionDisponible['fecha']);
-        Log::info($rd->stock_original);
+        $rd=RacionesDisponibles::findById($racionDisponible['id']);
+        Log::info('Update Racion Disponible');
+        Log::info($rd);
         Log::info("cantidad-realizados ".$cantidad_realizados);
         $creado=new DateTime(date("Y-m-d H:i:s"));
         $user=Auth::user();
         if(!(empty($cantidad_stock))){
           $movimiento=Movimiento::create([
-            'horario_id' => $rd->horario_id,
-            'racion_id'=>$rd->racion_id,
-            'fecha'=> $rd->fecha,
+            'racion_disponible_id'=>$rd->id,
             'creado'=>$creado,
             'user_id'=>$user->personal_id,
             'tipo_movimiento_id'=>1,
@@ -188,9 +185,7 @@ class RacionesDisponiblesController extends Controller
           ]);
         }if(!empty($cantidad_realizados)){
           $movimiento=Movimiento::create([
-            'horario_id' => $rd->horario_id,
-            'racion_id'=>$rd->racion_id,
-            'fecha'=> $rd->fecha,
+            'racion_disponible_id'=>$rd->id,
             'creado'=>$creado,
             'user_id'=>$user->personal_id,
             'tipo_movimiento_id'=>1,
