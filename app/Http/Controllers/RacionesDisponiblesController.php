@@ -44,6 +44,8 @@ class RacionesDisponiblesController extends Controller
                 $racion=Racion::findById($query);
                 if($racion){
                     $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_racion($fecha,$racion);
+                }{
+                  $racionesDisponibles=null;
                 }
               }
             break;
@@ -219,9 +221,11 @@ class RacionesDisponiblesController extends Controller
       Log::info($request);
       $rd=$request->racionDisponible;
       $racionDisponible=RacionesDisponibles::findById($rd['id']);
+      Log::info($racionDisponible);
       try{
-        $fecha=new DateTime(date("Y-m-d"));
-        if( $racionDisponible<$fecha ){
+        $fecha_actual= new DateTime(date("Y-m-d"));
+        $fecha_racion=date_create($racionDisponible->fecha);
+        if($fecha_racion>$fecha_actual){
         $racionDisponible->delete();
         return response()->json([
               'estado'=>'true',
