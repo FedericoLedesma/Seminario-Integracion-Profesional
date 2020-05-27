@@ -51,8 +51,8 @@ class RacionesDisponibles extends Model
       $res = array();
       foreach ($hor_rac as $hr) {
         foreach ($rac_dis as $rd) {
-          if ($rd->get_horario_id()==$rh->get_id())
-            array_pus($res,$rd);
+          if ($rd->horario_racion->id==$hr->id)
+            array_push($res,$rd);
         }
       }
       return $res;
@@ -112,7 +112,7 @@ class RacionesDisponibles extends Model
     public function scopeGetRacionesDisponiblesFecha($query, $fecha)
     {
         return $raciones_disponibles = $query->where('fecha','=',$fecha)
-        ->orderBy('horario_id', 'asc');
+        ->orderBy('id', 'asc');
     }
     public function get_racion(){
       return HorarioRacion::find($this->get_horario_racion_id())->get_racion();

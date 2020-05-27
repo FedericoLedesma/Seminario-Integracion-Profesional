@@ -41,7 +41,10 @@ class RacionesDisponiblesController extends Controller
               if($query==""){
                   $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
               }else {
-                $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->where('racion_id',$query)->get();
+                $racion=Racion::findById($query);
+                if($racion){
+                    $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_racion($fecha,$racion);
+                }
               }
             break;
           default:
@@ -216,18 +219,26 @@ class RacionesDisponiblesController extends Controller
       Log::info($request);
       $rd=$request->racionDisponible;
       $racionDisponible=RacionesDisponibles::findById($rd['id']);
-    //  try{
+      try{
+        $fecha=new DateTime(date("Y-m-d"));
+        if( $racionDisponible<$fecha ){
         $racionDisponible->delete();
         return response()->json([
               'estado'=>'true',
               'success' => 'Disponinilidad de racion eliminada con exito!'
           ]);
-    /*  } catch (\Exception $e) {
+        }else{
+          return response()->json([
+                'estado'=>'false',
+                'success' => 'No se puede eliminar una Disponibilidad anterior a la fecha actual'
+            ]);
+        }
+      } catch (\Exception $e) {
         return response()->json([
           'estado'=>'false',
           'success' => 'No se pudo eliminar la disponibilidad de la racion !'
         ]);
-      }*/
+      }
 
     }
 
