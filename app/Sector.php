@@ -12,6 +12,11 @@ class Sector extends Model
   protected $fillable = [
       'id', 'name', 'descripcion',
   ];
+
+  public function get_id(){return $this->id;}
+  public function get_name(){return $this->name;}
+  public function get_descripcion(){return $this->descripcion;}
+
   public static function findById(int $id)
   {
        $sector = static::where('id', $id)->first();

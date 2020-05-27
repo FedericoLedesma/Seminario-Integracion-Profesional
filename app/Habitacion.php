@@ -88,4 +88,9 @@ class Habitacion extends Model
       }
       return $res;
     }
+
+    public function get_sector_name(){return $this->get_sector()->get_name();}
+    public function set_sector_id($sector_id){$this->sector_id=$sector_id;}
+    public function get_id(){return $this->id;}
+    public function get_name(){return $this->name;}
 }

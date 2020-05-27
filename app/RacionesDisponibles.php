@@ -114,13 +114,16 @@ class RacionesDisponibles extends Model
         return $raciones_disponibles = $query->where('fecha','=',$fecha)
         ->orderBy('horario_id', 'asc');
     }
-    public function get_racion(){
-      return HorarioRacion::find($this->get_horario_racion_id())->get_racion();
-    }
-
-    public function get_racion_id(){
-      return $this->get_racion()->get_id();
-    }
+    /**
+     Getters y setters
+     */
+    public function get_horario_racion_id(){return $this->horario_racion_id;}
+    public function get_horario_racion(){return HorarioRacion::find($this->get_horario_racion_id());}
+    public function get_fecha(){return $this->fecha;}
+    public function set_fecha($fecha){$this->fecha = $fecha;}
+    public function get_horario(){return $this->get_horario_name()->get_horario();}
+    public function get_racion(){return $this->get_horario_racion()->get_racion();}
+    public function get_racion_id(){return $this->get_racion()->get_id();}
 
     public function fecha()
     {
@@ -188,18 +191,6 @@ class RacionesDisponibles extends Model
     }
     public function horario_racion(){
         return $this->belongsTo('App\HorarioRacion','horario_racion_id');
-    }
-
-    public function get_horario_racion_id(){
-      return $this->horario_racion_id;
-    }
-
-    public function get_fecha(){
-      return $this->fecha;
-    }
-
-    public function set_fecha($fecha){
-      $this->fecha = $fecha;
     }
 
     public function get_id(){

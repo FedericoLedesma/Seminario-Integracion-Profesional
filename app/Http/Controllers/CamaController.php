@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Sector;
+use App\Habitacion;
+use App\Cama;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class SectorController extends Controller
+class CamaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,26 +26,27 @@ class SectorController extends Controller
     {
       $query = $request->get('search');
       $busqueda_por= $request->get('busqueda_por');
+      $habitacion = array();
       if($request){
         switch ($busqueda_por) {
           case 'busqueda_id':
-            $sectores=Sector::where('id','LIKE','%'.$query.'%')
+            $cama=Cama::where('id','LIKE','%'.$query.'%')
               ->orderBy('id','asc')
               ->get();
             $busqueda_por="ID";
             break;
           case 'busqueda_name':
-              $sectores=Sector::findByName($query)->get();
+              $cama=Cama::findByName($query)->get();
               $busqueda_por="NOMBRE";
             break;
           default:
-            $sectores=Sector::all();
+            $cama=Cama::all();
             break;
         }
 
       }
-      $sectores_total=Sector::all()->count();
-      return  view('admin_sectores.sector.index', compact('sectores','sectores_total','query','busqueda_por'));
+      $camas_total=Cama::all()->count();
+      return  view('admin_sectores.cama.index', compact('cama','camas_total','query','busqueda_por'));
 
     }
 
@@ -55,7 +57,8 @@ class SectorController extends Controller
      */
     public function create()
     {
-      return  view('admin_sectores.sector.create');
+      $habitaciones = Habitacion::all();
+      return  view('admin_sectores.cama.create', compact('habitaciones'));
     }
 
     /**
@@ -67,13 +70,13 @@ class SectorController extends Controller
     public function store(Request $request)
     {
         $data=$request->all();
-        $sector=Sector::create([
-            'name' => $data['name'],
-            'descripcion'=>$data['descripcion'],
+        Log::debug($data);
+        $habitacion=Cama::create([
+            'habitacion_id'=>$data['habitacion_id'],
           ]);
 
-        $sector->save();
-        return redirect('/sectores');
+        $habitacion->save();
+        return redirect('/camas');
     }
 
     /**
@@ -84,8 +87,8 @@ class SectorController extends Controller
      */
     public function show($id)
     {
-        $sector=Sector::findById($id);
-        return view('admin_sectores.sector.show',compact('sector'));
+        $cama=Cama::find($id);
+        return view('admin_sectores.cama.show',compact('cama'));
     }
 
     /**
@@ -96,8 +99,9 @@ class SectorController extends Controller
      */
     public function edit($id)
     {
-        $sector=Sector::findById($id);
-        return view('admin_sectores.sector.edit',compact('sector'));
+        $cama=Cama::all($id);
+        $habitaciones=Habitacion::all();
+        return view('admin_sectores.cama.edit',compact('cama','habitaciones'));
     }
 
     /**
@@ -109,11 +113,12 @@ class SectorController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $sector=Sector::findById($id);
-        $sector->name=$request->name;
-        $sector->descripcion=$request->descripcion;
-        $sector->save();
-        return redirect('/sectores');
+        $habitacion=Cama::find($id);
+        $habitacion->name=$request->name;
+        $habitacion->descripcion=$request->descripcion;
+        $habitacion->set_habitacion_id($request->habitacion_id);
+        $habitacion->save();
+        return redirect('/camas');
     }
 
     /**
@@ -125,16 +130,17 @@ class SectorController extends Controller
     public function destroy($id)
     {
       try {
-        $sector=Sector::findById($id);
-        $sector->delete();
+        Log::debug($id);
+        $habitacion=Cama::find($id);
+        $habitacion->delete();
         return response()->json([
             'estado'=>'true',
-            'success' => 'Sector eliminado con exito!'
+            'success' => 'Cama eliminada con exito!'
         ]);
       } catch (\Exception $e) {
         return response()->json([
           'estado'=>'false',
-          'success' => 'No se pudo eliminar el sector !'
+          'success' => 'No se pudo eliminar la cama !'
         ]);
       }
     }

@@ -65,7 +65,11 @@ Route::get('/informes/generar','InformeController@create')
 Route::get('/informes/settear','InformeController@set_realizado')
 	->name('InformeController.set');
 Route::resource('/informes','InformeController');
-#Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
+Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
+/*Route::get('/habitaciones/delete', 'HabitacionController@delete')
+	->name('HabitacionController.delete');*/
+Route::resource('/habitaciones', 'HabitacionController');
+Route::resource('/camas', 'CamaController');
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');

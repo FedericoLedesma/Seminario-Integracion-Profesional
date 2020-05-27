@@ -69,29 +69,13 @@ class HorarioRacion extends Model
      * Devuelve un objeto del tipo App\Racion
      * @return App\Racion [devuelve la ración asosiada al horario de este objeto]
      */
-    public function get_racion(){
-      return Racion::findById($this->racion_id);
-    }
-
-    public function get_racion_name(){
-      return $this->get_racion()->name;
-    }
-
-    public function get_racion_id(){
-      return $this->get_racion()->id;
-    }
-
-    public function get_horario(){
-      return Horario::findById($this->horario_id);
-    }
-
-    public function get_horario_name(){
-      return $this->get_horario()->name;
-    }
-
-    public function get_horario_id(){
-      return $this->get_horario()->id;
-    }
+    public function get_racion(){return Racion::findById($this->racion_id);}
+    public function get_racion_name(){return $this->get_racion()->name;}
+    public function get_racion_id(){return $this->get_racion()->id;}
+    public function get_horario(){return Horario::findById($this->horario_id);}
+    public function get_horario_name(){return $this->get_horario()->name;}
+    public function get_horario_id(){return $this->get_horario()->id;}
+    
     public function racion(){
       return $this->belongsTo('App\Racion', 'racion_id');
     }
