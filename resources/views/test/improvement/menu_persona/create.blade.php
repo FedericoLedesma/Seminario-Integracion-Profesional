@@ -41,9 +41,7 @@
 		</div>
 
 			<input class="date form-control" type="text" id="calendario" name="calendario" value={{$fecha}}>
-			<script type="text/javascript" id="calendario_" name="calendario_">
-				var new_date = $('.date').datepicker({format: 'yyyy-mm-dd'});
-			</script>
+
 
 			<select class="browser-default custom-select" id="horario_id" name="horario_id">
 				<option value= 0> Todos </option>
@@ -59,7 +57,7 @@
 			@include('layouts.error')
 			<table>
 
-					{!!	Form::label('horario', 'Horario')!!}
+					{!!	Form::label('persona_id', 'Persona')!!}
 					<div id= "personas">
 						<select class="browser-default custom-select" id="persona" name="persona">
 							<option value=0 > Persona </option>
@@ -105,7 +103,7 @@
 			});
 		});
 
-		
+
 	})
 </script>
 <script type="text/javascript">

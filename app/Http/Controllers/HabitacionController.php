@@ -120,6 +120,11 @@ class HabitacionController extends Controller
         $habitacion->descripcion=$request->descripcion;
         $habitacion->set_sector_id($request->sector_id);
         $habitacion->save();
+        Log::debug('Habitacion updateada a '.$habitacion);
+        #if ($habitacion->get_cantidad_camas_desocupadas()>0){
+          Log::debug('Intentando cambiar la cantidad de camas, hay '.$habitacion->get_cantidad_camas_desocupadas().' camas desocupadas');
+          $habitacion->set_cantidad_camas($request->cantidad_camas);
+        #}
         return redirect('/habitaciones');
     }
 

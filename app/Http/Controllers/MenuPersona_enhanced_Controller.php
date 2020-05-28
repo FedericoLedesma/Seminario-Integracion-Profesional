@@ -31,7 +31,8 @@ class MenuPersona_enhanced_Controller extends Controller
     {
         //
         if (Auth::user()->can('ver_menu_persona')){
-          $menus = MenuPersona::buscar_por_fecha(Carbon::now()->toDateString());
+          #$menus = MenuPersona::buscar_por_fecha(Carbon::now()->toDateString());
+          $menus = MenuPersona::all();
           Log::debug("Se buscaron las planillas del dia: ".Carbon::now()->toDateString());
           foreach ($menus as $m) {
             Log::debug($m);

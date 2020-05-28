@@ -88,4 +88,15 @@ class PacienteCama extends Model
       #return $res;
     }
 
+    public function get_fecha_fin(){return $this->fecha_fin;}
+    public static function cama_is_desocupada($cama_id){
+      $res = true;
+      $camas = static::where('cama_id','=',$cama_id)->get();
+      foreach ($camas as $cama) {
+        if ($cama->get_fecha_fin()==null)
+          $res= false;
+      }
+      return $res;
+    }
+
 }

@@ -19,7 +19,7 @@
 	   @include('layouts.error')
 	  	@if($habitacion)
 	    <div class="table-responsive">
-	    <h2>Sector:  {{$habitacion->name}}</h2>
+	    <h2>Habitacion:  {{$habitacion->name}}</h2>
         <div class="col-md-3 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
@@ -30,6 +30,14 @@
       <tr>
 				<td>Nombre </td>
 				<td>{{$habitacion->name}}</td>
+			</tr>
+      <tr>
+				<td>Cantidad de camas </td>
+				<td>{{$habitacion->get_cantidad_camas()}}</td>
+			</tr>
+      <tr>
+				<td>Cantidad de camas desocupadas </td>
+				<td>{{$habitacion->get_cantidad_camas_desocupadas()}}</td>
 			</tr>
       <tr>
 				<td>Descripcion </td>

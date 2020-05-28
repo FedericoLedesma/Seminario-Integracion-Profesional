@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Habitacion;
 use App\PacienteCama;
+use Illuminate\Support\Facades\Log;
 
 class Cama extends Model
 {
@@ -80,4 +81,27 @@ class Cama extends Model
     public function get_sector(){return $this->get_habitacion()->get_sector();}
     public function get_sector_id(){return $this->get_sector()->get_id();}
     public function get_sector_name(){return $this->get_sector()->get_name();}
+    public function is_desocupada(){return PacienteCama::cama_is_desocupada($this->get_id());}
+    public static function contar_por_id_habitacion($id_habitacion){return static::where('habitacion_id','=',$id_habitacion)->count();}
+    public static function eliminar_una_por_id_habitacion($habitacion_id){
+      #$camas = static::where('habitacion_id');
+    }
+    public static function buscar_camas_desocupadas_por_id_habitacion($habitacion_id){
+      Log::debug('Buscando las camas desocupadas de la habitacion '.$habitacion_id);
+      $res = array();
+      $camas = static::where('habitacion_id','=',$habitacion_id)->get();
+      foreach ($camas as $cama) {
+        Log::debug('Checkeando la cama '.$cama);
+        if ($cama->is_desocupada()){
+          Log::debug('Desocupada');
+          array_push($res,$cama);
+        }
+        else {
+          Log::debug('Ocupada');
+        }
+      }
+      return $res;
+    }
+
+    public static function borrar(Cama $cama){$cama->delete();}
 }

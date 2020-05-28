@@ -93,4 +93,37 @@ class Habitacion extends Model
     public function set_sector_id($sector_id){$this->sector_id=$sector_id;}
     public function get_id(){return $this->id;}
     public function get_name(){return $this->name;}
+    public function get_cantidad_camas(){return Cama::contar_por_id_habitacion($this->get_id());}
+    public function get_camas_desocupadas(){return Cama::buscar_camas_desocupadas_por_id_habitacion($this->get_id());}
+    public function get_cantidad_camas_desocupadas(){return sizeof($this->get_camas_desocupadas());}
+    public function set_cantidad_camas($cantidad){
+      Log::debug('Se quiere cambiar la cantidad de camas de la habitacion '.$this->get_name().' a '.$cantidad);
+      if ($cantidad<0)
+        return false;
+      $c = $this->get_cantidad_camas();
+      Log::Debug('Cantidad de camas actual '.$c);
+      if ($c<>$cantidad){
+        if ($c>$cantidad){
+          $camas_desocupadas = $this->get_camas_desocupadas();
+          if (sizeof($camas_desocupadas)==0)
+            return false;
+          if (sizeof($camas_desocupadas)<($c-$cantidad)){
+            $c = sizeof($camas_desocupadas);
+          }
+          else{
+            $c -= $cantidad;
+          }
+          for ($i=0; $i<$c; $i++){
+            Cama::borrar($camas_desocupadas[$i]);
+          }
+        }
+        else{
+          for ($i=0; $i<($cantidad-$c); $i++){
+            $cama = new Cama(['habitacion_id'=>$this->get_id()]);
+            $cama->save();
+          }
+        }
+      }
+      return true;
+    }
 }

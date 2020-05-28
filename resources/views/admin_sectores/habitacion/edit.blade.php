@@ -24,6 +24,10 @@
   				<td>{!!	Form::text('name',$habitacion->name)!!}</td>
   			</tr>
         <tr>
+  				<td>Cantidad de camas </td>
+  				<td>{!!	Form::text('cantidad_camas',$habitacion->get_cantidad_camas())!!}</td>
+  			</tr>
+        <tr>
   				<td>Descripcion </td>
   				<td>{!!	Form::text('descripcion',$habitacion->descripcion)!!}</td>
   			</tr>
