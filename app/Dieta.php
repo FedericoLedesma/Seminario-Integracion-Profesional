@@ -91,7 +91,7 @@ class Dieta extends Model
   }
 
   public function get_observacion(){
-    return $this>->observacion;
+    return $this->observacion;
   }
 
   public function set_observacion($observacion){
@@ -112,6 +112,11 @@ class Dieta extends Model
 
   public function set_personal_id(int $personal_id){
     $this->personal_id = $personal_id;
+  }
+  
+  public function patologia()
+  {
+    return $this->belongsTo('App\Patologia', 'patologia_id');
   }
 
 }

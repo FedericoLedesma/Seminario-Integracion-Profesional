@@ -95,11 +95,16 @@ class PatologiaController extends Controller
           'personal_id'=>$user->personal_id,
         ]);
         $fecha= new DateTime(date("Y-m-d H:i:s"));
-        $dietaActiva=DietaActiva::create([
+        $dieta_activa=new DietaActiva();
+        $dieta_activa->dieta_id=$dieta->id;
+        $dieta_activa->fecha=$fecha;
+        $dieta_activa->observacion=$dieta->observacion;
+      /*  $dietaActiva=DietaActiva::create([
           'dieta_id'=>$dieta->id,
           'fecha'=>$fecha,
           'observacion'=>$dieta->observacion,
-        ]);
+        ]);*/
+        $dieta_activa->save();
         return redirect('/patologias');
     }
 
@@ -216,10 +221,12 @@ class PatologiaController extends Controller
     }
 
     public function quitarAlimento(Request $request){
+      Log::debug("Quitar Alimento de patologias");
       Log::info($request);
       $idPatologia=$request->data[0];
       $idAlimento=$request->data[1];
       $patologia=Patologia::findById($idPatologia);
+      Log::info($patologia);
       $patologia->alimentos()->detach($idAlimento);
       return response()->json([
           'estado'=>'true',

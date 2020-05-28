@@ -38,6 +38,14 @@ class DietaActiva extends Model
         ->orderBy('fecha', 'asc');
       }return null;
     }
+    public function scopeFindDietaActiva($query,$dieta_id)
+    {
+      if($dieta_id){
+        return $query->where('dieta_id',$dieta_id)
+        ->where('fecha_final','=',null)
+        ->first();
+      }return null;
+    }
     public function scopeGetNoActivas($query,$dieta_id)
     {
       if($dieta_id){
@@ -65,5 +73,12 @@ class DietaActiva extends Model
               ->where('fecha','=', $this->fecha)
               ->update(['fecha_final' => $this->fecha_final,
               ]);
+    }
+    public function dieta(){
+        return $this->belongsTo('App\Dieta', 'dieta_id');
+    }
+    public function raciones(){
+      return $this->belongsToMany('App\Racion', 'dieta_activa_racion')
+      ->withPivot('fecha');
     }
 }

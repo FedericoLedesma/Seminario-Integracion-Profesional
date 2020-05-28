@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+@section('token')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
 		<li class="breadcrumb-item active">Editar Patologia</li>
@@ -11,6 +14,7 @@
 	 	 {!! Form::model($patologia, ['route' => ['patologias.update', $patologia->id], 'method'=> 'PUT'])!!}
 	 	@if($patologia)
 	    <h1>Editar Patologia  {{$patologia->name}}</h1>
+      <div id="alert" class="alert alert-info"></div>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
@@ -73,7 +77,7 @@
                <td>
                    {{$alimento->name}}
                </td>
-              <td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-racion="{{ $patologia }}">X</button></td>
+              <td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-patologia="{{ $patologia }}">X</button></td>
             </tr>
           </tr>
       @endforeach
@@ -87,4 +91,8 @@
     </table>
 		</div>
 		</div>
+@endsection
+@section('script')
+ <script src="{{asset('js/patologia-script.js')}}"></script>
+
 @endsection

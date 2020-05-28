@@ -157,3 +157,42 @@
 
 	        });
 	});
+	$('.quitarAlimento').click(function(e){
+
+		e.preventDefault();//evita cargar la pagina
+
+		if(!confirm("¿Esta seguro que desea quitar el Alimento?")){
+			return false;
+		}
+
+		var row = $(this).parents('tr');
+		var token = $(this).data("token");
+		var patologia = $(this).data("patologia");
+		var alimento=$(this).data("id");
+
+		var url_quitar = "/patologias/:id/quitaralimento";
+		url_quitar = url_quitar.replace(':id',patologia.id);
+		console.log(patologia);
+		console.log(url_quitar);
+	$('#alert').show();
+	    $.ajax({
+	    	type: 'PUT',
+	    	url: url_quitar,
+	    	dataType: 'json',
+				data:{data:[patologia.id,alimento.id]},
+		    	success: function (data) {
+						if (data.estado=='true'){
+						   		row.fadeOut();
+	        			$('#alert').html(data.success);
+							  	console.log(data.success);
+								}else{
+									$('#alert').html(data.success);
+										console.log(data.success);
+								}
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+
+	        });
+	});

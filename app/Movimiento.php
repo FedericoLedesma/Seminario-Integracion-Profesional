@@ -45,6 +45,9 @@ class Movimiento extends Model
       ->orderBy('created_at', 'asc');
     }return null;
   }
+  public function racion_disponible(){
+    return $this->belongsTo('App\RacionesDisponibles', 'racion_disponible_id');
+  }
   public function racion()
   {
     return $this->belongsTo('App\Racion', 'racion_id');

@@ -10,6 +10,7 @@ use App\Racion;
 use App\Alimento;
 use App\Acompanante;
 use App\RacionesDisponibles;
+use App\DietaActiva;
 use App\MenuPersona;
 use Illuminate\Support\Facades\Log;
 class Prueba extends Seeder
@@ -58,7 +59,8 @@ class Prueba extends Seeder
     }else {
       echo "La fecha de la racion es menor";
     }
-
+    $patologia=Patologia::findById(1);
+    $patologia->alimentos()->detach(1);
     }
 
 
