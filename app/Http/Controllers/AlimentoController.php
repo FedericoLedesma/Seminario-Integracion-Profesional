@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alimento;
+use App\Http\Requests\AlimentoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -66,7 +67,7 @@ class AlimentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlimentoRequest $request)
     {
       $data=$request->all();
       $alimento=Alimento::create([
@@ -107,7 +108,7 @@ class AlimentoController extends Controller
      * @param  \App\Alimento  $alimento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alimento $alimento)
+    public function update(AlimentoRequest $request, Alimento $alimento)
     {
       if($alimento){
         $alimento->name=$request->name;

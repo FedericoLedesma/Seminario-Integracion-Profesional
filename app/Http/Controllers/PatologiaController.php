@@ -11,6 +11,7 @@ use App\TipoPatologia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\PatologiaRequest;
 
 class PatologiaController extends Controller
 {
@@ -78,7 +79,7 @@ class PatologiaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PatologiaRequest $request)
     {
         $data=$request->all();
         $patologia=Patologia::create([
@@ -139,7 +140,7 @@ class PatologiaController extends Controller
      * @param  \App\Patologia  $patologia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patologia $patologia)
+    public function update(PatologiaRequest $request, Patologia $patologia)
     {
         if($patologia){
           $patologia->name=$request->name;
