@@ -238,6 +238,26 @@ class DatabaseSeeder extends Seeder
         'name' => 'baja_tipos-patologias',
         'guard_name'=>'web',
     ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_tipos-patologias',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'alta_sectores',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'baja_sectores',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'modificacion_sectores',
+        'guard_name'=>'web',
+    ]);
+    DB::table('permissions')->insert([
+        'name' => 'ver_sectores',
+        'guard_name'=>'web',
+    ]);
     //--------Tipos de Movimientos----------------------
     DB::table('tipo_movimiento')->insert([
         'name' => 'Agregar al stock',

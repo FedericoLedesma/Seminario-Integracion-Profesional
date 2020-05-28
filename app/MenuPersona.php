@@ -236,9 +236,24 @@ class MenuPersona extends Model
   }
 
   public function set_disponibilidad_racion($racion,$horario,$fecha){
-    $this->racion_id = $racion->id;
-    $this->horario_id = $horario->id;
-    $this->fecha = $fecha;
+    $dis_rac = RacionesDisponibles::buscar_por_racion_horario_fecha($racion,$horario,$fecha);
+    $this->set_racion_disponible($dis_rac);
+  }
+
+  public function get_racion_disponible_id(){
+    return $this->racion_disponible_id;
+  }
+
+  public function set_racion_disponible(RacionesDisponibles $dis_rac){
+    $this->racion_disponible_id = $dis_rac->get_id();
+  }
+
+  public function get_racion_disponible(){
+    return racionDisponible::find($this->get_racion_disponible_id());
+  }
+
+  public function get_fecha(){
+    return $this->get_racion_disponible()->get_fecha();
   }
 
   public function set_persona($persona){
@@ -390,8 +405,13 @@ class MenuPersona extends Model
   *   @return MenuRacion[]
   */
   public static function buscar_por_fecha($fecha){
-    return static::where('fecha','=',$fecha)
-      ->get();
+    $res = array();
+    $all = static::all();
+    foreach ($all as $menu) {
+      if ($menu->get_fecha()==$fecha)
+        array_push($res,$menu);
+    }
+    return $res;
   }
 
 

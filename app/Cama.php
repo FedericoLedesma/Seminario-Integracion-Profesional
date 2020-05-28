@@ -54,9 +54,9 @@ class Cama extends Model
       $this->id = $id;
     }
 
-    public function get_habitacion(){
+    /*public function get_habitacion(){
       return Habitacion::buscar_por_id($this->habitacion_id);
-    }
+    }*/
 
     public function set_habitacion(Habitacion $habitacion){
       $this->set_habitacion_id($habitacion->get_id());
@@ -66,10 +66,6 @@ class Cama extends Model
       $this->habitacion_id = $habitacion_id;
     }
 
-    public function get_sector(){
-      return $this->get_habitacion()->get_sector();
-    }
-
     public function get_pacientes(){
       return PacienteCama::buscar_pacientes($this->id);
     }
@@ -77,4 +73,11 @@ class Cama extends Model
     public function get_pacientes_internados(){
       return PacienteCama::buscar_paciente_actual($this->id);
     }
+
+    public function get_habitacion(){return Habitacion::find($this->get_habitacion_id());}
+    public function get_habitacion_id(){return $this->habitacion_id;}
+    public function get_habitacion_name(){return $this->get_habitacion()->get_name();}
+    public function get_sector(){return $this->get_habitacion()->get_sector();}
+    public function get_sector_id(){return $this->get_sector()->get_id();}
+    public function get_sector_name(){return $this->get_sector()->get_name();}
 }
