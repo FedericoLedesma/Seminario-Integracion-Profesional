@@ -75,9 +75,9 @@
 						@if($movimientos)
 							@foreach($movimientos as $movimiento)
 							<tr>
-								<td>{{$movimiento->racion->name}}</td>
-								<td>{{$movimiento->horario->name}}</td>
-								<td>{{$movimiento->fecha}}</td>
+								<td>{{$movimiento->racion_disponible->horario_racion->racion->name}}</td>
+								<td>{{$movimiento->racion_disponible->horario_racion->horario->name}}</td>
+								<td>{{$movimiento->racion_disponible->fecha()}}</td>
 								<td>{{$movimiento->tipoMovimiento->name}}</td>
 								<td>{{$movimiento->cantidad}}</td>
 								<td>
