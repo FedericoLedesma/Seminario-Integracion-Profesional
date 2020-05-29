@@ -25,24 +25,32 @@
 
 <h1>Recorridos de nutricionista</h1>
 
-	{!!Form::open(['route'=>'menu_persona.create','method'=>'GET']) !!}
+	{!!Form::open(['route'=>'MenuPersona_enhanced_Controller.store','method'=>'POST']) !!}
+	@include('layouts.error')
+	<table>
 		<div class="input-group mb-3">
-
+			<tr>
+		{!!	Form::label('sec_id', 'Sector')!!}
+		</tr>
 			<select class="browser-default custom-select" id="sectores" name="sectores">
-				<option value='0'> Sector </option>
+				<option value='0'> --- </option>
 				@foreach($sector as $s)
 					<option value={{$s->id}} >{{$s->name}}</option>
 				@endforeach
 			</select>
+
+			{!!	Form::label('hab_id', 'Habitacion')!!}
 		<div id= "habitaciones">
 			<select class="browser-default custom-select" id="habitacion" name="habitacion">
 				<option value=0 > Habitación </option>
 			</select>
 		</div>
 
+		{!!	Form::label('fec', 'Fecha')!!}
 			<input class="date form-control" type="text" id="calendario" name="calendario" value={{$fecha}}>
 
 
+			{!!	Form::label('hor_id', 'Horario')!!}
 			<select class="browser-default custom-select" id="horario_id" name="horario_id">
 				<option value= 0> Todos </option>
 				@foreach($horarios as $horario)
@@ -50,12 +58,9 @@
 				@endforeach
 			</select>
 		<div class="input-group-append">
-		{!!	Form::submit('Recuperar raciones disponibles',['class'=>'btn btn-success btn-buscar'])!!}
-
 		</div>
 			</div>
-			@include('layouts.error')
-			<table>
+
 
 					{!!	Form::label('persona_id', 'Persona')!!}
 					<div id= "personas">
@@ -63,7 +68,13 @@
 							<option value=0 > Persona </option>
 						</select>
 					</div>
-					</td>
+					{!!	Form::label('racion_id', 'Seleccionar ración')!!}
+					<div id= "racion">
+						<select class="browser-default custom-select" id="racion" name="racion">
+							<option value=0 > Racion </option>
+						</select>
+					</div>
+
 
 				</tr>
 				<tr>
@@ -100,6 +111,16 @@
 				success:function(r){
 					$('#personas').html(r);
 				}
+			});
+
+			$("#personas").change(function(){
+				$.ajax({
+					type:"get",
+					url:	"/forms/select/raciones/" + $('#horario_id').val()+ '/' + $('#persona').val(),
+					success:function(r){
+						$('#racion').html(r);
+					}
+				});
 			});
 		});
 

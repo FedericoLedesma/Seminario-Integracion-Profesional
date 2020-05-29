@@ -181,6 +181,19 @@ class Persona extends Model
        return $this->id;
      }
 
+     public function get_name(){return $this->name;}
+     public function get_apellido(){return $this->apellido;}
+     public function get_numero_doc(){return $this->numero_doc;}
+     public function get_observacion(){return $this->observacion;}
+     public function get_direccion(){return $this->direccion;}
+     public function get_email(){return $this->email;}
+     public function get_provincia(){return $this->provincia;}
+     public function get_localidad(){return $this->localidad;}
+     public function get_sexo(){return $this->sexo;}
+     public function get_fecha_nac(){return $this->fecha_nac;}
+     public function get_tipo_documento_id(){return $this->tipo_documento_id;}
+     public function get_tipo_documento(){return TipoDocumento::find($this->get_tipo_documento_id());}
+
      /**
       * Funcionalidad principal.
       *
@@ -214,7 +227,7 @@ class Persona extends Model
       public function get_raciones_disponibles($fecha,$horario){
         Log::debug('Se buscarán las raciones diponibles de <'.$this->id.'> '.$this->name);
         $raciones_disponibles = array();
-        $conj_rac_dis = Array();
+        $conj_rac_dis = array();
         try{
           $lista_raciones_disponibles = RacionesDisponibles::buscar_por_fecha_horario($fecha,$horario);
           $patologias_pac = $this->get_patologias();
@@ -241,6 +254,7 @@ class Persona extends Model
         catch(Throwable $e){
 
         }
+        Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
         return $conj_rac_dis;
       }
 

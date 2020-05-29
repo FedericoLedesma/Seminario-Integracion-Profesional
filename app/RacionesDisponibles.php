@@ -38,11 +38,14 @@ class RacionesDisponibles extends Model
        #} return null;
     }
 
-    public static function buscar_por_racion_horario_fecha(Racion $racion, Horario $horario, $fecha){
-      return static::where('horario_id','=', $horario->get_id())
-      ->where('racion_id','=', $racion->get_id())
-      ->where('fecha','=', $fecha)
-      ->get()->first();
+    public static function buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha){
+      $raciones_disponibles_fecha = static::where('fecha','=', $fecha)->get();
+      $horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);
+      foreach ($raciones_disponibles_fecha as $rac_dis) {
+        if ($rac_dis->get_horario_racion_id()==$horario_racion->get_id())
+          return $rac_dis;
+      }
+      return null;
     }
 
     public static function buscar_por_fecha_racion($fecha, Racion $racion){
@@ -121,7 +124,7 @@ class RacionesDisponibles extends Model
     public function get_horario_racion(){return HorarioRacion::find($this->get_horario_racion_id());}
     public function get_fecha(){return $this->fecha;}
     public function set_fecha($fecha){$this->fecha = $fecha;}
-    public function get_horario(){return $this->get_horario_name()->get_horario();}
+    public function get_horario(){return $this->get_horario_racion()->get_horario();}
     public function get_racion(){return $this->get_horario_racion()->get_racion();}
     public function get_racion_id(){return $this->get_racion()->get_id();}
 
@@ -169,14 +172,24 @@ class RacionesDisponibles extends Model
         Log::debug('Buscando raciones en la fecha '.$fecha.' y horario '.$horario->name);
         if(($horario)&&($fecha)){
           $rac_dis = static::where('fecha','=',$fecha)->get();
-          $hor_rac = HorarioRacion::buscar_por_horario($horario);
+          /*$hor_rac = HorarioRacion::buscar_por_horario($horario);
           $res = Array();
           foreach ($rac_dis as $r_d) {
             foreach ($hor_rac as $h_r) {
               if ($r_d->get_horario_racion_id()==$h_r->get_id())
                 array_push($res, $r_d);
             }
+          }*/
+          $res = array();
+          foreach ($rac_dis as $r_d){
+            Log::Debug('Analizando el horario de: '.$r_d);
+            $hor_r_d =$r_d->get_horario();
+            Log::debug('Su horario es: '.$hor_r_d);
+            if ($hor_r_d->get_id()==$horario->get_id()){
+              array_push($res, $r_d);
+            }
           }
+          Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
           return $res;
         }
         return Array();

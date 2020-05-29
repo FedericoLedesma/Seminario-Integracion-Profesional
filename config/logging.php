@@ -37,18 +37,21 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
+            #'tap' => [App\Logging\CustomLoggerFormatter::class],
             'channels' => ['single'],
             'path' => storage_path('logs/logger.log'),
         ],
 
         'single' => [
             'driver' => 'single',
+            #'tap' => [App\Logging\CustomLoggerFormatter::class],
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
             'driver' => 'daily',
+            #'tap' => [App\Logging\CustomLoggerFormatter::class],
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 14,
@@ -56,6 +59,7 @@ return [
 
         'slack' => [
             'driver' => 'slack',
+            #'tap' => [App\Logging\CustomLoggerFormatter::class],
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',

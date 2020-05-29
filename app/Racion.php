@@ -113,7 +113,8 @@ class Racion extends Model
      $this->id = $id;
    }
 
-
+   public function get_name(){return $this->name;}
+   public function get_observacion(){return $this->observacion;}
 
   /**
    métodos estáticos

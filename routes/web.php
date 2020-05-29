@@ -65,6 +65,8 @@ Route::get('/informes/generar','InformeController@create')
 Route::get('/informes/settear','InformeController@set_realizado')
 	->name('InformeController.set');
 Route::resource('/informes','InformeController');
+Route::post('/improvement/menu_persona/create','MenuPersona_enhanced_Controller@store')
+->name('MenuPersona_enhanced_Controller.store');
 Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
 /*Route::get('/habitaciones/delete', 'HabitacionController@delete')
 	->name('HabitacionController.delete');*/
@@ -106,4 +108,5 @@ Route::post('/test/save', ['as' => 'save-date',
  }]);
 
  Route::get('/forms/select/{form}/{query}', 'FormsController@showSelect');
+ Route::get('/forms/select/raciones/{horario}/{persona}', 'FormsController@showRaciones');
  Route::resource('/forms', 'FormsController');

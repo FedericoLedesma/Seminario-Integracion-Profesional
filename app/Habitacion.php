@@ -13,13 +13,13 @@ class Habitacion extends Model
     protected $table = "habitacion";
 
     protected $fillable = [
-        'id','habitacion_id', 'sector_id','name','descripcion',
+        'id',/*'habitacion_id',*/ 'sector_id','name','descripcion',
     ];
     public static function findById($id)
     {
         if($id){
-           $habitacion = static::where('habitacion_id', $habitacion_id)
-           ->where('id',$id)
+           $habitacion = static::#where('habitacion_id', $habitacion_id)
+           /*->*/where('id',$id)->get()
            ->first();
            if($habitacion){
              return $habitacion;
@@ -29,7 +29,7 @@ class Habitacion extends Model
     public static function findByIdSector($habitacion_id, $sector_id)
     {
         if(($habitacion_id)&&($sector_id)){
-           $habitacion = static::where('habitacion_id', $habitacion_id)
+           $habitacion = static::where('id', $habitacion_id)
            ->where('sector_id',$sector_id)
            ->first();
            if($habitacion){
@@ -42,7 +42,7 @@ class Habitacion extends Model
     {
       if($sector_id){
         return $query->where('sector_id',$sector_id)
-        ->orderBy('habitacion_id', 'asc');
+        ->orderBy('id', 'asc');
       }return null;
     }
     public function scopeFindByName($query,$name)
@@ -53,12 +53,16 @@ class Habitacion extends Model
       }return null;
     }
 
-    public static function buscar_por_sector($id){
-      return static::where('sector_id','=',$id)->get();
+    public static function buscar_por_sector($sector_id){
+      $res =  static::where('sector_id','=',$sector_id)->get();
+      foreach ($res as $habitacion) {
+        Log::debug(__CLASS__.' || método: '.__FUNCTION__.': en el sector (id) <'.$sector_id.'> se encontró la habitacion '.$habitacion->get_name());
+      }
+      return $res;
     }
 
     public static function buscar_por_id($id){
-      return static::where('habitacion_id','=',$id)
+      return static::where('id','=',$id)
         ->get()
         ->first();
     }
@@ -68,7 +72,13 @@ class Habitacion extends Model
     }
 
     public function get_camas(){
-      return Cama::buscar_por_habitacion($this->habitacion_id);
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+      $camas = Cama::buscar_por_habitacion($this->get_id());
+      foreach ($camas as $cama) {
+        Log::debug('Cama encontrada: '.$cama);
+      }
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
+      return $camas;
     }
 
     public function get_pacientes(){
@@ -81,11 +91,18 @@ class Habitacion extends Model
     }
 
     public function get_pacientes_internados(){
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
       $res = Array();
       $cam = $this->get_camas();
-      foreach ($cam as $p) {
-        array_push($res,$p->get_pacientes_internados());
+      foreach ($cam as $c) {
+        Log::debug(__CLASS__.' || método: '.__FUNCTION__.': revisando la cama (id) '.$c);
+        $paciente = $c->buscar_paciente_actual();
+        if ($paciente<>null){
+          Log::debug(__CLASS__.' || método: '.__FUNCTION__.': Agregando el paciente '.$paciente);
+          array_push($res,$paciente);
+        }
       }
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
       return $res;
     }
 

@@ -55,6 +55,10 @@ class HorarioRacion extends Model
       return static::where('racion_id','=',$racion->get_id())->get();
     }
 
+    public static function buscar_por_unique_key_horario_racion($horario_id,$racion_id){
+      return static::where('racion_id','=',$racion_id)->where('horario_id','=',$horario_id)->get()->first();
+    }
+
     /**
     *
     Métodos de instancia

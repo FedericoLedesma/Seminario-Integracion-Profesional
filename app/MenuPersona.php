@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use App\Horario;
+use App\RacionesDisponibles;
 use Carbon\Carbon;
 use App\Informes\InformeRacion;
 
@@ -14,7 +15,7 @@ class MenuPersona extends Model
 
   protected $fillable = [
       'id', 'persona_id','racion_disponible_id','personal_id',
-      'dieta_id','realizado',
+      /*'dieta_id',*/'realizado',
   ];
 
   public static $dias = 30;
@@ -96,7 +97,7 @@ class MenuPersona extends Model
    * @return Racion
    */
   public static function get_racion_menos_consumida($persona,$raciones){
-    $racion = array();
+    $racion = null;
     $c = -1;
     foreach($raciones as $r){
       $rac_dis = RacionesDisponibles::buscar_por_fecha_racion(Carbon::now()->subDays(30),$r);
@@ -161,11 +162,7 @@ class MenuPersona extends Model
    * @return Racion
    */
 
-  public function get_racion(){
-    $racion = null;
-    $racion = Racion::findById($this->racion_id);
-    return $racion;
-  }
+  public function get_racion(){return $this->get_racion_disponible()->get_racion();}
 
   /**
    *
@@ -221,10 +218,9 @@ class MenuPersona extends Model
     return $racion;
   }
 
-  public function get_horario(){
-    $horario = Horario::findById($this->horario_id);
-    return $horario;
-  }
+  public function get_racion_disponible(){return RacionesDisponibles::find($this->get_racion_disponible_id());}
+
+  public function get_horario(){return $this->get_racion_disponible()->get_horario(); }
 
   public function get_horario_name(){
     return $this->get_horario()->name;
@@ -246,10 +242,6 @@ class MenuPersona extends Model
 
   public function set_racion_disponible(RacionesDisponibles $dis_rac){
     $this->racion_disponible_id = $dis_rac->get_id();
-  }
-
-  public function get_racion_disponible(){
-    return racionDisponible::find($this->get_racion_disponible_id());
   }
 
   public function get_fecha(){

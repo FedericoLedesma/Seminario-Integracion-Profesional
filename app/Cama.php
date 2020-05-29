@@ -42,8 +42,8 @@ class Cama extends Model
         ->first();
     }
 
-    public static function buscar_por_habitacion($id){
-      return static::where('habitacion_id','=',$id)
+    public static function buscar_por_habitacion($habitacion_id){
+      return static::where('habitacion_id','=',$habitacion_id)
         ->get();
     }
 
@@ -71,7 +71,7 @@ class Cama extends Model
       return PacienteCama::buscar_pacientes($this->id);
     }
 
-    public function get_pacientes_internados(){
+    public function buscar_paciente_actual(){
       return PacienteCama::buscar_paciente_actual($this->id);
     }
 

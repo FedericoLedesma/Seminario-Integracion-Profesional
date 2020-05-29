@@ -10,6 +10,7 @@ use App\Persona;
 use App\Racion;
 use App\Sector;
 use App\Habitacion;
+use App\RacionesDisponibles;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -53,13 +54,12 @@ class MenuPersona_enhanced_Controller extends Controller
         {
             //
             Log::debug($request);
-            $pacientes = Paciente::get_pacientes_internados();
-            $horarios = Horario::all();
-            $fecha = $request->get('fecha');
+            Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
             $sector = Sector::all();
-            if ($fecha == null)
-              $fecha = Carbon::now()->toDateString();
-            return view(self::path.'.create',compact('pacientes','horarios','fecha','sector'));
+            $fecha = Carbon::now()->toDateString();
+            $horarios = Horario::all();
+
+            return view(self::path.'.create',compact('sector','fecha','horarios'));
         }
 
         /**
@@ -71,35 +71,35 @@ class MenuPersona_enhanced_Controller extends Controller
         public function store(Request $request)
         {
             //
+            Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
             Log::debug('Se quiere ingresar un nuevo menu persona: '.$request);
+            $this->validate($request,[
+                'persona'=>'required',
+                'horario_id'=>'required',
+                'racion'=>'required'
+            ]);
+            $persona_id = $request->get('persona');
+            $horario_id = $request->get('horario_id');
+            $racion_id = $request->get('racion');
+            $fecha = Carbon::now()->toDateString();
             $user = Auth::user();
-            Log::debug('Usuario: '.$user);
-            $persona_id = $request->get('persona_id');
-            $horario_id = $request->get('horario');
-            $racion_id = $request->get('racion_id');
-            $fecha = $request->get('fecha');
+            $racion_disponible = RacionesDisponibles::buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha);
             Log::debug('$persona_id: '.$persona_id);
             Log::debug('$horario_id: '.$horario_id);
             Log::debug('$racion_id: '.$racion_id);
             Log::debug('$fecha: '.$fecha);
-            $this->validate($request,[
-                'persona_id'=>'required',
-                'horario'=>'required',
-                'racion_id'=>'required',
-                'fecha'=>'required'
-            ]);
             $data = [
               'persona_id'=>$persona_id,
-              'horario_id'=>$racion_id,
-              'racion_id'=>$horario_id,
+              'racion_disponible_id'=>$racion_disponible->get_id(),
               'fecha'=>$fecha,
               'personal_id'=>$user->id,
               'realizado'=>false,
             ];
             $mp = new MenuPersona($data);
             $mp->save();
-            return redirect()->route(self::path.'.index')
-                ->with('success','Menu persona registrado satisfactoriamente');
+            return $this->index($request);
+            /*return redirect()->route('/improvement/menu_persona')
+                ->with('success','Menu persona registrado satisfactoriamente');*/
         }
 
         /**
