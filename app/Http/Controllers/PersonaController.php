@@ -7,6 +7,8 @@ use App\TipoDocumento;
 use App\Patologia;
 use DateTime;
 use Illuminate\Http\Request;
+use App\Http\Requests\PersonaRequest;
+use App\Http\Requests\PersonaEditRequest;
 use Illuminate\Support\Facades\Log;
 
 class PersonaController extends Controller
@@ -84,7 +86,7 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PersonaRequest $request)
     {
         $data=$request->all();
         $persona=Persona::create([
@@ -151,7 +153,7 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Persona $persona)//crear un request para validar
+    public function update(PersonaEditRequest $request, Persona $persona)//crear un request para validar
     {
         if($persona){
           $persona->numero_doc=$request->numero_doc;

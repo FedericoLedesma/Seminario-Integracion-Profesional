@@ -89,14 +89,16 @@ class RacionesDisponiblesController extends Controller
     {
         Log::info($request);
         try{
-          $horarioId=$request->data['0'];
+          $horarioId=$request->data[0];
           $racionId=$request->data[2];
           $racion=Racion::findById($racionId);
-
-          $horario_racion_id=$racion->horarios()->wherePivot('horario_id',$horarioId)->first()->pivot->id;
-          Log::info("-----Horario_Racion_id----");
-          Log::info($horario_racion_id);
-          if($horario_racion_id){
+          $horario_pivot=$racion->horarios()->wherePivot('horario_id',$horarioId)->first();
+          if($horario_pivot){
+            $horario_racion_id=$horario_pivot->pivot->id;
+            Log::info("-----Horario_Racion_id----");
+            Log::info($horario_racion_id);
+          }
+          if(!(empty($horario_racion_id))){
             $creado=new DateTime(date("Y-m-d H:i:s"));
             $user=Auth::user();
             $racionDisponible=RacionesDisponibles::create([

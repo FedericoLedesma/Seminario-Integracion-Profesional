@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Alimento;
 use App\Horario;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\RacionRequest;
 
 class RacionController extends Controller
 {
@@ -67,7 +68,7 @@ class RacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RacionRequest $request)
     {
         $data=$request->all();
         $racion=Racion::create([
@@ -110,7 +111,7 @@ class RacionController extends Controller
      * @param  \App\Racion  $racion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RacionRequest $request, $id)
     {
           Log::info($request);
           $racion=Racion::findById($id);
@@ -120,7 +121,7 @@ class RacionController extends Controller
           foreach ($racion->alimentos as $alimento) {
             Log::info($request['cantidad-'.$alimento->id]);
             if(!($request['cantidad-'.$alimento->id]=='')){
-              
+
               $cantidad=$request['cantidad-'.$alimento->id];
               $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
             }
