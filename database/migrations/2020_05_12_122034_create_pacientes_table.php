@@ -23,7 +23,7 @@ class CreatePacientesTable extends Migration
 
             $table->timestamps();
 
-            #$table->primary(['id'], 'primary_key_paciente');
+            $table->primary(['id'], 'primary_key_paciente');
         });
     }
 
