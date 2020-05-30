@@ -13,6 +13,10 @@ use App\Alimento;
 use App\Horario;
 use App\Paciente;
 use App\Acompanante;
+use App\Sector;
+use App\Cama;
+use App\PacienteCama;
+use App\Habitacion;
 use App\HorarioRacion;
 use App\RacionesDisponibles;
 use Illuminate\Support\Facades\Log;
@@ -952,6 +956,185 @@ class DatabaseSeeder extends Seeder
     $h6->save();
 
 
-  }
 
+    $data= [
+      'name'=>'Sector 1',
+      'descripcion'=>'-',
+    ];
+    $s1= new Sector($data);
+    $s1->save();
+    $data= [
+      'name'=>'Sector 2',
+      'descripcion'=>'-',
+    ];
+    $s2= new Sector($data);
+    $s2->save();
+    $data= [
+      'name'=>'Sector 3',
+      'descripcion'=>'-',
+    ];
+    $s3= new Sector($data);
+    $s3->save();
+    $data= [
+      'name'=>'Sector 4',
+      'descripcion'=>'-',
+    ];
+    $s4= new Sector($data);
+    $s4->save();
+
+    $data= [
+      'sector_id'=>$s1->id,
+      'name'=>'h1',
+      'descripcion'=>'-',
+    ];
+    //--------habitacion 1 sector 1--------------------------
+    $h1= new Habitacion($data);
+    $h1->save();
+    $data= [
+      'sector_id'=>$s1->id,
+      'name'=>'h2',
+      'descripcion'=>'-',
+    ];
+    $h2= new Habitacion($data);
+    $h2->save();
+    $data= [
+      'sector_id'=>$s1->id,
+      'name'=>'h3',
+      'descripcion'=>'-',
+    ];
+    $h3= new Habitacion($data);
+    $h3->save();
+    $data= [
+      'sector_id'=>$s1->id,
+      'name'=>'h4',
+      'descripcion'=>'-',
+    ];
+    $h4= new Habitacion($data);
+    $h4->save();
+    //------------habitacion 2 sector 2------------------
+    $data= [
+      'sector_id'=>$s2->id,
+      'name'=>'h2s1',
+      'descripcion'=>'-',
+    ];
+    $h1s2= new Habitacion($data);
+    $h1s2->save();
+    $data= [
+      'sector_id'=>$s2->id,
+      'name'=>'h2s2',
+      'descripcion'=>'-',
+    ];
+    $h2s2= new Habitacion($data);
+    $h2s2->save();
+    $data= [
+      'sector_id'=>$s2->id,
+      'name'=>'h3s3',
+      'descripcion'=>'-',
+    ];
+    $h2s2= new Habitacion($data);
+    $h2s2->save();
+    //--------camas----habitacion 1 sector 1--------------------------
+    $data=[
+      'habitacion_id'=>$h1->id,
+    ];
+    $cama1= new Cama($data);
+    $cama1->save();
+    $data=[
+      'habitacion_id'=>$h1->id,
+    ];
+    $cama2= new Cama($data);
+    $cama2->save();
+    $data=[
+      'habitacion_id'=>$h1->id,
+    ];
+    $cama3= new Cama($data);
+    $cama3->save();
+    //-------camas habitacion 2 sector 1---------
+    $data=[
+      'habitacion_id'=>$h2->id,
+    ];
+    $cama1h2s1= new Cama($data);
+    $cama1h2s1->save();
+    $data=[
+      'habitacion_id'=>$h2->id,
+    ];
+    $cama2h2s1= new Cama($data);
+    $cama2h2s1->save();
+    $data=[
+      'habitacion_id'=>$h2->id,
+    ];
+    $cama3h2s1= new Cama($data);
+    $cama3h2s1->save();
+    $data=[
+      'habitacion_id'=>$h2->id,
+    ];
+    $cama4h2s1= new Cama($data);
+    $cama4h2s1->save();
+    //----------camas habitacion1 sector 2------
+    $data=[
+      'habitacion_id'=>$h1s2->id,
+    ];
+    $cama1h1s2= new Cama($data);
+    $cama1h1s2->save();
+    $data=[
+      'habitacion_id'=>$h1s2->id,
+    ];
+    $cama2h1s2= new Cama($data);
+    $cama2h1s2->save();
+    $data=[
+      'habitacion_id'=>$h1s2->id,
+    ];
+    $cama3h1s2= new Cama($data);
+    $cama3h1s2->save();
+    $data=[
+      'habitacion_id'=>$h1s2->id,
+    ];
+    $cama4h1s2= new Cama($data);
+    $cama4h1s2->save();
+    //-----------pacientes camas--------------
+    $data=[
+      'paciente_id'=>5,
+      'cama_id'=>$cama1,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci_cama= new PacienteCama($data);
+    $paci_cama->save();
+    $data=[
+      'paciente_id'=>6,
+      'cama_id'=>$cama2,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci2_cama= new PacienteCama($data);
+    $paci2_cama->save();
+    $data=[
+      'paciente_id'=>7,
+      'cama_id'=>$cama3,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci1_cama= new PacienteCama($data);
+    $paci1_cama->save();
+    $data=[
+      'paciente_id'=>8,
+      'cama_id'=>$cama1h1s2,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci3_cama= new PacienteCama($data);
+    $paci3_cama->save();
+    $data=[
+      'paciente_id'=>9,
+      'cama_id'=>$cama2h1s2,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci4_cama= new PacienteCama($data);
+    $paci4_cama->save();
+    $data=[
+      'paciente_id'=>10,
+      'cama_id'=>$cama3h1s2,
+      'fecha'=>'2020-02-02'
+    ];
+    $paci5_cama= new PacienteCama($data);
+    $paci5_cama->save();
+
+
+  }
 }
