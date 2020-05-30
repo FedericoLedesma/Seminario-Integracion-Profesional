@@ -1094,42 +1094,42 @@ class DatabaseSeeder extends Seeder
     //-----------pacientes camas--------------
     $data=[
       'paciente_id'=>5,
-      'cama_id'=>$cama1,
+      'cama_id'=>$cama1->id,
       'fecha'=>'2020-02-02'
     ];
     $paci_cama= new PacienteCama($data);
     $paci_cama->save();
     $data=[
       'paciente_id'=>6,
-      'cama_id'=>$cama2,
+      'cama_id'=>$cama2->id,
       'fecha'=>'2020-02-02'
     ];
     $paci2_cama= new PacienteCama($data);
     $paci2_cama->save();
     $data=[
       'paciente_id'=>7,
-      'cama_id'=>$cama3,
+      'cama_id'=>$cama3->id,
       'fecha'=>'2020-02-02'
     ];
     $paci1_cama= new PacienteCama($data);
     $paci1_cama->save();
     $data=[
       'paciente_id'=>8,
-      'cama_id'=>$cama1h1s2,
+      'cama_id'=>$cama1h1s2->id,
       'fecha'=>'2020-02-02'
     ];
     $paci3_cama= new PacienteCama($data);
     $paci3_cama->save();
     $data=[
       'paciente_id'=>9,
-      'cama_id'=>$cama2h1s2,
+      'cama_id'=>$cama2h1s2->id,
       'fecha'=>'2020-02-02'
     ];
     $paci4_cama= new PacienteCama($data);
     $paci4_cama->save();
     $data=[
       'paciente_id'=>10,
-      'cama_id'=>$cama3h1s2,
+      'cama_id'=>$cama3h1s2->id,
       'fecha'=>'2020-02-02'
     ];
     $paci5_cama= new PacienteCama($data);
