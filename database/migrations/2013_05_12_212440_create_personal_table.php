@@ -25,7 +25,7 @@ class CreatePersonalTable extends Migration
 
             $table->timestamps();
 
-            #$table->primary(['id'], 'primary_key_personal');
+            $table->primary(['id'], 'primary_key_personal');
         });
     }
 
