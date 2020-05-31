@@ -38,6 +38,7 @@
                     </td>
                     <td>
 											<select class="custom-select" id="option-horario" name="name_horario">
+												<option value="Horarios">Horarios</option>
 												@if($horarios)
 												@foreach($horarios as $horario)
 													<option value="{{$horario->id}}">{{$horario->name}}</option>
@@ -50,14 +51,15 @@
 											</select>
 										</td>
 										<td>
-											{!!	Form::text('cantidad','0',["id"=>"cantidad"])!!}
+
+											<input type="number" id="cantidad" name="cantidad" min="0" step="1">
 										</td>
                   </tr>
 								<tr>
 									<td>
-										<a href="#" class="btn btn-primary btn-ver pull-right" >
+										<!--<a href="#" class="btn btn-primary btn-ver pull-right" >
 										    Ver raciones
-										</a>
+										</a>-->
 									</td>
 									<td>
 											<a href="#" class="btn btn-success guardarDisponibilidad" id="guardarDisponibilidad">

@@ -27,6 +27,10 @@
   				<td>Nombre </td>
   				<td>{!!	Form::text('name',$racion->name)!!}</td>
   			</tr>
+				<tr>
+  				<td>Observacion </td>
+  				<td>{!!	Form::text('observacion',$racion->observacion)!!}</td>
+  			</tr>
 		 </table>
 		 @endif
      <h6>Editar / quitar  Alimentos</h6>
@@ -46,8 +50,7 @@
                    {{$alimento->name}}
                </td>
                <td>
-
-								 <input type="number" value="{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}" name="cantidad-{{$alimento->id}}" min="0"  step="0.1"><label>Kg.</label>
+								 <input type="number" value="{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}" name="cantidad-{{$alimento->id}}" min="0"  step="0.1"><label>gr.</label>
                </td>
                	<td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-racion="{{ $racion }}">X</button></td>
             </tr>

@@ -112,7 +112,50 @@
 
 						});
     })
+		$('.custom-select').change(function(){
 
+			//e.preventDefault();//evita cargar la pagina
+
+			var url="/ver-raciones-disponibles";
+			var optionHorario=document.getElementById("option-horario").value;
+			console.log(optionHorario);
+			var fecha=document.getElementById("fecha").value;
+			console.log(fecha);
+			$.ajax({
+				type: 'get',
+				url: url,
+				dataType: 'json',
+				data:{data:[optionHorario,fecha]},
+					success: function (data) {
+									$("#cantidad").show();
+									$("#miSelect").show();
+									$("#guardarDisponibilidad").show();
+									var miSelect=document.getElementById("miSelect");
+
+									for (i = miSelect.length - 1; i >= 0; i--) {
+										miSelect.remove(i);
+									}
+
+
+									console.log(data.raciones);
+									data.raciones.forEach(myFunction)
+
+									function myFunction(item, i) {
+										console.log(item.id);
+										var miOption=document.createElement("option");
+										miOption.setAttribute("value",item.id);
+										miOption.setAttribute("label",item.name);
+										miSelect.appendChild(miOption);
+										i++;
+									}
+								},
+								error: function (data) {
+										console.log('Error:', data);
+								}
+
+					});
+
+		});
 	});
 	function getQueryVariable() {
 	 var query = window.location.search.substring(1);
@@ -136,7 +179,7 @@
 		var token = $(this).data("token");
 		var racionDisponible = $(this).data("id");
 		var url_destroy = "/raciones-disponibles/destroy/:id";
-	
+
 		url_destroy = url_destroy.replace(':id',racionDisponible.id);
 
 		console.log(racionDisponible);
