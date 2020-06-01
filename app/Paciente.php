@@ -22,6 +22,19 @@ class Paciente extends Model
          return $sector;
      } return null;
   }
+  public static function findByNumeroDoc($numero_doc)
+  {
+    if($numero_doc){
+      $persona=Persona::findByNumeroDoc($numero_doc);
+      if(!(empty($persona))){
+        try{
+          return Paciente::findById($numero_doc);
+        } catch (\Exception $e){
+          return null;
+        }
+      }return null;
+    }return null;
+  }
 
   public static function get_pacientes_internados(){
     $historial = HistoriaInternacion::get_pacientes_internados();
@@ -63,5 +76,8 @@ class Paciente extends Model
   public function get_fecha_nac(){return $this->get_persona()->get_fecha_nac();}
   public function get_tipo_documento_id(){return $this->get_persona()->get_tipo_documento_id();}
   public function get_tipo_documento(){return $this->get_persona()->get_tipo_documento();}
-
+  public function persona()
+  {
+    return $this->belongsTo('App\Persona', 'id');
+  }
 }

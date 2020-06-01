@@ -40,9 +40,8 @@ class PersonaController extends Controller
               $busqueda_por="ID";
             break;
           case 'busqueda_dni':
-            $personas=Persona::where('dni','LIKE','%'.$query.'%')
-            ->orderBy('id','asc')
-            ->get();
+            $personas=Persona::findByNumeroDoc($query);
+            
             $busqueda_por="DNI";
             break;
           case 'busqueda_name':
