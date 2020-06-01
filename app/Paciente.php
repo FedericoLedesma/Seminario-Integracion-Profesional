@@ -27,7 +27,7 @@ class Paciente extends Model
     $historial = HistoriaInternacion::get_pacientes_internados();
     $res = Array();
     foreach($historial as $h){
-      array_push($res,Persona::findById($h->paciente_id));
+      array_push($res,Paciente::find($h->paciente_id));
     }
     return $res;
   }
@@ -64,7 +64,6 @@ class Paciente extends Model
   public function get_tipo_documento_id(){return $this->get_persona()->get_tipo_documento_id();}
   public function get_tipo_documento(){return $this->get_persona()->get_tipo_documento();}
   public function get_tipo_documento_name(){return $this->get_tipo_documento()->get_name();}
-
 
 
   public static function buscar_por_nombre_y_apellido($nombre_y_apellido){
@@ -139,5 +138,36 @@ class Paciente extends Model
   public function get_historial_camas($fecha_inicio, $fecha_fin){
     return PacienteCama::buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
   }
+
+  public static function buscar_por_nombre_sector($sector){
+    $res = array();
+    $all = static::all();
+    foreach ($all as $paciente) {
+      if ($paciente->pertenece_a_sector_like($sector)){
+        array_push($res,$paciente);
+      }
+    }
+    return $res;
+  }
+
+  public function pertenece_a_sector_like($sector){
+    return ($sector == $this->get_sector_actual_name());
+  }
+
+  public static function get_pacientes_internados_por_nombre_sector($sector){
+    $res = array();
+    $internados = static::get_pacientes_internados();
+    $camas = PacienteCama::buscar_camas_por_sector_name($sector);
+    foreach ($internados as $paciente) {
+      foreach ($camas as $cama) {
+        if ($paciente->get_cama()->get_id()==$cama->get_id()){
+          array_push($res,$paciente);
+        }
+      }
+    }
+    return $res;
+  }
+
+  public static function get_all_personas(){return Persona::all();}
 
 }

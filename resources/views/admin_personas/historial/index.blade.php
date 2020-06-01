@@ -36,8 +36,8 @@
 		</span>
 	</p>
 	<div id="alert" class="alert alert-info"></div>
-	@if($query)
-		<div id="alert" name="alert-roles" class="alert alert-info">Roles con el {{$busqueda_por}} = {{$query}}</div>
+	@if($notificacion)
+		<div id="alert" name="alert-roles" class="alert alert-info">{{$notificacion}}</div>
 	@endif
 </div>
 
@@ -47,13 +47,13 @@
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'pacientes.index','method'=>'GET']) !!}
+				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-						 <option value="busqueda_name" >Nombre y/o apellido</option>
+						 <option value="busqueda_nombre_persona" >Nombre y/o apellido</option>
 						 <option value="busqueda_dni" > Número DNI </option>
-						 <option value="busqueda_sector" > Sector </option>
+						 <option value="busqueda_nombre_sector" > Sector </option>
 					 </select>
 
 						 {!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
@@ -68,12 +68,12 @@
 							<tr>
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Tipo Doc.</th>
-								<th scope="col">DNI</th>
+								<th scope="col">Documento</th>
 								<th scope="col">Fecha ingreso</th>
 								<th scope="col">Sector</th>
 								<th scope="col">Habitación</th>
 								<th scope="col">Accion</th>
+								<th scope="col">Dar alta</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -85,12 +85,12 @@
 							<tr>
 								<td>{{$historial->get_id()}}</td>
 								<td>{{$historial->get_name()}} {{$historial->get_apellido()}}</td>
-								<td>{{$historial->get_tipo_documento_name()}}</td>
-								<td>{{$historial->get_numero_doc()}}</td>
+								<td>{{$historial->get_tipo_documento_name()}} {{$historial->get_numero_doc()}}</td>
 								<td>{{$historial->get_fecha_ingreso()}}</td>
 								<td>{{$historial->get_sector_actual_name()}}</td>
 								<td>{{$historial->get_habitacion_actual_name()}}</td>
 								<td>{!!link_to_route('historialInternacion.show', $title = 'VER', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($historial, ['route' => ['historialInternacion.destroy', $historial->id], 'method'=> 'DELETE'])!!}
 								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $historial->id }}">Eliminar</button></td>

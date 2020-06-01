@@ -104,4 +104,18 @@ class Cama extends Model
     }
 
     public static function borrar(Cama $cama){$cama->delete();}
+
+    public static function buscar_por_sector_name($sector_name){
+      $res = array();
+      $habitaciones = Habitacion::buscar_por_sector_name($sector_name);
+      $all = static::all();
+      foreach ($all as $cama) {
+        foreach ($habitaciones as $habitacion) {
+          if ($cama->get_habitacion_id()==$habitacion->get_id()){
+            array_push($res,$cama);
+          }
+        }
+      }
+      return $res;
+    }
 }

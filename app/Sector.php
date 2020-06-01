@@ -92,4 +92,8 @@ class Sector extends Model
     return $res;
   }
 
+  public static function buscar_por_nombre_parecido($nombre){
+    return static::where('name','LIKE',$nombre)->get();
+  }
+
 }

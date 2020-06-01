@@ -21,6 +21,10 @@ class MenuPersona_enhanced_Controller extends Controller
     const path = 'test.improvement.menu_persona';
     public function __construct()
     {
+        $this->middleware(['permission:alta_menu'],['only'=>['create','store']]);
+        $this->middleware(['permission:baja_menu'],['only'=>['destroy']]);
+        $this->middleware(['permission:modificacion_menu'],['only'=>['edit']]);
+        $this->middleware(['permission:ver_menu'],['only'=>['index']]);
         $this->middleware('auth');
     }
     /**
@@ -31,7 +35,7 @@ class MenuPersona_enhanced_Controller extends Controller
     public function index(Request $request)
     {
         //
-        if (Auth::user()->can('ver_menu_persona')){
+        #if (Auth::user()->can('ver_menu_persona')){
           #$menus = MenuPersona::buscar_por_fecha(Carbon::now()->toDateString());
           $menus = MenuPersona::all();
           Log::debug("Se buscaron las planillas del dia: ".Carbon::now()->toDateString());
@@ -39,7 +43,7 @@ class MenuPersona_enhanced_Controller extends Controller
             Log::debug($m);
           }
           return view(self::path.'.index',compact('menus'));
-        }
+        #}
 
         return redirect('/home');
     }

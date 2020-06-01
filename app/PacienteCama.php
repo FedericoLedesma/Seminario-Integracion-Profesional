@@ -54,6 +54,8 @@ class PacienteCama extends Model
       return Cama::buscar_por_id($this->cama_id);
     }
 
+    public function get_cama_id(){return $this->get_cama()->get_id();}
+
     public function get_habitacion(){
       return $this->get_cama()->get_habitacion();
     }
@@ -153,4 +155,6 @@ class PacienteCama extends Model
       return $res;
     }
 
+    public static function buscar_camas_por_sector_name($sector_name){return Cama::buscar_por_sector_name($sector_name);}
+    public function get_id(){return $this->id;}
 }

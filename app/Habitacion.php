@@ -61,6 +61,20 @@ class Habitacion extends Model
       return $res;
     }
 
+    public static function buscar_por_sector_name($sector_name){
+      $res = array();
+      $sectores = Sector::buscar_por_nombre_parecido($sector_name);
+      $all = static::all();
+      foreach ($all as $habitacion) {
+        foreach ($sectores as $sector) {
+          if ($habitacion->get_sector_id()==$sector->get_id()){
+            array_push($res,$habitacion);
+          }
+        }
+      }
+      return $res;
+    }
+
     public static function buscar_por_id($id){
       return static::where('id','=',$id)
         ->get()
@@ -68,7 +82,7 @@ class Habitacion extends Model
     }
 
     public function get_sector(){
-      return Sector::findById($this->sector_id);
+      return Sector::find($this->sector_id);
     }
 
     public function get_camas(){
@@ -107,6 +121,7 @@ class Habitacion extends Model
     }
 
     public function get_sector_name(){return $this->get_sector()->get_name();}
+    public function get_sector_id(){return $this->get_sector()->get_id();}
     public function set_sector_id($sector_id){$this->sector_id=$sector_id;}
     public function get_id(){return $this->id;}
     public function get_name(){return $this->name;}

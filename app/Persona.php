@@ -62,9 +62,9 @@ class Persona extends Model
     {
       Log::debug('Buscando por numero_doc a '.$numero_doc);
       if($numero_doc){
-        $persona =  static::where('numero_doc',$numero_doc)->get();
+        $persona =  static::where('numero_doc','=',$numero_doc)->get();
         return $persona;
-      }return null;
+      }return array();
     }
 
 
