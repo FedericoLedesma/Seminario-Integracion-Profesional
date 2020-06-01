@@ -76,8 +76,88 @@ class Paciente extends Model
   public function get_fecha_nac(){return $this->get_persona()->get_fecha_nac();}
   public function get_tipo_documento_id(){return $this->get_persona()->get_tipo_documento_id();}
   public function get_tipo_documento(){return $this->get_persona()->get_tipo_documento();}
+
   public function persona()
   {
     return $this->belongsTo('App\Persona', 'id');
   }
+
+  public function get_tipo_documento_name(){return $this->get_tipo_documento()->get_name();}
+
+
+
+  public static function buscar_por_nombre_y_apellido($nombre_y_apellido){
+    Log::debug('Buscando por nombre y apellido a '.$nombre_y_apellido);
+    $pacientes = Array();
+    //Separo todos los strings pasados separados por comas
+    $campos = explode(' ',$nombre_y_apellido.' ',-1);
+    Log::debug('String separado en '.implode($campos));
+    foreach($campos as $campo){
+      $res_no = static::buscar_por_nombre($campo);
+      $res_ap = static::buscar_por_apellido($campo);
+      $pacientes = $res_no + $res_ap;
+      Log::debug('Campos de $persona: '.implode($pacientes));
+    }
+    return $pacientes;
+  }
+
+  public static function buscar_por_nombre($name)
+  {
+    Log::debug('Buscando por nombre a '.$name[0]);
+    $res = array();
+    $all = Persona::buscar_por_nombre($name);
+    foreach ($all as $persona) {
+      $paciente = static::find($persona->get_id());
+      if ($paciente<>null){
+        array_push($res,$paciente);
+      }
+    }
+    return $res;
+  }
+
+  public static function buscar_por_apellido($apellido)
+  {
+    Log::debug('Buscando por apellido a '.$apellido);
+    $res = array();
+    $all = Persona::buscar_por_apellido($apellido);
+    foreach ($all as $persona) {
+      $paciente = static::find($persona->get_id());
+      if ($paciente<>null){
+        array_push($res,$paciente);
+      }
+    }
+    return $res;
+  }
+
+  public static function buscar_por_dni($dni){
+    Log::debug('Buscando por dni a '.$dni);
+    $res = array();
+    $all = Persona::buscar_por_numero_doc($dni);
+    foreach ($all as $persona) {
+      $paciente = static::find($persona->get_id());
+      if ($paciente<>null){
+        array_push($res,$paciente);
+      }
+    }
+    return $res;
+  }
+
+  public function get_sector_actual(){return $this->get_cama()->get_sector();}
+  public function get_sector_actual_name(){return $this->get_cama()->get_sector_name();}
+  public function get_habitacion_actual(){return $this->get_cama()->get_habitacion();}
+  public function get_habitacion_actual_name(){return $this->get_cama()->get_habitacion_name();}
+
+  public function get_historial_sectores($fecha_inicio, $fecha_fin){
+    return PacienteCama::buscar_sectores_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
+  }
+
+  public function get_historial_habitaciones($fecha_inicio, $fecha_fin){
+    return PacienteCama::buscar_habitaciones_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
+  }
+
+  public function get_historial_camas($fecha_inicio, $fecha_fin){
+    return PacienteCama::buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
+  }
+
+
 }

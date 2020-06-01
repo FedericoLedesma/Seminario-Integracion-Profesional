@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Cama;
 use App\Paciente;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class PacienteCama extends Model
 {
     protected $table = "paciente_cama";
 
     protected $fillable = [
-        'id','paciente_id', 'fecha', 'fecha_fin', 'cama_id','habitacion_id','sector_id',
+        'id','paciente_id', 'fecha', 'fecha_fin', 'cama_id',/*'habitacion_id','sector_id',*/
     ];
 
     public static function findByPacienteFecha($paciente_id,$fecha)
@@ -57,8 +58,16 @@ class PacienteCama extends Model
       return $this->get_cama()->get_habitacion();
     }
 
+    public function get_habitacion_name(){
+      return $this->get_cama()->get_habitacion_name();
+    }
+
     public function get_sector(){
       return $this->get_cama()->get_sector();
+    }
+
+    public function get_sector_name(){
+      return $this->get_cama()->get_sector_name();
     }
 
     public function get_paciente(){
@@ -111,6 +120,37 @@ class PacienteCama extends Model
 	  ->where('fecha_fin','=',null)
 	  ->get()->first();
       return $cama<>null;
+    }
+
+    public static function buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, Paciente $paciente){
+      if ($fecha_fin==null){
+        $fecha_fin = Carbon::now()->toDateString();
+      }
+      return static::where('fecha','>=',$fecha_inicio)
+        ->where('fecha','<=', $fecha_fin)
+        ->orWhere([['fecha_fin','>=',$fecha_inicio],
+        ['fecha_fin','<=', $fecha_fin]])
+        ->get();
+    }
+
+    public static function buscar_habitaciones_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, Paciente $paciente){
+      $res = array();
+      $camas = buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $paciente);
+      foreach ($camas as $cama) {
+        $x = $cama->get_habitacion();
+        array_push($res,$x);
+      }
+      return $res;
+    }
+
+    public static function buscar_sectores_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, Paciente $paciente){
+      $res = array();
+      $camas = buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $paciente);
+      foreach ($camas as $cama) {
+        $x = $cama->get_sector();
+        array_push($res,$x);
+      }
+      return $res;
     }
 
 }

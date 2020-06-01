@@ -28,4 +28,7 @@ class TipoDocumento extends Model
   public function personas(){
     return $this->hasMany('App\Personas');
   }
+
+  public function get_name(){return $this->name;}
+  public function get_id(){return $this->id;}
 }

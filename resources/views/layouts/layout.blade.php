@@ -323,7 +323,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
        </li>
        <!--           fin persona           -->
 
+       <!--              enfermería        -->
+       <li class="nav-item has-treeview menu-close">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
+          <p>
+            Enfermería
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('historialInternacion.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Ingreso de pacientes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('pacientes.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Ficha de pacientes</p>
+            </a>
+          </li>
 
+        </ul>
+       </li>
+       <!--           fin enfermería           -->
 
 
         </ul>
