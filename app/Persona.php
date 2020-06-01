@@ -58,6 +58,16 @@ class Persona extends Model
         return $persona;
       }return null;
     }
+    public static function buscar_por_numero_doc($numero_doc)
+    {
+      Log::debug('Buscando por numero_doc a '.$numero_doc);
+      if($numero_doc){
+        $persona =  static::where('numero_doc',$numero_doc)->get();
+        return $persona;
+      }return null;
+    }
+
+
     public static function scopeFindByApellido($query,$apellido)
     {
       Log::debug('Buscando por apellido a '.$apellido);

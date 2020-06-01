@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Paciente;
 
 class HistoriaInternacion extends Model
 {
@@ -55,5 +56,40 @@ class HistoriaInternacion extends Model
     else
       return false;
   }
+  
+  public function is_paciente_internado(){return $this->get_fecha_egreso()==null;}
+  public function get_fecha_egreso(){return $this->fecha_egreso;}
+  public function set_fecha_egreso($fecha_egreso){$this->fecha_egreso=$fecha_egreso;}
+  public function get_fecha_ingreso(){return $this->fecha_ingreso;}
+  public function get_peso(){return $this->peso;}
+  public function get_paciente_id(){return $this->paciente_id;}
+
+  //métodos delegados por parte de App\Paciente: <paciente_id>
+  public function get_paciente(){return Paciente::find($this->get_paciente_id());}
+  public function get_id(){return $this->id;}
+  public function get_name(){return $this->get_paciente()->get_name();}
+  public function get_apellido(){return $this->get_paciente()->get_apellido();}
+  public function get_tipo_documento(){return $this->get_paciente()->get_tipo_documento();}
+  public function get_tipo_documento_id(){return $this->get_paciente()->get_tipo_documento_id();}
+  public function get_tipo_documento_name(){return $this->get_paciente()->get_tipo_documento_name();}
+  public function get_numero_doc(){return $this->get_paciente()->get_numero_doc();}
+  public function get_numero_doc(){return $this->get_paciente()->get_numero_doc();}
+  public function get_observacion(){return $this->get_paciente()->get_observacion();}
+  public function get_direccion(){return $this->get_paciente()->get_direccion();}
+  public function get_email(){return $this->get_paciente()->get_email();}
+  public function get_provincia(){return $this->get_paciente()->get_provincia();}
+  public function get_localidad(){return $this->get_paciente()->get_localidad();}
+  public function get_sexo(){return $this->get_paciente()->get_sexo();}
+  public function get_fecha_nac(){return $this->get_paciente()->get_fecha_nac();}
+
+      //métodos para acceder a información útil en la carga de historial
+  public function get_sector_actual(){return $this->get_paciente()->get_sector_actual();}
+  public function get_sector_actual_name(){return $this->get_paciente()->get_sector_actual_name();}
+  public function get_habitacion_actual(){return $this->get_paciente()->get_habitacion_actual();}
+  public function get_habitacion_actual_name(){return $this->get_paciente()->get_habitacion_actual_name();}
+
+  public function get_historial_sectores(){return $this->get_paciente()->get_historial_sectores($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
+  public function get_historial_habitaciones(){return $this->get_paciente()->get_historial_habitaciones($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
+  public function get_historial_camas(){return $this->get_paciente()->get_historial_camas($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
 
 }
