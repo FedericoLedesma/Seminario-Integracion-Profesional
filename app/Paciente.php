@@ -133,11 +133,11 @@ class Paciente extends Model
   }
 
   public function get_historial_habitaciones($fecha_inicio, $fecha_fin){
-    return return PacienteCama::buscar_habitaciones_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
+    return PacienteCama::buscar_habitaciones_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
   }
 
   public function get_historial_camas($fecha_inicio, $fecha_fin){
-    return return PacienteCama::buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
+    return PacienteCama::buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
   }
 
 }

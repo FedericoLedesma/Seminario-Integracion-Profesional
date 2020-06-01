@@ -72,6 +72,8 @@ Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
 	->name('HabitacionController.delete');*/
 Route::resource('/habitaciones', 'HabitacionController');
 Route::resource('/camas', 'CamaController');
+Route::resource('/pacientes', 'PacienteController');
+Route::resource('/historialInternacion', 'HistorialInternacionController');
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');

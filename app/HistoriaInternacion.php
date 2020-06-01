@@ -56,7 +56,7 @@ class HistoriaInternacion extends Model
     else
       return false;
   }
-  
+
   public function is_paciente_internado(){return $this->get_fecha_egreso()==null;}
   public function get_fecha_egreso(){return $this->fecha_egreso;}
   public function set_fecha_egreso($fecha_egreso){$this->fecha_egreso=$fecha_egreso;}
@@ -72,7 +72,6 @@ class HistoriaInternacion extends Model
   public function get_tipo_documento(){return $this->get_paciente()->get_tipo_documento();}
   public function get_tipo_documento_id(){return $this->get_paciente()->get_tipo_documento_id();}
   public function get_tipo_documento_name(){return $this->get_paciente()->get_tipo_documento_name();}
-  public function get_numero_doc(){return $this->get_paciente()->get_numero_doc();}
   public function get_numero_doc(){return $this->get_paciente()->get_numero_doc();}
   public function get_observacion(){return $this->get_paciente()->get_observacion();}
   public function get_direccion(){return $this->get_paciente()->get_direccion();}

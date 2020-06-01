@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Pacientes</li>
+<li class="breadcrumb-item active">Historial de pacientes</li>
 @endsection
 @section('content')
 
@@ -11,7 +11,7 @@
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
 
-	  	<title>Índice de pacientes</title>
+	  	<title>Historial de pacientes</title>
 
 	    <h1></h1>
 	      @include('layouts.error')
@@ -27,7 +27,7 @@
 }
 -->
 </style>
-	<a href="{{action('PacienteController@create')}}" class="btn btn-primary">Agregar pacientes</a>
+	<a href="{{action('HistorialInternacionController@create')}}" class="btn btn-primary">Ingreso de pacientes</a>
 <div>
 	<p>
 		<span id="users-total">
@@ -62,15 +62,17 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
+					{!!	Form::label('titulo_tabla', 'Pacientes activos')!!}
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Apellido</th>
 								<th scope="col">Tipo Doc.</th>
 								<th scope="col">DNI</th>
+								<th scope="col">Fecha ingreso</th>
+								<th scope="col">Sector</th>
+								<th scope="col">Habitación</th>
 								<th scope="col">Accion</th>
 								<th scope="col"></th>
 
@@ -78,18 +80,20 @@
 						</thead>
 
 						<tbody>
-						@if($pacientes)
-							@foreach($pacientes as $paciente)
+						@if($historiales)
+							@foreach($historiales as $historial)
 							<tr>
-								<td>{{$paciente->get_id()}}</td>
-								<td>{{$paciente->get_name()}}</td>
-								<td>{{$paciente->get_apellido()}}</td>
-								<td>{{$paciente->get_tipo_documento_name()}}</td>
-								<td>{{$paciente->get_numero_doc()}}</td>
-								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$paciente],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{{$historial->get_id()}}</td>
+								<td>{{$historial->get_name()}} {{$historial->get_apellido()}}</td>
+								<td>{{$historial->get_tipo_documento_name()}}</td>
+								<td>{{$historial->get_numero_doc()}}</td>
+								<td>{{$historial->get_fecha_ingreso()}}</td>
+								<td>{{$historial->get_sector_actual_name()}}</td>
+								<td>{{$historial->get_habitacion_actual_name()}}</td>
+								<td>{!!link_to_route('historialInternacion.show', $title = 'VER', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($paciente, ['route' => ['pacientes.destroy', $paciente->id], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $paciente->id }}">Eliminar</button></td>
+								{!! Form::model($historial, ['route' => ['historialInternacion.destroy', $historial->id], 'method'=> 'DELETE'])!!}
+								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $historial->id }}">Eliminar</button></td>
 								{!! Form::close() !!}
 
 							</tr>
@@ -104,6 +108,6 @@
 				<!--</div>-->
 @endsection
 @section('script')
- <script src="{{asset('js/paciente-script.js')}}"></script>
+ <script src="{{asset('js/historial-script.js')}}"></script>
 
 @endsection
