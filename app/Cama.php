@@ -136,4 +136,5 @@ class Cama extends Model
       catch(Throwable $t){
         return false;
       }
+    }
 }
