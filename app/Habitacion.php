@@ -158,6 +158,11 @@ class Habitacion extends Model
       }
       return true;
     }
+    public function sector()
+    {
+      return $this->belongsTo('App\Sector', 'sector_id');
+    }
+
 
     public function ingresar_paciente($paciente,$fecha){
       $desocupadas = $this->get_cantidad_camas_desocupadas();

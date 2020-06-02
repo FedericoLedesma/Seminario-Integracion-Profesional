@@ -118,6 +118,10 @@ class Cama extends Model
       }
       return $res;
     }
+    public function habitacion()
+    {
+      return $this->belongsTo('App\Habitacion', 'habitacion_id');
+    }
 
     public function ingresar_paciente($paciente,$fecha){
       try{
@@ -132,5 +136,4 @@ class Cama extends Model
       catch(Throwable $t){
         return false;
       }
-    }
 }

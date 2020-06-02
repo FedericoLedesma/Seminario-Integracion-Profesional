@@ -164,31 +164,30 @@ class MenuPersonaController extends Controller
         $user = Auth::user();
         Log::debug('Usuario: '.$user);
         $persona_id = $request->get('persona_id');
-        $horario_id = $request->get('horario');
-        $racion_id = $request->get('racion_id');
-        $fecha = $request->get('fecha');
+        $racion_disponible_id = $request->get('racion_disponible_id');
+        //$racion_disponible=RacionesDisponibles::findById($racion_disponible_id);
         Log::debug('$persona_id: '.$persona_id);
-        Log::debug('$horario_id: '.$horario_id);
-        Log::debug('$racion_id: '.$racion_id);
-        Log::debug('$fecha: '.$fecha);
-        $this->validate($request,[
-            'persona_id'=>'required',
-            'horario'=>'required',
-            'racion_id'=>'required',
-            'fecha'=>'required'
-        ]);
-        $data = [
-          'persona_id'=>$persona_id,
-          'horario_id'=>$racion_id,
-          'racion_id'=>$horario_id,
-          'fecha'=>$fecha,
-          'personal_id'=>$user->id,
-          'realizado'=>false,
-        ];
-        $mp = new MenuPersona($data);
-        $mp->save();
-        return redirect()->route('menu_persona.index')
-            ->with('success','Menu persona registrado satisfactoriamente');
+        Log::debug('$racion_disponible_id: '.$racion_disponible_id);
+        try{
+          $data = [
+            'persona_id'=>$persona_id,
+            'racion_disponible_id'=>$racion_disponible_id,
+            'personal_id'=>$user->personal_id,
+            'realizado'=>false,
+          ];
+          $mp = new MenuPersona($data);
+          $mp->save();
+          return response([
+            'success'=>'true',
+            'data'=>"Menu realizado con exito",
+          ]);
+        }catch (\Exception $e) {
+          return response([
+            'success'=>'false',
+            'data'=>"Esta persona ya tiene una racion asignada para este horario",
+          ]);
+        }
+
     }
 
     /**
