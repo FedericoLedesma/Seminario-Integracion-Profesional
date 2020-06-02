@@ -158,4 +158,13 @@ class Habitacion extends Model
       }
       return true;
     }
+
+    public function ingresar_paciente($paciente,$fecha){
+      $desocupadas = $this->get_cantidad_camas_desocupadas();
+      if ($desocupadas<=0){
+        return false;
+      }
+      $camas = $this->get_camas_desocupadas();
+      return $camas[0]->ingresar_paciente($paciente,$fecha);
+    }
 }

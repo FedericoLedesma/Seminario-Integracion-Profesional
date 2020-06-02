@@ -77,6 +77,8 @@ Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@al
 	->name('historialInternacion.alta');
 Route::get('/historialInternacion/ingresarNuevo', 'HistorialInternacionController@ingresarNuevo')
 		->name('historialInternacion.alta');
+Route::get('/historialInternacion/ingresarNuevo/paciente', 'HistorialInternacionController@createPaciente')
+		->name('historialInternacion.createPaciente');
 Route::resource('/historialInternacion', 'HistorialInternacionController');
 
 Route::resource('/personas', 'PersonaController');

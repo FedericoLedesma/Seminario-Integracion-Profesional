@@ -118,4 +118,19 @@ class Cama extends Model
       }
       return $res;
     }
+
+    public function ingresar_paciente($paciente,$fecha){
+      try{
+          $paciente_cama = new PacienteCama([
+          'paciente_id'=>$paciente->get_id(),
+          'fecha'=>$fecha,
+          'cama_id'=>$this->get_id(),
+        ]);
+        $paciente_cama->save();
+        return true;
+      }
+      catch(Throwable $t){
+        return false;
+      }
+    }
 }

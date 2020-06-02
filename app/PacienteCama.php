@@ -121,7 +121,7 @@ class PacienteCama extends Model
       $camas = static::where('cama_id','=',$cama_id)
 	  ->where('fecha_fin','=',null)
 	  ->get()->first();
-      return $cama<>null;
+      return $camas<>null;
     }
 
     public static function buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, Paciente $paciente){
