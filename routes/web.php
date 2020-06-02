@@ -73,6 +73,7 @@ Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
 Route::resource('/habitaciones', 'HabitacionController');
 Route::resource('/camas', 'CamaController');
 Route::resource('/pacientes', 'PacienteController');
+Route::post('/menu_persona/pacientes/{paciente}/patologias','PacienteController@getPatologias');
 Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@alta')
 	->name('historialInternacion.alta');
 Route::get('/historialInternacion/ingresarNuevo', 'HistorialInternacionController@ingresarNuevo')
@@ -97,6 +98,7 @@ Route::PUT('/raciones/{racion}/guardarhorario', 'RacionController@guardarHorario
 Route::PUT('/raciones/{racion}/quitarhorario', 'RacionController@quitarHorario');
 Route::resource('/raciones-disponibles', 'RacionesDisponiblesController');
 Route::get('/ver-raciones-disponibles', 'RacionesDisponiblesController@getRacionesDisponibles');
+Route::get('/ver-raciones-disponibles-persona', 'RacionesDisponiblesController@getRacionesDisponiblesPersona');
 Route::get('/raciones-disponibles/show/{id}',["as"=>"raciones-disponibles.show", "uses"=>'RacionesDisponiblesController@show']);
 Route::DELETE('/raciones-disponibles/destroy/{id}','RacionesDisponiblesController@destroy');
 Route::PUT('/raciones-disponibles/update/{id}','RacionesDisponiblesController@update');

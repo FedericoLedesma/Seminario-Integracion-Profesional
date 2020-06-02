@@ -258,4 +258,17 @@ class RacionesDisponiblesController extends Controller
             'raciones'=>$raciones->toArray(),
           ]);
     }
+    public function getRacionesDisponiblesPersona(Request $request){
+      Log::info($request);
+      $horario_id=$request->horario_id;
+      $persona_id=$request->persona_id;
+      /**
+        Se deben obtener las raciones disponibles para la persona en un array
+        para enviar a la vista.
+      **/
+      $raciones=Racion::all();//ejemplo para ver si funcionaba.
+      return response([
+        'raciones'=>$raciones->toArray(),
+      ]);
+    }
 }
