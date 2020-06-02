@@ -93,7 +93,7 @@ class MenuPersonaController extends Controller
     public function create(Request $request)
     {
         //
-        $raciones_disponibles = Array();
+        /**$raciones_disponibles = Array();
         $pacientes = Paciente::get_pacientes_internados();
         $fecha = $request->get('calendario');
         $horario= Horario::findById($request->get('horario_id'));
@@ -118,8 +118,8 @@ class MenuPersonaController extends Controller
                   'nombre'=>'ninguno',
                   'id'=>'-1'
                 ];*/
-              }
-              else
+          //    }
+          /*    else
               {
                   Log::debug('Pase a buscar raciones');
                   $persona = Persona::findById((int)$persona_id);
@@ -144,8 +144,11 @@ class MenuPersonaController extends Controller
               }
         $fecha = Carbon::now();
         $horarios = Horario::all();
-        $horario = Array();
-        return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
+        $horario = Array();*/
+      //  return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
+      $pacientes=Paciente::all();
+      $horarios= Horario::all();
+      return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
     }
 
     /**

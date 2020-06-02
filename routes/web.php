@@ -73,6 +73,7 @@ Route::resource('/improvement/menu_persona','MenuPersona_enhanced_Controller');
 Route::resource('/habitaciones', 'HabitacionController');
 Route::resource('/camas', 'CamaController');
 Route::resource('/pacientes', 'PacienteController');
+Route::post('/menu_persona/pacientes/{paciente}/patologias','PacienteController@getPatologias');
 Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@alta')
 	->name('historialInternacion.alta');
 Route::get('/historialInternacion/ingresarNuevo', 'HistorialInternacionController@ingresarNuevo')

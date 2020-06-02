@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Permission;
 use App\Paciente;
 use App\TipoDocumento;
 use App\Persona;
+use App\Patologia;
+use Illuminate\Support\Facades\Log;
 
 class PacienteController extends Controller
 {
@@ -52,5 +54,30 @@ class PacienteController extends Controller
         $personas = Persona::all();
         return view('admin_personas.pacientes.create',compact('tipo_documento','personas'));
       #}
+  }
+  public function getPatologias(Paciente $paciente ){
+    Log::info("getPatologias");
+    Log::info($paciente->persona->patologias);
+    $patologias=$paciente->persona->patologias;
+    Log::info("patologias -  ".$patologias);
+    if(count($patologias)==0){
+      Log::info("No tiene patologias return null json");
+      return response()->json([
+            'success'=>'false',
+            'patologias' => ''
+        ]);
+    }else{
+      Log::info("Tiene patologias");
+      $s="";
+
+      foreach ($patologias as $patologia) {
+        $s=$s.' '.$patologia->name;
+      }
+      Log::info($s);
+      return response()->json([
+            'success'=>'true',
+            'patologias' => $s,
+        ]);
+    }
   }
 }
