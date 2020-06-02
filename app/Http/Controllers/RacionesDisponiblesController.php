@@ -262,7 +262,11 @@ class RacionesDisponiblesController extends Controller
       Log::info($request);
       $horario_id=$request->horario_id;
       $persona_id=$request->persona_id;
-      $raciones=Racion::all();
+      /**
+        Se deben obtener las raciones disponibles para la persona en un array
+        para enviar a la vista.
+      **/
+      $raciones=Racion::all();//ejemplo para ver si funcionaba.
       return response([
         'raciones'=>$raciones->toArray(),
       ]);
