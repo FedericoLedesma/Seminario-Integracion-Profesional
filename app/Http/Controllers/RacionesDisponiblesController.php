@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use \App\RacionesDisponibles;
 use \App\Horario;
 use \App\Racion;
+use \App\Persona;
 use \App\Movimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use DateTime;
 
 class RacionesDisponiblesController extends Controller
@@ -266,17 +268,22 @@ class RacionesDisponiblesController extends Controller
         Se deben obtener las raciones disponibles para la persona en un array
         para enviar a la vista.
       **/
+      $horario=Horario::findById($horario_id);
+      $persona=Persona::findById($persona_id);
       $fecha=new DateTime(date("Y-m-d"));
-      $raciones=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();//ejemplo para ver si funcionaba.
+      $f = Carbon::now()->toDateString();
+      $raciones=RacionesDisponibles::buscar_por_fecha_horario($f,$horario);//ejemplo para ver si funcionaba.
       Log::info($raciones);
+      $racion_recomendada = $persona->recomendar_racion($f,$horario);
       $raciones_name=array();
+      array_push($raciones_name,$racion_recomendada);
       foreach ($raciones as $racion) {
         $r=Racion::findById($racion->horario_racion->racion->id);
         array_push($raciones_name,$r);
       }
       Log::info($raciones_name);
       return response([
-        'raciones'=>$raciones->toArray(),
+        'raciones'=>$raciones,
         'raciones_name'=>$raciones_name,
       ]);
       //return view('forms.selects.racion_select', compact('raciones'));

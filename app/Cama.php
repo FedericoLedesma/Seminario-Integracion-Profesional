@@ -118,4 +118,8 @@ class Cama extends Model
       }
       return $res;
     }
+    public function habitacion()
+    {
+      return $this->belongsTo('App\Habitacion', 'habitacion_id');
+    }
 }

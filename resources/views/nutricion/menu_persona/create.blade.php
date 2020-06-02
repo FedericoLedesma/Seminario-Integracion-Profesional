@@ -41,7 +41,7 @@
 
 <div class="container">
   <div class="table-responsive">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1">
 
 			<div class="panel-heading">
 				{!!Form::open(['route'=>'pacientes.index','method'=>'GET']) !!}
@@ -85,7 +85,7 @@
 									<td>{{$paciente->get_numero_doc()}}</td>
 
 									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-toggle="modal" data-target="#create">
-									    Agregar
+									    Crear Menu
 									</a></td>
 
 								</tr>

@@ -158,4 +158,8 @@ class Habitacion extends Model
       }
       return true;
     }
+    public function sector()
+    {
+      return $this->belongsTo('App\Sector', 'sector_id');
+    }
 }
