@@ -115,7 +115,7 @@
 								<td>
 								{!!	Form::label('hor_id', 'Horario')!!}
 								<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-									<option value= 0> Todos </option>
+									<option value= 0> Seleccione horario </option>
 									@foreach($horarios as $horario)
 									<option value= {{$horario->id}} >{{$horario->name}}</option>
 									@endforeach
@@ -132,8 +132,8 @@
 
 					</div>
 					<div class="modal-footer">
-							<a href="" class="btn btn-primary guardar_menu" >Nueva Racion</a>
-							<a href="" class="btn btn-primary guardar_menu" >Guardar</a>
+							<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Racion</a>
+							<a href="" class="btn btn-success guardar_menu" >Guardar</a>
 					</div>
 
 			</div>

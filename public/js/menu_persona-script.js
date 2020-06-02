@@ -152,3 +152,8 @@
 					}
 		});
 	});
+	$('.guardar_menu').click(function(e){
+		e.preventDefault();
+		var modal=document.getElementById("create");
+		$('#create').modal('hide');
+	});
