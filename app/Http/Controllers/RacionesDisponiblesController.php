@@ -266,9 +266,19 @@ class RacionesDisponiblesController extends Controller
         Se deben obtener las raciones disponibles para la persona en un array
         para enviar a la vista.
       **/
-      $raciones=Racion::all();//ejemplo para ver si funcionaba.
+      $fecha=new DateTime(date("Y-m-d"));
+      $raciones=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();//ejemplo para ver si funcionaba.
+      Log::info($raciones);
+      $raciones_name=array();
+      foreach ($raciones as $racion) {
+        $r=Racion::findById($racion->horario_racion->racion->id);
+        array_push($raciones_name,$r);
+      }
+      Log::info($raciones_name);
       return response([
         'raciones'=>$raciones->toArray(),
+        'raciones_name'=>$raciones_name,
       ]);
+      //return view('forms.selects.racion_select', compact('raciones'));
     }
 }

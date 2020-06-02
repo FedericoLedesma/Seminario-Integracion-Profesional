@@ -101,21 +101,19 @@
 	<div class="modal-dialog">
 			<div class="modal-content">
 					<div class="modal-header" id="modal-header">
-					<!--	<button type="button" class="close" data-dismiss="modal">
-								<span>×</span>
-						</button>-->
+
 					</div>
 					<div class="modal-body">
 						<div id="p_body">
 
 						</div>
-
+						<div id="alert-modal" class="alert alert-modal alert-danger"></div>
 						<table>
 							<tr>
 								<td>
 								{!!	Form::label('hor_id', 'Horario')!!}
 								<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-									<option value= 0> Seleccione horario </option>
+									<option selected value= 0> Seleccione horario </option>
 									@foreach($horarios as $horario)
 									<option value= {{$horario->id}} >{{$horario->name}}</option>
 									@endforeach

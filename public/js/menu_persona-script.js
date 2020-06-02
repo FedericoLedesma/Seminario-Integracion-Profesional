@@ -14,6 +14,10 @@
 			var horario_id=$('#horario_id').val();
 			var persona_id=paciente.id;
 			console.log(paciente);
+			var selectRaciones=document.getElementById("racion_id");
+			for (i = selectRaciones.length - 1; i >= 0; i--) {
+				selectRaciones.remove(i);
+			}
 
 			var url="/ver-raciones-disponibles-persona";
 			$.ajax({
@@ -23,19 +27,23 @@
 				data:{horario_id,persona_id},
 					success: function (data) {
 								console.log(data);
-								var selectRaciones=document.getElementById("racion_id");
-								for (i = selectRaciones.length - 1; i >= 0; i--) {
-									selectRaciones.remove(i);
-								}
 								data.raciones.forEach(myFunction)
 								function myFunction(item, i) {
-									console.log(item.id);
-									var miOption=document.createElement("option");
-									miOption.setAttribute("value",item.id);
-									miOption.setAttribute("label",item.name);
-									selectRaciones.appendChild(miOption);
+									data.raciones_name.forEach(myRacionFunction)
+									function myRacionFunction(racion, j) {
+										if(i==j){
+											console.log(item.id);
+											console.log(racion.name);
+											var miOption=document.createElement("option");
+											miOption.setAttribute("value",item.id);
+											miOption.setAttribute("label",racion.name);
+											selectRaciones.appendChild(miOption);
+										}
+										j++;
+									}
 									i++;
-								}
+
+									}
 								},
 								error: function (data) {
 									console.log('Error:', data);
@@ -99,8 +107,11 @@
 	});
 	$('.crear_menu').click(function(e){
 		var elemento=document.getElementById("modal-header");
+		$('#alert-modal').hide();
 		e.preventDefault();//evita cargar la pagina
 		var s=document.getElementById("h4_modal");
+		document.getElementById("horario_id").options[0].selected=true;
+		//console.log(horarioSelect.options[0]);
 		console.log(s);
 		$(".close").remove();
 		$(".h4_modal").remove();
@@ -111,7 +122,12 @@
 		}
 		var paciente_name= $(this).data("paciente_name");
 		var paciente= $(this).data("paciente");
+
+		localStorage.setItem('paciente', JSON.stringify(paciente));
+		var p = JSON.parse(localStorage.getItem('paciente'));
+		console.log("paciente "+p.id);
 		console.log(paciente_name);
+
 		var h4 = document.createElement("h4");
 		h4.innerHTML = "Crear menu para "+paciente_name;
 		h4.setAttribute("id","h4_modal");
@@ -154,6 +170,30 @@
 	});
 	$('.guardar_menu').click(function(e){
 		e.preventDefault();
+		var persona = JSON.parse(localStorage.getItem('paciente'));
+		var persona_id=persona.id;
+		var racion_disponible_id=$('#racion_id').val();
+		var url="/menu_persona";
 		var modal=document.getElementById("create");
-		$('#create').modal('hide');
+		$.ajax({
+			type: 'post',
+			url: url,
+			dataType: 'json',
+				data:{persona_id,racion_disponible_id},
+				success: function (data) {
+					console.log(data);
+					if(data.success=='true'){
+						$('#create').modal('hide');
+						$('#alert').show();
+						$('#alert').html(data.data);
+					}else{
+						$('#alert-modal').show();
+						$('#alert-modal').html(data.data);
+					}
+				},
+				error: function (data) {
+					console.log('Error:', data);
+				}
+		});
+
 	});
