@@ -9,7 +9,45 @@
 		{
 			document.getElementById("personaid").focus();
 		}
+		$("#horario_id").change(function(){
+			var paciente = $(this).data("paciente");
+			var horario_id=$('#horario_id').val();
+			var persona_id=paciente.id;
+			console.log(paciente);
 
+			var url="/ver-raciones-disponibles-persona";
+			$.ajax({
+				type: 'get',
+				url: url,
+				dataType: 'json',
+				data:{horario_id,persona_id},
+					success: function (data) {
+								console.log(data);
+								var selectRaciones=document.getElementById("racion_id");
+								for (i = selectRaciones.length - 1; i >= 0; i--) {
+									selectRaciones.remove(i);
+								}
+								data.raciones.forEach(myFunction)
+								function myFunction(item, i) {
+									console.log(item.id);
+									var miOption=document.createElement("option");
+									miOption.setAttribute("value",item.id);
+									miOption.setAttribute("label",item.name);
+									selectRaciones.appendChild(miOption);
+									i++;
+								}
+								},
+								error: function (data) {
+									console.log('Error:', data);
+
+								}
+			});
+
+
+
+
+
+		});
 	});
 	function getQueryVariable() {
 	 var query = window.location.search.substring(1);
@@ -67,6 +105,10 @@
 		$(".close").remove();
 		$(".h4_modal").remove();
 		$(".p_modal_body").remove();
+		var selectRaciones=document.getElementById("racion_id");
+		for (i = selectRaciones.length - 1; i >= 0; i--) {
+			selectRaciones.remove(i);
+		}
 		var paciente_name= $(this).data("paciente_name");
 		var paciente= $(this).data("paciente");
 		console.log(paciente_name);

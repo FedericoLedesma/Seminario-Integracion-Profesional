@@ -114,7 +114,7 @@
 							<tr>
 								<td>
 								{!!	Form::label('hor_id', 'Horario')!!}
-								<select class="browser-default custom-select" id="horario_id" name="horario_id">
+								<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
 									<option value= 0> Todos </option>
 									@foreach($horarios as $horario)
 									<option value= {{$horario->id}} >{{$horario->name}}</option>
