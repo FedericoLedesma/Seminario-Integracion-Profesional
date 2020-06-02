@@ -104,8 +104,8 @@
 				</div>
 				</div>
 			  </div>
-				 </div>
-				<!--</div>-->
+	</div>
+</div>
 @endsection
 @section('script')
  <script src="{{asset('js/historial-script.js')}}"></script>

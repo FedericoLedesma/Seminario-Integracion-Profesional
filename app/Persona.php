@@ -203,6 +203,7 @@ class Persona extends Model
      public function get_fecha_nac(){return $this->fecha_nac;}
      public function get_tipo_documento_id(){return $this->tipo_documento_id;}
      public function get_tipo_documento(){return TipoDocumento::find($this->get_tipo_documento_id());}
+     public function get_tipo_documento_name(){return $this->get_tipo_documento()->get_name();}
 
      /**
       * Funcionalidad principal.

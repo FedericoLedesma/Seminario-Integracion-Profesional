@@ -46,7 +46,9 @@ class Paciente extends Model
   }
 
   public function get_cama(){
+    Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
     return PacienteCama::buscar_ultima_cama_ocupada_por_paciente($this->id);
+    Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
   }
 
   public function get_habitacion(){

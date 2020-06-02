@@ -10,7 +10,7 @@ class Acompanante extends Model
   protected $table = "acompanante";
 
   protected $fillable = [
-      'id', 'paciente_id','fecha',
+      'id', 'paciente_id','fecha', 'acompanante_id'
   ];
 
   public static function buscar_por_id(int $id){

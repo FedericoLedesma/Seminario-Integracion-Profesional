@@ -80,6 +80,16 @@ Route::get('/historialInternacion/ingresarNuevo', 'HistorialInternacionControlle
 		->name('historialInternacion.alta');
 Route::get('/historialInternacion/ingresarNuevo/paciente', 'HistorialInternacionController@createPaciente')
 		->name('historialInternacion.createPaciente');
+Route::get('/historialInternacion/ingresar/paciente', 'HistorialInternacionController@storeExistente')
+		->name('historialInternacion.storeExistente');
+Route::get('/historialInternacion/ingresar_acompanante', 'HistorialInternacionController@addAcompanante')
+		->name('historialInternacion.addAcompanante');
+Route::get('/historialInternacion/create_acompanante/{id_historial}', 'HistorialInternacionController@createAcompanante')
+		->name('historialInternacion.createAcompanante');
+Route::get('/historialInternacion/store_new_acompanante', 'HistorialInternacionController@storeNewAcompanante')
+		->name('historialInternacion.storeNewAcompanante');
+Route::get('/historialInternacion/sucess', 'HistorialInternacionController@sucess')
+		->name('historialInternacion.sucess');
 Route::resource('/historialInternacion', 'HistorialInternacionController');
 
 Route::resource('/personas', 'PersonaController');

@@ -92,7 +92,7 @@ class Cama extends Model
       $camas = static::where('habitacion_id','=',$habitacion_id)->get();
       foreach ($camas as $cama) {
         Log::debug('Checkeando la cama '.$cama);
-        if ($cama->is_desocupada()){
+        if ($cama->is_desocupada()==true){
           Log::debug('Desocupada');
           array_push($res,$cama);
         }

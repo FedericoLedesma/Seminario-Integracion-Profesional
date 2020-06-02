@@ -44,10 +44,13 @@ class PacienteCama extends Model
     }
 
     public static function buscar_ultima_cama_ocupada_por_paciente($id_paciente){
-      return static::where('paciente_id','=',$id_paciente)
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__.' ID paciente: '.$id_paciente);
+      $res = static::where('paciente_id','=',$id_paciente)
         ->orderBy('fecha', 'desc')
         ->get()
         ->first();
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' || resultado: '.$res);
+      return $res;
     }
 
     public function get_cama(){
@@ -120,8 +123,8 @@ class PacienteCama extends Model
     public static function cama_is_desocupada($cama_id){
       $camas = static::where('cama_id','=',$cama_id)
 	  ->where('fecha_fin','=',null)
-	  ->get()->first();
-      return $camas<>null;
+	  ->get()->count();
+      return ($camas<=0);
     }
 
     public static function buscar_camas_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, Paciente $paciente){

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Paciente;
 use Carbon\Carbon;
+use App\Acompanante;
 
 class HistoriaInternacion extends Model
 {
@@ -155,6 +156,15 @@ class HistoriaInternacion extends Model
       }
     }
     return $res;
+  }
+
+  public function add_acompanante(Persona $persona){
+    $acom = new Acompanante([
+      'acompanante_id'=>$persona->get_id(),
+      'paciente_id'=>$this->get_paciente_id(),
+      'fecha'=>$this->get_fecha_ingreso(),
+    ]);
+    $acom->save();
   }
 
 }
