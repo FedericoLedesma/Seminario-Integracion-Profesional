@@ -72,13 +72,6 @@ class Prueb extends Seeder
       */
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
-      $paciente=Paciente::findById(5);
-      $acompanante=$paciente->acompananteActual();
-      if($acompanante){
-        echo "tiene acompa";
-        echo $acompanante->persona;
-      }else {
-        echo "no tiene acompa";
-      }
+          
     }
 }

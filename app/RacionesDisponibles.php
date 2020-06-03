@@ -44,25 +44,34 @@ class RacionesDisponibles extends Model
       Log::Debug("static function getRacionesDisponiblesPatologias");
       $raciones_disponibles= RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
       Log::Debug("Obtengo todas las raciones disponibles para la fecha");
+
       $r_d=array();
+      $raciones=array();
+
       foreach ($patologias as $patologia) {
         Log::Debug("Patologia ".$patologia->name);
         $dieta=$patologia->dieta->dietaActiva->where('fecha_final','=',null)->first();
         Log::Debug("Obtengo la dieta activa de la patologia");
         Log::info($dieta);
-        $raciones=$dieta->raciones;
-        Log::Debug("Para cada racion asociada a la dieta activa se verifica si esta disponible en la fecha actual");
-        foreach ($raciones as $racion) {
-          
-          $r=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion->id,$fecha);
-            Log::info("Raciondisp ".$r);
-            if(!empty($r)){
-              array_push($r_d,$r);
-            }
+
+        $rs=$dieta->raciones;
+        Log::Debug("Se guardan todas las raciones asociadas a la dieta dentro del array raciones ");
+
+        foreach ($rs as $r) {
+          array_push($raciones,$r);
         }
+      }
+
+      foreach ($raciones as $racion) {
+        $r=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion->id,$fecha);
+          if(!empty($r)){
+            Log::info("Raciondisp ".$r);
+            array_push($r_d,$r);
+          }
       }
       return $r_d;
     }
+
     public static function buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha){
       $raciones_disponibles_fecha = static::where('fecha','=', $fecha)->get();
       $horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);
