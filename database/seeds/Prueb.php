@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Persona;
+use App\Paciente;
 use App\Alimento;
+use App\Acompanante;
 use App\Personal;
 use App\TipoDocumento;
 use App\Patologia;
@@ -42,7 +44,7 @@ class Prueb extends Seeder
 
         //  echo $r."----------";
       }*/
-      $fecha=new DateTime(date("Y-m-d"));
+      /*$fecha=new DateTime(date("Y-m-d"));
       $racion=Racion::findById(14);
       $dietas_activas=DietaActiva::all();
       foreach ($dietas_activas as $dieta_activa) {
@@ -67,7 +69,16 @@ class Prueb extends Seeder
         }
 
       }
-
-
+      */
+    //  $acompanante=Acompanante::findById(1);
+      //echo $acompanante->paciente;
+      $paciente=Paciente::findById(5);
+      $acompanante=$paciente->acompananteActual();
+      if($acompanante){
+        echo "tiene acompa";
+        echo $acompanante->persona;
+      }else {
+        echo "no tiene acompa";
+      }
     }
 }

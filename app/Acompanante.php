@@ -13,9 +13,15 @@ class Acompanante extends Model
   protected $table = "acompanante";
 
   protected $fillable = [
-      'id', 'paciente_id','fecha', 'acompanante_id','fecha_fin'
+      'id', 'paciente_id','fecha', 'persona_id','fecha_fin'
   ];
-
+  public static function findById(int $id)
+  {
+       $acompanante = static::where('id', $id)->first();
+       if($acompanante){
+         return $acompanante;
+     } return null;
+  }
   public static function buscar_por_id(int $id){
     return static::where('id','=',$id)->get()->first();
   }
@@ -161,5 +167,12 @@ class Acompanante extends Model
     $this->fecha_fin = Carbon::now();
     $this->update();
   }
+  public function paciente(){
 
+    return $this->belongsTo('App\Paciente', 'paciente_id');
+
+  }
+  public function persona(){
+    return $this->belongsTo('App\Persona', 'persona_id');
+  }
 }
