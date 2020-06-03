@@ -84,10 +84,14 @@
 									<td>{{$paciente->get_tipo_documento_name()}}</td>
 									<td>{{$paciente->get_numero_doc()}}</td>
 
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-toggle="modal" data-target="#create">
+									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear Menu
 									</a></td>
-
+									@if($paciente->acompananteActual())
+									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
+									    Menu Acompa.
+									</a></td>
+									@endif
 								</tr>
 							@endforeach
 						@endif
@@ -137,6 +141,7 @@
 			</div>
 	</div>
 </div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/menu_persona-script.js')}}"></script>

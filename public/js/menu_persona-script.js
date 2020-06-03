@@ -10,7 +10,7 @@
 			document.getElementById("personaid").focus();
 		}
 		$("#horario_id").change(function(){
-			var persona = JSON.parse(localStorage.getItem('paciente'));
+			var persona = JSON.parse(localStorage.getItem('persona'));
 			var persona_id=persona.id;
 			var horario_id=$('#horario_id').val();
 			console.log(persona);
@@ -123,8 +123,8 @@
 		var paciente_name= $(this).data("paciente_name");
 		var paciente= $(this).data("paciente");
 
-		localStorage.setItem('paciente', JSON.stringify(paciente));
-		var p = JSON.parse(localStorage.getItem('paciente'));
+		localStorage.setItem('persona', JSON.stringify(paciente));
+		var p = JSON.parse(localStorage.getItem('persona'));
 		console.log("paciente "+p.id);
 		console.log(paciente_name);
 
@@ -140,13 +140,28 @@
 		btn.appendChild(dateSpan);
 		btn.setAttribute("class", "close");
 		btn.setAttribute("id", "close");
-    btn.setAttribute("data-dismiss", "modal");
+		btn.setAttribute("data-dismiss", "modal");
 		console.log(btn);
 		document.getElementById("modal-header").appendChild(btn);
 		var p = document.createElement("p");
 		p.setAttribute("id", "p_modal_body");
 		p.setAttribute("class", "p_modal_body");
-		var url = "pacientes/:id/patologias";
+		var patologias = $(this).data("patologias");
+		if(patologias.length==0){
+			p.innerHTML = "No tiene patologias";
+			document.getElementById("p_body").appendChild(p);
+		}else{
+			var s="Tiene las patologias : ";
+			patologias.forEach(myFunction)
+			function myFunction(patologia, i) {
+				console.log(patologia.name);
+				s=s+" "+ patologia.name+ " ; ";
+				i++;
+			}
+			p.innerHTML = s;
+			document.getElementById("p_body").appendChild(p);
+		}
+		/*var url = "pacientes/:id/patologias";
 		url= url.replace(':id',paciente.id);
 		$.ajax({
 			type: 'post',
@@ -166,11 +181,11 @@
 					error: function (data) {
 						console.log('Error:', data);
 					}
-		});
+		});*/
 	});
 	$('.guardar_menu').click(function(e){
 		e.preventDefault();
-		var persona = JSON.parse(localStorage.getItem('paciente'));
+		var persona = JSON.parse(localStorage.getItem('persona'));
 		var persona_id=persona.id;
 		var racion_disponible_id=$('#racion_id').val();
 		var url="/menu_persona";

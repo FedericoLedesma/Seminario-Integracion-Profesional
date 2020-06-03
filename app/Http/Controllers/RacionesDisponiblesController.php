@@ -297,18 +297,21 @@ class RacionesDisponiblesController extends Controller
       Log::info("Racion recomendada ".$racion_recomendada);
       //array_push($raciones,$racion_recomendada);
       $r_d_recomendada=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion_recomendada->id,$fecha);
-      Log::info("Racion disponible recomendada ".$r_d_recomendada);
+    //  Log::info("Racion disponible recomendada ".$r_d_recomendada);
       $raciones=array();
-      array_push($raciones,$r_d_recomendada);
+    //  array_push($raciones,$r_d_recomendada);
       $raciones_name=array();
       /**
       Agrego al array como primer racion la recomendada y luego las disponibles segun la patologia
+
+      Se genera un error al recomendar la racion, la misma no tiene en cuenta los alimentos prohibidos.
+      Se debe corregir.
       **/
     //  array_push($raciones_name,$racion_recomendada);
       foreach ($raciones_d as $racion) {
-        if(!($racion->id==$r_d_recomendada->id)){
+      //  if(!($racion->id==$r_d_recomendada->id)){
           array_push($raciones,$racion);
-        }
+      //  }
       }
       foreach ($raciones as $racion) {
         $r=Racion::findById($racion->horario_racion->racion->id);

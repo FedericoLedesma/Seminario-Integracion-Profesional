@@ -18,9 +18,9 @@ class Paciente extends Model
   ];
   public static function findById(int $id)
   {
-       $sector = static::where('id', $id)->first();
-       if($sector){
-         return $sector;
+       $paciente = static::where('id', $id)->first();
+       if($paciente){
+         return $paciente;
      } return null;
   }
   public static function findByNumeroDoc($numero_doc)
@@ -284,6 +284,14 @@ class Paciente extends Model
     }
   }
 
+  public function acompanantes(){
+    return $this->hasMany('App\Acompanante');
+  }
+  public function acompananteActual(){
+    return $this->acompanantes()->where('fecha_fin','=',null)->first();
+  }
+
+
   public function get_acompanate_persona(){
     $acompanante = $this->get_acompanante_actual();
     if ($acompanante<>null)
@@ -294,6 +302,7 @@ class Paciente extends Model
   public function rehubicar_paciente($habitacion){
     PacienteCama::dar_baja_por_paciente($this->get_id());
     PacienteCama::create_from_paciente($habitacion,$this->get_id());
+
   }
 
   public function dar_alta(){
