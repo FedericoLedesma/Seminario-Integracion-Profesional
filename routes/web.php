@@ -133,5 +133,6 @@ Route::post('/test/save', ['as' => 'save-date',
  }]);
 
  Route::get('/forms/select/{form}/{query}', 'FormsController@showSelect');
+ Route::get('/forms/habitaciones_disponibles/select/{sector}', 'FormsController@habitaciones_disponibles');
  Route::get('/forms/select/raciones/{horario}/{persona}', 'FormsController@showRaciones');
  Route::resource('/forms', 'FormsController');

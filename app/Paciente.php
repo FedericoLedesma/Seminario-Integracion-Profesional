@@ -283,10 +283,25 @@ class Paciente extends Model
       $this->get_acompanante_actual()->dar_alta();
     }
   }
+
   public function acompanantes(){
     return $this->hasMany('App\Acompanante');
   }
   public function acompananteActual(){
     return $this->acompanantes()->where('fecha_fin','=',null)->first();
+  }
+
+
+  public function get_acompanate_persona(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_persona();
+    return null;
+  }
+
+  public function rehubicar_paciente($habitacion){
+    PacienteCama::dar_baja_por_paciente($this->get_id());
+    PacienteCama::create_from_paciente($habitacion,$this->get_id());
+
   }
 }

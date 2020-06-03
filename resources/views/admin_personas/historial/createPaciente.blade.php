@@ -1,3 +1,12 @@
+<head>
+  <script
+          src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+          crossorigin="anonymous">
+  </script>
+</head>
+
+
 @extends('layouts.layout')
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historial pacientes</a></li>
@@ -45,7 +54,7 @@
        <div>
             {!!	Form::label('sector_id', 'Sector')!!}
             @if($sectores)
-              <select name="sector_id">
+              <select name="sectores" id='sectores'>
               <!--	<option selected>Seleccione el Rol</option>validar-->
             @foreach ($sectores as $sector)
             <!-- Opciones de la lista -->
@@ -55,8 +64,8 @@
              </select>
            @endIf
       </div>
-       <div id='select_habitacion'>
-            {!!	Form::label('habitacion_id', 'Habitacion')!!}
+       <div id='select_habitacion' name='select_habitacion'>
+            {!!	Form::label('habitacion', 'Habitacion')!!}
             @if($habitaciones)
               <select name="habitacion_id">
               <!--	<option selected>Seleccione el Rol</option>validar-->
@@ -99,4 +108,22 @@
    </div>
   {!! Form::close() !!}
 
+@endsection
+@section('script')
+<script type="text/javascript">
+	$("document").ready(function(){
+
+
+		$("#sectores").change(function(){
+			var token = '{{csrf_token()}}';
+			$.ajax({
+				type:"get",
+				url:	"/forms/habitaciones_disponibles/select/" + $('#sectores').val(),
+				success:function(r){
+					$('#select_habitacion').html(r);
+				}
+			});
+		});
+	});
+</script>
 @endsection

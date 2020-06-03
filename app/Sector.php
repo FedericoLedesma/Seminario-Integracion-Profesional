@@ -96,4 +96,16 @@ class Sector extends Model
     return static::where('name','LIKE',$nombre)->get();
   }
 
+  public function get_habitaciones_disponibles(){
+    $res = array();
+    $all = $this->get_habitaciones();
+    foreach ($all as $habitacion) {
+      $c = $habitacion->get_camas_desocupadas();
+      if ($c>0){
+        array_push($res,$habitacion);
+      }
+    }
+    return $res;
+  }
+
 }

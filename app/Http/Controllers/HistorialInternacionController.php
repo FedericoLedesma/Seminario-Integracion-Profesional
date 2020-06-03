@@ -69,8 +69,11 @@ class HistorialInternacionController extends Controller
       return view('admin_personas.historial.create',compact('personas_no_internadas','tipos_documentos','sectores','habitaciones'));
     }
 
-    public function edit(HistoriaInternacion $request){
-
+    public function edit($id){
+      $historial = HistoriaInternacion::find($id);
+      $sectores = Sector::all();
+      $habitaciones = Habitacion::all();
+      return view('admin_personas.historial.edit',compact('historial','sectores','habitaciones'));
     }
 
     public function alta($id){
@@ -102,15 +105,14 @@ class HistorialInternacionController extends Controller
 
     public function store(Request $request){
       Log::debug($request);
-      /*$persona_id = $request->get('persona_id');
-      $persona = Persona::find($persona_id);
-      $paciente = Paciente::find($persona_id);
-      if ($paciente==null){
-        $paciente = new Paciente([
-          'id'=>$persona->get_id(),
-        ]);
-        $paciente->save();
-      }*/
+    }
+
+    public function update(Request $request, $historial_id){
+      Log::debug($request);
+      $historial = HistoriaInternacion::find($historial_id);
+      $habitacion = Habitacion::find($request->get('habitacion_id'));
+      $historial->rehubicar_paciente($habitacion);
+      return $this->show($historial_id);
     }
 
     public function storeExistente(Request $request){

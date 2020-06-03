@@ -1,3 +1,12 @@
+<head>
+  <script
+          src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+          crossorigin="anonymous">
+  </script>
+</head>
+
+
 @extends('layouts.layout')
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historial pacientes</a></li>
@@ -74,7 +83,7 @@
         								<td>{{$persona->get_tipo_documento_name()}}</td>
         								<td>{{$persona->get_numero_doc()}}</td>
                         <td>
-                          <select class="browser-default custom-select" id="sector_id" name="sector_id">
+                          <select class="browser-default custom-select" id="sectores" name="sectores">
                             @if($sectores)
                               @foreach($sectores as $sector)
                                 <option value= {{$sector->get_id()}}>{{$sector->get_name()}}</option>
@@ -82,8 +91,8 @@
                             @endif
                           <select/>
                         </td>
-                        <td><div id='habitaciones' name='habitaciones'>
-                          <select class="browser-default custom-select" id="habitacion_id" name="habitacion_id">
+                        <td><div id='select_habitacion' name='select_habitacion'>
+                          <select id="habitacion_id" name="habitacion_id">
                             @if($habitaciones)
                               @foreach($habitaciones as $habitacion)
                                 <option value= {{$habitacion->get_id()}}>{{$habitacion->get_name()}}</option>
@@ -114,4 +123,22 @@
 		 </div>
 		{!! Form::close() !!}
 
+@endsection
+@section('script')
+<script type="text/javascript">
+	$("document").ready(function(){
+
+
+		$("#sectores").change(function(){
+			var token = '{{csrf_token()}}';
+			$.ajax({
+				type:"get",
+				url:	"/forms/habitaciones_disponibles/select/" + $('#sectores').val(),
+				success:function(r){
+					$('#select_habitacion').html(r);
+				}
+			});
+		});
+	});
+</script>
 @endsection

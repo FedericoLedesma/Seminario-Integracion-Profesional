@@ -44,4 +44,17 @@ class FormsController extends Controller
       return view('forms.selects.racion_id_name', compact('raciones','racion_recomendada'));
     }
 
+    public function habitaciones_disponibles($sector_id){
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__.' parámetro: '.$sector_id);
+      $sector = Sector::find($sector_id);
+      if ($sector<>null){
+        $habitaciones = $sector->get_habitaciones_disponibles();
+      }
+      else{
+        $habitaciones = array();
+      }
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
+      return view('forms.selects.habitacion_id', compact('habitaciones'));
+    }
+
 }
