@@ -76,7 +76,7 @@ class RacionController extends Controller
             'observacion' => $data['observacion'],
           ]);
         $racion->save();
-        return view('nutricion.raciones.agregar-alimentos', compact('racion'));
+        return redirect('raciones/'.$racion->id.'/agregaralimentos');
     }
 
     /**
@@ -191,6 +191,7 @@ class RacionController extends Controller
         $idAlimento=$request->data[1];
         $racion=Racion::findById($idRacion);
         $racion->alimentos()->detach($idAlimento);
+        $racion->save();
         return response()->json([
             'estado'=>'true',
             'success' => 'Alimento quitado con exito!'
@@ -209,6 +210,7 @@ class RacionController extends Controller
           Log::info($alimento);
           try{
           $racion->alimentos()->attach($alimento,['cantidad'=>0]);
+          $racion->save();
           }catch (\Exception $e) {}
         }
         $als=array();

@@ -10,10 +10,10 @@
 			document.getElementById("personaid").focus();
 		}
 		$("#horario_id").change(function(){
-			var paciente = $(this).data("paciente");
+			var persona = JSON.parse(localStorage.getItem('paciente'));
+			var persona_id=persona.id;
 			var horario_id=$('#horario_id').val();
-			var persona_id=paciente.id;
-			console.log(paciente);
+			console.log(persona);
 			var selectRaciones=document.getElementById("racion_id");
 			for (i = selectRaciones.length - 1; i >= 0; i--) {
 				selectRaciones.remove(i);

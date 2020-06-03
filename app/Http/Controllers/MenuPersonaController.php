@@ -92,60 +92,7 @@ class MenuPersonaController extends Controller
      */
     public function create(Request $request)
     {
-        //
-        /**$raciones_disponibles = Array();
-        $pacientes = Paciente::get_pacientes_internados();
-        $fecha = $request->get('calendario');
-        $horario= Horario::findById($request->get('horario_id'));
-        $horarios = Horario::all();
-        $persona_id = $request->get('persona_id');
-        $racion_recomendada = [
-          'nombre'=>'ninguno',
-          'id'=>'-1'
-        ];
-        $persona_seleccionada = [
-          'nombre'=>'ninguno',
-          'id'=>'-1'
-        ];
-        $fecha_actual = carbon::now()->toDateString();
-        #Log::debug('Se quiere crear un menu persona. Request: '.$request);
-        Log::debug('Fecha: '.$fecha);
-        Log::debug('Horario: '.$horario);
-        if($fecha)
-            if($horarios)
-              if(($persona_id==null)|($persona_id<1)){
-                /*$persona_seleccionada = [
-                  'nombre'=>'ninguno',
-                  'id'=>'-1'
-                ];*/
-          //    }
-          /*    else
-              {
-                  Log::debug('Pase a buscar raciones');
-                  $persona = Persona::findById((int)$persona_id);
-                  $persona_seleccionada = [
-                    'nombre'=>$persona->name.' ',$persona->apellido,
-                    'id'=>$persona->id
-                  ];
-                  Log::debug('ID de la persona seleccionada: '.$persona_seleccionada['id']);
-                  #$raciones_disponibles = Racion::buscar_por_fecha_horario($fecha,$horario);
-                  $raciones_disponibles = $persona->get_raciones_disponibles($fecha,$horario);
-                  $rac_rec = $persona->recomendar_racion($fecha,$horario);
-                  if($rac_rec<>null)
-                    $racion_recomendada = [
-                      'nombre'=>$rac_rec->name,
-                      'id'=>$rac_rec->id
-                    ];
-                  Log::debug('Acá salí de buscar las raciones recomendadas');
-                  foreach($raciones_disponibles as $r)
-                      Log::debug('Ración disponible: '.$r);
-                  $horario = Array($horario);
-                  return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
-              }
-        $fecha = Carbon::now();
-        $horarios = Horario::all();
-        $horario = Array();*/
-      //  return view('menu_persona.create',compact('raciones_disponibles','pacientes','horarios','horario','fecha','persona_seleccionada','racion_recomendada','fecha_actual'));
+        
       $pacientes=Paciente::all();
       $horarios= Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));

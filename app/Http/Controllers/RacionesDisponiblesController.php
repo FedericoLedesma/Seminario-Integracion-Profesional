@@ -268,15 +268,48 @@ class RacionesDisponiblesController extends Controller
         Se deben obtener las raciones disponibles para la persona en un array
         para enviar a la vista.
       **/
-      $horario=Horario::findById($horario_id);
-      $persona=Persona::findById($persona_id);
       $fecha=new DateTime(date("Y-m-d"));
       $f = Carbon::now()->toDateString();
-      $raciones=RacionesDisponibles::buscar_por_fecha_horario($f,$horario);//ejemplo para ver si funcionaba.
-      Log::info($raciones);
+
+      $horario=Horario::findById($horario_id);
+      $persona=Persona::findById($persona_id);
+      $patologias=$persona->patologias;
+      Log::info("patologias de persona. ".$persona->name);
+      Log::info($patologias);
+      if(count($patologias)==0){
+        /**
+        Se verifica si no tiene patologias, entonces se recuperan todas las raciones disponible para el dia y horario
+        **/
+        Log::info("NO TIENE PATOLOGIAS".$persona->name);
+        $raciones_d=RacionesDisponibles::buscar_por_fecha_horario($f,$horario);
+          Log::info($raciones_d);
+      }else {
+        /**
+        Tiene patologias, entonces se recuperan todas las raciones disponible para el dia y horario segun la patologia
+        **/
+        Log::info("TIENE PATOLOGIAS".$persona->name);
+        $raciones_d=RacionesDisponibles::getRacionesDisponiblesPatologias($patologias,$fecha,$horario_id);
+        Log::info($raciones_d);
+      }
+
       $racion_recomendada = $persona->recomendar_racion($f,$horario);
+
+      Log::info("Racion recomendada ".$racion_recomendada);
+      //array_push($raciones,$racion_recomendada);
+      $r_d_recomendada=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion_recomendada->id,$fecha);
+      Log::info("Racion disponible recomendada ".$r_d_recomendada);
+      $raciones=array();
+      array_push($raciones,$r_d_recomendada);
       $raciones_name=array();
-      array_push($raciones_name,$racion_recomendada);
+      /**
+      Agrego al array como primer racion la recomendada y luego las disponibles segun la patologia
+      **/
+    //  array_push($raciones_name,$racion_recomendada);
+      foreach ($raciones_d as $racion) {
+        if(!($racion->id==$r_d_recomendada->id)){
+          array_push($raciones,$racion);
+        }
+      }
       foreach ($raciones as $racion) {
         $r=Racion::findById($racion->horario_racion->racion->id);
         array_push($raciones_name,$r);
@@ -286,6 +319,6 @@ class RacionesDisponiblesController extends Controller
         'raciones'=>$raciones,
         'raciones_name'=>$raciones_name,
       ]);
-      //return view('forms.selects.racion_select', compact('raciones'));
+
     }
 }

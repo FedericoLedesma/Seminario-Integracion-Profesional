@@ -44,7 +44,7 @@
 		<div class="col-md-10 col-md-offset-1">
 
 			<div class="panel-heading">
-				{!!Form::open(['route'=>'pacientes.index','method'=>'GET']) !!}
+				{!!Form::open(['route'=>'menu_persona.create','method'=>'GET']) !!}
 		 			<div class="input-group mb-3">
 
 					  <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -53,7 +53,7 @@
 						 	<option value="busqueda_sector" > Sector </option>
 					 	</select>
 
-						{!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
+						{!!	Form::text('paciente_id',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
 							<div class="input-group-append">
 								{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						 	</div>
