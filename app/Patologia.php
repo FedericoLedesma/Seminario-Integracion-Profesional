@@ -112,4 +112,9 @@ class Patologia extends Model
        return $this->belongsToMany('App\Alimento', 'patologia_alimento_prohibido')
        ->withPivot('fecha');
      }
+    public function dieta()
+    {
+      return $this->hasOne('App\Dieta');
+
+    }
 }

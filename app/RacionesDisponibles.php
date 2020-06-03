@@ -27,17 +27,42 @@ class RacionesDisponibles extends Model
     }
     public static function findByHorarioRacionFecha($horario_id,$racion_id,$fecha)
     {
-         $raciones_disponibles = static::where('horario_id','=', $horario_id)
-         ->where('racion_id','=', $racion_id)
-         ->where('fecha','=', $fecha)
-         ->get()
-         ->first();
+         $raciones_disponibles = static::where('fecha','=', $fecha)
+         ->get();
+         foreach ($raciones_disponibles as $r_d) {
+           if(($r_d->horario_racion->horario->id==$horario_id)&&($r_d->horario_racion->racion->id==$racion_id)){
+             return $r_d;
+           }
+         }
          Log::debug('Recuperada la racionDisponible: '.$raciones_disponibles);
          #if($raciones_disponibles){
-           return $raciones_disponibles;
+           return null;
        #} return null;
     }
-
+    public static function getRacionesDisponiblesPatologias($patologias,$fecha,$horario_id)
+    {
+      Log::Debug("static function getRacionesDisponiblesPatologias");
+      $raciones_disponibles= RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
+      Log::Debug("Obtengo todas las raciones disponibles para la fecha");
+      $r_d=array();
+      foreach ($patologias as $patologia) {
+        Log::Debug("Patologia ".$patologia->name);
+        $dieta=$patologia->dieta->dietaActiva->where('fecha_final','=',null)->first();
+        Log::Debug("Obtengo la dieta activa de la patologia");
+        Log::info($dieta);
+        $raciones=$dieta->raciones;
+        Log::Debug("Para cada racion asociada a la dieta activa se verifica si esta disponible en la fecha actual");
+        foreach ($raciones as $racion) {
+          
+          $r=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion->id,$fecha);
+            Log::info("Raciondisp ".$r);
+            if(!empty($r)){
+              array_push($r_d,$r);
+            }
+        }
+      }
+      return $r_d;
+    }
     public static function buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha){
       $raciones_disponibles_fecha = static::where('fecha','=', $fecha)->get();
       $horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);

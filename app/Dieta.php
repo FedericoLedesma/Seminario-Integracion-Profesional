@@ -113,10 +113,17 @@ class Dieta extends Model
   public function set_personal_id(int $personal_id){
     $this->personal_id = $personal_id;
   }
-  
+
   public function patologia()
   {
     return $this->belongsTo('App\Patologia', 'patologia_id');
   }
-
+  public function dietaActiva()
+  {
+    return $this->hasMany('App\DietaActiva');
+  }
+  public function get_dieta_activa()
+  {
+    return $this->dietaActiva;
+  }
 }
