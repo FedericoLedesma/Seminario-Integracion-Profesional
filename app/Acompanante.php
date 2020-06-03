@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Paciente;
+use App\Persona;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class Acompanante extends Model
 {
   protected $table = "acompanante";
 
   protected $fillable = [
-      'id', 'paciente_id','fecha', 'acompanante_id'
+      'id', 'paciente_id','fecha', 'acompanante_id','fecha_fin'
   ];
 
   public static function buscar_por_id(int $id){
@@ -123,5 +126,40 @@ class Acompanante extends Model
 	public function get_cama(){
 		return $this->get_paciente()->get_cama();
 	}
+
+  public static function get_acompanante_actual($paciente_id){
+    $acompanante = static::where('paciente_id','=',$paciente_id)
+      ->whereNull('fecha_fin')
+      ->orderBy('fecha','DESC')->get();
+    if ($acompanante->count()>0){
+      return $acompanante->first();
+    }
+    return null;
+  }
+
+  public function get_acompanante_id(){return $this->acompanante_id;}
+  public function get_persona(){
+    Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+    $persona = Persona::find($this->get_acompanante_id());
+  	Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' con la persona: '.$persona);
+    return $persona;
+  }
+  public function get_name(){return $this->get_persona()->get_name();}
+  public function get_apellido(){return $this->get_persona()->get_apellido();}
+  public function get_numero_doc(){return $this->get_persona()->get_numero_doc();}
+  public function get_observacion(){return $this->get_persona()->get_observacion();}
+  public function get_direccion(){return $this->get_persona()->get_direccion();}
+  public function get_email(){return $this->get_persona()->get_email();}
+  public function get_provincia(){return $this->get_persona()->get_provincia();}
+  public function get_localidad(){return $this->get_persona()->get_localidad();}
+  public function get_sexo(){return $this->get_persona()->get_sexo();}
+  public function get_fecha_nac(){return $this->get_persona()->get_fecha_nac();}
+  public function get_tipo_documento_id(){return $this->get_persona()->get_tipo_documento_id();}
+  public function get_tipo_documento(){return $this->get_persona()->get_tipo_documento();}
+
+  public function dar_alta(){
+    $this->fecha_fin = Carbon::now();
+    $this->update();
+  }
 
 }

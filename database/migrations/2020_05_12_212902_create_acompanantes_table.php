@@ -18,6 +18,7 @@ class CreateAcompanantesTable extends Migration
             $table->unsignedBigInteger('acompanante_id');
             $table->unsignedBigInteger('paciente_id');
             $table->date('fecha');
+            $table->date('fecha_fin')->nullable();
 
 			#$table->primary(['id'],'primary_key_acompanante');
 

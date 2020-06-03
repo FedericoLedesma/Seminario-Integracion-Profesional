@@ -89,6 +89,17 @@ class HistorialInternacionController extends Controller
       }
     }
 
+    public function altaAcompanante($id){
+      try{
+        $historial = HistoriaInternacion::find($id);
+        $historial->dar_alta_acompanante();
+        return $this->show($id);
+      }
+      catch(Throwable $t){
+        return view('/home');
+      }
+    }
+
     public function store(Request $request){
       Log::debug($request);
       /*$persona_id = $request->get('persona_id');
@@ -127,6 +138,16 @@ class HistorialInternacionController extends Controller
           compact('personas_no_internadas','historial'));
       }//Acá abajo se debería notificar al usuario
       return $this->create($request);
+    }
+
+    public function update_add_paciente($historial_id){
+      $historial = HistoriaInternacion::find($historial_id);
+      if ($historial==null){
+        return $this->index('{}');
+      }
+      $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
+      return view('admin_personas.historial.addAcompanante',
+        compact('personas_no_internadas','historial'));
     }
 
     public function createPaciente(Request $request){
@@ -208,8 +229,9 @@ class HistorialInternacionController extends Controller
       return view('admin_personas.historial.sucess');
     }
 
-    public function show(HistoriaInternacion $request){
-
+    public function show($id){
+      $historial = HistoriaInternacion::find($id);
+      return view('admin_personas.historial.show', compact('historial'));
     }
 
     public function delete(HistoriaInternacion $request){

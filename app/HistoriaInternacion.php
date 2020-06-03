@@ -92,6 +92,8 @@ class HistoriaInternacion extends Model
   public function get_historial_sectores(){return $this->get_paciente()->get_historial_sectores($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
   public function get_historial_habitaciones(){return $this->get_paciente()->get_historial_habitaciones($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
   public function get_historial_camas(){return $this->get_paciente()->get_historial_camas($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
+  public function have_acompanante(){return $this->get_paciente()->have_acompanante();}
+
 
   public static function buscar_pacientes_internados_por_nombre($nombre){
     $all = static::get_pacientes_internados();
@@ -165,6 +167,30 @@ class HistoriaInternacion extends Model
       'fecha'=>$this->get_fecha_ingreso(),
     ]);
     $acom->save();
+  }
+
+
+  public function get_acompanante(){return $this->get_paciente()->get_acompanante_actual();}
+  public function get_acompanante_id(){return $this->get_paciente()->get_acompanante_id();}
+  public function get_acompanante_name(){return $this->get_paciente()->get_acompanante_name();}
+  public function get_acompanante_apellido(){return $this->get_paciente()->get_acompanante_apellido();}
+  public function get_acompanante_tipo_documento(){return $this->get_paciente()->get_acompanante_tipo_documento();}
+  public function get_acompanante_tipo_documento_id(){return $this->get_paciente()->get_acompanante_tipo_documento_id();}
+  public function get_acompanante_tipo_documento_name(){return $this->get_paciente()->get_acompanante_tipo_documento_name();}
+  public function get_acompanante_numero_doc(){return $this->get_paciente()->get_acompanante_numero_doc();}
+  public function get_acompanante_observacion(){return $this->get_paciente()->get_acompanante_observacion();}
+  public function get_acompanante_direccion(){return $this->get_paciente()->get_acompanante_direccion();}
+  public function get_acompanante_email(){return $this->get_paciente()->get_acompanante_email();}
+  public function get_acompanante_provincia(){return $this->get_paciente()->get_acompanante_provincia();}
+  public function get_acompanante_localidad(){return $this->get_paciente()->get_acompanante_localidad();}
+  public function get_acompanante_sexo(){return $this->get_paciente()->get_acompanante_sexo();}
+  public function get_acompanante_fecha_nac(){return $this->get_paciente()->get_acompanante_fecha_nac();}
+
+
+  public function dar_alta_acompanante(){
+    if ($this->have_acompanante()==true){
+      $this->get_paciente()->dar_alta_acompanante();
+    }
   }
 
 }
