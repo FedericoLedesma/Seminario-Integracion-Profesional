@@ -12,6 +12,8 @@ use App\DietaActivaRacion;
 use App\Observers\DietaActivaRacionObserver;
 use App\DietaActiva;
 use App\Observers\DietaActivaObserver;
+use App\Racion;
+use App\Observers\RacionObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
         MenuPersona::observe(MenuPersonaObserver::class);
         DietaActivaRacion::observe(DietaActivaRacionObserver::class);
         DietaActiva::observe(DietaActivaObserver::class);
+        Racion::observe(RacionObserver::class);
     }
 }
