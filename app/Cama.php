@@ -92,7 +92,7 @@ class Cama extends Model
       $camas = static::where('habitacion_id','=',$habitacion_id)->get();
       foreach ($camas as $cama) {
         Log::debug('Checkeando la cama '.$cama);
-        if ($cama->is_desocupada()){
+        if ($cama->is_desocupada()==true){
           Log::debug('Desocupada');
           array_push($res,$cama);
         }
@@ -121,5 +121,20 @@ class Cama extends Model
     public function habitacion()
     {
       return $this->belongsTo('App\Habitacion', 'habitacion_id');
+    }
+
+    public function ingresar_paciente($paciente,$fecha){
+      try{
+          $paciente_cama = new PacienteCama([
+          'paciente_id'=>$paciente->get_id(),
+          'fecha'=>$fecha,
+          'cama_id'=>$this->get_id(),
+        ]);
+        $paciente_cama->save();
+        return true;
+      }
+      catch(Throwable $t){
+        return false;
+      }
     }
 }

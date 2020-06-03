@@ -7,6 +7,7 @@ use App\HistoriaInternacion;
 use App\Persona;
 use App\PacienteCama;
 use Illuminate\Support\Facades\Log;
+use App\Acompanante;
 
 class Paciente extends Model
 {
@@ -46,7 +47,9 @@ class Paciente extends Model
   }
 
   public function get_cama(){
+    Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
     return PacienteCama::buscar_ultima_cama_ocupada_por_paciente($this->id);
+    Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
   }
 
   public function get_habitacion(){
@@ -188,5 +191,96 @@ class Paciente extends Model
   }
 
   public static function get_all_personas(){return Persona::all();}
+  public function have_acompanante(){return ($this->get_acompanante_actual()<>null);}
+  public function get_acompanante_actual(){return Acompanante::get_acompanante_actual($this->get_id());}
+  public function get_acompanante_id(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_id();
+    return -1;
+  }
+  public function get_acompanante_name(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_name();
+    return 'Ninguno';
+  }
+  public function get_acompanante_apellido(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_apellido();
+    return 'Ninguno';
+  }
+  public function get_acompanante_tipo_documento(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_tipo_documento();
+    return null;
+  }
+  public function get_acompanante_tipo_documento_id(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_tipo_documento_id();
+    return -1;
+  }
+  public function get_acompanante_tipo_documento_name(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_tipo_documento_name();
+    return 'Ninguno';
+  }
+  public function get_acompanante_numero_doc(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_numero_doc();
+    return 0;
+  }
+  public function get_acompanante_observacion(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_observacion();
+    return 'Ninguna';
+  }
+  public function get_acompanante_direccion(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_direccion();
+    return 'Ninguna';
+  }
+  public function get_acompanante_email(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_email();
+    return 'Ninguno';
+  }
+  public function get_acompanante_provincia(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_provincia();
+    return 'Ninguna';
+  }
+  public function get_acompanante_localidad(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_localidad();
+    return 'Ninguna';
+  }
+  public function get_acompanante_sexo(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_sexo();
+    return 'Ninguno';
+  }
+  public function get_acompanante_fecha_nac(){
+    $acompanante = $this->get_acompanante_actual();
+    if ($acompanante<>null)
+      return $acompanante->get_fecha_nac();
+    return 'Ninguna';
+  }
 
+  public function dar_alta_acompanante(){
+    if ($this->have_acompanante()==true){
+      $this->get_acompanante_actual()->dar_alta();
+    }
+  }
 }

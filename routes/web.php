@@ -77,7 +77,23 @@ Route::post('/menu_persona/pacientes/{paciente}/patologias','PacienteController@
 Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@alta')
 	->name('historialInternacion.alta');
 Route::get('/historialInternacion/ingresarNuevo', 'HistorialInternacionController@ingresarNuevo')
-		->name('historialInternacion.alta');
+		->name('historialInternacion.ingresarNuevo');
+Route::get('/historialInternacion/ingresarNuevo/paciente', 'HistorialInternacionController@createPaciente')
+		->name('historialInternacion.createPaciente');
+Route::get('/historialInternacion/ingresar/paciente', 'HistorialInternacionController@storeExistente')
+		->name('historialInternacion.storeExistente');
+Route::get('/historialInternacion/ingresar_acompanante', 'HistorialInternacionController@addAcompanante')
+		->name('historialInternacion.addAcompanante');
+Route::get('/historialInternacion/create_acompanante/{id_historial}', 'HistorialInternacionController@createAcompanante')
+		->name('historialInternacion.createAcompanante');
+Route::get('/historialInternacion/store_new_acompanante', 'HistorialInternacionController@storeNewAcompanante')
+		->name('historialInternacion.storeNewAcompanante');
+Route::get('/historialInternacion/sucess', 'HistorialInternacionController@sucess')
+		->name('historialInternacion.sucess');
+Route::get('/historialInternacion/update/add_paciente/{historial_id}', 'HistorialInternacionController@update_add_paciente')
+		->name('historialInternacion.update_add_paciente');
+		Route::get('/historialInternacion/altaAcompanante/{id}', 'HistorialInternacionController@altaAcompanante')
+			->name('historialInternacion.altaAcompanante');
 Route::resource('/historialInternacion', 'HistorialInternacionController');
 
 Route::resource('/personas', 'PersonaController');
