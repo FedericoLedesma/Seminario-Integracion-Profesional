@@ -65,14 +65,14 @@ class HistorialInternacionController extends Controller
       $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
       $tipos_documentos = TipoDocumento::all();
       $sectores = Sector::all();
-      $habitaciones = Habitacion::all();
+      $habitaciones = Habitacion::get_disponibles();
       return view('admin_personas.historial.create',compact('personas_no_internadas','tipos_documentos','sectores','habitaciones'));
     }
 
     public function edit($id){
       $historial = HistoriaInternacion::find($id);
       $sectores = Sector::all();
-      $habitaciones = Habitacion::all();
+      $habitaciones = Habitacion::get_disponibles();
       return view('admin_personas.historial.edit',compact('historial','sectores','habitaciones'));
     }
 
