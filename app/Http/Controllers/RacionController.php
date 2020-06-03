@@ -76,7 +76,7 @@ class RacionController extends Controller
             'observacion' => $data['observacion'],
           ]);
         $racion->save();
-        return view('nutricion.raciones.agregar-alimentos', compact('racion'));
+        return redirect('raciones/'.$racion->id.'/agregaralimentos');
     }
 
     /**
