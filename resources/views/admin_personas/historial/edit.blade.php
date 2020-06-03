@@ -1,105 +1,79 @@
+<head>
+  <script
+          src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+          crossorigin="anonymous">
+  </script>
+</head>
+
+
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
-		<li class="breadcrumb-item active">Editar Rol</li>
+    <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales</a></li>
+		<li class="breadcrumb-item active">Traslado de paciente</li>
 @endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
-	 	 {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method'=> 'PUT'])!!}
-	 	@if($role)
-	    <h1>Editar Rol  {{$role->name}}</h1>
+	 	 {!! Form::model($historial, ['route' => ['historialInternacion.update', $historial->get_id()], 'method'=> 'PUT'])!!}
+	 	@if($historial)
+	    <h1>Trasladar de habitación a {{$historial->get_paciente_name()}}</h1>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
-	    	<tr>
-	    	<td>
-		    {!!	Form::label('id', 'ID')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::label($role->id)!!}
-		   	</td>
-		   	</tr>
+          <div>
+               {!!	Form::label('sector_id', 'Sector')!!}
+               @if($sectores)
+                 <select name="sectores" id='sectores'>
+                 <!--	<option selected>Seleccione el Rol</option>validar-->
+               @foreach ($sectores as $sector)
+               <!-- Opciones de la lista -->
+                 <option value="{{$sector->id}}" >{{$sector->name}}</option> <!-- Opci�n por defecto -->
 
-		   	<tr>
-	    	<td>
-		    {!!	Form::label('name', 'NOMBRE')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::text('name',$role->name)!!}
-		   	</td>
-		   	</tr>
-		   	<tr>
-	    	<td>
+               @endforeach
+                </select>
+              @endIf
+          </div>
+          <div id='select_habitacion' name='select_habitacion'>
+               {!!	Form::label('habitacion', 'Habitacion')!!}
+               @if($habitaciones)
+                 <select name="habitacion_id">
+                   <!--	<option selected>Seleccione el Rol</option>validar-->
+                   @foreach ($habitaciones as $habitacion)
+                   <!-- Opciones de la lista -->
+                     <option value={{$habitacion->get_id()}} > {{$habitacion->get_name()}}</option> <!-- Opci�n por defecto -->
+
+                   @endforeach
+                </select>
+              @endIf
+          </div>
 		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
 		    <td>
-		   	{!!link_to_route('roles.show', $title = 'CANCELAR', $parameters = [$role], $attributes = [])!!}
+		   	{!!link_to_route('historialInternacion.show', $title = 'CANCELAR', $parameters = [$historial], $attributes = [])!!}
 		   	</td>
 		   	</tr>
 		 </table>
 		 @endif
-
-		 @if($permisosAsociados)
-		  <table class="table table-bordered table-hover table-striped">
-		   <tr>
-		    	<td>
-		    	Permisos asociados al rol {{$role->name}}
-		   		</td>
-		   		<td>
-		   			Quitar Permiso
-		   		</td>
-		   </tr>
-		   		@if (count($permisosAsociados)==0)
-		   		<tr>
-		   			<td>NO TIENE PERMISOS ASOCIADOS
-		   			</td>
-		   		</tr>
-			@endif
+@endsection
+@section('script')
+<script type="text/javascript">
+	$("document").ready(function(){
 
 
-		   	   @foreach($permisosAsociados as $permisoAsociado)
-		   <tr>
-		   		<td>
-		   		<div class="form-check">
-				 	<label class="form-check-label" for="defaultCheck1">
-				   		{{$permisoAsociado->name}}
-				  	</label>
-		   		</td>
-		   		<td>
-		   			<input class="form-check-input" type="checkbox" name="quitarPermisos[]"value="{{$permisoAsociado->id}}" id="defaultCheck1">
-		   		</td>
-		   </tr>
-		   	@endforeach
-		  </table>
-		@endif
-
-
-
-
-		 @if($permisos)
-		  <table class="table table-bordered table-hover table-striped">
-		   <tr>
-		    	<td>
-		    	Permisos disponibles
-		   		</td>
-		   </tr>
-		   	   @foreach($permisos as $permiso)
-		   <tr>
-		   		<td>
-		   		<div class="form-check">
-				 	<input class="form-check-input" type="checkbox" name="agregarPermisos[]" value="{{$permiso->id}}" id="defaultCheck{{$permiso->id}}">
-				  	<label class="form-check-label" for="defaultCheck{{$permiso->id}}">
-				   		{{$permiso->name}}
-				  	</label>
-		   		</td>
-		   </tr>
-		   	@endforeach
-		  </table>
-		@endif
-		</div>
-		</div>
+		$("#sectores").change(function(){
+			var token = '{{csrf_token()}}';
+			$.ajax({
+				type:"get",
+				url:	"/forms/habitaciones_disponibles/select/" + $('#sectores').val(),
+				success:function(r){
+					$('#select_habitacion').html(r);
+				}
+			});
+		});
+	});
+</script>
 @endsection

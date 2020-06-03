@@ -82,7 +82,7 @@ class HistoriaInternacion extends Model
   public function get_localidad(){return $this->get_paciente()->get_localidad();}
   public function get_sexo(){return $this->get_paciente()->get_sexo();}
   public function get_fecha_nac(){return $this->get_paciente()->get_fecha_nac();}
-
+  public function get_paciente_persona(){return $this->get_paciente()->get_persona();}
       //métodos para acceder a información útil en la carga de historial
   public function get_sector_actual(){return $this->get_paciente()->get_sector_actual();}
   public function get_sector_actual_name(){return $this->get_paciente()->get_sector_actual_name();}
@@ -185,12 +185,14 @@ class HistoriaInternacion extends Model
   public function get_acompanante_localidad(){return $this->get_paciente()->get_acompanante_localidad();}
   public function get_acompanante_sexo(){return $this->get_paciente()->get_acompanante_sexo();}
   public function get_acompanante_fecha_nac(){return $this->get_paciente()->get_acompanante_fecha_nac();}
-
+  public function get_acompanante_persona(){return $this->get_paciente()->get_acompanate_persona();}
 
   public function dar_alta_acompanante(){
     if ($this->have_acompanante()==true){
       $this->get_paciente()->dar_alta_acompanante();
     }
   }
+
+  public function rehubicar_paciente($habitacion){return $this->get_paciente()->rehubicar_paciente($habitacion);}
 
 }

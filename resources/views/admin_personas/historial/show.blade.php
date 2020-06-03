@@ -68,9 +68,11 @@
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('historialInternacion.edit', $title = 'MODIFICAR', $parameters = [$historial],['class' => 'btn btn-warning'], $attributes = [])!!}
+	{!!link_to_route('historialInternacion.edit', $title = 'Cambiar de habitación', $parameters = [$historial],['class' => 'btn btn-warning'], $attributes = [])!!}
+  {!!link_to_route('personas.edit', $title = 'Modificar datos de paciente', $parameters = [$historial->get_paciente_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
   {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}
   @if($historial->have_acompanante()==true)
+    {!!link_to_route('personas.edit', $title = 'Modificar datos de acompañante', $parameters = [$historial->get_acompanante_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
     {!!link_to_route('historialInternacion.altaAcompanante', $title = 'Quitar acompañante', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}
   @endif
 @endif

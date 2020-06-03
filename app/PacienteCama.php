@@ -160,4 +160,26 @@ class PacienteCama extends Model
 
     public static function buscar_camas_por_sector_name($sector_name){return Cama::buscar_por_sector_name($sector_name);}
     public function get_id(){return $this->id;}
+
+    public static function dar_baja_por_paciente($paciente_id){
+      $paciente_cama = static::where('paciente_id','=',$paciente_id)
+        ->whereNull('fecha_fin')
+        ->get();
+      foreach ($paciente_cama as $pac_cam) {
+        $pac_cam->fecha_fin = Carbon::now();
+        $pac_cam->update();
+      }
+    }
+
+    public static function create_from_paciente($habitacion, $paciente_id){
+      /*$habitaciones = $habitacion->get_camas_desocupadas();
+      $cama = $habitaciones[0];
+      $new = new $pacienteCama([
+        'paciente_id'=>$paciente_id,
+        'fecha'=>Carbon::now(),
+        'cama_id'=>$cama->get_id(),
+      ]);
+      $new->save();*/
+      $habitacion->ingresar_paciente($paciente_id,Carbon::now());
+    }
 }
