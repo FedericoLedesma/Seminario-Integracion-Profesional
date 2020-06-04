@@ -144,6 +144,42 @@ class MenuPersonaController extends Controller
       $horarios=Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
     }
+    
+    public function createMenuPersonal(Request $request)
+    {
+      Log::info("create MenuPersonaController");
+      Log::info($request);
+      $query=$request->get('search');
+      $busqueda_por=$request->get('busqueda_por');
+      if($request){
+        $personal=array();
+        switch ($busqueda_por) {
+          case 'busqueda_name':
+            Log::debug("case 'busqueda_name':");
+            $personal=all();
+            break;
+          case 'busqueda_dni':
+            Log::debug("case 'busqueda_dni':");
+            $p=Personal::buscar_por_numero_doc($query);
+            if(!empty($p)){
+              array_push($personal,$p);
+            }
+            break;
+          case 'busqueda_sector':
+            Log::debug("case 'busqueda_sector':");
+            $personal=Personal::allBySectorName($query);
+            break;
+          default:
+            Log::debug("case 'default':");
+            $personal=Personal::all();
+            break;
+        }
+      }else {
+        $personal=Personal::all();
+      }
+      $horarios=Horario::all();
+      return view('nutricion.menu_persona.create_personal',compact('personal','horarios'));
+    }
 
     /**
      * Store a newly created resource in storage.

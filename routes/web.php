@@ -57,8 +57,9 @@ Route::match(array('PUT', 'PATCH'), "/user/updatepass/{id}", array(
 ));
 
 Route::resource('/menu_persona','MenuPersonaController');
+Route::get('/menu_persona_create_personal',["as"=>"menu_persona.create_personal", "uses"=>'MenuPersonaController@createMenuPersonal']);
 #Route::resource('menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
-Route::get('/menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
+//Route::get('/menu_persona/show/{persona}/{horario}/{fecha}','MenuPersonaController@show');
 Route::get('/menu_persona/destroy/{persona}/{horario}/{fecha}','MenuPersonaController@destroy');
 Route::get('/informes/generar','InformeController@create')
 	->name('InformeController.create');

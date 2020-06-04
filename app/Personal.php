@@ -20,6 +20,20 @@ class Personal extends Model
        }
      }return null;
   }
+  public static function buscar_por_numero_doc($dni){
+    Log::debug('Buscando por dni a '.$dni);
+
+    $all = Personal::all();
+    foreach ($all as $personal) {
+      if($personal->persona->numero_doc==$dni){
+        return $personal;
+      }
+    }
+  }
+  public function persona()
+  {
+    return $this->belongsTo('App\Persona', 'id');
+  }
   public static function findByMatricula($matricula)
   {
       if($matricula){
