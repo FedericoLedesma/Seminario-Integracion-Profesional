@@ -8,10 +8,6 @@
 @endsection
 @section('content')
 
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
     <h1>Agregar Racion</h1>
 		<div id="alert" class="alert alert-danger"></div>
      @include('layouts.error')
@@ -52,7 +48,7 @@
 										</td>
 										<td>
 
-											<input type="number" id="cantidad" name="cantidad" min="0" step="1">
+											<input type="number" id="cantidad" name="cantidad" min="0" step="1" value="0">
 										</td>
                   </tr>
 								<tr>

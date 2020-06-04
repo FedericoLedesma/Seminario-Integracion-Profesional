@@ -11,9 +11,9 @@
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
 
-	  	<title>Índice de pacientes</title>
 
-	    <h1></h1>
+
+	    <h1>Crear Menus</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->

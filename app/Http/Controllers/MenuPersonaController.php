@@ -22,68 +22,31 @@ class MenuPersonaController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $user = Auth::user();
-        Log::info($user);
-        Log::info($request);
-        if ($user==null){
-          Log::debug('No se ha logeado');
-          return redirect('/home');
+      Log::info($request);
+      $query = $request->get('search');
+      $fecha=$request->get('fecha');
+      $busqueda_por="";
+      $busqueda_horario_por=$request->get('busqueda_horario_por');
+
+      $horarios=Horario::all();
+      if($request){
+        switch ($busqueda_horario_por){
+          case 'busqueda_todos':
+              $menus=MenuPersona::all();
+            break;
+          default:
+            $menus=MenuPersona::all();
+            break;
+          }
+
+        }else{
+          $menus=MenuPersona::all();
         }
-        $menues = Array();
-        $query = $request->get('search');
-        $busqueda_por= $request->get('busqueda_por');
-        $fecha = $request->get('fecha');
-        $info = [
-          'action'=>'ok',
-          'message'=>'Bienvenido al índice de menus personas',
-          'estado'=>'1'
-        ];
-        $fecha_actual = Carbon::now()->toDateString();
-        if ($user->can('ver_menu_persona')){
-            if($request){
-                switch ($busqueda_por) {
-                    case 'busqueda_nombre_persona':
-                        Log::debug("Se realizará unas búsqueda por nombre de persona. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_persona_nombre_y_apellido($query);
-                            $busqueda_por="nombres o apellidos";
-                        break;
-                    case 'busqueda_nombre_horario':
-                        Log::debug("Se realizará unas búsqueda por nombre de horario. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_nombre_de_horario($query);
-                            $busqueda_por="horario";
-                        break;
-                    case 'busqueda_fecha':
-                        Log::debug("Se realizará unas búsqueda por fecha. Query:[".$query.']');
-                        $menues=MenuPersona::buscar_por_fecha($query);
-                            $busqueda_por="fecha";
-                        break;
-                    default:
-                        $roles=MenuPersona::all();
-                        $query=null;
-                      break;
-                }
-            }
-            $menues_excluidos = Array();
-            foreach ($menues as $menu){
-              if (($fecha==null)||($menu->tengo_la_fecha($fecha))){
-                Log::debug('Se devuelven: '.$menu);
-              }
-              else{
-                Log::debug('Se descarta el menú: '.$menu);
-                Array_push($menues_excluidos, $menu);
-              }
-            }
-            $menues = array_diff($menues, $menues_excluidos);
-            $info = [
-              'action'=>'ok',
-              'message'=>'Se hizo una busqueda',
-              'estado'=>'5'
-            ];
-            return view('menu_persona.index',compact('menues','query','busqueda_por','info','fecha_actual'));
-        }
-        Log::debug($user->name . ' NO tiene permisos para ver menues');
-        return redirect('/home');
+        $menus_total=MenuPersona::all()->count();
+        $horarios=Horario::all();
+        return  view('nutricion.menu_persona.index', compact('menus','horarios','menus_total','query','busqueda_por'));
+
+
     }
 
     /**
@@ -94,7 +57,7 @@ class MenuPersonaController extends Controller
     public function create(Request $request)
     {
 
-      $pacientes=Paciente::all();
+      $pacientes=Paciente::get_pacientes_internados();
       $horarios= Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
     }
@@ -121,29 +84,36 @@ class MenuPersonaController extends Controller
           Log::debug("No tiene menu asignado ");
           Log::debug('$persona_id: '.$persona_id);
           Log::debug('$racion_disponible_id: '.$racion_disponible_id);
-          try{
-
-            $data = [
-              'persona_id'=>$persona_id,
-              'racion_disponible_id'=>$racion_disponible_id,
-              'personal_id'=>$user->personal_id,
-              'realizado'=>false,
-            ];
-            $mp = new MenuPersona($data);
-            $mp->save();
-            return response([
-              'success'=>'true',
-              'data'=>"Menu realizado con exito",
-            ]);
-          }catch (\Exception $e) {
+          if($racion_disponible->cantidad_restante>0){
+            try{
+              $data = [
+                'persona_id'=>$persona_id,
+                'racion_disponible_id'=>$racion_disponible_id,
+                'personal_id'=>$user->personal_id,
+                'realizado'=>false,
+              ];
+              $mp = new MenuPersona($data);
+              $mp->save();
+              return response([
+                'success'=>'true',
+                'data'=>"Menu realizado con exito",
+              ]);
+            }catch (\Exception $e) {
+              return response([
+                'success'=>'false',
+                'data'=>"Esta persona ya tiene una racion asignada para este horario",
+              ]);
+            }
+          }
+          else {
             return response([
               'success'=>'false',
-              'data'=>"Esta persona ya tiene una racion asignada para este horario",
+              'data'=>"Esta racion no tiene suficiente stock",
             ]);
           }
         }else {
           Log::info("Esta persona ya tiene una racion asignada para este horario");
-          //Log::info($menu_);
+
           return response([
             'success'=>'false',
             'data'=>"Esta persona ya tiene una racion asignada para este horario",
