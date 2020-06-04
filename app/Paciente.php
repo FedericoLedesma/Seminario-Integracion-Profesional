@@ -304,4 +304,9 @@ class Paciente extends Model
     PacienteCama::create_from_paciente($habitacion,$this->get_id());
 
   }
+
+  public function dar_alta(){
+    $this->dar_alta_acompanante();
+    PacienteCama::dar_baja_por_paciente($this->get_id());
+  }
 }

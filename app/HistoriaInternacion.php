@@ -140,6 +140,7 @@ class HistoriaInternacion extends Model
   public function dar_alta(){
     $this->fecha_egreso=Carbon::now()->toDateString();
     $this->update();
+    $this->get_paciente()->dar_alta();
   }
 
   public static function get_personas_no_internadas(){

@@ -100,7 +100,7 @@ class Sector extends Model
     $res = array();
     $all = $this->get_habitaciones();
     foreach ($all as $habitacion) {
-      $c = $habitacion->get_camas_desocupadas();
+      $c = $habitacion->get_cantidad_camas_desocupadas();
       if ($c>0){
         array_push($res,$habitacion);
       }

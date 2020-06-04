@@ -172,4 +172,16 @@ class Habitacion extends Model
       $camas = $this->get_camas_desocupadas();
       return $camas[0]->ingresar_paciente($paciente,$fecha);
     }
+
+    public static function get_disponibles(){
+      $res = array();
+      $all = static::all();
+      foreach ($all as $habitacion) {
+        $c = $habitacion->get_cantidad_camas_desocupadas();
+        if ($c>0){
+          array_push($res,$habitacion);
+        }
+      }
+      return $res;
+    }
 }

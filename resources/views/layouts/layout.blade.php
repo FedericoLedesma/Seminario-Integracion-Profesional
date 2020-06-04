@@ -339,17 +339,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <p>Ingreso de pacientes</p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="{{ route('pacientes.index') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Ficha de pacientes</p>
+            </a>
+          </li>-->
+
+        </ul>
+       </li>
+       <!--           fin enfermería           -->
+       <!--              Administración sectores        -->
+       <li class="nav-item has-treeview menu-close">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
+          <p>
+            Administración sectores
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('sectores.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Sectores</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('habitaciones.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Habitaciones</p>
             </a>
           </li>
 
         </ul>
        </li>
-       <!--           fin enfermería           -->
-
+       <!--           fin administración sectores           -->
 
         </ul>
       </nav>
