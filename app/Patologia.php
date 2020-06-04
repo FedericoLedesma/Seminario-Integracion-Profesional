@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\PatologiaAlimentosProhibidos;
+use Illuminate\Support\Facades\Log;
 
 class Patologia extends Model
 {
@@ -40,6 +41,9 @@ class Patologia extends Model
 
     }
 
+    public function get_dietas(){return Dieta::where('patologia_id','=',$this->id)->get();}
+
+
     /**
      *
      *
@@ -47,18 +51,7 @@ class Patologia extends Model
      */
 
     public function get_dieta_activa_reciente(){
-      $dieta = null;
-      $ids = DB::table('dietas')
-        ->join('dieta_activas','dieta_activas.dieta_id','=','dietas.id')
-        ->where('dietas.patologia_id','=',$this->id)
-        ->whereNull('dieta_activas.fecha_final')
-        ->orderByRaw('fecha DESC')
-        ->select('dietas.id')
-        ->first();
-
-      $dieta = Dieta::findById($ids);
-
-      return $dieta;
+      return $this->get_dietas()->first()->get_activa_reciente();
     }
 
     /**
@@ -67,19 +60,33 @@ class Patologia extends Model
      */
 
     public function get_raciones_por_patologia(){
-      $raciones = array();
-      $ids = DB::table('dietas')
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+      $raciones = $this->get_dieta_activa_reciente()->get_raciones();
+      /*$ids = DB::table('dietas')
         ->join('dieta_activas','dieta_activas.dieta_id','=','dietas.id')
         ->where('dietas.patologia_id','=',$this->id)
         ->whereNull('dieta_activas.fecha_final')
         ->select('dietas.id')
-        ->get();
-
-      foreach($ids as $id){
+        ->get();*/
+      $prohibidas = $this->get_raciones_prohibidas();
+      /*foreach($ids as $id){
         array_push($raciones, Dieta::findById($id)->get_raciones());
+      }*/
+      $res = array();
+      foreach ($raciones as $racion) {
+        $flag =true;
+        foreach ($prohibidas as $prohibida) {
+          if ($racion->get_id()==$prohibida->get_id()){
+            $flag=false;
+          }
+        }
+        if($flag==true){
+          Log::Debug('Agregada: '.$racion);
+          array_push($res,$racion);
+        }
       }
-
-      return $raciones;
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
+      return $res;
     }
 
     /**
@@ -97,7 +104,7 @@ class Patologia extends Model
        $res = Array();
        $ali_pro = PatologiaAlimentosProhibidos::get_alimentos_por_patologia($this);
        foreach ($ali_pro as $a) {
-         $rac_ali = PatologiaAlimentosProhibidos::get_racion_por_alimento($a);
+         $rac_ali = PatologiaAlimentosProhibidos::get_racion_por_alimento($a,$this->id);
        }
        return $res;
      }

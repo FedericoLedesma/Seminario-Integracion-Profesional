@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Racion;
 
 class RacionAlimento extends Model
 {
@@ -63,6 +64,15 @@ class RacionAlimento extends Model
         $x->where('racion_id','=',$x->racion_id)
         ->delete();
       }
+    }
+
+    public static function get_raciones_por_alimento($alimento_id){
+      $res = array();
+      $raciones_id = static::where('alimento_id','=',$alimento_id)->get();
+      foreach ($raciones_id as $ali_rac) {
+        array_push($res,Racion::find($ali_rac->racion_id));
+      }
+      return $res;
     }
 
 }

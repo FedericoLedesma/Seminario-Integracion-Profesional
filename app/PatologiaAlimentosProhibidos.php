@@ -8,7 +8,7 @@ use App\Alimento;
 
 class PatologiaAlimentosProhibidos extends Model
 {
-    protected $table = "patologia_alimentos_prohibidos";
+    protected $table = "patologia_alimento_prohibido";
 
     protected $fillable = [
         'id', 'patologia_id', 'alimento_id', 'fecha',
@@ -41,7 +41,22 @@ class PatologiaAlimentosProhibidos extends Model
         return $res;
      }
 
-     public static function get_raciones_prohibidas($alimento){
-        return Alimento::get_raciones_prohibidas($alimento);
+     public static function get_racion_por_alimento($alimento,$patologia_id){
+        $res =array();
+        $pat_ali = static::where('patologia_id','=',$patologia_id)->get();
+        foreach ($pat_ali as $p_a) {
+          $sub_total = $p_a->get_raciones();
+          foreach ($sub_total as $racion) {
+            array_push($res,$racion);
+          }
+        }
+        return $res;
      }
+
+     public function get_raciones(){
+       return $this->get_alimento()->get_raciones();
+     }
+
+     public function get_alimento(){return Alimento::find($this->get_alimento_id());}
+     public function get_alimento_id(){return $this->alimento_id;}
 }

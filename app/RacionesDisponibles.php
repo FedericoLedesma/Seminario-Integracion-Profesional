@@ -221,6 +221,7 @@ class RacionesDisponibles extends Model
             Log::debug('Su horario es: '.$hor_r_d);
             if ($hor_r_d->get_id()==$horario->get_id()){
               array_push($res, $r_d);
+              Log::debug('Agregada: '.$r_d->get_racion());
             }
           }
           Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);

@@ -178,12 +178,13 @@ class Persona extends Model
         $pat_id = PersonaPatologia::where('persona_id','=',$this->id)
                 ->get();
         foreach($pat_id as $p){
-          $query = 'select racion_id';
+          array_push($res,$p->get_patologia());
         }
        }
        catch(Throwable $e){
 
        }
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
       return $res;
      }
 
@@ -245,12 +246,16 @@ class Persona extends Model
           foreach ($lista_raciones_disponibles as $rac_dis) {
             // code...
             array_push($conj_rac_dis,$rac_dis->get_racion());
-            Log::debug('Racion disponible: '.$rac_dis);
+            Log::debug('Racion disponible: '.$rac_dis->get_racion());
           }
 
           foreach($patologias_pac as $p){
-            Racion::intercept_raciones($conj_rac_dis,$p->get_raciones_por_patologia());
-            Log::debug('Patologia: '.p);
+            $c =$p->get_raciones_por_patologia();
+            foreach ($c as $r) {
+              Log::debug('Racion por patologia: '.$r);
+            }
+            $conj_rac_dis = Racion::intercept_raciones($conj_rac_dis,$c);
+            Log::debug('Patologia: '.$p);
           }
 
           /*$lista_raciones_disponibles = Racion::union_raciones($lista_raciones_disponibles,$this->get_ultimas_raciones_consumidas());

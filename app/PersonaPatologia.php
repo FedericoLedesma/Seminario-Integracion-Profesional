@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Patologia;
 
 class PersonaPatologia extends Pivot
 {
@@ -42,5 +43,7 @@ class PersonaPatologia extends Pivot
       }return null;
     }
     //Deberia agregarse Fecha_final
+
+    public function get_patologia(){return Patologia::find($this->patologia_id);}
 
 }

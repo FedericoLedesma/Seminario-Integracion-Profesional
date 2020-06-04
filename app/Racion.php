@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Alimento;
 use App\RacionAlimento;
 use App\Patologia;
+use Illuminate\Support\Facades\Log;
 
 class Racion extends Model
 {
@@ -124,15 +125,17 @@ class Racion extends Model
 
 
   public static function intercept_raciones($conj_a, $conj_b){
+    Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
     $intercepcion = array();
     foreach($conj_a as $a){
       foreach($conj_b as $b){
-        if ($a == $b){
+        if ($a->id == $b->id){
           array_push($intercepcion,$a);
         }
         Log::debug('Comparando racion '.$a.' con  racion '.$b);
       }
     }
+    Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
     return $intercepcion;
   }
 

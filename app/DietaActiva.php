@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Dieta;
 use Illuminate\Support\Facades\DB;
+use App\DietaActivaRacion;
 
 class DietaActiva extends Model
 {
@@ -80,5 +81,14 @@ class DietaActiva extends Model
     public function raciones(){
       return $this->belongsToMany('App\Racion', 'dieta_activa_racion')
       ->withPivot('fecha');
+    }
+
+    public function get_raciones(){
+      $res = array();
+      $all = DietaActivaRacion::where('dieta_activa_id','=',$this->id)->get();
+      foreach ($all as $x) {
+        array_push($res,$x->get_racion());
+      }
+      return $res;
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Dieta_racion;
 use App\Patologia;
+use App\DietaActiva;
 
 class Dieta extends Model
 {
@@ -126,4 +127,6 @@ class Dieta extends Model
   {
     return $this->dietaActiva;
   }
+
+  public function get_activa_reciente(){return DietaActiva::where('dieta_id','=',$this->get_id())->orderBy('fecha','DESC')->first();}
 }

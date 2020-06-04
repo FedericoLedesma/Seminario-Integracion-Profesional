@@ -296,7 +296,7 @@ class RacionesDisponiblesController extends Controller
 
       Log::info("Racion recomendada ".$racion_recomendada);
       //array_push($raciones,$racion_recomendada);
-      $r_d_recomendada=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion_recomendada->id,$fecha);
+      //$r_d_recomendada=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion_recomendada->id,$fecha);
     //  Log::info("Racion disponible recomendada ".$r_d_recomendada);
       $raciones=array();
     //  array_push($raciones,$r_d_recomendada);
@@ -313,8 +313,9 @@ class RacionesDisponiblesController extends Controller
           array_push($raciones,$racion);
       //  }
       }
+      $raciones = $persona->get_raciones_disponibles($f,$horario);
       foreach ($raciones as $racion) {
-        $r=Racion::findById($racion->horario_racion->racion->id);
+        $r=Racion::findById($racion->id);
         array_push($raciones_name,$r);
       }
       Log::info($raciones_name);
