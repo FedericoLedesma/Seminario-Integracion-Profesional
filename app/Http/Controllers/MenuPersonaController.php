@@ -8,6 +8,7 @@ use App\RacionesDisponibles;
 use App\Horario;
 use App\Paciente;
 use App\Persona;
+use App\Personal;
 use App\Racion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,27 +24,91 @@ class MenuPersonaController extends Controller
     public function index(Request $request)
     {
       Log::info($request);
-      $query = $request->get('search');
-      $fecha=$request->get('fecha');
+      $query="";
       $busqueda_por="";
+      $fecha=$request->get('fecha');
+      $sector_name=$request->get('search');
+      $habitacion_id=$request->get('search_habitacion');
+      $busqueda_persona_por=$request->get('busqueda_persona_por');
       $busqueda_horario_por=$request->get('busqueda_horario_por');
-
       $horarios=Horario::all();
       if($request){
-        switch ($busqueda_horario_por){
+        switch ($busqueda_persona_por){
           case 'busqueda_todos':
-              $menus=MenuPersona::all();
+              if($busqueda_horario_por==0){
+                $menus=MenuPersona::allFecha($fecha);
+              }else {
+                $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+              }
+            break;
+          case 'busqueda_personal':
+            if($busqueda_horario_por==0){
+              if(empty($sector_name)){
+                $personal=Personal::all();
+              }else {
+                $personal=Personal::allBySectorName($sector_name);
+              }
+              $menus=array();
+              foreach ($personal as $p) {
+                $m=MenuPersona::allPersonaFecha($p->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+            }else {
+              if(empty($sector_name)){
+                $personal=Personal::all();
+              }else {
+                $personal=Personal::allBySectorName($sector_name);
+              }
+              $menus=array();
+              foreach ($personal as $p) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+            }
+            break;
+          case 'busqueda_pacientes':
+            if($busqueda_horario_por==0){
+              if(empty($sector_name)){
+                $pacientes=Paciente::get_pacientes_internados();
+              }else {
+                $pacientes=Paciente::buscar_por_nombre_sector($sector_name);
+              }
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+            }else {
+              if(empty($sector_name)){
+                $pacientes=Paciente::get_pacientes_internados();
+              }else {
+                $pacientes=Paciente::buscar_por_nombre_sector($sector_name);
+              }
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+            }
             break;
           default:
             $menus=MenuPersona::all();
             break;
           }
-
         }else{
           $menus=MenuPersona::all();
         }
         $menus_total=MenuPersona::all()->count();
         $horarios=Horario::all();
+
         return  view('nutricion.menu_persona.index', compact('menus','horarios','menus_total','query','busqueda_por'));
 
 

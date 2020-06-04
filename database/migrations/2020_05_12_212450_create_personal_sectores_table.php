@@ -18,6 +18,7 @@ class CreatePersonalSectoresTable extends Migration
             $table->unsignedInteger('sector_id');
             $table->unsignedBigInteger('personal_id');
             $table->date('fecha');
+            $table->date('fecha_hasta')->nullable();
 
 			#$table->primary(['id'],'primary_key_personal_sector');
 

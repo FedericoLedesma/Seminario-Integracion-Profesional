@@ -61,7 +61,28 @@ class MenuPersona extends Model
       ->orderBy('persona_id', 'asc');
     }return null;
   }
-
+  public function scopeAllPersonaFecha($query,$persona_id,$fecha)
+  {
+    $mp=array();
+    $menus=MenuPersona::where('persona_id',$persona_id)->get();
+    foreach ($menus as $menu) {
+      if($menu->racionDisponible->fecha==$fecha){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
+  public function scopeAllHorarioFecha($query,$horario_id,$fecha)
+  {
+    $mp=array();
+    $menus=MenuPersona::all();
+    foreach ($menus as $menu) {
+      if(($menu->racionDisponible->fecha==$fecha)&&($menu->racionDisponible->horario_racion->horario->id==$horario_id)){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
   public function scopeAllRealizadosFecha($query,$fecha)
   {
     if($fecha){
@@ -72,18 +93,14 @@ class MenuPersona extends Model
   }
   public function scopeAllFecha($query,$fecha)
   {
-    if($fecha){
-      return $query->where('fecha','=',$fecha)
-      ->orderBy('persona_id', 'asc');
-    }return null;
-  }
-  public function scopeAllPersonaFecha($query,$persona_id,$fecha)
-  {
-    if(($persona_id)&&($fecha)){
-      return $query->where('fecha','=',$fecha)
-      ->where('persona_id',$persona_id)
-      ->orderBy('persona_id', 'asc');
-    }return null;
+    $mp=array();
+    $menus=MenuPersona::all();
+    foreach ($menus as $menu) {
+      if($menu->racionDisponible->fecha==$fecha){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
   }
   public function scopeAllPersona($query,$persona_id)
   {
