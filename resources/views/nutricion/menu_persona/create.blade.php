@@ -101,47 +101,48 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="create">
-	<div class="modal-dialog">
-			<div class="modal-content">
-					<div class="modal-header" id="modal-header">
-
-					</div>
-					<div class="modal-body">
-						<div id="p_body">
+@if($pacientes)
+	<div class="modal fade" id="create">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header" id="modal-header">
 
 						</div>
-						<div id="alert-modal" class="alert alert-modal alert-danger"></div>
-						<table>
-							<tr>
-								<td>
-								{!!	Form::label('hor_id', 'Horario')!!}
-								<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-									<option selected value= 0> Seleccione horario </option>
-									@foreach($horarios as $horario)
-									<option value= {{$horario->id}} >{{$horario->name}}</option>
-									@endforeach
-								</select>
-								</td>
-								<td>
-									{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
-									<select class="browser-default custom-select" id="racion_id" name="racion_id">
-										<option value= 0>Raciones recomendadas</option>
+						<div class="modal-body">
+							<div id="p_body">
+
+							</div>
+							<div id="alert-modal" class="alert alert-modal alert-danger"></div>
+							<table>
+								<tr>
+									<td>
+									{!!	Form::label('hor_id', 'Horario')!!}
+									<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
+										<option selected value= 0> Seleccione horario </option>
+										@foreach($horarios as $horario)
+										<option value= {{$horario->id}} >{{$horario->name}}</option>
+										@endforeach
 									</select>
-								</td>
-							</tr>
-						</table>
+									</td>
+									<td>
+										{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
+										<select class="browser-default custom-select" id="racion_id" name="racion_id">
+											<option value= 0>Raciones recomendadas</option>
+										</select>
+									</td>
+								</tr>
+							</table>
 
-					</div>
-					<div class="modal-footer">
-							<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Racion</a>
-							<a href="" class="btn btn-success guardar_menu" >Guardar</a>
-					</div>
+						</div>
+						<div class="modal-footer">
+								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Racion</a>
+								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
+						</div>
 
-			</div>
+				</div>
+		</div>
 	</div>
-</div>
-
+@endif
 @endsection
 @section('script')
  <script src="{{asset('js/menu_persona-script.js')}}"></script>

@@ -42,12 +42,12 @@ class MenuPersonaController extends Controller
               }
             break;
           case 'busqueda_personal':
+            if(empty($sector_name)){
+              $personal=Personal::all();
+            }else {
+              $personal=Personal::allBySectorName($sector_name);
+            }
             if($busqueda_horario_por==0){
-              if(empty($sector_name)){
-                $personal=Personal::all();
-              }else {
-                $personal=Personal::allBySectorName($sector_name);
-              }
               $menus=array();
               foreach ($personal as $p) {
                 $m=MenuPersona::allPersonaFecha($p->id,$fecha);
@@ -56,11 +56,6 @@ class MenuPersonaController extends Controller
                 }
               }
             }else {
-              if(empty($sector_name)){
-                $personal=Personal::all();
-              }else {
-                $personal=Personal::allBySectorName($sector_name);
-              }
               $menus=array();
               foreach ($personal as $p) {
                 $menu=MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
@@ -71,12 +66,12 @@ class MenuPersonaController extends Controller
             }
             break;
           case 'busqueda_pacientes':
+            if(empty($sector_name)){
+              $pacientes=Paciente::get_pacientes_internados();
+            }else {
+              $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($sector_name);
+            }
             if($busqueda_horario_por==0){
-              if(empty($sector_name)){
-                $pacientes=Paciente::get_pacientes_internados();
-              }else {
-                $pacientes=Paciente::buscar_por_nombre_sector($sector_name);
-              }
               $menus=array();
               foreach ($pacientes as $paciente) {
                 $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
@@ -85,11 +80,6 @@ class MenuPersonaController extends Controller
                 }
               }
             }else {
-              if(empty($sector_name)){
-                $pacientes=Paciente::get_pacientes_internados();
-              }else {
-                $pacientes=Paciente::buscar_por_nombre_sector($sector_name);
-              }
               $menus=array();
               foreach ($pacientes as $paciente) {
                 $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
@@ -121,9 +111,37 @@ class MenuPersonaController extends Controller
      */
     public function create(Request $request)
     {
-
-      $pacientes=Paciente::get_pacientes_internados();
-      $horarios= Horario::all();
+      Log::info("create MenuPersonaController");
+      Log::info($request);
+      $query=$request->get('search');
+      $busqueda_por=$request->get('busqueda_por');
+      if($request){
+        $pacientes=array();
+        switch ($busqueda_por) {
+          case 'busqueda_name':
+            Log::debug("case 'busqueda_name':");
+            $pacientes=Paciente::buscar_por_nombre_y_apellido($query);
+            break;
+          case 'busqueda_dni':
+            Log::debug("case 'busqueda_dni':");
+            $paciente=Paciente::buscar_por_dni($query);
+            if(!empty($paciente)&&($paciente->estaInternado())){
+              array_push($pacientes,$paciente);
+            }
+            break;
+          case 'busqueda_sector':
+            Log::debug("case 'busqueda_sector':");
+            $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($query);
+            break;
+          default:
+            Log::debug("case 'default':");
+            $pacientes=Paciente::get_pacientes_internados();
+            break;
+        }
+      }else {
+        $pacientes=Paciente::get_pacientes_internados();
+      }
+      $horarios=Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
     }
 

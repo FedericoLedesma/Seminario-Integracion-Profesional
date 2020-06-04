@@ -141,8 +141,8 @@
 
 							{!! Form::close() !!}
 							</tr>
-								@endforeach
-							@endif
+							@endforeach
+						@endif
 
 					</table>
 			</div>

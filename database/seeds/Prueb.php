@@ -88,9 +88,11 @@ class Prueb extends Seeder
           array_push($s, $menu);
           break;
       }*/
-      $personal=Personal::allBySectorName("Sector 2");
-      foreach ($personal as $p) {
-        echo $p;
+      $paciente=Paciente::buscar_por_dni(88888888);
+      if($paciente->estaInternado()){
+        echo "Esta internado";
+      }else {
+        echo "no esta internado";
       }
     //  return null;
     }
