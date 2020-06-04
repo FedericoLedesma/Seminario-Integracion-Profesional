@@ -72,6 +72,29 @@ class Prueb extends Seeder
       */
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
-          
+      $fecha=new DateTime(date("Y-m-d"));
+      $persona=Persona::findById(5);
+      /*$menu=MenuPersona::get_menu_por_persona_horario_fecha($persona,5,$fecha) ;
+      echo $menu;*/
+      $horario_id=1;
+      $menus=MenuPersona::all();
+      $s=array();
+      foreach ($menus as $menu) {
+        $h_id=$menu->racionDisponible->horario_racion->horario->id;
+        $menu_f=$menu->racionDisponible->fecha;
+        $persona_id=$menu->persona->id;
+        if((($h_id==$horario_id)&&($menu_f==$fecha->format('Y-m-d')))&&($persona_id==$persona->id)){
+
+          array_push($s, $menu);
+          break;
+      }
+
+      }
+      if(count($s)==0){
+        echo "no tiene un menu";
+      }else {
+        echo " tiene un menu";
+      }
+    //  return null;
     }
 }

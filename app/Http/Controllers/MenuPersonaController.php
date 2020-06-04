@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MenuPersona;
+use App\RacionesDisponibles;
 use App\Horario;
 use App\Paciente;
 use App\Persona;
@@ -92,7 +93,7 @@ class MenuPersonaController extends Controller
      */
     public function create(Request $request)
     {
-        
+
       $pacientes=Paciente::all();
       $horarios= Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
@@ -112,23 +113,37 @@ class MenuPersonaController extends Controller
         Log::debug('Usuario: '.$user);
         $persona_id = $request->get('persona_id');
         $racion_disponible_id = $request->get('racion_disponible_id');
-        //$racion_disponible=RacionesDisponibles::findById($racion_disponible_id);
-        Log::debug('$persona_id: '.$persona_id);
-        Log::debug('$racion_disponible_id: '.$racion_disponible_id);
-        try{
-          $data = [
-            'persona_id'=>$persona_id,
-            'racion_disponible_id'=>$racion_disponible_id,
-            'personal_id'=>$user->personal_id,
-            'realizado'=>false,
-          ];
-          $mp = new MenuPersona($data);
-          $mp->save();
-          return response([
-            'success'=>'true',
-            'data'=>"Menu realizado con exito",
-          ]);
-        }catch (\Exception $e) {
+        $racion_disponible=RacionesDisponibles::findById($racion_disponible_id);
+        $h_id=$racion_disponible->horario_racion->horario->id;
+        $menu_=MenuPersona::get_menu_por_persona_horario_fecha($persona_id,$racion_disponible->horario_racion->horario->id,$racion_disponible->fecha);
+
+        if(empty($menu_)){
+          Log::debug("No tiene menu asignado ");
+          Log::debug('$persona_id: '.$persona_id);
+          Log::debug('$racion_disponible_id: '.$racion_disponible_id);
+          try{
+
+            $data = [
+              'persona_id'=>$persona_id,
+              'racion_disponible_id'=>$racion_disponible_id,
+              'personal_id'=>$user->personal_id,
+              'realizado'=>false,
+            ];
+            $mp = new MenuPersona($data);
+            $mp->save();
+            return response([
+              'success'=>'true',
+              'data'=>"Menu realizado con exito",
+            ]);
+          }catch (\Exception $e) {
+            return response([
+              'success'=>'false',
+              'data'=>"Esta persona ya tiene una racion asignada para este horario",
+            ]);
+          }
+        }else {
+          Log::info("Esta persona ya tiene una racion asignada para este horario");
+          //Log::info($menu_);
           return response([
             'success'=>'false',
             'data'=>"Esta persona ya tiene una racion asignada para este horario",

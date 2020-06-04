@@ -37,13 +37,19 @@ class MenuPersona extends Model
       ->get()->first();
   }
 
-  public function scopeAllHorarioFecha($query,$horario_id,$fecha)
+  public static function get_menu_por_persona_horario_fecha($persona_id,$horario_id,$fecha)
   {
-    if(($horario_id)&&($fecha)){
-      return $query->where('fecha','=',$fecha)
-      ->where('horario_id',$horario_id)
-      ->orderBy('persona_id', 'asc');
-    }return null;
+    $menus=MenuPersona::all();
+    foreach ($menus as $menu) {
+      $h_id=$menu->racionDisponible->horario_racion->horario->id;
+      $menu_f=$menu->racionDisponible->fecha;
+      $p_id=$menu->persona->id;
+      if((($h_id==$horario_id)&&($menu_f==$fecha))&&($p_id==$persona_id)){
+        return $menu;
+        break;
+      }
+    }
+    return null;
   }
 
   public function scopeAllRealizadosHorarioFecha($query,$horario_id,$fecha)
@@ -472,5 +478,10 @@ class MenuPersona extends Model
     }
     return $var;
   }
-
+  public function racionDisponible(){
+    return $this->belongsTo('App\RacionesDisponibles', 'racion_disponible_id');
+  }
+  public function persona(){
+    return $this->belongsTo('App\Persona', 'persona_id');
+  }
 }

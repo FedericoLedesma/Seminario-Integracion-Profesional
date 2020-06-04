@@ -50,11 +50,6 @@
 
 								}
 			});
-
-
-
-
-
 		});
 	});
 	function getQueryVariable() {
@@ -161,27 +156,7 @@
 			p.innerHTML = s;
 			document.getElementById("p_body").appendChild(p);
 		}
-		/*var url = "pacientes/:id/patologias";
-		url= url.replace(':id',paciente.id);
-		$.ajax({
-			type: 'post',
-			url: url,
-			dataType: 'json',
-				data:{paciente},
-				success: function (data) {
-					console.log(data);
-					if(data.success=='true'){
-					p.innerHTML = "Tiene las patologias "+data.patologias;
-					document.getElementById("p_body").appendChild(p);
-				}else{
-					p.innerHTML = "No tiene patologias";
-					document.getElementById("p_body").appendChild(p);
-				}
-					},
-					error: function (data) {
-						console.log('Error:', data);
-					}
-		});*/
+
 	});
 	$('.guardar_menu').click(function(e){
 		e.preventDefault();
@@ -189,12 +164,13 @@
 		var persona_id=persona.id;
 		var racion_disponible_id=$('#racion_id').val();
 		var url="/menu_persona";
+		var horario_id=$('#horario_id').val();
 		var modal=document.getElementById("create");
 		$.ajax({
 			type: 'post',
 			url: url,
 			dataType: 'json',
-				data:{persona_id,racion_disponible_id},
+				data:{persona_id,racion_disponible_id,horario_id},
 				success: function (data) {
 					console.log(data);
 					if(data.success=='true'){
