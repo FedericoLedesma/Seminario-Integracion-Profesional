@@ -26,7 +26,9 @@
 		</span>
 	</p>
 	<div id="alert" class="alert alert-info"></div>
-
+	@if($query)
+		<div id="alert" name="alert-raciones" class="alert alert-info">Busqueda por: {{$busqueda_por}} {{$query}}</div>
+	@endif
 </div>
 
 <div class="container">

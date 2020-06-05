@@ -129,12 +129,13 @@ class MenuPersonaController extends Controller
       Log::info($request);
       $query=$request->get('search');
       $busqueda_por=$request->get('busqueda_por');
-      if($request){
+      if($query){
         $pacientes=array();
         switch ($busqueda_por) {
           case 'busqueda_name':
             Log::debug("case 'busqueda_name':");
             $pacientes=Paciente::buscar_por_nombre_y_apellido($query);
+            $busqueda_por="Nombre ";
             break;
           case 'busqueda_dni':
             Log::debug("case 'busqueda_dni':");
@@ -142,21 +143,24 @@ class MenuPersonaController extends Controller
             if(!empty($paciente)&&($paciente->estaInternado())){
               array_push($pacientes,$paciente);
             }
+            $busqueda_por="Numero de Documento ";
             break;
           case 'busqueda_sector':
             Log::debug("case 'busqueda_sector':");
             $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($query);
+            $busqueda_por="Nombre de Sector ";
             break;
           default:
             Log::debug("case 'default':");
             $pacientes=Paciente::get_pacientes_internados();
+            $busqueda_por="Todos los internados ";
             break;
         }
       }else {
         $pacientes=Paciente::get_pacientes_internados();
       }
       $horarios=Horario::all();
-      return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
+      return view('nutricion.menu_persona.create',compact('pacientes','horarios','query','busqueda_por'));
     }
 
     public function createMenuPersonal(Request $request)
@@ -165,12 +169,13 @@ class MenuPersonaController extends Controller
       Log::info($request);
       $query=$request->get('search');
       $busqueda_por=$request->get('busqueda_por');
-      if($request){
+      if($query){
         $personal=array();
         switch ($busqueda_por) {
           case 'busqueda_name':
             Log::debug("case 'busqueda_name':");
             $personal=all();
+            $busqueda_por="Nombre";
             break;
           case 'busqueda_dni':
             Log::debug("case 'busqueda_dni':");
@@ -178,10 +183,12 @@ class MenuPersonaController extends Controller
             if(!empty($p)){
               array_push($personal,$p);
             }
+            $busqueda_por="Numero de documento ";
             break;
           case 'busqueda_sector':
             Log::debug("case 'busqueda_sector':");
             $personal=Personal::allBySectorName($query);
+            $busqueda_por="Nombre de Sector ";
             break;
           default:
             Log::debug("case 'default':");
@@ -192,7 +199,7 @@ class MenuPersonaController extends Controller
         $personal=Personal::all();
       }
       $horarios=Horario::all();
-      return view('nutricion.menu_persona.create_personal',compact('personal','horarios'));
+      return view('nutricion.menu_persona.create_personal',compact('personal','horarios','query','busqueda_por'));
     }
 
     /**
