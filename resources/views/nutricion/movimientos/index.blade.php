@@ -12,7 +12,7 @@
 
 <div class="container">
 	<div class="table-responsive">
-  	<div class="col-md-9 col-md-offset-1">
+  	<div class="col-md-6 col-md-offset-1">
 			<div class="panel-heading">
 				 {!!Form::open(['route'=>'movimientos.index','method'=>'GET']) !!}
 					<div class="input-group mb-3">
@@ -28,6 +28,16 @@
 							 <tr>
 								 <td>{!!Form::date('fecha', \Carbon\Carbon::now(),['id'=>'fecha']);!!}</td>
 								 <td>
+								 <select class="browser-default custom-select" id="busqueda_horario_por" name="busqueda_horario_por">
+									 <option value="0" >Todos</option>
+									 @if($horarios)
+										 @foreach($horarios as $horario)
+											 <option value="{{$horario->id}}" >{{$horario->name}}</option>
+										 @endforeach
+									 @endif
+								 </select>
+								 </td>
+								 <td>
 									 {!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 								 </td>
 							 </tr>
@@ -35,7 +45,15 @@
 					 	</table>
 					</div>
 					{!! Form::close() !!}
-
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="table-responsive">
+  	<div class="col-md-9 col-md-offset-1">
+			<div class="panel-heading">
+				<div class="input-group mb-3">
 					<table class="table table-striped table-hover ">
 						<thead >
 							<tr>
@@ -68,6 +86,7 @@
 							@endforeach
 						@endif
 					</table>
+				</div>
 			</div>
 		</div>
 	</div>
