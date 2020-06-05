@@ -14,3 +14,5 @@ composer require spatie/laravel-permission
 @echo Publicando migraciones para spatie
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 
+@echo Instalando DomPDF
+composer require barryvdh/laravel-dompdf
