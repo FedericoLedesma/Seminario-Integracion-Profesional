@@ -86,8 +86,8 @@
 								<td>{{$personal->get_sector_name()}}</td>
 								<td>{!!link_to_route('personal.show', $title = 'VER', $parameters = [$personal],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($personal, ['route' => ['personal.destroy', $personal->id], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $personal->id }}">Eliminar</button></td>
+								{!! Form::model($personal, ['route' => ['personal.destroy', $personal], 'method'=> 'DELETE'])!!}
+								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $personal }}">Eliminar</button></td>
 								{!! Form::close() !!}
 
 							</tr>

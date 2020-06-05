@@ -154,7 +154,11 @@ class PersonalController extends Controller
       Log::debug($id);
       try {
         $personal=Personal::find($id);
-        $personal->delete();
+        Log::debug('Se borrará el personal: '.$personal);
+        #$personal->delete();
+        Personal::destroy($id);
+        #Personal::where('id','=',$id)->delete();
+        Log::debug('Se borró el personal');
         return response()->json([
             'estado'=>'true',
             'success' => 'Personal eliminado con exito!'

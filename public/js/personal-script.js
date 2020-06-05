@@ -23,6 +23,7 @@ function getQueryVariable() {
 };
 $('.eliminar').click(function(e){
 
+
 	e.preventDefault();//evita cargar la pagina
 
 	if(!confirm("¿Esta seguro que desea eliminar?")){
@@ -31,14 +32,15 @@ $('.eliminar').click(function(e){
 
 	var row = $(this).parents('tr');
 	var token = $(this).data("token");
-	var role_id = $(this).data("id");
+	var personal_id = $(this).data("id");
 	//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 	//validar el usuario
 	var url_destroy = "personal/:id";
-	url_destroy = url_destroy.replace(':id',paciente_id);
+	url_destroy = url_destroy.replace(':id',personal_id);
 
 $('#alert').show();
 		$.ajax({
+			alert('pepe');
 			type: 'DELETE',
 			url: url_destroy,
 			dataType: 'json',
