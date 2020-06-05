@@ -144,7 +144,7 @@ class MenuPersonaController extends Controller
       $horarios=Horario::all();
       return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
     }
-    
+
     public function createMenuPersonal(Request $request)
     {
       Log::info("create MenuPersonaController");
@@ -275,22 +275,17 @@ class MenuPersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $compuesta)
+    public function update(Request $request)
     {
-        //
-        $this->validate($request,[
-            'persona_id'=>'required',
-            'horario_id'=>'required',
-            'racion_id'=>'required',
-            'fecha'=>'required',
-            'realizado'=>'required',
+      $menuPersona=$request->get('menu_persona');
+      $menuPersona=MenuPersona::findById($menuPersona['id']);
+      Log::info($request);
+      $menuPersona->realizado=true;
+      $menuPersona->save();
+      return response()->json([
+            'estado'=>'true',
+            'success' => 'Se registro exitosamente como realizado',
         ]);
-        $horario_id = $compuesta['horario_id'];
-        $persona_id = $compuesta['persona_id'];
-        $fecha = $compuesta['fecha'];
-        MenuPersona::find($horario_id,$persona_id,$fecha)->update($request->all());
-        return redirect()->route('menu_persona.index')
-            ->with('success','Menu persona actualizado satisfactoriamente');
     }
 
     /**
@@ -310,28 +305,34 @@ class MenuPersonaController extends Controller
         return redirect()->route('MenuPersona.index')
             ->with('success','Menu persona borrado satisfactoriamente');
     }*/
-    public function destroy($persona_id,$horario_id,$fecha)
+    public function destroy(Request $request)
     {
       Log::debug('Se quiere borrar una ración...');
-      $info = [
-        'acction'=>'false',
-        'message'=>'No se pudo eliminar el menu persona (planilla) !!!'
-      ];
+      Log::info($request);
+      $mp=$request->get('menu_persona');
+      Log::info($mp['id']);
       try {
-        $menuPersona = MenuPersona::findById($horario_id,$persona_id,$fecha);
-        if ($menuPersona<>null){
-          if (MenuPersona::borrar($menuPersona)){
-            $info = [
-              'acction'=>'success',
-              'message'=>'Menu persona actualizado satisfactoriamente'
-            ];
-          }
+        $menuPersona = MenuPersona::findById($mp['id']);
+        Log::info($menuPersona);
+        if($menuPersona->realizado){
+          return response()->json([
+                'estado'=>'false',
+                'success' => 'No se puede eliminar un menu realizado',
+            ]);
+        }else{
+          $menuPersona->delete();
+          return response()->json([
+                'estado'=>'true',
+                'success' => 'Se elimino correctamente el menu',
+            ]);
         }
       } catch (\Exception $e) {
-
+        return response()->json([
+              'estado'=>'false',
+              'success' => 'No se pudo eliminar el menu de la persona',
+          ]);
       }
-      return redirect()->route('menu_persona.index',compact('info'));
-          #->with('false','No se pudo eliminar el menu persona (planilla) !!!');
+
     }
 
 

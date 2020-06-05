@@ -28,8 +28,8 @@
 -->
 </style>
 <container justify-content="space-evenly">
-	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu persona (planilla)</a>
-
+	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu a Pacientes (planilla)</a>
+	<a href="{{route('menu_persona.create_personal')}}" class="btn btn-primary">Agregar menu Personal (planilla)</a>
 	<a href="{{action('InformeController@index')}}" class="btn btn-primary">Informes</a>
 
 </container>
@@ -135,9 +135,13 @@
 								<td>{{$menu_persona->get_racion_name()}}</td>
 								<td>{{$menu_persona->racionDisponible->fecha}}</td>
 								<td>{{$menu_persona->isRealizado_str()}}</td>
-								<td><button type="submit" class="btn btn-success entregar" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Entregar</button></td>
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Eliminar</button></td>
-
+								@if($menu_persona->realizado)
+								<td><button type="submit" class="btn btn-success entregar"  disabled>Entregar</button></td>
+								<td><button type="submit" class="btn btn-danger eliminar" disabled>Eliminar</button></td>
+								@else
+								<td><button type="submit" class="btn btn-success entregar" id="btn-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Entregar</button></td>
+								<td><button type="submit" class="btn btn-danger eliminar" id="btn-eliminar-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Eliminar</button></td>
+								@endif
 
 							{!! Form::close() !!}
 							</tr>

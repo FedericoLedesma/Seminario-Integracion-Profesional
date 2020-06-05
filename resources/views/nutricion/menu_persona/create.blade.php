@@ -3,7 +3,8 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Pacientes</li>
+<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menus</a></li>
+<li class="breadcrumb-item active">Crear Menu a Paciente</li>
 @endsection
 @section('content')
 
@@ -13,21 +14,10 @@
 
 
 
-	    <h1>Crear Menus</h1>
+	    <h1>Crear Menus para Pacientes</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
-
 <div>
 	<p>
 		<span id="users-total">
@@ -60,7 +50,7 @@
 					</div>
 				{!! Form::close() !!}
 
-				<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+				<table class="table table-striped table-hover ">
 					<thead >
 						<tr>
 							<th scope="col">id</th>

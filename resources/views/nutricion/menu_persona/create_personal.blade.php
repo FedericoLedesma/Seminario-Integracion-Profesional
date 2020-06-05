@@ -3,30 +3,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Pacientes</li>
+<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menus</a></li>
+<li class="breadcrumb-item active">Crear Menu a Personal</li>
 @endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 
-
-
-	    <h1>Crear Menus</h1>
+	    <h1>Crear Menus para Personal</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 
 <div>
 	<p>
@@ -41,7 +26,7 @@
 
 <div class="container">
   <div class="table-responsive">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-8 col-md-offset-1">
 
 			<div class="panel-heading">
 				{!!Form::open(['route'=>'menu_persona.create_personal','method'=>'GET']) !!}

@@ -20,15 +20,12 @@ class MenuPersona extends Model
 
   public static $dias = 30;
 
-  public static function findById($horario_id,$persona_id,$fecha)
+  public static function findById($id)
   {
-       $menu_personas = static::where('horario_id', $horario_id)
-       ->where('fecha','=', $fecha)
-       ->where('persona_id', $persona_id)
+       $menu_personas = static::where('id', $id)
        ->first();
-       if($menu_personas){
-         return $menu_personas;
-     } return null;
+      return $menu_personas;
+
   }
 
   public static function buscar_por_racion_horario_fecha($racion, $horario, $fecha){
