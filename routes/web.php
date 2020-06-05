@@ -63,6 +63,7 @@ Route::get('/menu_persona_create_personal',["as"=>"menu_persona.create_personal"
 Route::get('/menu_persona/destroy/{persona}/{horario}/{fecha}','MenuPersonaController@destroy');
 Route::get('/informes/generar','InformeController@create')
 	->name('InformeController.create');
+Route::get('/informe/generar-informe',["as"=>"informe.generar-informe", "uses"=>'InformeController@generarInforme']);
 Route::get('/informes/settear','InformeController@set_realizado')
 	->name('InformeController.set');
 Route::resource('/informes','InformeController');

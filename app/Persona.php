@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\PersonaPatologia;
+use App\Personal;
+use App\Paciente;
 use Carbon\Carbon;
 use App\RacionesDisponibles;
 use App\Racion;
@@ -363,5 +365,34 @@ class Persona extends Model
   {
     return $this->belongsTo('App\TipoDocumento', 'tipo_documento_id');
   }
-
+  public function personal(){
+    //return $this->hasOne('App\Personal');//corregir en de la bd personal debe tener el campo persona_id
+    return Personal::findById($this->id);
+  }
+  public function paciente(){
+    //return $this->hasOne('App\Paciente');//corregir en de la bd pacientes debe tener el campo $persona_id
+    return Paciente::findById($this->id);
+  }
+  public function sectorFecha($fecha){
+    if($this->personal())
+    {
+      return $this->personal()->sectorActual();
+    }else {
+      if($this->paciente()){
+        return $this->paciente()->camasFecha($fecha)->habitacion->sector;
+      }else {
+        return null;
+      }
+    }
+  }
+  public function habitacionFecha($fecha){
+    if($this->paciente()){
+      return $this->paciente()->camasFecha($fecha)->habitacion;
+    }return null;
+  }
+  public function camaFecha($fecha){
+    if($this->paciente()){
+      return $this->paciente()->camasFecha($fecha);
+    }return null;
+  }
 }

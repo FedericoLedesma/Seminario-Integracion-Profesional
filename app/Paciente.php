@@ -292,6 +292,15 @@ class Paciente extends Model
     return $this->belongsToMany('App\Cama', 'paciente_cama')
     ->withPivot('fecha','fecha_fin');
   }
+  public function camasFecha($fecha){
+    $camas= $this->camas()->wherePivot('fecha_fin','>=',$fecha)
+    ->wherePivot('fecha','<=',$fecha)
+    ->first();
+    if ($camas==null){
+      $camas=$this->camas()->wherePivot('fecha','<=',$fecha)
+      ->first();
+    }return $camas;
+  }
   public function camaActual(){
     return $this->camas()->wherePivot('fecha_fin','=',null)->first();
   }

@@ -75,12 +75,17 @@ class Prueb extends Seeder
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
       $fecha=new DateTime(date("Y-m-d"));
-      $persona=Persona::findById(6);
+      $personas=Paciente::all();
       /*$menu=MenuPersona::get_menu_por_persona_horario_fecha($persona,5,$fecha) ;
       echo $menu;*/
       $horario_id=1;
       //$menus=MenuPersona::all();
       $s=array();
+      foreach ($personas as $persona) {
+            echo $persona->camasFecha('2020-06-03');
+
+      }
+
       /*foreach ($menus as $menu) {
         $h_id=$menu->racionDisponible->horario_racion->horario->id;
         $menu_f=$menu->racionDisponible->fecha;
