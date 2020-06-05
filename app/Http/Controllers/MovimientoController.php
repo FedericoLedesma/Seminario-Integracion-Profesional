@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Movimiento;
 use App\Horario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MovimientoController extends Controller
 {
@@ -17,18 +18,26 @@ class MovimientoController extends Controller
     {
       $horario_id=$request->get('busqueda_horario_por');
       $fecha=$request->get('fecha');
-      if(!empty($horario_id)){
+      $busqueda_por=null;
+      $query=null;
+      Log::info($horario_id);
+      if($request){
         if($horario_id==0){
+          Log::info('Buscando por fecha todos los horarios');
           $movimientos=Movimiento::allFecha($fecha);
+          $busqueda_por="Fecha ".$fecha;
+          $query=" ";
         }else {
           $movimientos=Movimiento::allHorarioFecha($horario_id,$fecha);
+          $busqueda_por="Fecha ".$fecha;
+          $query="Horario ".$horario_id;
         }
       }else {
         $movimientos=Movimiento::all();
       }
       $horarios=Horario::all();
 
-      return view('nutricion.movimientos.index',compact('movimientos','horarios'));
+      return view('nutricion.movimientos.index',compact('movimientos','horarios','query','busqueda_por'));
 
     }
 

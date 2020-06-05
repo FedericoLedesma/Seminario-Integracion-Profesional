@@ -9,7 +9,9 @@
 
 <h1>Movimientos</h1>
 @include('layouts.error')
-
+@if($query)
+	<div id="alert" name="alert-raciones" class="alert alert-info">Movimientos por: {{$busqueda_por}} {{$query}}</div>
+@endif
 <div class="container">
 	<div class="table-responsive">
   	<div class="col-md-6 col-md-offset-1">

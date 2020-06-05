@@ -13,15 +13,6 @@
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('raciones.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Racion</button>

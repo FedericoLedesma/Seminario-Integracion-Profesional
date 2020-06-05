@@ -42,7 +42,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-menu_persona" class="alert alert-info">Menues persona (Planillas) con {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-raciones" class="alert alert-info">Menus por: {{$busqueda_por}} {{$query}}</div>
 	@endif
 </div>
 
