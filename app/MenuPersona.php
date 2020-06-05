@@ -265,7 +265,7 @@ class MenuPersona extends Model
   }
 
   public function get_fecha(){
-    return $this->get_racion_disponible()->get_fecha();
+    return $this->get_racion_disponible()->fecha();
   }
 
   public function set_persona($persona){

@@ -1,8 +1,8 @@
 @extends('layouts.layout_pdf')
 @section('content')
-<h1>Informe de Menus</h1>
 
-    <div>
+
+    <div><h1>Informe de Menus</h1>
       <h2>Solicitado : {{$creado}} </h2>
       <p>Por el usuario : Apellido: {{$user->personal->persona->apellido}} Nombre: {{$user->personal->persona->name}} </p>
       <p>Numero de documento {{$user->personal->persona->numero_doc}} - ID: {{$user->personal->persona->id}}</p>
@@ -46,7 +46,7 @@
               @endif
               <td>{{$menu_persona->get_horario_name()}}</td>
               <td>{{$menu_persona->get_racion_name()}}</td>
-              <td>{{$menu_persona->racionDisponible->fecha}}</td>
+              <td>{{$menu_persona->racionDisponible->fecha()}}</td>
               <td>{{$menu_persona->isRealizado_str()}}</td>
             </tr>
             @endforeach

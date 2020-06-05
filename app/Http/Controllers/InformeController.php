@@ -80,9 +80,11 @@ class InformeController extends Controller
               if($busqueda_horario_por==0){
                 $menus=MenuPersona::allFecha($fecha);
                 $busqueda_por='Fecha:';
+                $fecha = date("d/m/Y", strtotime($fecha));
                 $query=$fecha;
               }else {
                 $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+                $fecha = date("d/m/Y", strtotime($fecha));   
                 $busqueda_por='Fecha: '.$fecha;
                 $query='Horario: '.$busqueda_horario_por;
               }
@@ -103,6 +105,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Personal, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha;
             }else {
               $menus=array();
@@ -113,6 +116,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Personal, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
             }
             break;
@@ -132,6 +136,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Pacientes, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha;
             }else {
               $menus=array();
@@ -142,6 +147,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Pacientes, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
             }
             break;
