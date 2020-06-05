@@ -14,6 +14,8 @@ use App\HorarioRacion;
 use App\RacionesDisponibles;
 use App\MenuPersona;
 use App\Dieta;
+use App\User;
+use App\Movimiento;
 use App\DietaActiva;
 class Prueb extends Seeder
 {
@@ -88,12 +90,6 @@ class Prueb extends Seeder
           array_push($s, $menu);
           break;
       }*/
-      $paciente=Paciente::buscar_por_dni(88888888);
-      if($paciente->estaInternado()){
-        echo "Esta internado";
-      }else {
-        echo "no esta internado";
-      }
     //  return null;
     }
 }

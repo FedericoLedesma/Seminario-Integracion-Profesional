@@ -3,8 +3,11 @@
 namespace App\Observers;
 
 use App\MenuPersona;
+use App\Movimiento;
 use App\RacionesDisponibles;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class MenuPersonaObserver
 {
@@ -114,10 +117,20 @@ class MenuPersonaObserver
     }
     public function saved(MenuPersona $menuPersona)
     {
+
       $rd=$menuPersona->racionDisponible;
+      $user=Auth::user();
       if($menuPersona->is_realizado()){
         $rd->stock_original=$rd->stock_original-1;
         $rd->guardar();
+        $creado=new DateTime(date("Y-m-d H:i:s"));
+        $movimiento=Movimiento::create([
+          'racion_disponible_id'=>$rd->id,
+          'creado'=>$creado,
+          'user_id'=>$user->personal->id,
+          'tipo_movimiento_id'=>2,
+          'cantidad'=>'1',
+        ]);
       }
     }
     /**
