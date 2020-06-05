@@ -4,20 +4,15 @@
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menus</a></li>
-<li class="breadcrumb-item active">Crear Menu a Paciente</li>
+<li class="breadcrumb-item active">Crear Menu a Personal</li>
 @endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 
-
-
-	    <h1>Crear Menus para Pacientes</h1>
+	    <h1>Crear Menus para Personal</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
+
 <div>
 	<p>
 		<span id="users-total">
@@ -33,10 +28,10 @@
 
 <div class="container">
   <div class="table-responsive">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-8 col-md-offset-1">
 
 			<div class="panel-heading">
-				{!!Form::open(['route'=>'menu_persona.create','method'=>'GET']) !!}
+				{!!Form::open(['route'=>'menu_persona.create_personal','method'=>'GET']) !!}
 		 			<div class="input-group mb-3">
 
 					  <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -52,7 +47,7 @@
 					</div>
 				{!! Form::close() !!}
 
-				<table class="table table-striped table-hover ">
+				<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 					<thead >
 						<tr>
 							<th scope="col">id</th>
@@ -67,23 +62,18 @@
 					</thead>
 
 					<tbody>
-						@if($pacientes)
-							@foreach($pacientes as $paciente)
+						@if($personal)
+							@foreach($personal as $p)
 								<tr>
-									<td id="paciente_id">{{$paciente->get_id()}}</td>
-									<td>{{$paciente->get_name()}}</td>
-									<td>{{$paciente->get_apellido()}}</td>
-									<td>{{$paciente->get_tipo_documento_name()}}</td>
-									<td>{{$paciente->get_numero_doc()}}</td>
+									<td id="paciente_id">{{$p->id}}</td>
+									<td>{{$p->persona->name}}</td>
+									<td>{{$p->persona->apellido}}</td>
+									<td>{{$p->persona->tipoDocumento->name}}</td>
+									<td>{{$p->persona->numero_doc}}</td>
 
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
+									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear Menu
 									</a></td>
-									@if($paciente->acompananteActual())
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
-									    Menu Acompa.
-									</a></td>
-									@endif
 								</tr>
 							@endforeach
 						@endif
@@ -93,7 +83,7 @@
 		</div>
 	</div>
 </div>
-@if($pacientes)
+@if($personal)
 	<div class="modal fade" id="create">
 		<div class="modal-dialog">
 				<div class="modal-content">
@@ -109,7 +99,7 @@
 								<tr>
 									<td>
 									{!!	Form::label('hor_id', 'Horario')!!}
-									<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
+									<select class="browser-default custom-select" data-paciente="{{$p}}" id="horario_id" name="horario_id">
 										<option selected value= 0> Seleccione horario </option>
 										@foreach($horarios as $horario)
 										<option value= {{$horario->id}} >{{$horario->name}}</option>

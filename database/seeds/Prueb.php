@@ -14,6 +14,8 @@ use App\HorarioRacion;
 use App\RacionesDisponibles;
 use App\MenuPersona;
 use App\Dieta;
+use App\User;
+use App\Movimiento;
 use App\DietaActiva;
 class Prueb extends Seeder
 {
@@ -73,13 +75,18 @@ class Prueb extends Seeder
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
       $fecha=new DateTime(date("Y-m-d"));
-      $persona=Persona::findById(5);
+      $personas=Paciente::all();
       /*$menu=MenuPersona::get_menu_por_persona_horario_fecha($persona,5,$fecha) ;
       echo $menu;*/
       $horario_id=1;
-      $menus=MenuPersona::all();
+      //$menus=MenuPersona::all();
       $s=array();
-      foreach ($menus as $menu) {
+      foreach ($personas as $persona) {
+            echo $persona->camasFecha('2020-06-03');
+
+      }
+
+      /*foreach ($menus as $menu) {
         $h_id=$menu->racionDisponible->horario_racion->horario->id;
         $menu_f=$menu->racionDisponible->fecha;
         $persona_id=$menu->persona->id;
@@ -87,14 +94,7 @@ class Prueb extends Seeder
 
           array_push($s, $menu);
           break;
-      }
-
-      }
-      if(count($s)==0){
-        echo "no tiene un menu";
-      }else {
-        echo " tiene un menu";
-      }
+      }*/
     //  return null;
     }
 }

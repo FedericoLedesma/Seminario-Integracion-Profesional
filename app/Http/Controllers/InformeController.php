@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MenuPersona;
+use App\Personal;
+use App\Paciente;
+use App\Persona;
 use App\Horario;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Log;
 
 class InformeController extends Controller
@@ -15,7 +20,7 @@ class InformeController extends Controller
       #$user = Auth::
       $horarios = Horario::all();
       $fecha_actual = Carbon::now();
-      return view('informe.index',compact('horarios','fecha_actual'));
+      return view('informe.index_informe',compact('horarios','fecha_actual'));
     }
 
     public function create(Request $request)
@@ -54,6 +59,100 @@ class InformeController extends Controller
       $horarios = Horario::all();
       return view('informe.create',compact('informe','lista','fecha_actual','horarios',
         'fecha_inicio','horario_inicio','fecha_fin','horario_fin'));
+    }
+    public function generarInforme(Request $request){
+      Log::info($request);
+      $user=Auth::user();
+      $query=null;
+      $busqueda_por=null;
+      $fecha=$request->get('fecha');
+      $c=new DateTime(date("Y-m-d H:i:s"));
+      $creado=$c->format('d-m-Y H:i:s');
+      $sector_name=$request->get('search');
+      $habitacion_id=$request->get('search_habitacion');
+      $busqueda_persona_por=$request->get('busqueda_persona_por');
+      $busqueda_horario_por=$request->get('busqueda_horario_por');
+      $horarios=Horario::all();
+      if($request){
+        switch ($busqueda_persona_por){
+          case 'busqueda_todos':
+              if($busqueda_horario_por==0){
+                $menus=MenuPersona::allFecha($fecha);
+                $busqueda_por='Fecha:';
+                $query=$fecha;
+              }else {
+                $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+                $busqueda_por='Fecha: '.$fecha;
+                $query='Horario: '.$busqueda_horario_por;
+              }
+            break;
+          case 'busqueda_personal':
+            if(empty($sector_name)){
+              $personal=Personal::all();
+            }else {
+              $personal=Personal::allBySectorName($sector_name);
+              $query= "Sector: ".$sector_name;
+            }
+            if($busqueda_horario_por==0){
+              $menus=array();
+              foreach ($personal as $p) {
+                $m=MenuPersona::allPersonaFecha($p->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Personal, ';
+              $query=$query.' Fecha: '.$fecha;
+            }else {
+              $menus=array();
+              foreach ($personal as $p) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Personal, ';
+              $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
+            }
+            break;
+          case 'busqueda_pacientes':
+            if(empty($sector_name)){
+              $pacientes=Paciente::get_pacientes_internados();
+            }else {
+              $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($sector_name);
+              $query="Sector: ".$sector_name;
+            }
+            if($busqueda_horario_por==0){
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Pacientes, ';
+              $query=$query.' Fecha: '.$fecha;
+            }else {
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Pacientes, ';
+              $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
+            }
+            break;
+          default:
+            $menus=MenuPersona::all();
+            break;
+          }
+        }else{
+          $menus=MenuPersona::all();
+        }
+        $menus_total=count($menus);
+        return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
     }
 
 }

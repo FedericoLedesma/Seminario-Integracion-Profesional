@@ -62,6 +62,35 @@
 			 }return("");
 	 }
 	};
+	$('.entregar').click(function(e){
+		var menu_persona = $(this).data("id");
+		//var btn=document.getElementById("btn-"+menu_persona.id).disabled = true;
+		e.preventDefault();//evita cargar la pagina
+		var url="/menu_persona/"+menu_persona.id;
+		$.ajax({
+			type: 'PUT',
+			url: url,
+			dataType: 'json',
+				data:{menu_persona},
+				success: function (data) {
+					if (data.estado=='true'){
+							console.log(data.success);
+							document.getElementById("btn-"+menu_persona.id).disabled = true;
+							document.getElementById("btn-eliminar-"+menu_persona.id).disabled = true;
+							$('#alert').show();
+							$('#alert').html(data.success);
+							}else{
+								console.log(data.success);
+							}
+							},
+							error: function (data) {
+								$('#alert').show();
+								$('#alert').html(data);
+								console.log('Error:', data);
+							}
+				});
+	});
+
 	$('.eliminar').click(function(e){
 
 		e.preventDefault();//evita cargar la pagina
@@ -72,18 +101,18 @@
 
 		var row = $(this).parents('tr');
 		var token = $(this).data("token");
-		var persona = $(this).data("id");
+		var menu_persona = $(this).data("id");
 		//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 		//validar el usuario
-		var url_destroy = "personas/:id";
-		url_destroy = url_destroy.replace(':id',persona.id);
-		console.log(persona);
+		var url_destroy = "menu_persona/"+menu_persona.id;
+
+		console.log(menu_persona);
 	$('#alert').show();
 	    $.ajax({
 	    	type: 'DELETE',
 	    	url: url_destroy,
 	    	dataType: 'json',
-					data:{data:persona},
+					data:{menu_persona},
 		    	success: function (data) {
 						if (data.estado=='true'){
 						   		row.fadeOut();

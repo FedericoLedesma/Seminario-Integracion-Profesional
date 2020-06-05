@@ -38,4 +38,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public static function findById($id)
+    {
+        if($id){
+           $user = static::where('id', $id)->first();
+           if($user){
+             return $user;
+         }
+       }return null;
+    }
+    public function personal()
+    {
+      return $this->belongsTo('App\Personal', 'personal_id');
+    }
 }

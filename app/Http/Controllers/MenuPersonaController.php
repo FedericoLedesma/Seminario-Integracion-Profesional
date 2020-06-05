@@ -8,6 +8,7 @@ use App\RacionesDisponibles;
 use App\Horario;
 use App\Paciente;
 use App\Persona;
+use App\Personal;
 use App\Racion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,27 +24,95 @@ class MenuPersonaController extends Controller
     public function index(Request $request)
     {
       Log::info($request);
-      $query = $request->get('search');
+      $query=null;
+      $busqueda_por=null;
       $fecha=$request->get('fecha');
-      $busqueda_por="";
+      $sector_name=$request->get('search');
+      $habitacion_id=$request->get('search_habitacion');
+      $busqueda_persona_por=$request->get('busqueda_persona_por');
       $busqueda_horario_por=$request->get('busqueda_horario_por');
-
       $horarios=Horario::all();
       if($request){
-        switch ($busqueda_horario_por){
+        switch ($busqueda_persona_por){
           case 'busqueda_todos':
-              $menus=MenuPersona::all();
+              if($busqueda_horario_por==0){
+                $menus=MenuPersona::allFecha($fecha);
+                $busqueda_por='Fecha:';
+                $query=$fecha;
+              }else {
+                $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+                $busqueda_por='Fecha: '.$fecha;
+                $query='Horario: '.$busqueda_horario_por;
+              }
+            break;
+          case 'busqueda_personal':
+            if(empty($sector_name)){
+              $personal=Personal::all();
+            }else {
+              $personal=Personal::allBySectorName($sector_name);
+              $query= "Sector: ".$sector_name;
+            }
+            if($busqueda_horario_por==0){
+              $menus=array();
+              foreach ($personal as $p) {
+                $m=MenuPersona::allPersonaFecha($p->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Personal, ';
+              $query=$query.' Fecha: '.$fecha;
+            }else {
+              $menus=array();
+              foreach ($personal as $p) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Personal, ';
+              $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
+            }
+            break;
+          case 'busqueda_pacientes':
+            if(empty($sector_name)){
+              $pacientes=Paciente::get_pacientes_internados();
+            }else {
+              $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($sector_name);
+              $query="Sector: ".$sector_name;
+            }
+            if($busqueda_horario_por==0){
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
+                foreach($m as $menu){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Pacientes, ';
+              $query=$query.' Fecha: '.$fecha;
+            }else {
+              $menus=array();
+              foreach ($pacientes as $paciente) {
+                $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
+                if(!(empty($menu))){
+                  array_push($menus,$menu);
+                }
+              }
+              $busqueda_por='Pacientes, ';
+              $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
+            }
             break;
           default:
             $menus=MenuPersona::all();
             break;
           }
-
         }else{
           $menus=MenuPersona::all();
         }
         $menus_total=MenuPersona::all()->count();
         $horarios=Horario::all();
+
         return  view('nutricion.menu_persona.index', compact('menus','horarios','menus_total','query','busqueda_por'));
 
 
@@ -56,10 +125,81 @@ class MenuPersonaController extends Controller
      */
     public function create(Request $request)
     {
+      Log::info("create MenuPersonaController");
+      Log::info($request);
+      $query=$request->get('search');
+      $busqueda_por=$request->get('busqueda_por');
+      if($query){
+        $pacientes=array();
+        switch ($busqueda_por) {
+          case 'busqueda_name':
+            Log::debug("case 'busqueda_name':");
+            $pacientes=Paciente::buscar_por_nombre_y_apellido($query);
+            $busqueda_por="Nombre ";
+            break;
+          case 'busqueda_dni':
+            Log::debug("case 'busqueda_dni':");
+            $paciente=Paciente::buscar_por_dni($query);
+            if(!empty($paciente)&&($paciente->estaInternado())){
+              array_push($pacientes,$paciente);
+            }
+            $busqueda_por="Numero de Documento ";
+            break;
+          case 'busqueda_sector':
+            Log::debug("case 'busqueda_sector':");
+            $pacientes=Paciente::get_pacientes_internados_por_nombre_sector($query);
+            $busqueda_por="Nombre de Sector ";
+            break;
+          default:
+            Log::debug("case 'default':");
+            $pacientes=Paciente::get_pacientes_internados();
+            $busqueda_por="Todos los internados ";
+            break;
+        }
+      }else {
+        $pacientes=Paciente::get_pacientes_internados();
+      }
+      $horarios=Horario::all();
+      return view('nutricion.menu_persona.create',compact('pacientes','horarios','query','busqueda_por'));
+    }
 
-      $pacientes=Paciente::get_pacientes_internados();
-      $horarios= Horario::all();
-      return view('nutricion.menu_persona.create',compact('pacientes','horarios'));
+    public function createMenuPersonal(Request $request)
+    {
+      Log::info("create MenuPersonaController");
+      Log::info($request);
+      $query=$request->get('search');
+      $busqueda_por=$request->get('busqueda_por');
+      if($query){
+        $personal=array();
+        switch ($busqueda_por) {
+          case 'busqueda_name':
+            Log::debug("case 'busqueda_name':");
+            $personal=all();
+            $busqueda_por="Nombre";
+            break;
+          case 'busqueda_dni':
+            Log::debug("case 'busqueda_dni':");
+            $p=Personal::buscar_por_numero_doc($query);
+            if(!empty($p)){
+              array_push($personal,$p);
+            }
+            $busqueda_por="Numero de documento ";
+            break;
+          case 'busqueda_sector':
+            Log::debug("case 'busqueda_sector':");
+            $personal=Personal::allBySectorName($query);
+            $busqueda_por="Nombre de Sector ";
+            break;
+          default:
+            Log::debug("case 'default':");
+            $personal=Personal::all();
+            break;
+        }
+      }else {
+        $personal=Personal::all();
+      }
+      $horarios=Horario::all();
+      return view('nutricion.menu_persona.create_personal',compact('personal','horarios','query','busqueda_por'));
     }
 
     /**
@@ -156,22 +296,17 @@ class MenuPersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $compuesta)
+    public function update(Request $request)
     {
-        //
-        $this->validate($request,[
-            'persona_id'=>'required',
-            'horario_id'=>'required',
-            'racion_id'=>'required',
-            'fecha'=>'required',
-            'realizado'=>'required',
+      $menuPersona=$request->get('menu_persona');
+      $menuPersona=MenuPersona::findById($menuPersona['id']);
+      Log::info($request);
+      $menuPersona->realizado=true;
+      $menuPersona->save();
+      return response()->json([
+            'estado'=>'true',
+            'success' => 'Se registro exitosamente como realizado',
         ]);
-        $horario_id = $compuesta['horario_id'];
-        $persona_id = $compuesta['persona_id'];
-        $fecha = $compuesta['fecha'];
-        MenuPersona::find($horario_id,$persona_id,$fecha)->update($request->all());
-        return redirect()->route('menu_persona.index')
-            ->with('success','Menu persona actualizado satisfactoriamente');
     }
 
     /**
@@ -191,28 +326,34 @@ class MenuPersonaController extends Controller
         return redirect()->route('MenuPersona.index')
             ->with('success','Menu persona borrado satisfactoriamente');
     }*/
-    public function destroy($persona_id,$horario_id,$fecha)
+    public function destroy(Request $request)
     {
       Log::debug('Se quiere borrar una ración...');
-      $info = [
-        'acction'=>'false',
-        'message'=>'No se pudo eliminar el menu persona (planilla) !!!'
-      ];
+      Log::info($request);
+      $mp=$request->get('menu_persona');
+      Log::info($mp['id']);
       try {
-        $menuPersona = MenuPersona::findById($horario_id,$persona_id,$fecha);
-        if ($menuPersona<>null){
-          if (MenuPersona::borrar($menuPersona)){
-            $info = [
-              'acction'=>'success',
-              'message'=>'Menu persona actualizado satisfactoriamente'
-            ];
-          }
+        $menuPersona = MenuPersona::findById($mp['id']);
+        Log::info($menuPersona);
+        if($menuPersona->realizado){
+          return response()->json([
+                'estado'=>'false',
+                'success' => 'No se puede eliminar un menu realizado',
+            ]);
+        }else{
+          $menuPersona->delete();
+          return response()->json([
+                'estado'=>'true',
+                'success' => 'Se elimino correctamente el menu',
+            ]);
         }
       } catch (\Exception $e) {
-
+        return response()->json([
+              'estado'=>'false',
+              'success' => 'No se pudo eliminar el menu de la persona',
+          ]);
       }
-      return redirect()->route('menu_persona.index',compact('info'));
-          #->with('false','No se pudo eliminar el menu persona (planilla) !!!');
+
     }
 
 

@@ -133,15 +133,13 @@ class Paciente extends Model
 
   public static function buscar_por_dni($dni){
     Log::debug('Buscando por dni a '.$dni);
-    $res = array();
-    $all = Persona::buscar_por_numero_doc($dni);
-    foreach ($all as $persona) {
-      $paciente = static::find($persona->get_id());
-      if ($paciente<>null){
-        array_push($res,$paciente);
+
+    $all = Paciente::all();
+    foreach ($all as $paciente) {
+      if($paciente->persona->numero_doc==$dni){
+        return $paciente;
       }
     }
-    return $res;
   }
 
   public function get_sector_actual(){return $this->get_cama()->get_sector();}
@@ -290,8 +288,27 @@ class Paciente extends Model
   public function acompananteActual(){
     return $this->acompanantes()->where('fecha_fin','=',null)->first();
   }
-
-
+  public function camas(){
+    return $this->belongsToMany('App\Cama', 'paciente_cama')
+    ->withPivot('fecha','fecha_fin');
+  }
+  public function camasFecha($fecha){
+    $camas= $this->camas()->wherePivot('fecha_fin','>=',$fecha)
+    ->wherePivot('fecha','<=',$fecha)
+    ->first();
+    if ($camas==null){
+      $camas=$this->camas()->wherePivot('fecha','<=',$fecha)
+      ->first();
+    }return $camas;
+  }
+  public function camaActual(){
+    return $this->camas()->wherePivot('fecha_fin','=',null)->first();
+  }
+  public function estaInternado(){
+    if(!(empty($this->camaActual()))){
+      return true;
+    }return false;
+  }
   public function get_acompanate_persona(){
     $acompanante = $this->get_acompanante_actual();
     if ($acompanante<>null)

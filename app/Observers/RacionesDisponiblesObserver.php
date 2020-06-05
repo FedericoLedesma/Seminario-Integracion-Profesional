@@ -12,7 +12,7 @@ class RacionesDisponiblesObserver
      * @param  \App\RacionesDisponibles  $racionesDisponibles
      * @return void
      */
-    public function creating(RacionesDisponibles $racionesDisponibles)
+  /*  public function creating(RacionesDisponibles $racionesDisponibles)
     {
         //
         if($racionesDisponibles->stock<0){
@@ -21,7 +21,17 @@ class RacionesDisponiblesObserver
         $racionesDisponibles->cantidad_restante = $racionesDisponibles->stock_original;
         $racionesDisponibles->cantidad_realizados = 0;
         return true;
-    }
+    }*/
+  /*  public function created(RacionesDisponibles $racionesDisponibles)
+    {
+        //
+        if($racionesDisponibles->stock<0){
+          return false;
+        }
+        $racionesDisponibles->cantidad_restante = $racionesDisponibles->stock_original;
+        $racionesDisponibles->cantidad_realizados = 0;
+        return true;
+    }*/
 
     /**
      * Handle the raciones disponibles "updated" event.

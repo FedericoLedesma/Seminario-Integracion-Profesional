@@ -277,16 +277,16 @@ class RacionesDisponiblesController extends Controller
       Log::info("patologias de persona. ".$persona->name);
       Log::info($patologias);
       if(count($patologias)==0){
-        /**
+        /*
         Se verifica si no tiene patologias, entonces se recuperan todas las raciones disponible para el dia y horario
-        **/
+        */
         Log::info("NO TIENE PATOLOGIAS".$persona->name);
         $raciones_d=RacionesDisponibles::buscar_por_fecha_horario($f,$horario);
           Log::info($raciones_d);
       }else {
-        /**
+        /*
         Tiene patologias, entonces se recuperan todas las raciones disponible para el dia y horario segun la patologia
-        **/
+        */
         Log::info("TIENE PATOLOGIAS".$persona->name);
         $raciones_d=RacionesDisponibles::getRacionesDisponiblesPatologias($patologias,$fecha,$horario_id);
         Log::info($raciones_d);
@@ -297,25 +297,25 @@ class RacionesDisponiblesController extends Controller
       Log::info("Racion recomendada ".$racion_recomendada);
       //array_push($raciones,$racion_recomendada);
       //$r_d_recomendada=RacionesDisponibles::findByHorarioRacionFecha($horario_id,$racion_recomendada->id,$fecha);
-    //  Log::info("Racion disponible recomendada ".$r_d_recomendada);
+      //Log::info("Racion disponible recomendada ".$r_d_recomendada);
       $raciones=array();
-    //  array_push($raciones,$r_d_recomendada);
+      //array_push($raciones,$r_d_recomendada);
       $raciones_name=array();
-      /**
+      /*
       Agrego al array como primer racion la recomendada y luego las disponibles segun la patologia
 
       Se genera un error al recomendar la racion, la misma no tiene en cuenta los alimentos prohibidos.
       Se debe corregir.
-      **/
+      */
     //  array_push($raciones_name,$racion_recomendada);
       foreach ($raciones_d as $racion) {
       //  if(!($racion->id==$r_d_recomendada->id)){
           array_push($raciones,$racion);
       //  }
       }
-      $raciones = $persona->get_raciones_disponibles($f,$horario);
+      //$raciones = $persona->get_raciones_disponibles($f,$horario);//Este metodo devuelve la racion concreta, no la racionDisponible.
       foreach ($raciones as $racion) {
-        $r=Racion::findById($racion->id);
+        $r=Racion::findById($racion->horario_racion->racion->id);
         array_push($raciones_name,$r);
       }
       Log::info($raciones_name);
