@@ -39,4 +39,17 @@ class PersonalSector extends Model
       ->orderBy('sector_id', 'asc');
     }return null;
   }
+
+  public static function get_sector_reciente_por_personal_id($personal_id){
+    $personal_sector = PersonalSector::where('personal_id','=',$personal_id)
+      ->orderBy('fecha','DESC')
+      ->get()->first();
+    if($personal_sector<>null){
+      return $personal_sector->get_sector();
+    }
+    return null;
+  }
+
+  public function get_sector(){return Sector::find($this->sector_id);}
+
 }

@@ -349,12 +349,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </ul>
        </li>
        <!--           fin enfermería           -->
-       <!--              Administración sectores        -->
+       <!--              Admin. general        -->
        <li class="nav-item has-treeview menu-close">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-users"></i>
           <p>
-            Administración sectores
+            Admin. general
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -371,10 +371,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <p>Habitaciones</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('personal.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Personal</p>
+            </a>
+          </li>
 
         </ul>
        </li>
-       <!--           fin administración sectores           -->
+       <!--           fin admin. general           -->
 
         </ul>
       </nav>

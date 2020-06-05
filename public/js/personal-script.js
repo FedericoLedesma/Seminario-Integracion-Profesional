@@ -7,7 +7,7 @@ $(document).ready(function(){
 		});
 	if(getQueryVariable()=="buscar_personal")
 	{
-		document.getElementById("personalid").focus();
+		document.getElementById("id").focus();
 	}
 
 });
@@ -35,7 +35,7 @@ $('.eliminar').click(function(e){
 	//var url_destroy = "{{route('users.destroy',':id')}}";//esto solo funciona en blade.php
 	//validar el usuario
 	var url_destroy = "personal/:id";
-	url_destroy = url_destroy.replace(':id',personal_id);
+	url_destroy = url_destroy.replace(':id',paciente_id);
 
 $('#alert').show();
 		$.ajax({

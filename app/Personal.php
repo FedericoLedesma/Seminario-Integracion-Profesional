@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\PersonalSector;
 use App\Persona;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class Personal extends Model
 {
@@ -148,5 +149,14 @@ class Personal extends Model
           }
         }
         return $res;
+      }
+
+      public function reubicar_personal($sector){
+        $per_sec = new PersonalSector([
+          'personal_id'=>$this->get_id(),
+          'sector_id'=>$sector->get_id(),
+          'fecha'=>Carbon::now(),
+        ]);
+        $per_sec->save();
       }
 }
