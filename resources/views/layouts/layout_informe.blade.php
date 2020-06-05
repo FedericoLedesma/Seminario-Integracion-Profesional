@@ -23,14 +23,14 @@
        border-collapse: collapse;
        padding: 0.3em;
        caption-side: bottom;
-       font-size: 8px;
+
     }
     td{
          border:1px  #000;
-         font-size: 8px;
+
       }
     thead tr{
-      font-size: 8px;
+
     }
     tbody tr:nth-child(odd){
       background-color: #E3ECE6;
@@ -46,7 +46,7 @@
   }
   th {
      background: #eee;
-     font-size: 8px;
+  
   }
     </style>
 

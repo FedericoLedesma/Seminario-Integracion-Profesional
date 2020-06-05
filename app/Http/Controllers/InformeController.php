@@ -11,6 +11,7 @@ use App\Horario;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DateTime;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Log;
 
 class InformeController extends Controller
@@ -152,7 +153,9 @@ class InformeController extends Controller
           $menus=MenuPersona::all();
         }
         $menus_total=count($menus);
-        return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        $pdf = PDF::loadView('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        return $pdf->stream();
     }
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.layout_informe')
+@extends('layouts.layout_pdf')
 @section('content')
 <h1>Informe de Menus</h1>
 
