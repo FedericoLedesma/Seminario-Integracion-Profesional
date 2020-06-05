@@ -95,6 +95,9 @@ Route::get('/historialInternacion/update/add_paciente/{historial_id}', 'Historia
 		Route::get('/historialInternacion/altaAcompanante/{id}', 'HistorialInternacionController@altaAcompanante')
 			->name('historialInternacion.altaAcompanante');
 Route::resource('/historialInternacion', 'HistorialInternacionController');
+Route::get('/personal/ingresarNuevo/personal', 'PersonalController@createPersonal')
+	->name('personal.createPaciente');
+Route::resource('/personal', 'PersonalController');
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');

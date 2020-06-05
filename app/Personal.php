@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PersonalSector;
+use App\Persona;
 
 class Personal extends Model
 {
@@ -29,4 +31,90 @@ class Personal extends Model
      }
     }return null;
   }
+
+
+    public function get_id(){return $this->id;}
+    public function get_persona(){
+      $persona = Persona::find($this->get_id());
+    	return $persona;
+    }
+    public function get_name(){return $this->get_persona()->get_name();}
+    public function get_apellido(){return $this->get_persona()->get_apellido();}
+    public function get_numero_doc(){return $this->get_persona()->get_numero_doc();}
+    public function get_observacion(){return $this->get_persona()->get_observacion();}
+    public function get_direccion(){return $this->get_persona()->get_direccion();}
+    public function get_email(){return $this->get_persona()->get_email();}
+    public function get_provincia(){return $this->get_persona()->get_provincia();}
+    public function get_localidad(){return $this->get_persona()->get_localidad();}
+    public function get_sexo(){return $this->get_persona()->get_sexo();}
+    public function get_fecha_nac(){return $this->get_persona()->get_fecha_nac();}
+    public function get_tipo_documento_id(){return $this->get_persona()->get_tipo_documento_id();}
+    public function get_tipo_documento(){return $this->get_persona()->get_tipo_documento();}
+    public function get_tipo_documento_name(){return $this->get_persona()->get_tipo_documento_name();}
+
+    public function get_sector(){
+      return PersonalSector::get_sector_reciente_por_personal_id($this->get_id());
+    }
+
+    public function get_sector_name(){
+      $sector = $this->get_sector();
+      if ($sector<>null)
+        {return $sector->get_name();}
+      else
+        {return 'Ninguno';}
+    }
+
+    public function buscar_por_nombre($nombre){
+      $all = Persona::buscar_por_nombre_y_apellido($nombre);
+      $res = array();
+      foreach ($all as $persona) {
+        $personal = static::find($persona->get_id());
+        if ($personal<>null){
+          array_push($res,$personal);
+        }
+      }
+      return $res;
+    }
+
+    public function buscar_por_dni($dni){
+      $all = Persona::buscar_por_numero_doc($dni);
+      $res = array();
+      foreach ($all as $persona) {
+        $personal = static::find($persona->get_id());
+        if ($personal<>null){
+          array_push($res,$personal);
+        }
+      }
+      return $res;
+    }
+
+    public function buscar_por_nombre_sector($sector_name){
+      $all = static::all();
+      $res = array();
+      foreach ($all as $personal) {
+        if ($personal->get_sector_name()==$sector_name){
+          array_push($res,$personal);
+        }
+      }
+      return $res;
+    }
+
+    public static function get_no_personal(){
+      $res = array();
+      $all = Persona::all();
+      $personales = static::all();
+      foreach ($all as $persona) {
+        $flag=true;
+        foreach ($personales as $personal) {
+          if ($personal->get_id()==$persona->get_id()){
+            $flag=false;
+          }
+        }
+        if($flag==true){
+          array_push($res,$persona);
+        }
+      }
+      return $res;
+    }
+
 }
