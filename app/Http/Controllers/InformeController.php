@@ -11,6 +11,7 @@ use App\Horario;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DateTime;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Log;
 
 class InformeController extends Controller
@@ -79,9 +80,11 @@ class InformeController extends Controller
               if($busqueda_horario_por==0){
                 $menus=MenuPersona::allFecha($fecha);
                 $busqueda_por='Fecha:';
+                $fecha = date("d/m/Y", strtotime($fecha));
                 $query=$fecha;
               }else {
                 $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+                $fecha = date("d/m/Y", strtotime($fecha));   
                 $busqueda_por='Fecha: '.$fecha;
                 $query='Horario: '.$busqueda_horario_por;
               }
@@ -102,6 +105,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Personal, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha;
             }else {
               $menus=array();
@@ -112,6 +116,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Personal, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
             }
             break;
@@ -131,6 +136,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Pacientes, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha;
             }else {
               $menus=array();
@@ -141,6 +147,7 @@ class InformeController extends Controller
                 }
               }
               $busqueda_por='Pacientes, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
               $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
             }
             break;
@@ -152,7 +159,9 @@ class InformeController extends Controller
           $menus=MenuPersona::all();
         }
         $menus_total=count($menus);
-        return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        $pdf = PDF::loadView('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        return $pdf->stream();
     }
 
 }
