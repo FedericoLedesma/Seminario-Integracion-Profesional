@@ -23,6 +23,13 @@ class InformeController extends Controller
       $fecha_actual = Carbon::now();
       return view('informe.index_informe',compact('horarios','fecha_actual'));
     }
+    public function informeIndex(Request $request)
+    {
+      #$user = Auth::
+      $horarios = Horario::all();
+      $fecha_actual = Carbon::now();
+      return view('informe.index_informe_raciones',compact('horarios','fecha_actual'));
+    }
 
     public function create(Request $request)
     {
@@ -173,6 +180,36 @@ class InformeController extends Controller
         $menus_total=count($menus);
         //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
         $pdf = PDF::loadView('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        return $pdf->stream();
+    }
+    public function generarInformeDeRaciones(Request $request){
+      Log::info($request);
+      $user=Auth::user();
+      $query=null;
+      $busqueda_por=null;
+      $fecha=$request->get('fecha');
+      $c=new DateTime(date("Y-m-d H:i:s"));
+      $creado=$c->format('d-m-Y H:i:s');
+      $horarios=Horario::all();
+      $busqueda_horario_por=$request->get('busqueda_horario_por');
+      if($busqueda_horario_por==0){
+        $menus=MenuPersona::allFecha($fecha);
+        $busqueda_por='Fecha:';
+        $fecha = date("d/m/Y", strtotime($fecha));
+        $query=$fecha;
+      }else {
+        $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+        $fecha = date("d/m/Y", strtotime($fecha));
+        $busqueda_por='Fecha: '.$fecha;
+        $query='Horario: '.$busqueda_horario_por;
+      }
+        $menus_total=count($menus);
+        $menus_array=$menus;
+        $menu_final;
+        $cantidad=array();
+        //La idea es contar y devolver las raciones a preparar para mostrar en la vista que alimentos tiene etc
+        //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+        $pdf = PDF::loadView('informe.informe_raciones', compact('menus','menus_total','cantidad','query','busqueda_por','creado','user'));
         return $pdf->stream();
     }
 
