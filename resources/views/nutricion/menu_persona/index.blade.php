@@ -109,12 +109,15 @@
 	</div>
 	<div class="container">
 	  <div class="table-responsive">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-11 col-md-offset-2">
 				<div class="panel-heading">
 					<table class="table table-striped table-hover ">
 						<thead >
 							<tr>
 								<th scope="col">Persona</th>
+								<th scope="col">Sector </th>
+	              <th scope="col">Habitacion</th>
+	              <th scope="col">Cama</th>
 								<th scope="col">Horario</th>
 								<th scope="col">Racion</th>
 								<th scope="col">Fecha</th>
@@ -131,9 +134,24 @@
 							<tr>
 								{{Log::debug(' Persona id: '.$menu_persona)}}
 								<td>{{$menu_persona->get_persona_nombre_completo()}}</td>
+								@if($menu_persona->persona->sectorFecha($menu_persona->racionDisponible->fecha))
+	                <td>{{$menu_persona->persona->sectorFecha($menu_persona->racionDisponible->fecha)->name}}</td>
+	              @else
+	                <td>-</td>
+	              @endif
+	              @if($menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha))
+	                <td>{{$menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha)->name}}</td>
+								@else
+	                <td>-</td>
+								@endif
+								@if($menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha))
+	                <td>{{$menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha)->id}}</td>
+	              @else
+	                <td>-</td>
+	              @endif
 								<td>{{$menu_persona->get_horario_name()}}</td>
 								<td>{{$menu_persona->get_racion_name()}}</td>
-								<td>{{$menu_persona->racionDisponible->fecha}}</td>
+								<td>{{$menu_persona->racionDisponible->fecha()}}</td>
 								<td>{{$menu_persona->isRealizado_str()}}</td>
 								@if($menu_persona->realizado)
 								<td><button type="submit" class="btn btn-success entregar"  disabled>Entregar</button></td>

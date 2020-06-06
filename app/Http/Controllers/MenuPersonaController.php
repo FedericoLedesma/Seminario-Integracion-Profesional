@@ -88,6 +88,12 @@ class MenuPersonaController extends Controller
                 foreach($m as $menu){
                   array_push($menus,$menu);
                 }
+                if($paciente->acompananteActual()){
+                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                  foreach($m as $menu){
+                    array_push($menus,$menu);
+                  }
+                }
               }
               $busqueda_por='Pacientes, ';
               $query=$query.' Fecha: '.$fecha;
@@ -97,6 +103,12 @@ class MenuPersonaController extends Controller
                 $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
                 if(!(empty($menu))){
                   array_push($menus,$menu);
+                }
+                if($paciente->acompananteActual()){
+                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                  foreach($m as $menu){
+                    array_push($menus,$menu);
+                  }
                 }
               }
               $busqueda_por='Pacientes, ';

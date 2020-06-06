@@ -376,23 +376,32 @@ class Persona extends Model
   public function sectorFecha($fecha){
     if($this->personal())
     {
-      return $this->personal()->sectorActual();
+      return $this->personal()->sectorActual();//Cambiar esto debe devolver el sector que pertenecia esas fechas
     }else {
       if($this->paciente()){
         return $this->paciente()->camasFecha($fecha)->habitacion->sector;
-      }else {
-        return null;
+      }else{
+        if($this->acompanante){
+          return $this->acompanante->sectorFecha($fecha);
+        }else {
+          return null;
+        }
       }
     }
   }
   public function habitacionFecha($fecha){
     if($this->paciente()){
       return $this->paciente()->camasFecha($fecha)->habitacion;
+    }if($this->acompanante){
+      return $this->acompanante->habitacionFecha($fecha);
     }return null;
   }
   public function camaFecha($fecha){
     if($this->paciente()){
       return $this->paciente()->camasFecha($fecha);
     }return null;
+  }
+  public function acompanante(){
+    return $this->hasOne('App\Acompanante');
   }
 }

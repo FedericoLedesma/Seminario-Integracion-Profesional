@@ -37,11 +37,14 @@
               @else
                 <td>-</td>
               @endif
-              @if($menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha))
+              @if($menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha))
                 <td>{{$menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha)->name}}</td>
-                <td>{{$menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha)->id}}</td>
               @else
                 <td>-</td>
+              @endif
+              @if($menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha))
+                <td>{{$menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha)->id}}</td>
+              @else
                 <td>-</td>
               @endif
               <td>{{$menu_persona->get_horario_name()}}</td>

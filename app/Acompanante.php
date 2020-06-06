@@ -175,4 +175,13 @@ class Acompanante extends Model
   public function persona(){
     return $this->belongsTo('App\Persona', 'persona_id');
   }
+  public function sector(){
+    return $this->paciente()->sectorActual();
+  }
+  public function sectorFecha($fecha){
+    return $this->paciente->camasFecha($fecha)->habitacion->sector;
+  }
+  public function habitacionFecha($fecha){
+    return $this->paciente->camasFecha($fecha)->habitacion;
+  }
 }

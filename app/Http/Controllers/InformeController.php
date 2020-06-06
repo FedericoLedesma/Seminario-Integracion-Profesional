@@ -84,7 +84,7 @@ class InformeController extends Controller
                 $query=$fecha;
               }else {
                 $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
-                $fecha = date("d/m/Y", strtotime($fecha));   
+                $fecha = date("d/m/Y", strtotime($fecha));
                 $busqueda_por='Fecha: '.$fecha;
                 $query='Horario: '.$busqueda_horario_por;
               }
@@ -134,6 +134,12 @@ class InformeController extends Controller
                 foreach($m as $menu){
                   array_push($menus,$menu);
                 }
+                if($paciente->acompananteActual()){
+                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                  foreach($m as $menu){
+                    array_push($menus,$menu);
+                  }
+                }
               }
               $busqueda_por='Pacientes, ';
               $fecha = date("d/m/Y", strtotime($fecha));
@@ -144,6 +150,12 @@ class InformeController extends Controller
                 $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
                 if(!(empty($menu))){
                   array_push($menus,$menu);
+                }
+                if($paciente->acompananteActual()){
+                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                  foreach($m as $menu){
+                    array_push($menus,$menu);
+                  }
                 }
               }
               $busqueda_por='Pacientes, ';

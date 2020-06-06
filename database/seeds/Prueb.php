@@ -81,10 +81,6 @@ class Prueb extends Seeder
       $horario_id=1;
       //$menus=MenuPersona::all();
       $s=array();
-      foreach ($personas as $persona) {
-            echo $persona->camasFecha('2020-06-03');
-
-      }
 
       /*foreach ($menus as $menu) {
         $h_id=$menu->racionDisponible->horario_racion->horario->id;
@@ -96,5 +92,7 @@ class Prueb extends Seeder
           break;
       }*/
     //  return null;
+    $persona=Persona::findById(2);
+    echo $persona->acompanante->sectorFecha('2020-02-03');
     }
 }
