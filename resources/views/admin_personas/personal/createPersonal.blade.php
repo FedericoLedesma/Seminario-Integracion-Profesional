@@ -21,34 +21,53 @@
 
 
     {!!Form::open(['method'=>'get','action'=>'PersonalController@ingresarNuevo'])!!}
-    <div>
-       <div>
-            {!!	Form::label('numero_doc', 'Numero Doc.')!!}
-            {!!	Form::text('numero_doc')!!}
+    <div class="container">
+       <div class="row justify-content-md-center">
+          <div class="col col-lg-3">
+              {!!	Form::label('numero_doc', 'Numero Doc.')!!}
+          </div>
+          <div class="col-sm">
+              <input id="numero_doc" name="numero_doc" type="number" min="20000000" max="99999999" required></input>
+          </div>
       </div>
-       <div>
-            {!!	Form::label('tipo_documento_id', 'Tipo de Documento')!!}
-            @if($tipos_documentos)
-              <select name="tipo_documento_id">
-              <!--	<option selected>Seleccione el Rol</option>validar-->
-            @foreach ($tipos_documentos as $tipos_documento)
-            <!-- Opciones de la lista -->
-              <option value="{{$tipos_documento->id}}" >{{$tipos_documento->name}}</option> <!-- Opci�n por defecto -->
+       <div class="row">
+          <div class="col col-lg-3">
+              {!!	Form::label('tipo_documento_id', 'Tipo de Documento')!!}
+          </div>
+          <div class="col-sm">
+              @if($tipos_documentos)
+                <select name="tipo_documento_id">
+                <!--	<option selected>Seleccione el Rol</option>validar-->
+              @foreach ($tipos_documentos as $tipos_documento)
+              <!-- Opciones de la lista -->
+                <option value="{{$tipos_documento->id}}" >{{$tipos_documento->name}}</option> <!-- Opci�n por defecto -->
 
-            @endforeach
-             </select>
-           @endIf
+              @endforeach
+               </select>
+             @endIf
+          </div>
       </div>
-      <div>
-            {!!	Form::label('name', 'Nombre')!!}
-            {!!	Form::text('name')!!}
-      </div>
-       <div>
+        <div class="row">
+            <div class="col-sm col-lg-3">
+                {!!	Form::label('name', 'Nombre')!!}
+            </div>
+            <div class="col-sm">
+                <input id="name" name="name" type="text" required></input>
+            </div>
+        </div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('apellido', 'Apellido')!!}
-            {!!	Form::text('apellido')!!}
+        </div>
+        <div class="col-sm">
+            <input id="apellido" name="apellido" type="text" required></input>
+        </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('sector_id', 'Sector')!!}
+        </div>
+        <div class="col-sm">
             @if($sectores)
               <select name="sectores" id='sectores'>
               <!--	<option selected>Seleccione el Rol</option>validar-->
@@ -59,34 +78,63 @@
             @endforeach
              </select>
            @endIf
+        </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('direccion', 'Direccion')!!}
-            {!!	Form::text('direccion')!!}
+        </div>
+        <div class="col-sm">
+            <input id="direccion" name="direccion" type="text" required></input>
+        </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('email', 'EMail')!!}
-            {!!	Form::text('email')!!}
+        </div>
+        <div class="col-sm">
+            <input id="email" name="email" type="text" required></input>
+        </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('provincia', 'Provincia')!!}
-            {!!	Form::text('provincia')!!}
+        </div>
+        <div class="col-sm">
+            <input id="provincia" name="provincia" type="text" required></input>
+        </div>
       </div>
-       <div>
+       <div class="row">
+         <div class="col-sm col-lg-3">
             {!!	Form::label('localidad', 'Localidad')!!}
-            {!!	Form::text('localidad')!!}
+         </div>
+         <div class="col-sm">
+             <input id="localidad" name="localidad" type="text" required></input>
+         </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('sexo', 'Sexo')!!}
-            {!!	Form::text('sexo')!!}
+        </div>
+        <div class="col-sm">
+            <input id="sexo" name="sexo" type="text" required></input>
+        </div>
       </div>
-       <div>
+       <div class="row">
+        <div class="col-sm col-lg-3">
             {!!	Form::label('fecha_nac', 'Fecha Nacimiento')!!}
-            {!!Form::date('fecha_nac', \Carbon\Carbon::now()) !!}
+        </div>
+        <div class="col-sm">
+            <input id="fecha_nac" name="fecha_nac" type="date" required value="{{\Carbon\Carbon::now()->toDateString()}}"></input>
+        </div>
       </div>
-      <div>
+      <div class="row">
+       <div class="col-sm col-lg-3">
             {!!	Form::submit('Guardar Persona',['class' => 'btn btn-success'])!!}
+       </div>
+       <div class="col-sm">
             {!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}
+       </div>
       </div>
    </div>
   {!! Form::close() !!}

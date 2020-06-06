@@ -98,11 +98,11 @@ class Personal extends Model
           {return 'Ninguno';}
       }
 
-      public function buscar_por_nombre($nombre){
+      public static function buscar_por_nombre($nombre){
         $all = Persona::buscar_por_nombre_y_apellido($nombre);
         $res = array();
         foreach ($all as $persona) {
-          $personal = static::find($persona->get_id());
+          $personal = static::find($persona['id']);
           if ($personal<>null){
             array_push($res,$personal);
           }
@@ -110,7 +110,7 @@ class Personal extends Model
         return $res;
       }
 
-      public function buscar_por_dni($dni){
+      public static function buscar_por_dni($dni){
         $all = Persona::buscar_por_numero_doc($dni);
         $res = array();
         foreach ($all as $persona) {
@@ -122,7 +122,7 @@ class Personal extends Model
         return $res;
       }
 
-      public function buscar_por_nombre_sector($sector_name){
+      public static function buscar_por_nombre_sector($sector_name){
         $all = static::all();
         $res = array();
         foreach ($all as $personal) {

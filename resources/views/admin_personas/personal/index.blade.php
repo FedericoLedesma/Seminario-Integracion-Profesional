@@ -47,7 +47,7 @@
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
+				 {!!Form::open(['route'=>'personal.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
