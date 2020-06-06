@@ -246,4 +246,11 @@ class RacionesDisponibles extends Model
     public function set_id(int $id){
       $this->id = $id;
     }
+    public function movimientos(){
+      //return $this->hasMany('App\Movimiento');
+
+      return Movimiento::all()->where('racion_disponible_id',$this->id);
+
+
+    }
 }

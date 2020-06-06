@@ -357,10 +357,20 @@ $('.guardarRealizados').click(function(e){
 
 });
 
+$('.btn-agregar').click(function(e){
+	e.preventDefault();
+	localStorage.setItem('racionDisponible',JSON.stringify($(this).data("id")));
+});
+$('.btn-movimientos').click(function(e){
+	e.preventDefault();
+	localStorage.setItem('racionDisponible',JSON.stringify($(this).data("id")));
+	
+});
 $('.guardarStock').click(function(e){
 
 	e.preventDefault();//evita cargar la pagina
-	var racionDisponible=$(this).data("id");
+	//var racionDisponible=$(this).data("id");
+	var racionDisponible=JSON.parse(localStorage.getItem('racionDisponible'));
 	var user=$(this).data("user");
 	var cantidad_stock=document.getElementById("cantidad_stock").value;
 	console.log(racionDisponible);
