@@ -2,45 +2,77 @@
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
-.table{display:table;}
-.theader{
-	display:table-header-group;
-	font-size:1.2em;
+div.blueTable {
+  border: 1px solid #1F78B3;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
 }
-.tbody{display:table-row-group;}
-.tfooter{
-	display:table-footer-group;
-	font-weight:bold;
-	font-size:1.2em;
+.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
 }
-.tr{
-	display:table-row;
+.divTable.blueTable .divTableBody .divTableCell {
+  font-size: 13px;
 }
-.td,.th{
-	display:table-cell;
-	width:120px;
-	height:40px;
-	padding:8px;
-	vertical-align: middle;
+.divTable.blueTable .divTableRow:nth-child(even) {
+  background: #CBD9F5;
 }
-.td{
-	text-align:center;
+.divTable.blueTable .divTableHeading {
+  background: #566CA4;
+  background: -moz-linear-gradient(top, #8091bb 0%, #677aad 66%, #566CA4 100%);
+  background: -webkit-linear-gradient(top, #8091bb 0%, #677aad 66%, #566CA4 100%);
+  background: linear-gradient(to bottom, #8091bb 0%, #677aad 66%, #566CA4 100%);
+  border-bottom: 1px solid #444444;
+}
+.divTable.blueTable .divTableHeading .divTableHead {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #E6F5E4;
+}
+.divTable.blueTable .divTableHeading .divTableHead:first-child {
+  border-left: none;
 }
 
-.th{
-	font-weight:bold;
-	text-align:right;
+.blueTable .tableFootStyle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #4BFFAE;
+  background: #D0E4F5;
+  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  border-top: 2px solid #444444;
 }
-
-.theader .th{
-	text-align:center;
+.blueTable .tableFootStyle {
+  font-size: 14px;
 }
-
-.tr .td:nth-child(8){
-	font-size:1.2em;
-	border-left:1px solid #000;
-	border-right:1px solid #000;
+.blueTable .tableFootStyle .links {
+	 text-align: right;
 }
+.blueTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.blueTable.outerTableFooter {
+  border-top: none;
+}
+.blueTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px;
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
 </style>
 @endsection
 @section('navegacion')
@@ -109,45 +141,41 @@
 		</div>
 	</div>
 
-		<div class="col-md-12 col-md-offset-2">
-			<div class="panel-heading">
-				<div class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
-					<div class="table">
-						<div class="theader">
-							<div class="row">
-								<div class="td">Racion</div>
-								<div class="td">Horario</div>
-								<div class="td">Fecha</div>
-								<div class="td">Stock</div>
-								<div class="td">Restante</div>
-								<div class="td">Accion</div>
-								<div class="td">   -    </div>
-								<div class="td">   -    </div>
+		<div class="col-md-10 col-md-offset-2">
+			<div class="table-responsive">
+				<!--<div class="table table-striped table-hover ">  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+				<div class="divTable blueTable">
+					<div class="divTableHeading">
+						<div class="divTableRow">
+								<div class="divTableHead">Racion</div>
+								<div class="divTableHead">Horario</div>
+								<div class="divTableHead">Fecha</div>
+								<div class="divTableHead">Stock</div>
+								<div class="divTableHead">Restante</div>
+								<div class="divTableHead">Accion</div>
+
 
 							</div>
 						</div>
 
 						@if($racionesDisponibles)
 							@foreach($racionesDisponibles as $racionDisponible)
-						<div class="tbody">
-							<div class="row">
-									<div class="td">{{$racionDisponible->horario_racion->racion->name}}</div>
-									<div class="td">{{$racionDisponible->horario_racion->horario->name}}</div>
-									<div class="td">{{$racionDisponible->fecha()}}</div>
-									<div class="td">{{$racionDisponible->stock_original}}</div>
-									<div class="td">{{$racionDisponible->cantidad_restante}}</div>
+						<div class="divTableBody">
+							<div class="divTableRow">
+									<div class="divTableCell">{{$racionDisponible->horario_racion->racion->name}}</div>
+									<div class="divTableCell">{{$racionDisponible->horario_racion->horario->name}}</div>
+									<div class="divTableCell">{{$racionDisponible->fecha()}}</div>
+									<div class="divTableCell">{{$racionDisponible->stock_original}}</div>
+									<div class="divTableCell">{{$racionDisponible->cantidad_restante}}</div>
 
-									<div class="td"><a href="#" class="btn btn-primary pull-right btn-agregar" data-id="{{$racionDisponible}}" data-toggle="modal" data-target="#create-stock">
+									<div class="divTableCell"><a href="#" class="btn btn-primary pull-right btn-agregar" data-id="{{$racionDisponible}}" data-toggle="modal" data-target="#create-stock">
 											Agregar
-									</a></div>
-									<div class="td"><a href="#" class="btn btn-success pull-right btn-movimientos" data-toggle="modal" data-target="#modal-movimientos-{{$racionDisponible->id}}">
+									</a><a href="#" class="btn btn-success pull-right btn-movimientos" data-toggle="modal" data-target="#modal-movimientos-{{$racionDisponible->id}}">
 											Movimientos
-									</a></div>
-									<div class="td"><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $racionDisponible }}">Eliminar</button></div>
+									</a><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $racionDisponible }}">Eliminar</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					@if($racionDisponible->movimientos())
 						<div class="modal fade" id="modal-movimientos-{{$racionDisponible->id}}">
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
@@ -155,17 +183,19 @@
 										<button type="button" class="close" data-dismiss="modal">
 											<span>×</span>
 										</button>
+
 										<h4>Movimientos  de {{$racionDisponible->horario_racion->racion->name}} </h4>
 									</div>
+									@if($racionDisponible->movimientos())
 									<div class="modal-movimiento-body">
 										<div id="p_body">
 											<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 												<thead >
-												 	<tr>
+													<tr>
 														<th scope="col">Racion</th>
 														<th scope="col">Horario</th>
 														<th scope="col">Fecha</th>
-													 	<th scope="col">Tipo de Mov.</th>
+														<th scope="col">Tipo de Mov.</th>
 														<th scope="col">Cantidad</th>
 														<th scope="col">ID Personal Responsable</th>
 													</tr>
@@ -187,15 +217,18 @@
 											</table>
 										</div>
 									</div>
+									@endif
 								</div>
 							</div>
 						</div>
-						@endif
+
+
+
 					@endforeach
 				@endif
 			</div>
 		</div>
-	</div>
+<!--	</div>-->
 </div>
   <div class="modal fade" id="create-stock">
     <div class="modal-dialog">
