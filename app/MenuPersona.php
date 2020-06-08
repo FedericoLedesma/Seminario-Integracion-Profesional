@@ -237,7 +237,7 @@ class MenuPersona extends Model
     $racion = Personal::findById($this->personal_id);
     return $racion;
   }
-
+  public function get_id(){return $this->id;}
   public function get_racion_disponible(){return RacionesDisponibles::find($this->get_racion_disponible_id());}
 
   public function get_horario(){return $this->get_racion_disponible()->get_horario(); }
@@ -497,5 +497,9 @@ class MenuPersona extends Model
   }
   public function persona(){
     return $this->belongsTo('App\Persona', 'persona_id');
+  }
+
+  public function is_in_date_range($days){
+    return $this->get_racion_disponible()->is_in_date_range($days);
   }
 }

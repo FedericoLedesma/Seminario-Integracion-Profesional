@@ -25,8 +25,8 @@ class CreatePacientesCamasTable extends Migration
 			#Creo que la siguiente key haría que un paciente pudiera estar internado en varias camas al mismo tiempo, según el modelo
             #$table->unique(['paciente_id','cama_id','fecha'],'pacientes_camas_paciente_id_fecha_unique');
 
-			$table->unique(['paciente_id','fecha'],'pacientes_camas_unique_paciente_id_fecha');
-			$table->unique(['cama_id','fecha'],'pacientes_camas_unique_cama_id_fecha');
+			#$table->unique(['paciente_id','fecha'],'pacientes_camas_unique_paciente_id_fecha');
+			#$table->unique(['cama_id','fecha'],'pacientes_camas_unique_cama_id_fecha');
 
             $table->foreign('paciente_id')
                 ->references('id')

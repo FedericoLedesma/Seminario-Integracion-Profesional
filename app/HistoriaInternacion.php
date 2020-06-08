@@ -163,7 +163,7 @@ class HistoriaInternacion extends Model
 
   public function add_acompanante(Persona $persona){
     $acom = new Acompanante([
-      'acompanante_id'=>$persona->get_id(),
+      'persona_id'=>$persona->get_id(),
       'paciente_id'=>$this->get_paciente_id(),
       'fecha'=>$this->get_fecha_ingreso(),
     ]);
@@ -195,5 +195,21 @@ class HistoriaInternacion extends Model
   }
 
   public function rehubicar_paciente($habitacion){return $this->get_paciente()->rehubicar_paciente($habitacion);}
+
+  public static function get_historial_activo_por_paciente_id($paciente_id){
+    return static::where('paciente_id','=',$paciente_id)
+      ->whereNull('fecha_egreso')
+      ->get()->first();
+  }
+
+  public function get_paciente_camas(){
+    if ($this->get_fecha_egreso()==null){
+      $f_egreso=Carbon::now();
+    }
+    else{
+      $f_egreso=$this->get_fecha_egreso();
+    }
+    return $this->get_paciente()->get_paciente_cama_entre_fechas($this->get_fecha_ingreso(),$f_egreso);
+  }
 
 }

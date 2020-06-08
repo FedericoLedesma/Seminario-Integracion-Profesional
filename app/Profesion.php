@@ -27,4 +27,7 @@ class Profesion extends Model
       ->orderBy('id', 'asc');
     }return null;
   }
+
+  public function get_id(){return $this->id;}
+  public function get_name(){return $this->name;}
 }

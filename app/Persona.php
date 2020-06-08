@@ -294,6 +294,28 @@ class Persona extends Model
         return $raciones;
       }
 
+      public function get_historial_menues($dias){
+        Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+        if ($dias==null){
+          $dias=30;
+        }
+        $menues = array();
+        $sub = MenuPersona::#select(DB::raw('racion_id'))->
+          where('persona_id','=',$this->id)->
+          #where('fecha','>=',Carbon::now()->subDays(30))
+          orderBy('racion_disponible_id','DESC')->
+          #->groupBy('racion_id')
+          get();
+        foreach ($sub as $menu) {
+          Log::Debug($menu->get_fecha().' -> '.$menu->is_in_date_range($dias));
+          if ($menu->is_in_date_range($dias)==true){
+            array_push($menues,$menu);
+          }
+        }
+        Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
+        return $menues;
+      }
+
   /**
    métodos estáticos
    */

@@ -136,14 +136,15 @@ class Acompanante extends Model
   public static function get_acompanante_actual($paciente_id){
     $acompanante = static::where('paciente_id','=',$paciente_id)
       ->whereNull('fecha_fin')
-      ->orderBy('fecha','DESC')->get();
+      ->orderBy('fecha','DESC')
+	  ->get();
     if ($acompanante->count()>0){
       return $acompanante->first();
     }
     return null;
   }
 
-  public function get_acompanante_id(){return $this->acompanante_id;}
+  public function get_acompanante_id(){return $this->persona_id;}
   public function get_persona(){
     Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
     $persona = Persona::find($this->get_acompanante_id());

@@ -80,4 +80,9 @@ class PacienteController extends Controller
         ]);
     }
   }
+
+  public function historial($id){
+    $paciente = Paciente::find($id);
+    return view('admin_personas.pacientes.historial',compact('paciente'));
+  }
 }

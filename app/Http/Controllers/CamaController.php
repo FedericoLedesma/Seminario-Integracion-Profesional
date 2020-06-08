@@ -16,11 +16,11 @@ class CamaController extends Controller
      */
      public function __construct()
      {
-       /*$this->middleware(['permission:alta_sectores'],['only'=>['create','store']]);
-       $this->middleware(['permission:baja_sectores'],['only'=>['destroy']]);
-       $this->middleware(['permission:modificacion_sectores'],['only'=>['edit']]);
-       $this->middleware(['permission:ver_sectores'],['only'=>['index']]);
-        $this->middleware('auth');*/
+       $this->middleware(['permission:alta_camas'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_camas'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_camas'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_camas'],['only'=>['index']]);
+        $this->middleware('auth');
      }
     public function index(Request $request)
     {

@@ -14,16 +14,18 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('paciente', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+          $table->unsignedBigInteger('id');
 
-            $table->foreign('id')
-                ->references('id')
-                ->on('persona')
-                ->onDelete('cascade');
+          $table->foreign('id')
+              ->references('id')
+              ->on('persona')
+              ->onDelete('cascade');
 
-            $table->timestamps();
+          #$table->unsignedBigInteger('matricula')->nullable($value = true);
 
-            $table->primary(['id'], 'primary_key_paciente');
+          $table->timestamps();
+
+          $table->primary(['id'], 'primary_key_paciente');
         });
     }
 

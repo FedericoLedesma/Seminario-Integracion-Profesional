@@ -16,11 +16,12 @@ class HabitacionController extends Controller
      */
      public function __construct()
      {
-       /*$this->middleware(['permission:alta_sectores'],['only'=>['create','store']]);
+       $this->middleware(['permission:alta_sectores'],['only'=>['create','store']]);
        $this->middleware(['permission:baja_sectores'],['only'=>['destroy']]);
        $this->middleware(['permission:modificacion_sectores'],['only'=>['edit']]);
        $this->middleware(['permission:ver_sectores'],['only'=>['index']]);
-        $this->middleware('auth');*/
+       $this->middleware(['permission:ver_historial'],['only'=>['historial']]);
+        $this->middleware('auth');
      }
     public function index(Request $request)
     {
@@ -150,5 +151,19 @@ class HabitacionController extends Controller
           'success' => 'No se pudo eliminar la habitacion !'
         ]);
       }
+    }
+
+    public function historial($id){
+      $habitacion = Habitacion::find($id);
+      $pacientes = $habitacion->get_pacientes_internados();
+      Log::debug('Buscando pacientes activos en la habitación: '.$habitacion);
+      foreach ($pacientes as $paciente) {
+        Log::debug('Se encontró un paciente: '.$paciente);
+        $historial = $paciente->get_historial_menues(null);
+        foreach ($historial as $menu) {
+          Log::debug('Se encontró un menu: '.$menu);
+        }
+      }
+      return view('admin_sectores.habitacion.historial',compact('habitacion','pacientes'));
     }
 }

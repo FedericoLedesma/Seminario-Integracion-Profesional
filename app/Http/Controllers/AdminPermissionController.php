@@ -61,7 +61,8 @@ class AdminPermissionController extends Controller
         $user=Auth::user();
         $acciones=['alta','baja','modificacion','ver'];
         $tablas=['usuarios','roles','patologias','personas','raciones','alimentos',
-        'tipos-patologias','raciones-disponibles','sectores','historial','menu'];
+        'tipos-patologias','raciones-disponibles','sectores','historial','menu','camas',
+        'profesion','personal'];
         if ($user->can('alta_permisos')){
     	     return view('admin.permisos.create',compact('acciones','tablas'));
          }

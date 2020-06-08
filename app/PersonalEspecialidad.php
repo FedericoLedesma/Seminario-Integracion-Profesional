@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class PersonalEspecialidad extends Model
 {
@@ -38,6 +39,27 @@ class PersonalEspecialidad extends Model
         return $query->where('especialidad_id',$especialidad_id)
         ->orderBy('personal_id', 'asc');
       }return null;
+    }
+
+    public static function buscar_por_personal_id($persona_id){
+      return static::where('personal_id','=',$persona_id)->get();
+    }
+
+    public function get_profesion(){return Profesion::find($this->especialidad_id);}
+
+    public static function create_by_personal_profesion($personal,$profesion){
+      $new = new PersonalEspecialidad([
+        'personal_id'=>$personal->get_id(),
+        'profesion_id'=>$profesion->get_id(),
+        'fecha'=>Carbon::now(),
+      ]);
+      $new->save();
+    }
+
+    public static function destroy_by_personal_profesion($personal,$profesion){
+      static::where('personal_id','=',$personal->get_id())
+        ->where('profesion_id','=',$profesion->get_id())
+        ->delete();
     }
 
 }

@@ -184,4 +184,17 @@ class Habitacion extends Model
       }
       return $res;
     }
+
+    public function get_historico_camas_paciente(){
+      $res = array();
+      $camas = $this->get_camas();
+      foreach ($camas as $cama) {
+        $subtotal = $cama->get_historico_camas_paciente();
+        foreach ($subtotal as $pac_cam) {
+          array_push($res,$pac_cam);
+        }
+      }
+      return $res;
+    }
+
 }

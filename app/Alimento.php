@@ -64,4 +64,8 @@ class Alimento extends Model
   public function set_name($name){
     $this->name = $name;
   }
+
+  public static function buscar_like_name($name){
+    return static::where('name','LIKE','%'.$name.'%')->get();
+  }
 }

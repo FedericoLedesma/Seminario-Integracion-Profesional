@@ -119,7 +119,7 @@ class PacienteCama extends Model
       #return $res;
     #}
 
-    public function get_fecha_fin(){return $this->fecha_fin;}
+    public function get_fecha_egreso(){return $this->fecha_fin;}
     public static function cama_is_desocupada($cama_id){
       $camas = static::where('cama_id','=',$cama_id)
 	  ->where('fecha_fin','=',null)
@@ -180,6 +180,49 @@ class PacienteCama extends Model
         'cama_id'=>$cama->get_id(),
       ]);
       $new->save();*/
-      $habitacion->ingresar_paciente($paciente_id,Carbon::now());
+      $paciente = Paciente::find($paciente_id);
+      $habitacion->ingresar_paciente($paciente,Carbon::now());
+    }
+
+    public static function get_ultima_fecha_ingreso_por_paciente($paciente,$cama){
+      $pac_cam = static::where('paciente_id','=',$paciente->get_id())
+        ->where('cama_id','=',$cama->get_id())
+        ->whereNull('fecha_fin')
+        ->get()->first();
+      return $pac_cam->fecha;
+    }
+
+    public function get_fecha_ingreso(){return $this->fecha;}
+
+    public function get_persona(){
+      Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+      $persona = Persona::find($this->get_id());
+    	Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' con la persona: '.$persona);
+      return $persona;
+    }
+    public function get_name(){return $this->get_paciente()->get_name();}
+    public function get_apellido(){return $this->get_paciente()->get_apellido();}
+    public function get_numero_doc(){return $this->get_paciente()->get_numero_doc();}
+    public function get_observacion(){return $this->get_paciente()->get_observacion();}
+    public function get_direccion(){return $this->get_paciente()->get_direccion();}
+    public function get_email(){return $this->get_paciente()->get_email();}
+    public function get_provincia(){return $this->get_paciente()->get_provincia();}
+    public function get_localidad(){return $this->get_paciente()->get_localidad();}
+    public function get_sexo(){return $this->get_paciente()->get_sexo();}
+    public function get_fecha_nac(){return $this->get_paciente()->get_fecha_nac();}
+    public function get_tipo_documento_id(){return $this->get_paciente()->get_tipo_documento_id();}
+    public function get_tipo_documento(){return $this->get_paciente()->get_tipo_documento();}
+
+
+    public static function all_inactive_with_cama_id($cama_id){
+      return static::where('cama_id','=',$cama_id)->whereNotNull('fecha_fin')->get();
+    }
+
+    public static function get_paciente_cama_entre_fechas($f_ini,$f_fin,$paciente){
+      return static::where([['fecha','>=',$f_ini],['paciente_id','=',$paciente->get_id()]])->
+        orWhere([['fecha_fin','<=',$f_fin],['paciente_id','=',$paciente->get_id()]])->
+        orderBy('fecha','DESC')->
+        orderBy('fecha_fin','ASC')->
+        get();
     }
 }

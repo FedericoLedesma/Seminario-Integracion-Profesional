@@ -154,7 +154,8 @@ class AlimentoController extends Controller
                   ->get();
                 break;
               case 'busqueda_name':
-                return  $alimentos=Alimento::findByName($query)->get();
+                #return  $alimentos=Alimento::findByName($query)->get();
+                return $alimentos = Alimento::buscar_like_name($query);
                 break;
               default:
                 return  $alimentos=Alimento::all();

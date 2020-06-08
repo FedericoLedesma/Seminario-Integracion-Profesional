@@ -137,4 +137,12 @@ class Cama extends Model
         return false;
       }
     }
+
+    public function get_habitacion_ultima_fecha_ingreso($paciente){
+      return PacienteCama::get_ultima_fecha_ingreso_por_paciente($paciente,$this);
+    }
+
+    public function get_historico_camas_paciente(){
+      return PacienteCama::all_inactive_with_cama_id($this->get_id());
+    }
 }

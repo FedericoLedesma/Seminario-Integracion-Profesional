@@ -336,7 +336,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="{{ route('historialInternacion.index') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Ingreso de pacientes</p>
+              <p>Historial de pacientes</p>
             </a>
           </li>
           <!-- <li class="nav-item">
@@ -377,6 +377,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <p>Personal</p>
             </a>
           </li>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('profesion.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Profesión</p>
+          </a>
+        </li>
 
         </ul>
        </li>

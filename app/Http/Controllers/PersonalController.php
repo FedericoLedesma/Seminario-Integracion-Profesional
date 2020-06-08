@@ -15,12 +15,12 @@ class PersonalController extends Controller
 {
   public function __construct()
   {
-    /*$this->middleware(['permission:alta_personal'],['only'=>['create','store']]);
+    $this->middleware(['permission:alta_personal'],['only'=>['create','store']]);
     $this->middleware(['permission:alta_personal'],['only'=>['create','createPaciente']]);
     $this->middleware(['permission:baja_personal'],['only'=>['destroy']]);
     $this->middleware(['permission:modificacion_personal'],['only'=>['edit']]);
     $this->middleware(['permission:modificacion_personal'],['only'=>['alta']]);
-    $this->middleware(['permission:ver_personal'],['only'=>['index']]);*/
+    $this->middleware(['permission:ver_personal'],['only'=>['index']]);
     $this->middleware('auth');
   }
 
@@ -139,6 +139,12 @@ class PersonalController extends Controller
       $personal->reubicar_personal($sector);
       $personas_no_internadas = Personal::get_no_personal();
         return $this->index($request);
+    }
+
+    public function showProfesiones($personal_id){
+      $personal = Personal::find($personal_id);
+      $profesiones = $personal->get_profesiones();
+      return view('admin_personas.personal.profesiones',compact('profesiones','personal'));
     }
 
     public function sucess(){

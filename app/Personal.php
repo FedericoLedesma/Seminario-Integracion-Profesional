@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\PersonalSector;
 use App\Persona;
+use App\PersonalEspecialidad;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
@@ -159,4 +160,22 @@ class Personal extends Model
         ]);
         $per_sec->save();
       }
+
+      public function get_profesiones(){
+        $res = array();
+        $all = PersonalEspecialidad::buscar_por_personal_id($this->get_id());
+        foreach ($all as $per_esp) {
+          array_push($res,$per_esp->get_profesion());
+        }
+        return $res;
+      }
+
+      public function add_profesion($profesion){
+        PersonalEspecialidad::create_by_personal_profesion($this,$profesion);
+      }
+
+      public function del_profesion($profesion){
+        PersonalEspecialidad::destroy_by_personal_profesion($this,$profesion);
+      }
+
 }

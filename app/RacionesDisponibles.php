@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Horario;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+
 class RacionesDisponibles extends Model
 {
     protected $table = "racion_disponible";
@@ -252,5 +255,14 @@ class RacionesDisponibles extends Model
       return Movimiento::all()->where('racion_disponible_id',$this->id);
 
 
+    }
+
+    public function is_in_date_range($days){
+      $c = static::where('fecha','>=',Carbon::now()->subDays($days))->
+        where('id','=',$this->get_id())->count();
+      if ($c>0){
+        return true;
+      }
+      return false;
     }
 }

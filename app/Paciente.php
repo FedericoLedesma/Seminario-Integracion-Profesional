@@ -146,6 +146,7 @@ class Paciente extends Model
   public function get_sector_actual_name(){return $this->get_cama()->get_sector_name();}
   public function get_habitacion_actual(){return $this->get_cama()->get_habitacion();}
   public function get_habitacion_actual_name(){return $this->get_cama()->get_habitacion_name();}
+  public function get_habitacion_actual_fecha_ingreso(){return $this->get_cama()->get_fecha_ingreso();}
 
   public function get_historial_sectores($fecha_inicio, $fecha_fin){
     return PacienteCama::buscar_sectores_por_paciente_entre_fechas($fecha_inicio, $fecha_fin, $this);
@@ -326,4 +327,10 @@ class Paciente extends Model
     $this->dar_alta_acompanante();
     PacienteCama::dar_baja_por_paciente($this->get_id());
   }
+
+  public function get_historial_internacion_reciente(){return HistoriaInternacion::get_historial_activo_por_paciente_id($this->get_id());}
+  public function get_historial_menues($dias){return $this->get_persona()->get_historial_menues($dias);}
+  public function get_historial_internacion_activo(){return HistoriaInternacion::get_historial_activo_por_paciente_id($this->get_id());}
+  public function get_paciente_cama_entre_fechas($f_ini,$f_fin){return PacienteCama::get_paciente_cama_entre_fechas($f_ini,$f_fin,$this);}
+  public function get_historiales_paciente_cama_activos(){return $this->get_historial_internacion_activo()->get_paciente_camas();}
 }
