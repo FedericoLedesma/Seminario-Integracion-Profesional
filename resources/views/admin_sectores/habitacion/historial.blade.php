@@ -19,7 +19,7 @@
 	   @include('layouts.error')
 	  	@if($habitacion)
 	    <div class="table-responsive">
-	    <h2>[Sector {{$habitacion->get_sector_name()}}] Habitacion:  {{$habitacion->name}}</h2>
+	    <h2>[{{$habitacion->get_sector_name()}}] Habitacion:  {{$habitacion->name}}</h2>
 	    <h4> Pacientes actuales </h4>
       <div class="container">
         <div class="row">
@@ -48,7 +48,7 @@
               <button class="btn btn-info" data-toggle="collapse" data-target="#dieta{{$paciente->get_id()}}">Ver dieta</button>
             </div>
             <div class="col-sm">
-              {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_reciente()],['class' => 'btn btn-warning'], $attributes = [])!!}
+              {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
             </div>
         </div>
         <div id="dieta{{$paciente->get_id()}}" class="collapse">

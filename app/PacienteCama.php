@@ -225,4 +225,6 @@ class PacienteCama extends Model
         orderBy('fecha_fin','ASC')->
         get();
     }
+
+    public function get_habitacion_id(){$this->get_cama()->get_habitacion_id();}
 }

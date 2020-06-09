@@ -333,4 +333,7 @@ class Paciente extends Model
   public function get_historial_internacion_activo(){return HistoriaInternacion::get_historial_activo_por_paciente_id($this->get_id());}
   public function get_paciente_cama_entre_fechas($f_ini,$f_fin){return PacienteCama::get_paciente_cama_entre_fechas($f_ini,$f_fin,$this);}
   public function get_historiales_paciente_cama_activos(){return $this->get_historial_internacion_activo()->get_paciente_camas();}
+  public function get_acompanantes_historial_activo(){return $this->get_historial_internacion_activo()->get_acompanantes();}
+  public function get_acompanante_entre_fechas($f_ini,$f_fin){return Acompanante::get_entre_fechas_por_paciente($f_ini,$f_fin,$this);}
+  public function get_acompanantes_historial_activo_id(){return $this->get_historial_internacion_activo()->get_id();}
 }

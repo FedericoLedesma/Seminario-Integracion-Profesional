@@ -185,4 +185,27 @@ class Acompanante extends Model
   public function habitacionFecha($fecha){
     return $this->paciente->camasFecha($fecha)->habitacion;
   }
+
+  public static function get_entre_fechas_por_paciente($f_ini,$f_fin,$paciente){
+    $res = array();
+    if ($f_fin==null){
+      $all = static::where('fecha','>=',$f_ini)->
+        orWhereNull('fecha_fin')->
+        where('paciente_id','=',$paciente->get_id())->
+        orderBy('fecha_fin','ASC')->
+        get();
+    }
+    else{
+      $all = static::where('fecha','>=',$f_ini)->
+        where('paciente_id','=',$paciente->get_id())->
+        where('fecha','<=',$f_ini)
+        ->get();
+    }
+    foreach ($all as $acomp) {
+      array_push($res,$acomp);
+    }
+    return $res;
+  }
+
+  public function get_fecha_egreso(){return $this->fecha_fin;}
 }

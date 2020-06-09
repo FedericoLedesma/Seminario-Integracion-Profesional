@@ -212,4 +212,6 @@ class HistoriaInternacion extends Model
     return $this->get_paciente()->get_paciente_cama_entre_fechas($this->get_fecha_ingreso(),$f_egreso);
   }
 
+  public function get_acompanantes(){return $this->get_paciente()->get_acompanante_entre_fechas($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
+
 }
