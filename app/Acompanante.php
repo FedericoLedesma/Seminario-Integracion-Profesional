@@ -208,4 +208,8 @@ class Acompanante extends Model
   }
 
   public function get_fecha_egreso(){return $this->fecha_fin;}
+
+  public static function get_por_persona($persona){
+    return static::where('persona_id','=',$persona->get_id())->get();
+  }
 }

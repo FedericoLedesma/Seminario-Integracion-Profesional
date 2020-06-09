@@ -197,21 +197,38 @@ class HistoriaInternacion extends Model
   public function rehubicar_paciente($habitacion){return $this->get_paciente()->rehubicar_paciente($habitacion);}
 
   public static function get_historial_activo_por_paciente_id($paciente_id){
-    return static::where('paciente_id','=',$paciente_id)
+    $res = static::where('paciente_id','=',$paciente_id)
       ->whereNull('fecha_egreso')
-      ->get()->first();
+      ->get();
+    if ($res->count()>0){
+      return $res->first();
+    }
+    else {
+      return null;
+    }
   }
 
   public function get_paciente_camas(){
-    if ($this->get_fecha_egreso()==null){
-      $f_egreso=Carbon::now();
-    }
-    else{
+    #if ($this->get_fecha_egreso()==null){
+      #$f_egreso=Carbon::now();
+    #}
+    #else{
       $f_egreso=$this->get_fecha_egreso();
-    }
+    #}
     return $this->get_paciente()->get_paciente_cama_entre_fechas($this->get_fecha_ingreso(),$f_egreso);
   }
 
   public function get_acompanantes(){return $this->get_paciente()->get_acompanante_entre_fechas($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
+
+  public static function get_historico_por_paciente($paciente){
+    $res = static::where('paciente_id','=',$paciente->get_id())->
+      whereNotNull('fecha_egreso')->
+      orderBy('fecha_ingreso','DESC')->
+      get();
+    if ($res==null){
+      $res = array();
+    }
+    return $res;
+  }
 
 }

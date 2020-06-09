@@ -45,10 +45,14 @@ class PacienteCama extends Model
 
     public static function buscar_ultima_cama_ocupada_por_paciente($id_paciente){
       Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__.' ID paciente: '.$id_paciente);
-      $res = static::where('paciente_id','=',$id_paciente)
-        ->orderBy('fecha', 'desc')
-        ->get()
-        ->first();
+      $res = static::where('paciente_id','=',$id_paciente)->
+        whereNull('fecha_fin')->get()->first();
+      if ($res==null){
+        $res = static::where('paciente_id','=',$id_paciente)
+          ->orderBy('fecha', 'desc')
+          ->get()
+          ->first();
+      }
       Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' || resultado: '.$res);
       return $res;
     }
@@ -219,11 +223,29 @@ class PacienteCama extends Model
     }
 
     public static function get_paciente_cama_entre_fechas($f_ini,$f_fin,$paciente){
-      return static::where([['fecha','>=',$f_ini],['paciente_id','=',$paciente->get_id()]])->
-        orWhere([['fecha_fin','<=',$f_fin],['paciente_id','=',$paciente->get_id()]])->
+      Log::debug('Fecha inicio: '.$f_ini);
+      Log::debug('Fecha fin: '.$f_fin);
+      Log::debug('ID Paciente: '.$paciente->get_id());
+      $res = array();
+      if ($f_fin==null){
+        array_push($res,static::where('fecha','>=',$f_ini)->
+          where('paciente_id','=',$paciente->get_id())->
+          whereNull('fecha_fin')->
+          orderBy('fecha','DESC')->
+          get()->first());
+        $f_fin = Carbon::now();
+      }
+      $sub = static::where('fecha','>=',$f_ini)->
+        where('paciente_id','=',$paciente->get_id())->
+        where('fecha_fin','<=',$f_fin)->
+        #orWhere([['fecha_fin','<=',$f_fin],['paciente_id','=',$paciente->get_id()]])->
         orderBy('fecha','DESC')->
         orderBy('fecha_fin','ASC')->
         get();
+      foreach ($sub as $pac_cam) {
+        array_push($res,$pac_cam);
+      }
+      return $res;
     }
 
     public function get_habitacion_id(){$this->get_cama()->get_habitacion_id();}

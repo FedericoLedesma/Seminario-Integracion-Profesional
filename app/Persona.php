@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\RacionesDisponibles;
 use App\Racion;
 use App\MenuPersona;
+use App\Acompanante;
 use Illuminate\Support\Facades\Log;
 
 class Persona extends Model
@@ -426,4 +427,6 @@ class Persona extends Model
   public function acompanante(){
     return $this->hasOne('App\Acompanante');
   }
+
+  public function get_acompanantes_desde_persona(){Acompanante::get_por_persona($this);}
 }

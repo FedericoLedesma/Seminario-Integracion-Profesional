@@ -336,4 +336,6 @@ class Paciente extends Model
   public function get_acompanantes_historial_activo(){return $this->get_historial_internacion_activo()->get_acompanantes();}
   public function get_acompanante_entre_fechas($f_ini,$f_fin){return Acompanante::get_entre_fechas_por_paciente($f_ini,$f_fin,$this);}
   public function get_acompanantes_historial_activo_id(){return $this->get_historial_internacion_activo()->get_id();}
+  public function get_historico_internacion(){return HistoriaInternacion::get_historico_por_paciente($this);}
+  public function get_like_paciente_list(){return $this->get_persona()->get_acompanantes_desde_persona();}
 }
