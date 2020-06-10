@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Paciente;
 use Carbon\Carbon;
 use App\Acompanante;
+use App\Informes\InformeRacion;
 
 class HistoriaInternacion extends Model
 {
@@ -230,5 +231,11 @@ class HistoriaInternacion extends Model
     }
     return $res;
   }
+
+  public function generar_informe_individual(){
+    $conjunto = $this->get_menues_consumidos();
+    return InformeRacion::create_informe_racion_entre_fechas($conjunto,$this->get_fecha_ingreso(),$this->get_fecha_egreso());
+  }
+  public function get_menues_consumidos(){return $this->get_paciente()->get_menues_entre_fechas($this->get_fecha_ingreso(),$this->get_fecha_egreso());}
 
 }

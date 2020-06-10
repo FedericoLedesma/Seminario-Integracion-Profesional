@@ -8,6 +8,7 @@ use App\Persona;
 use App\PacienteCama;
 use Illuminate\Support\Facades\Log;
 use App\Acompanante;
+use App\MenuPersona;
 
 class Paciente extends Model
 {
@@ -338,4 +339,22 @@ class Paciente extends Model
   public function get_acompanantes_historial_activo_id(){return $this->get_historial_internacion_activo()->get_id();}
   public function get_historico_internacion(){return HistoriaInternacion::get_historico_por_paciente($this);}
   public function get_like_paciente_list(){return $this->get_persona()->get_acompanantes_desde_persona();}
+  public function historial_activo_generar_informe(){
+    Log::Debug('Dentro de: '.__CLASS__.' || método: '.__FUNCTION__);
+    if ($this->get_historial_internacion_activo()==null){
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' con nulo');
+      return null;
+    }else{
+      Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__.' con historial generado');
+      return $this->get_historial_internacion_activo()->generar_informe_individual();
+    }
+  }
+  public function get_menues_entre_fechas($f_ini,$f_fin){return MenuPersona::get_menues_por_paciente_entre_fechas($this,$f_ini,$f_fin);}
+  public function historial_activo_generar_informe_get_renglones(){
+    $c = $this->historial_activo_generar_informe();
+    if ($c==null){
+      return null;
+    }
+    return $c->get_lista();
+  }
 }

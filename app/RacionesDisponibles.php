@@ -265,4 +265,15 @@ class RacionesDisponibles extends Model
       }
       return false;
     }
+
+    public static function buscar_entre_fechas($f_ini,$f_fin){
+      Log::debug('Buscando disponibilidades entre fechas');
+      Log::debug('Parámetros: 1-'.$f_ini.' || 2-'.$f_fin);
+      if ($f_fin==null){
+        return static::where('fecha','>=',$f_ini)->get();
+      }
+      return static::where('fecha','>=',$f_ini)->
+        where('fecha','<=',$f_fin)->
+        get();
+    }
 }

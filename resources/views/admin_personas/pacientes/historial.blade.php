@@ -24,6 +24,8 @@
       <button class="btn btn-info" data-toggle="collapse" data-target="#historial_actual">Internación actual</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_historico">Histórico</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_acompanhamiento">Acompañamiento</button>
+      <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Resumen dieta</button>
+      <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Dieta</button>
       <div class="collapse" id="historial_actual">
     	  <h4> Historial actual </h4>
         @if($paciente->get_historial_internacion_activo()==null)
@@ -214,6 +216,48 @@
         @endif
       </div>
      </div><!-- Histórico -->
+
+     <div class="collapse" id="resumen_dieta">
+         @if($paciente->historial_activo_generar_informe()==null)
+           No hay consumiciones en su internación actual.
+         @else
+            <h3>Resumen dieta</h3>
+            <div class="row">
+                <div class="col-md-2">
+                   <label> Ración </label>
+                </div>
+                <div class="col-md-2">
+                  <label> Cantidad </label>
+                </div>
+                <div class="col-md-2">
+                  <label> Estado </label>
+                </div>
+                <div class="col-md-2">
+                  <label> Acciones disponibles </label>
+                </div>
+            </div><!--  Título-->
+            @foreach($paciente->historial_activo_generar_informe_get_renglones() as $informe)
+            <div class="row">
+                <div class="col-md-2">
+                   <label> {{$informe->get_racion_name()}} </label>
+                </div>
+                <div class="col-md-2">
+                  <label> {{$informe->get_cantidad()}} </label>
+                </div>
+                <div class="col-md-2">
+                  @if($informe->is_realizado()==true)
+                    <label> Finalizado </label>
+                  @else
+                    <label> No finalizado </label>
+                  @endif
+                </div>
+                <div class="col-md-2">
+                  <label> - </label>
+                </div>
+            </div><!--  Título-->
+            @endforeach
+        @endif
+     </div> <!-- Resumen dieta-->
 
 @endif
 @endsection

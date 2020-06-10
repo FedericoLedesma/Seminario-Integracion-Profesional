@@ -5,6 +5,7 @@ namespace App\Informes;
 use App\Informes\InformeRacion_cantidad_de_raciones;
 use App\Racion;
 use Illuminate\Support\Facades\Log;
+use App\Horario;
 
 class InformeRacion
 {
@@ -22,6 +23,11 @@ class InformeRacion
   public static function create_informe_racion($conjunto,$fecha_inicial, $fecha_final, $horario_inicial, $horario_final)
   {
     Log::debug('Creando un informe ración');
+    Log::debug('Se recibió el conjunto:');
+    foreach ($conjunto as $x) {
+      Log::debug($x);
+    }
+    Log::debug('Fin del conjunto:');
     $informe = new InformeRacion;
     $informe->set_fecha_inicio($fecha_inicial);
     $informe->set_fecha_final($fecha_final);
@@ -139,5 +145,13 @@ class InformeRacion
         }
     }
     return $var;
-}
+  }
+
+  public static function create_informe_racion_entre_fechas($conjunto,$f_ini,$f_fin){
+    $horarios = Horario::all();
+    $h_ini = $horarios->min('id');
+    $h_fin = $horarios->max('id');
+    return static::create_informe_racion($conjunto,$f_ini,$f_fin,$h_ini,$h_fin);
+  }
+
 }

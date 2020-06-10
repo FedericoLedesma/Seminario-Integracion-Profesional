@@ -467,6 +467,25 @@ class MenuPersona extends Model
     return InformeRacion::create_informe_racion($conjunto,$fecha_inicial, $fecha_final, $horario_inicial, $horario_final);
   }
 
+  public static function get_menues_por_paciente_entre_fechas($paciente,$f_ini,$f_fin){
+    $disponibilidades = RacionesDisponibles::buscar_entre_fechas($f_ini,$f_fin);
+    Log::debug('Se recibió '.$paciente);
+    $all = static::where('persona_id','=',$paciente->get_id())->get();
+    $res = array();
+    foreach ($all as $menu) {
+      Log::debug('Analizando menu: '.$menu);
+      foreach ($disponibilidades as $dis_rac) {
+        Log::debug('Disponibilidad: '.$dis_rac);
+        if ($menu->get_racion_disponible_id()==$dis_rac->get_id()){
+          array_push($res,$menu);
+        }
+      }
+      Log::Debug('Fin de análisis');
+    }
+    return $res;
+    #return InformeRacion::create_informe_racion_entre_fechas($conjunto,$fecha_inicial, $fecha_final);
+  }
+
   public static function set_realizado_by_id($fecha,$horario,$racion,bool $valor){
     static::
       where('fecha','=',$fecha)->
@@ -502,4 +521,7 @@ class MenuPersona extends Model
   public function is_in_date_range($days){
     return $this->get_racion_disponible()->is_in_date_range($days);
   }
+
+
+
 }
