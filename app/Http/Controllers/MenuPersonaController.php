@@ -24,6 +24,11 @@ class MenuPersonaController extends Controller
     public function index(Request $request)
     {
       Log::info($request);
+      $user=Auth::user();
+      $buscar_desde_hasta=$request->get('buscar_desde_hasta');
+      Log::info($buscar_desde_hasta);
+      $fecha_hasta=$request->get('fecha_hasta');
+      Log::info('$fecha_hasta');
       $query=null;
       $busqueda_por=null;
       $fecha=$request->get('fecha');
@@ -36,13 +41,31 @@ class MenuPersonaController extends Controller
         switch ($busqueda_persona_por){
           case 'busqueda_todos':
               if($busqueda_horario_por==0){
-                $menus=MenuPersona::allFecha($fecha);
-                $busqueda_por='Fecha:';
-                $query=$fecha;
+                if($buscar_desde_hasta=='true'){
+                  $menus=MenuPersona::allEntreFechas($fecha,$fecha_hasta);
+                  $fecha = date("d/m/Y", strtotime($fecha));
+                  $busqueda_por='Fecha desde:' . $fecha;
+                  $fecha=date("d/m/Y", strtotime($fecha_hasta));
+                  $query='Hasta: '.$fecha;
+                }else{
+                  $menus=MenuPersona::allFecha($fecha);
+                  $busqueda_por='Fecha:';
+                  $fecha = date("d/m/Y", strtotime($fecha));
+                  $query=$fecha;
+                }
               }else {
-                $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
-                $busqueda_por='Fecha: '.$fecha;
-                $query='Horario: '.$busqueda_horario_por;
+                if($buscar_desde_hasta=='true'){
+                  $menus=MenuPersona::allHorarioEntreFechas($busqueda_horario_por,$fecha,$fecha_hasta);
+                  $fecha = date("d/m/Y", strtotime($fecha));
+                  $fecha_hasta= date("d/m/Y", strtotime($fecha_hasta));
+                  $busqueda_por='Fecha desde: '.$fecha. ' Hasta: '. $fecha_hasta;
+                  $query='Horario: '.$busqueda_horario_por;
+                }else {
+                  $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
+                  $fecha = date("d/m/Y", strtotime($fecha));
+                  $busqueda_por='Fecha: '.$fecha;
+                  $query='Horario: '.$busqueda_horario_por;
+                }
               }
             break;
           case 'busqueda_personal':
@@ -55,23 +78,46 @@ class MenuPersonaController extends Controller
             if($busqueda_horario_por==0){
               $menus=array();
               foreach ($personal as $p) {
-                $m=MenuPersona::allPersonaFecha($p->id,$fecha);
+                if($buscar_desde_hasta=='true'){
+                  $m=MenuPersona::allPersonaEntreFechas($p->id,$fecha,$fecha_hasta);
+
+                }else {
+                  $m=MenuPersona::allPersonaFecha($p->id,$fecha);
+                }
                 foreach($m as $menu){
                   array_push($menus,$menu);
                 }
               }
               $busqueda_por='Personal, ';
-              $query=$query.' Fecha: '.$fecha;
+              if($buscar_desde_hasta=='true'){
+                $fecha = date("d/m/Y", strtotime($fecha));
+                $query=$query.' Fecha desde: '.$fecha. ' Hasta: '. $fecha_hasta;
+              }else{
+                $fecha = date("d/m/Y", strtotime($fecha));
+                $query=$query.' Fecha: '.$fecha;
+              }
             }else {
               $menus=array();
               foreach ($personal as $p) {
-                $menu=MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
-                if(!(empty($menu))){
-                  array_push($menus,$menu);
+                if($buscar_desde_hasta=='true'){
+                  $menu = MenuPersona::get_menus_por_persona_horario_entre_fechas($p->id,$busqueda_horario_por,$fecha,$fecha_hasta);
+                  $menus = array_merge($menus, $menu);
+                }else{
+                  $menu = MenuPersona::get_menu_por_persona_horario_fecha($p->id,$busqueda_horario_por,$fecha);
+                  if(!(empty($menu))){
+                    array_push($menus,$menu);
+                  }
                 }
               }
               $busqueda_por='Personal, ';
-              $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
+              if($buscar_desde_hasta=='true'){
+                $fecha = date("d/m/Y", strtotime($fecha));
+                $fecha_hasta = date("d/m/Y", strtotime($fecha_hasta));
+                $query='Fecha desde: '.$fecha." Hasta: ".$fecha_hasta." Horario: ".$busqueda_horario_por;
+              }else{
+                $fecha = date("d/m/Y", strtotime($fecha));
+                $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
+              }
             }
             break;
           case 'busqueda_pacientes':
@@ -84,35 +130,59 @@ class MenuPersonaController extends Controller
             if($busqueda_horario_por==0){
               $menus=array();
               foreach ($pacientes as $paciente) {
-                $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
-                foreach($m as $menu){
-                  array_push($menus,$menu);
-                }
-                if($paciente->acompananteActual()){
-                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
-                  foreach($m as $menu){
-                    array_push($menus,$menu);
+                if($buscar_desde_hasta=='true'){
+                  $m=MenuPersona::allPersonaEntreFechas($paciente->id,$fecha,$fecha_hasta);
+                  $menus = array_merge($menus, $m);
+                  if($paciente->acompananteActual()){
+                    $m=MenuPersona::allPersonaEntreFechas($paciente->acompananteActual()->persona_id,$fecha,$fecha_hasta);
+                    $menus = array_merge($menus, $m);
+                  }
+                }else {
+                  $m=MenuPersona::allPersonaFecha($paciente->id,$fecha);
+                  $menus = array_merge($menus, $m);
+                  if($paciente->acompananteActual()){
+                    $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                    $menus = array_merge($menus, $m);
                   }
                 }
               }
-              $busqueda_por='Pacientes, ';
-              $query=$query.' Fecha: '.$fecha;
+              $busqueda_por='Pacientes y acompañantes, ';
+              $fecha = date("d/m/Y", strtotime($fecha));
+              if($buscar_desde_hasta=='true'){
+                $fecha_hasta = date("d/m/Y", strtotime($fecha_hasta));
+                $query=$query.' Fecha desde: '.$fecha. ' hasta: '.$fecha_hasta;
+              }else {
+                $query=$query.' Fecha: '.$fecha;
+              }
             }else {
               $menus=array();
               foreach ($pacientes as $paciente) {
-                $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
-                if(!(empty($menu))){
-                  array_push($menus,$menu);
-                }
-                if($paciente->acompananteActual()){
-                  $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
-                  foreach($m as $menu){
+                if($buscar_desde_hasta=='true'){
+                  $m = MenuPersona::get_menus_por_persona_horario_entre_fechas($paciente->id,$busqueda_horario_por,$fecha,$fecha_hasta);
+                  $menus = array_merge($menus, $m);
+                  if($paciente->acompananteActual()){
+                    $m = MenuPersona::get_menus_por_persona_horario_entre_fechas($paciente->acompananteActual()->persona_id,$busqueda_horario_por,$fecha,$fecha_hasta);
+                    $menus = array_merge($menus, $m);
+                  }
+                }else {
+                  $menu=MenuPersona::get_menu_por_persona_horario_fecha($paciente->id,$busqueda_horario_por,$fecha);
+                  if(!(empty($menu))){
                     array_push($menus,$menu);
+                  }
+                  if($paciente->acompananteActual()){
+                    $m=MenuPersona::allPersonaFecha($paciente->acompananteActual()->persona_id,$fecha);
+                    $menus = array_merge($menus, $m);
                   }
                 }
               }
               $busqueda_por='Pacientes, ';
-              $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
+              $fecha = date("d/m/Y", strtotime($fecha));
+              if($buscar_desde_hasta=='true'){
+                $fecha_hasta = date("d/m/Y", strtotime($fecha_hasta));
+                $query=$query.' Fecha desde: '.$fecha.' hasta:'.$fecha_hasta.' Horario: '.$busqueda_horario_por;
+              }else {
+                $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
+              }
             }
             break;
           default:
@@ -122,7 +192,7 @@ class MenuPersonaController extends Controller
         }else{
           $menus=MenuPersona::all();
         }
-        $menus_total=MenuPersona::all()->count();
+        $menus_total=count($menus);
         $horarios=Horario::all();
 
         return  view('nutricion.menu_persona.index', compact('menus','horarios','menus_total','query','busqueda_por'));

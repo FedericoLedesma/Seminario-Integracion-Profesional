@@ -128,13 +128,12 @@
 							</div>
 
 						</div>
+    				{!! Form::close() !!}
           </div>
 				</div>
-				{!! Form::close() !!}
 				</div>
 			</div>
-		</div>
-	</div>
+
 @endsection
 @section('script')
 
