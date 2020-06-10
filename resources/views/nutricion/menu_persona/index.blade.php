@@ -1,6 +1,11 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+.table{
+	 background-color: #E3EEE9;
+
+</style>
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Planillas</li>
@@ -16,17 +21,7 @@
 	    <h1>Menus de persona (planillas) existentes</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <container justify-content="space-evenly">
 	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu a Pacientes (planilla)</a>
 	<a href="{{route('menu_persona.create_personal')}}" class="btn btn-primary">Agregar menu Personal (planilla)</a>

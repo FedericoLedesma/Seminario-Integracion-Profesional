@@ -1,66 +1,131 @@
 @extends('layouts.layout')
+@section('token')
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+  <style>
+    div.blueTable {
+    border: 1px solid #1C6EA4;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+  }
+.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+  }
+.divTable.blueTable .divTableBody .divTableCell {
+    font-size: 13px;
+  }
+.divTable.blueTable .divTableRow:nth-child(even) {
+    background: #CBCFD5;
+  }
+  .divTable.blueTable .divTableHeading {
+    background: #1C6EA4;
+    background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    border-bottom: 2px solid #444444;
+  }
+  .divTable.blueTable .divTableHeading .divTableHead {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 2px solid #D0E4F5;
+  }
+  .divTable.blueTable .divTableHeading .divTableHead:first-child {
+    border-left: none;
+  }
+
+  .blueTable .tableFootStyle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #D0E4F5;
+    background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    border-top: 2px solid #444444;
+  }
+  .blueTable .tableFootStyle {
+    font-size: 14px;
+  }
+  .blueTable .tableFootStyle .links {
+    text-align: right;
+  }
+  .blueTable .tableFootStyle .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  .blueTable.outerTableFooter {
+		float:left;
+	}
+  .divTable{ display: table; }
+  .divTableRow { display: table-row; }
+  .divTableHeading { display: table-header-group;}
+  .divTableCell, .divTableHead { display: table-cell;}
+  .divTableHeading { display: table-header-group;}
+  .divTableFoot { display: table-footer-group;}
+  .divTableBody { display: table-row-group;}
+</style>
+@endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('habitaciones.index') }}">Habitaciones</a></li>
 		<li class="breadcrumb-item active">Ver habicación</li>
 @endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($habitacion)
-	    <div class="table-responsive">
-	    <h2>Habitacion:  {{$habitacion->name}}</h2>
-        <div class="col-md-3 col-md-offset-1">
-         <div class="panel-heading">
-	    <table class="table table-bordered table-hover table-striped">
-	    	<tr>
-	    		<td>ID </td>
-				<td>{{$habitacion->id}}</td>
-			</tr>
-      <tr>
-				<td>Nombre </td>
-				<td>{{$habitacion->name}}</td>
-			</tr>
-      <tr>
-				<td>Cantidad de camas </td>
-				<td>{{$habitacion->get_cantidad_camas()}}</td>
-			</tr>
-      <tr>
-				<td>Cantidad de camas desocupadas </td>
-				<td>{{$habitacion->get_cantidad_camas_desocupadas()}}</td>
-			</tr>
-      <tr>
-				<td>Descripcion </td>
-				<td>{{$habitacion->descripcion}}</td>
-			</tr>
-      <tr>
-				<td>Sector </td>
-				<td>{{$habitacion->get_sector_name()}}</td>
-			</tr>
-      <tr>
-				<td>CREADO </td>
-				<td>{{$habitacion->created_at}}</td>
-			</tr>
-			<tr>
-				<td>MODIFICADO </td>
-				<td>{{$habitacion->updated_at}}</td>
-			</tr>
 
-		</table>
+	    <h2>Habitacion:  {{$habitacion->name}}</h2>
+        <div class="col-md-5 col-md-offset-1">
+         <div class="panel-heading">
+           <div class="divTable blueTable">
+
+        	    	<div class="divTableRow">
+        	    		<div class="divTableCell">ID </div>
+          				<div class="divTableCell">{{$habitacion->id}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">Nombre </div>
+          				<div class="divTableCell">{{$habitacion->name}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">Cantidad de camas </div>
+          				<div class="divTableCell">{{$habitacion->get_cantidad_camas()}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">Cantidad de camas desocupadas </div>
+          				<div class="divTableCell">{{$habitacion->get_cantidad_camas_desocupadas()}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">Descripcion </div>
+          				<div class="divTableCell">{{$habitacion->descripcion}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">Sector </div>
+          				<div class="divTableCell">{{$habitacion->get_sector_name()}}</div>
+                </div>
+                <div class="divTableRow">
+          				<div class="divTableCell">CREADO </div>
+          				<div class="divTableCell">{{$habitacion->created_at}}</div>
+                </div>
+          			<div class="divTableRow">
+          				<div class="divTableCell">MODIFICADO </div>
+          				<div class="divTableCell">{{$habitacion->updated_at}}</div>
+          			</div>
+
+            </div>
+          </div>
 		</div>
-		</div>
-		</div>
-	{!!link_to_route('habitaciones.edit', $title = 'MODIFICAR', $parameters = [$habitacion->id],['class' => 'btn btn-warning'], $attributes = [])!!}
+    <div class="divTableCell">{!!link_to_route('habitaciones.edit', $title = 'MODIFICAR', $parameters = [$habitacion->id],['class' => 'btn btn-warning'], $attributes = [])!!} </div>
+    <div class="divTableCell"><a href="/habitaciones/historial/{{$habitacion->id}}">Historial</a></div>
+
+
+
 
 
 
