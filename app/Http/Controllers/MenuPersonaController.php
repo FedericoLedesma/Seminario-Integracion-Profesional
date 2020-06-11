@@ -16,6 +16,14 @@ use Carbon\Carbon;
 
 class MenuPersonaController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware(['permission:alta_menu'],['only'=>['create','store']]);
+      $this->middleware(['permission:baja_menu'],['only'=>['destroy']]);
+      $this->middleware(['permission:modificacion_menu'],['only'=>['edit']]);
+      $this->middleware(['permission:ver_menu'],['only'=>['index']]);
+       $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

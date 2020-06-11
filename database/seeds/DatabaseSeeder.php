@@ -85,12 +85,12 @@ class DatabaseSeeder extends Seeder
           'name' => 'Entregar racion (descontar)',
       ]);
   	  $user=User::find('1');
-  	  $role=Role::create(['name'=>'Aministrador']);
+  	  $role=Role::create(['name'=>'Administrador']);
   	  $permisos=Permission::all();
   	  foreach($permisos as $permiso){
   		  $role->givePermissionTo($permiso);
   	  }
-  	  $user->assignRole('Aministrador');
+  	  $user->assignRole('Administrador');
 /*
 		$this->call([
 			Menu_personaSeeder::class

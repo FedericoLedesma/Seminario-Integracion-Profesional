@@ -41,6 +41,7 @@ class RacionesDisponiblesController extends Controller
           case 'busqueda_todos':
               if($query==""){
                   $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
+                  $busqueda_por=" Fecha: ".$fecha;
               }else {
                 $raciones=Racion::findByName($query)->get();
                 $racionesDisponibles=array();
