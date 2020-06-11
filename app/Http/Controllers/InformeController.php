@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\MenuPersona;
 use App\Personal;
 use App\Paciente;
+use App\Racion;
 use App\Persona;
 use App\Horario;
 use Illuminate\Support\Facades\Auth;
@@ -68,11 +69,13 @@ class InformeController extends Controller
       return view('informe.create',compact('informe','lista','fecha_actual','horarios',
         'fecha_inicio','horario_inicio','fecha_fin','horario_fin'));
     }
+
     public function generarInforme(Request $request){
       Log::debug("generarInforme");
       Log::info($request);
       $user=Auth::user();
       $buscar_desde_hasta=$request->get('buscar_desde_hasta');
+      $solo_raciones=$request->get('solo_raciones');
       Log::info($buscar_desde_hasta);
       $fecha_hasta=$request->get('fecha_hasta');
       Log::info('$fecha_hasta');
@@ -242,39 +245,42 @@ class InformeController extends Controller
           $menus=MenuPersona::all();
         }
         $menus_total=count($menus);
-        //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
+
+        if($solo_raciones=="true"){
+          $raciones_id=array();
+          $raciones_a_preparar_id=array();
+          foreach ($menus as  $menu) {
+            array_push($raciones_id,$menu->racionDisponible->horario_racion->racion->id);
+            if(!$menu->realizado){
+              array_push($raciones_a_preparar_id,$menu->racionDisponible->horario_racion->racion->id);
+            }
+          }
+          $cantidad_raciones_a_preparar=array_count_values($raciones_a_preparar_id);
+          $cantidad_raciones=array_count_values($raciones_id);
+          Log::info("total de raciones:");
+          Log::info($cantidad_raciones);
+          $raciones=array();
+          while ($r = current($cantidad_raciones)) {
+            $racion=Racion::findById(key($cantidad_raciones));
+            array_push($raciones,$racion);
+            next($cantidad_raciones);
+          }
+          $raciones_a_preparar=array();
+          while ($r_p = current($cantidad_raciones_a_preparar)) {
+            $racion=Racion::findById(key($cantidad_raciones_a_preparar));
+            array_push($raciones_a_preparar,$racion);
+            next($cantidad_raciones_a_preparar);
+          }
+
+          $pdf = PDF::loadView('informe.informe_raciones', compact('raciones','cantidad_raciones','raciones_a_preparar','cantidad_raciones_a_preparar','query','busqueda_por','creado','user'));
+      }else{
         $pdf = PDF::loadView('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
-        return $pdf->stream();
-    }
-    public function generarInformeDeRaciones(Request $request){
-      Log::info($request);
-      $user=Auth::user();
-      $query=null;
-      $busqueda_por=null;
-      $fecha=$request->get('fecha');
-      $c=new DateTime(date("Y-m-d H:i:s"));
-      $creado=$c->format('d-m-Y H:i:s');
-      $horarios=Horario::all();
-      $busqueda_horario_por=$request->get('busqueda_horario_por');
-      if($busqueda_horario_por==0){
-        $menus=MenuPersona::allFecha($fecha);
-        $busqueda_por='Fecha:';
-        $fecha = date("d/m/Y", strtotime($fecha));
-        $query=$fecha;
-      }else {
-        $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
-        $fecha = date("d/m/Y", strtotime($fecha));
-        $busqueda_por='Fecha: '.$fecha;
-        $query='Horario: '.$busqueda_horario_por;
+
       }
-        $menus_total=count($menus);
-        $menus_array=$menus;
-        $menu_final;
-        $cantidad=array();
-        //La idea es contar y devolver las raciones a preparar para mostrar en la vista que alimentos tiene etc
-        //return  view('informe.informe', compact('menus','menus_total','query','busqueda_por','creado','user'));
-        $pdf = PDF::loadView('informe.informe_raciones', compact('menus','menus_total','cantidad','query','busqueda_por','creado','user'));
-        return $pdf->stream();
+      return $pdf->stream();
+    }
+
+    public function generarInformeDeRaciones(Request $request){
     }
 
 }

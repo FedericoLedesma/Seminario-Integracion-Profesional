@@ -2,79 +2,61 @@
 @section('content')
 
 
-    <div><h1>Informe de Menus</h1>
+    <div><h1>Informe de Raciones de menús</h1>
       <h2>Solicitado : {{$creado}} </h2>
-      <p>Por el usuario : Apellido: {{$user->personal->persona->apellido}} Nombre: {{$user->personal->persona->name}} </p>
-      <p>Numero de documento {{$user->personal->persona->numero_doc}} - ID: {{$user->personal->persona->id}}</p>
+      <p>Usuario que solicitó: Apellido: {{$user->personal->persona->apellido}}. Nombre: {{$user->personal->persona->name}} </p>
+      <p>Número de documento {{$user->personal->persona->numero_doc}} - ID: {{$user->personal->persona->id}}</p>
       <p>
-        Menus por : {{$busqueda_por}}  {{$query}} <br>
-        Cantidad encontrada= {{$menus_total}}
-
+        Filtro : {{$busqueda_por}}  {{$query}} <br>
       </p>
+      <h3>Raciones asiganadas a menús</h3>
         <table>
           <thead >
             <tr>
-              <th scope="col">Persona</th>
-              <th scope="col">Sector </th>
-              <th scope="col">Habitacion</th>
-              <th scope="col">Cama</th>
-              <th scope="col">Horario</th>
               <th scope="col">Racion</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Entregado</th>
-
+              <th scope="col">Cantidad </th>
             </tr>
           </thead>
 
           <tbody>
-          @if($menus)
-            @foreach($menus as $menu_persona)
+          @if($raciones)
+            @foreach($raciones as $racion)
             <tr>
-              {{Log::debug(' Persona id: '.$menu_persona)}}
-              <td>{{$menu_persona->get_persona_nombre_completo()}}</td>
-              @if($menu_persona->persona->sectorFecha($menu_persona->racionDisponible->fecha))
-                <td>{{$menu_persona->persona->sectorFecha($menu_persona->racionDisponible->fecha)->name}}</td>
-              @else
-                <td>-</td>
-              @endif
-              @if($menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha))
-                <td>{{$menu_persona->persona->habitacionFecha($menu_persona->racionDisponible->fecha)->name}}</td>
-              @else
-                <td>-</td>
-              @endif
-              @if($menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha))
-                <td>{{$menu_persona->persona->camaFecha($menu_persona->racionDisponible->fecha)->id}}</td>
-              @else
-                <td>-</td>
-              @endif
-              <td>{{$menu_persona->get_horario_name()}}</td>
-              <td>{{$menu_persona->get_racion_name()}}</td>
-              <td>{{$menu_persona->racionDisponible->fecha()}}</td>
-              <td>{{$menu_persona->isRealizado_str()}}</td>
+              <td>{{$racion->name}}</td>
+              <td>{{$cantidad_raciones[$racion->id]}}</td>
             </tr>
             @endforeach
           @endif
-        </table>
-        <table>
-          <thead >
-            <tr>
-              <th scope="col">1</th>
-
-            </tr>
-          </thead>
-
-          <tbody>
-          @if($cantidad)
-            @foreach($cantidad as $c)
-            <tr>
-              <td>
-                {{$c}}
-              </td>
-            </tr>
+        </tbody>
+      </table>
+        <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+        <h3>Raciones que aún no se entregaron</h3>
+        @if($raciones_a_preparar)
+          @foreach($raciones_a_preparar as $racion)
+          <p>Racion: {{$racion->name}}. Cantidad: {{$cantidad_raciones_a_preparar[$racion->id]}}</p>
+          <div class="divTable blueTable">
+            <div class="divTableHeading">
+              <div class="divTableRow">
+                <div class="divTableHead">Alimentos de la racion {{$racion->name}}</div>
+                <div class="divTableHead"></div>
+              </div>
+              <div class="divTableRow">
+                <div class="divTableHead">Nombre</div>
+                <div class="divTableHead">Cantidad</div>
+              </div>
+            </div>
+            @foreach($racion->alimentos as $alimento)
+            <div class="divTableBody">
+              <div class="divTableRow">
+                <div class="divTableCell">{{$alimento->name}}</div>
+                <div class="divTableCell">{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}} gr.</div>
+              </div>
+            </div>
             @endforeach
-          @endif
-        </table>
+          </div>
+          <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+          @endforeach
+        @endif
     </div>
-
 
 @endsection

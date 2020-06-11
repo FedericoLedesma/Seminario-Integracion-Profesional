@@ -72,6 +72,7 @@
   </style>
 @endsection
 @section('content')
+<h2>Informes de menús</h2>
 {!!Form::open(['route'=>'informe.generar-informe','method'=>'POST']) !!}
 <div class="container">
   <div class="table-responsive">
@@ -123,7 +124,10 @@
                   <input type="checkbox" name="buscar_desde_hasta" value="true" id="checkbox_fecha" />Incluir desde - hasta<br />
                 </div>
                 <div class="divTableCell">
-									{!!	Form::submit('Generar Informe de Menus',['class'=>'btn btn-success btn-buscar'])!!}
+                  <input type="checkbox" name="solo_raciones" value="true" id="checkbox_fecha" /> Informe solo de raciones<br />
+                </div>
+                <div class="divTableCell">
+									{!!	Form::submit('Generar Informe',['class'=>'btn btn-success btn-buscar'])!!}
 								</div>
 							</div>
 
