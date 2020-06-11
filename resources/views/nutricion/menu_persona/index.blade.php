@@ -78,13 +78,13 @@
 
 	  	<title>Menu persona</title>
 
-	    <h1>Menus de persona (planillas) existentes</h1>
+	    <h1>Menús de persona (planillas) </h1>
 	      @include('layouts.error')
 
 
 <container justify-content="space-evenly">
-	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menu a Pacientes (planilla)</a>
-	<a href="{{route('menu_persona.create_personal')}}" class="btn btn-primary">Agregar menu Personal (planilla)</a>
+	<a href="{{action('MenuPersonaController@create')}}" class="btn btn-primary">Agregar menú a Pacientes (planilla)</a>
+	<a href="{{route('menu_persona.create_personal')}}" class="btn btn-primary">Agregar menú Personal (planilla)</a>
 	<a href="{{action('InformeController@index')}}" class="btn btn-primary">Informes</a>
 
 </container>
@@ -97,7 +97,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-raciones" class="alert alert-info">Menus por: {{$busqueda_por}} {{$query}}</div>
+		<div id="alert" name="alert-raciones" class="alert alert-info">Menús por: {{$busqueda_por}} {{$query}}</div>
 	@endif
 </div>
 
@@ -113,7 +113,7 @@
 						<div class="divTableHead">Tipo Persona</div>
 						<div class="divTableHead">Horarios  </div>
 						<div class="divTableHead">Nombre Sector</div>
-						<div class="divTableHead">N. habitacion</div>
+						<div class="divTableHead">N. habitación</div>
 
           </div>
         </div>
@@ -171,13 +171,13 @@
 							<tr>
 								<th scope="col">Persona</th>
 								<th scope="col">Sector </th>
-	              <th scope="col">Habitacion</th>
+	              <th scope="col">Habitación</th>
 	              <th scope="col">Cama</th>
 								<th scope="col">Horario</th>
-								<th scope="col">Racion</th>
+								<th scope="col">Ración</th>
 								<th scope="col">Fecha</th>
 								<th scope="col">Realizado</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>

@@ -16,10 +16,10 @@
             <tr>
               <th scope="col">Persona</th>
               <th scope="col">Sector </th>
-              <th scope="col">Habitacion</th>
+              <th scope="col">Habitación</th>
               <th scope="col">Cama</th>
               <th scope="col">Horario</th>
-              <th scope="col">Racion</th>
+              <th scope="col">Ración</th>
               <th scope="col">Fecha</th>
               <th scope="col">Entregado</th>
 

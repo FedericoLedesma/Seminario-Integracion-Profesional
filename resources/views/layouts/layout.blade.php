@@ -19,7 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <!-- Links del plugin del calendario -->
   <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
@@ -201,9 +202,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!--              personas        -->
          <li class="nav-item has-treeview menu-close">
            <a href="#" class="nav-link">
-             <i class="nav-icon fas fa-users"></i>
-             <p>
-               Personas
+             <i class="nav-icon fas fa-user-friends"> </i>
+             <p>Personas
                <i class="right fas fa-angle-left"></i>
              </p>
            </a>
@@ -251,9 +251,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--              patologias        -->
        <li class="nav-item has-treeview menu-close">
          <a href="#" class="nav-link">
-           <i class="nav-icon fas fa-users"></i>
+           <i class="nav-icon fas fa-notes-medical"></i>
            <p>
-             Patologias
+             Patologías
              <i class="right fas fa-angle-left"></i>
            </p>
          </a>
@@ -276,9 +276,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--              nutricion        -->
        <li class="nav-item has-treeview menu-close">
          <a href="#" class="nav-link">
-           <i class="nav-icon fas fa-users"></i>
+           <i class="nav-icon fas fa-apple-alt"></i>
            <p>
-             NUTRICION
+             Nutrición
              <i class="right fas fa-angle-left"></i>
            </p>
          </a>
@@ -286,7 +286,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
            <li class="nav-item">
              <a href="{{ route('menu_persona.index') }}" class="nav-link">
                <i class="far fa-circle nav-icon"></i>
-               <p>Menus</p>
+               <p>Menús</p>
              </a>
            </li>
            <li class="nav-item">
@@ -326,9 +326,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!--              enfermería        -->
        <li class="nav-item has-treeview menu-close">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users"></i>
+          <i class="nav-icon left fas fa-user-md"></i>
           <p>
-            Enfermería
+                Enfermería
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -352,7 +352,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!--              Admin. general        -->
        <li class="nav-item has-treeview menu-close">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users"></i>
+          <i class="nav-icon fas fa-cogs"></i>
           <p>
             Admin. general
             <i class="right fas fa-angle-left"></i>

@@ -70,7 +70,7 @@
 								<th scope="col">Nombre</th>
 								<th scope="col">Documento</th>
 								<th scope="col">Sector</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
