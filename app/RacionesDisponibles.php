@@ -77,10 +77,11 @@ class RacionesDisponibles extends Model
 
     public static function buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha){
       $raciones_disponibles_fecha = static::where('fecha','=', $fecha)->get();
-      $horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);
+      //$horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);
       foreach ($raciones_disponibles_fecha as $rac_dis) {
-        if ($rac_dis->get_horario_racion_id()==$horario_racion->get_id())
+        if (($rac_dis->horario_racion->racion->id==$racion_id)&&($rac_dis->horario_racion->horario->id==$horario_id)){
           return $rac_dis;
+        }
       }
       return null;
     }

@@ -152,7 +152,7 @@
               <input type="checkbox" name="buscar_desde_hasta" value="true" id="checkbox_fecha" />Incluir desde - hasta<br />
             </div>
             <div class="divTableCell">
-							{!!	Form::submit('Generar Informe de Menus',['class'=>'btn btn-success btn-buscar'])!!}
+							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						</div>
 					</div>
 
