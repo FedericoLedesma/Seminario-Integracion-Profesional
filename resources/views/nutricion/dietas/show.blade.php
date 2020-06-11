@@ -127,7 +127,8 @@
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header" id="modal-header">
-										<h4>Raciones asociadas a la dieta activa  de {{$d_a->id}} </h4>
+										<h4>Raciones asociadas a la dieta activa {{$d_a->id}} </br>
+											Entre las fecha {{$d_a->fecha}} / {{$d_a->fecha_final}} </h4>
 										<button type="button" class="close" data-dismiss="modal">
 											<span>×</span>
 										</button>
