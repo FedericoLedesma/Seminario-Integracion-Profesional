@@ -11,6 +11,7 @@ class PersonalSector extends Model
   protected $fillable = [
       'id', 'sector_id', 'personal_id','fecha',
   ];
+  public $timestamps = false;
 
   public static function findByPacienteFecha($personal_id,$fecha)
   {

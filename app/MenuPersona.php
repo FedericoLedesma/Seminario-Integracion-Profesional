@@ -48,6 +48,20 @@ class MenuPersona extends Model
     }
     return null;
   }
+  public static function get_menus_por_persona_horario_entre_fechas($persona_id,$horario_id,$fecha_desde,$fecha_hasta)
+  {
+    $menus=MenuPersona::allEntreFechas($fecha_desde,$fecha_hasta);
+    $m=array();
+    foreach ($menus as $menu) {
+      $h_id=$menu->racionDisponible->horario_racion->horario->id;
+      $p_id=$menu->persona->id;
+      if(($h_id==$horario_id)&&($p_id==$persona_id)){
+        array_push($m,$menu);
+        break;
+      }
+    }
+    return $m;
+  }
 
   public function scopeAllRealizadosHorarioFecha($query,$horario_id,$fecha)
   {
@@ -69,12 +83,34 @@ class MenuPersona extends Model
       }
     }return $mp;
   }
+  public function scopeAllPersonaEntreFechas($query,$persona_id,$fecha_desde,$fecha_hasta)
+  {
+    $mp=array();
+    $menus=MenuPersona::where('persona_id',$persona_id)->get();
+    foreach ($menus as $menu) {
+      if(($menu->racionDisponible->fecha>=$fecha_desde)&&($menu->racionDisponible->fecha<=$fecha_hasta)){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
   public function scopeAllHorarioFecha($query,$horario_id,$fecha)
   {
     $mp=array();
     $menus=MenuPersona::all();
     foreach ($menus as $menu) {
       if(($menu->racionDisponible->fecha==$fecha)&&($menu->racionDisponible->horario_racion->horario->id==$horario_id)){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
+  public function scopeAllHorarioEntreFechas($query,$horario_id,$fecha_desde,$fecha_hasta)
+  {
+    $mp=array();
+    $menus=MenuPersona::allEntreFechas($fecha_desde,$fecha_hasta);
+    foreach ($menus as $menu) {
+      if($menu->racionDisponible->horario_racion->horario->id==$horario_id){
         array_push($mp,$menu);
         Log::info($menu);
       }
@@ -94,6 +130,17 @@ class MenuPersona extends Model
     $menus=MenuPersona::all();
     foreach ($menus as $menu) {
       if($menu->racionDisponible->fecha==$fecha){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
+  public function scopeAllEntreFechas($query,$fecha_desde,$fecha_hasta)
+  {
+    $mp=array();
+    $menus=MenuPersona::all();
+    foreach ($menus as $menu) {
+      if(($menu->racionDisponible->fecha>=$fecha_desde)&&($menu->racionDisponible->fecha<=$fecha_hasta)){
         array_push($mp,$menu);
         Log::info($menu);
       }

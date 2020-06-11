@@ -100,7 +100,7 @@ div.blueTable {
 </div>
 <div class="container">
 	<div class="table-responsive">
-  	<div class="col-md-12 col-md-offset-2">
+  	<div class="col-md-10 col-md-offset-2">
 			<div class="panel-heading">
 				 {!!Form::open(['route'=>'raciones-disponibles.index','method'=>'GET']) !!}
 						<div class="input-group mb-3">
@@ -228,7 +228,7 @@ div.blueTable {
 				@endif
 			</div>
 		</div>
-<!--	</div>-->
+@if($racionesDisponibles)
 </div>
   <div class="modal fade" id="create-stock">
     <div class="modal-dialog">
@@ -257,7 +257,7 @@ div.blueTable {
         </div>
     </div>
 </div>
-
+@endif
 @endsection
 @section('script')
  <script src="{{asset('js/racion-disponibles-script.js')}}"></script>

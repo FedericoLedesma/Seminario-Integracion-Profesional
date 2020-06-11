@@ -142,7 +142,7 @@ Route::PUT('/raciones-disponibles/update/{id}','RacionesDisponiblesController@up
 
 Route::POST('/buscarAlimento', 'AlimentoController@buscar');
 Route::get('/movimientos',["as"=>"movimientos.index", "uses"=>'MovimientoController@index']);
-Route::get('/dietas',["as"=>"dietas.index", "uses"=>'DietaController@index']);
+Route::resource('/dietas', 'DietaController');
 
 Route::get('/test/datepicker', function () {
     return view('datepicker');

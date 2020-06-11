@@ -70,7 +70,7 @@ class DietaController extends Controller
      */
     public function show(Dieta $dieta)
     {
-        //
+      return  view('nutricion.dietas.show', compact('dieta'));
     }
 
     /**

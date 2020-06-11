@@ -4,7 +4,22 @@
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	        }
 	    });
-
+		$('#fecha_hasta').hide();
+		$('#desde').hide();
+		$('#fecha_hasta_title').hide();
+		$('#checkbox_fecha').change(function() {
+			if($("#checkbox_fecha").is(':checked')) {
+				console.log("Mostrar fecha hasta");
+				$('#fecha_hasta').show();
+				$('#fecha_hasta_title').show();
+				$('#desde').show();
+			}else{
+				console.log("Ocultar fecha");
+				$('#fecha_hasta').hide();
+				$('#fecha_hasta_title').hide();
+				$('#desde').hide();
+			}
+		});
 	});
 	$('.buscar_user').click(function(e){
 
@@ -30,6 +45,9 @@ $('.buscar_permiso').click(function(e){
 $('.btn_generar_informe_raciones').click(function(e){
 	console.log("hola");
 	var fecha=document.getElementById("fecha").value;
+	var checkbox_fecha=document.getElementById("checkbox_fecha").value;
+	console.log(checkbox_fecha);
+	var fecha_hasta=document.getElementById("fecha_hasta").value;
 	var search=document.getElementById("sector_name").value;
 	var search_habitacion=document.getElementById("habitacion_id").value;
 	var busqueda_persona_por=document.getElementById("busqueda_persona_por").value;

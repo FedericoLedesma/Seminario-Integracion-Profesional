@@ -53,7 +53,7 @@ USUARIOS REGISTRADOS
 
           <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
             <option value="busqueda_id" >ID</option>
-            <option value="busqueda_dni" >DNI</option>
+            <option value="busqueda_dni" >Número Doc.</option>
             <option value="busqueda_name" >Nombre</option>
           </select>
 
@@ -73,7 +73,7 @@ USUARIOS REGISTRADOS
 								<th scope="col">Rol</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>

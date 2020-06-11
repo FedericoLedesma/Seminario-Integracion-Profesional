@@ -35,36 +35,56 @@ class RacionesDisponiblesController extends Controller
       $fecha=$request->get('fecha');
       $busqueda_por="";
       $busqueda_horario_por=$request->get('busqueda_horario_por');
-
       $horarios=Horario::all();
       if($request){
         switch ($busqueda_horario_por){
           case 'busqueda_todos':
               if($query==""){
                   $racionesDisponibles=RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
+                  $busqueda_por=" Fecha: ".$fecha;
               }else {
-                $racion=Racion::findById($query);
-                if($racion){
-                    $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_racion($fecha,$racion);
-                }{
+                $raciones=Racion::findByName($query)->get();
+                $racionesDisponibles=array();
+                if(!count($raciones)==0){
+                  foreach ($raciones as $racion) {
+                    $rd=RacionesDisponibles::buscar_por_fecha_racion($fecha,$racion);
+                    $racionesDisponibles = array_merge($racionesDisponibles, $rd);
+                  }
+                }else{
                   $racionesDisponibles=null;
                 }
               }
             break;
           default:
             if(is_numeric($busqueda_horario_por)){
-              $horario=Horario::findById($busqueda_horario_por);
-              $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_horario($fecha,$horario);
+              if($query==""){
+                $horario=Horario::findById($busqueda_horario_por);
+                $racionesDisponibles=RacionesDisponibles::buscar_por_fecha_horario($fecha,$horario);
+              }else {
+                $raciones=Racion::findByName($query)->get();
+                $racionesDisponibles=array();
+                foreach ($raciones as $racion) {
+                  Log::info($racion);
+                  $rd=RacionesDisponibles::buscar_por_racion_horario_fecha($racion->id,$busqueda_horario_por,$fecha);
+                  array_push($racionesDisponibles,$rd);
+                }
+              //  $racionesDisponibles=RacionesDisponibles::all();
+              }
             }else{
               $racionesDisponibles=RacionesDisponibles::all();
             }
             break;
           }
-
         }else{
           $racionesDisponibles=RacionesDisponibles::all();
         }
-        $racionesDisponibles_total=RacionesDisponibles::all()->count();
+        if(!empty($racionesDisponibles)){
+          $racionesDisponibles_total=count($racionesDisponibles);
+        }else{
+          $racionesDisponibles_total=0;
+        }
+
+
     return  view('nutricion.raciones-disponibles.index', compact('racionesDisponibles','horarios','racionesDisponibles_total','query','busqueda_por'));
     }
 

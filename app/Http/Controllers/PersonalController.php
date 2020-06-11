@@ -91,7 +91,7 @@ class PersonalController extends Controller
       $personal = Personal::find($persona_id);
       if ($personal==null){
         $personal = new Personal([
-          'id'=>$persona->$persona_id(),
+          'id'=>$persona_id,
         ]);
         $personal->save();
       }
