@@ -1,3 +1,7 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/div_table.css') }}" >
+</head>
+
 @extends('layouts.layout')
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales de pacientes</a></li>
@@ -32,42 +36,46 @@
           No se haya internado
         @else
           <h3> Traslados </h3>
-          <div class="container">
-            <div class="row">
-               <div class="col-md-3">
-                  <label> Sector </label>
-               </div>
-               <div class="col-md-3">
-                 <label> Habitación </label>
-               </div>
-               <div class="col-md-3">
-                 <label> Fecha ingreso </label>
-               </div>
-               <div class="col-md-3">
-                 <label> Acciones/Fecha egreso </label>
-               </div>
+          <div class="divTable greyGridTable">
+            <div class="divTableHeading">
+              <div class="divTableRow">
+                 <div class="divTableHead">
+                    <label> Sector </label>
+                 </div>
+                 <div class="divTableHead">
+                   <label> Habitación </label>
+                 </div>
+                 <div class="divTableHead">
+                   <label> Fecha ingreso </label>
+                 </div>
+                 <div class="divTableHead">
+                   <label> Acciones/Fecha egreso </label>
+                 </div>
+              </div>
             </div>
-           @foreach($paciente->get_historiales_paciente_cama_activos() as $pac_cama)
-             <div class="row">
-                <div class="col-md-3">
-                   <label> {{$pac_cama->get_sector_name()}} </label>
-                </div>
-                <div class="col-md-3">
-                  {!!link_to_route('habitaciones.historial', $title = $pac_cama->get_habitacion_name(), $parameters = [$pac_cama->get_habitacion()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                </div>
-                <div class="col-md-3">
-                  <label> {{$pac_cama->get_fecha_ingreso()}} </label>
-                </div>
-                <div class="col-md-3">
-                  @if($pac_cama->get_fecha_egreso()==null)
-                    {!!link_to_route('historialInternacion.edit', $title = 'Traslado', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                    {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                  @else
-                    <label> {{$pac_cama->get_fecha_egreso()}} </label>
-                  @endif
-                </div>
-             </div>
-           @endforeach
+            <div class="divTableBody">
+               @foreach($paciente->get_historiales_paciente_cama_activos() as $pac_cama)
+                   <div class="divTableRow">
+                      <div class="divTableCell">
+                         <label> {{$pac_cama->get_sector_name()}} </label>
+                      </div>
+                      <div class="divTableCell">
+                        {!!link_to_route('habitaciones.historial', $title = $pac_cama->get_habitacion_name(), $parameters = [$pac_cama->get_habitacion()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                      </div>
+                      <div class="divTableCell">
+                        <label> {{$pac_cama->get_fecha_ingreso()}} </label>
+                      </div>
+                      <div class="divTableCell">
+                        @if($pac_cama->get_fecha_egreso()==null)
+                          {!!link_to_route('historialInternacion.edit', $title = 'Traslado', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                          {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                        @else
+                          <label> {{$pac_cama->get_fecha_egreso()}} </label>
+                        @endif
+                      </div>
+                   </div>
+               @endforeach
+           </div>
 
 
          </div>
@@ -77,39 +85,43 @@
        @if($paciente->have_acompanante()==false)
         <a href="{{action('HistorialInternacionController@update_add_paciente', $paciente->get_acompanantes_historial_activo_id())}}" class="btn btn-primary">Agregar</a>
        @endif
-       <div class="container">
-          <div class="row">
-              <div class="col-md-3">
-                 <label> Nombre </label>
-              </div>
-              <div class="col-md-3">
-                <label> Fecha ingreso </label>
-              </div>
-              <div class="col-md-3">
-                <label> Acciones/Fecha egreso </label>
-              </div>
+       <div class="divTable greyGridTable">
+          <div class="divTableHeading">
+              <div class="divTableRow">
+                  <div class="divTableHead">
+                     <label> Nombre </label>
+                  </div>
+                  <div class="divTableHead">
+                    <label> Fecha ingreso </label>
+                  </div>
+                  <div class="divTableHead">
+                    <label> Acciones/Fecha egreso </label>
+                  </div>
+                </div>
             </div>
-            @foreach($paciente->get_acompanantes_historial_activo() as $acompanante)
-              <div class="row">
-                 <div class="col-md-3">
-                    <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
-                 </div>
-                 <div class="col-md-3">
-                   <label> {{$acompanante->get_fecha()}} </label>
-                 </div>
-                 <div class="col-md-3">
-                   @if($acompanante->get_fecha_egreso()==null)
-                     {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                   @else
-                     <label> {{$acompanante->get_fecha_egreso()}} </label>
-                   @endif
-                 </div>
-              </div>
-            @endforeach
-
+            <div class="divTableBody">
+                @foreach($paciente->get_acompanantes_historial_activo() as $acompanante)
+                  <div class="divTableRow">
+                     <div class="divTableCell">
+                        <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
+                     </div>
+                     <div class="divTableCell">
+                       <label> {{$acompanante->get_fecha()}} </label>
+                     </div>
+                     <div class="divTableCell">
+                       @if($acompanante->get_fecha_egreso()==null)
+                         {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                       @else
+                         <label> {{$acompanante->get_fecha_egreso()}} </label>
+                       @endif
+                     </div>
+                  </div>
+                @endforeach
+            </div>
          </div>
-      @endif
-    </div><!-- Historial actual -->
+       </div>
+    @endif
+  </div><!-- Historial actual -->
 
 
       <div id="lista_historico" class="collapse">
@@ -120,71 +132,77 @@
           </h4>
           <div class="collapse" id="historial{{$historial->get_id()}}">
             <h2> Traslados </h2>
-              <div class="container">
-                <div class="row">
-                   <div class="col-md-3">
-                      <label> Sector </label>
-                   </div>
-                   <div class="col-md-3">
-                     <label> Habitación </label>
-                   </div>
-                   <div class="col-md-3">
-                     <label> Fecha ingreso </label>
-                   </div>
-                   <div class="col-md-3">
-                     <label> Acciones/Fecha egreso </label>
-                   </div>
+              <div class="divTable greyGridTable">
+                <div class="divTableHeading">
+                  <div class="divTableRow">
+                     <div class="divTableHead">
+                        <label> Sector </label>
+                     </div>
+                     <div class="divTableHead">
+                       <label> Habitación </label>
+                     </div>
+                     <div class="divTableHead">
+                       <label> Fecha ingreso </label>
+                     </div>
+                     <div class="divTableHead">
+                       <label> Acciones/Fecha egreso </label>
+                     </div>
+                  </div>
                 </div>
-               @foreach($historial->get_paciente_camas() as $pac_cama)
-                 <div class="row">
-                    <div class="col-md-3">
-                       <label> {{$pac_cama->get_sector_name()}} </label>
-                    </div>
-                    <div class="col-md-3">
-                      {!!link_to_route('habitaciones.historial', $title = $pac_cama->get_habitacion_name(), $parameters = [$pac_cama->get_habitacion()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                    </div>
-                    <div class="col-md-3">
-                      <label> {{$pac_cama->get_fecha_ingreso()}} </label>
-                    </div>
-                    <div class="col-md-3">
-                        <label> {{$pac_cama->get_fecha_egreso()}} </label>
-                    </div>
-                 </div>
-               @endforeach
-
+                <div class="divTableBody">
+                   @foreach($historial->get_paciente_camas() as $pac_cama)
+                     <div class="divTableRow">
+                        <div class="divTableCell">
+                           <label> {{$pac_cama->get_sector_name()}} </label>
+                        </div>
+                        <div class="divTableCell">
+                          {!!link_to_route('habitaciones.historial', $title = $pac_cama->get_habitacion_name(), $parameters = [$pac_cama->get_habitacion()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                        </div>
+                        <div class="divTableCell">
+                          <label> {{$pac_cama->get_fecha_ingreso()}} </label>
+                        </div>
+                        <div class="divTableCell">
+                            <label> {{$pac_cama->get_fecha_egreso()}} </label>
+                        </div>
+                     </div>
+                   @endforeach
+               </div>
 
              </div>
             <h2> Acompañantes </h2>
-            <div class="container">
-              <div class="row">
-                 <div class="col-md-3">
-                    <label> Nombre </label>
-                 </div>
-                 <div class="col-md-3">
-                   <label> Fecha ingreso </label>
-                 </div>
-                 <div class="col-md-3">
-                   <label> Acciones/Fecha egreso </label>
-                 </div>
+            <div class="divTable greyGridTable">
+              <div class="divTableHeading">
+                <div class="divTableRow">
+                   <div class="divTableHead">
+                      <label> Nombre </label>
+                   </div>
+                   <div class="divTableHead">
+                     <label> Fecha ingreso </label>
+                   </div>
+                   <div class="divTableHead">
+                     <label> Acciones/Fecha egreso </label>
+                   </div>
+                </div>
               </div>
-             @foreach($historial->get_acompanantes() as $acompanante)
-               <div class="row">
-                  <div class="col-md-3">
-                     <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
-                  </div>
-                  <div class="col-md-3">
-                    <label> {{$acompanante->get_fecha()}} </label>
-                  </div>
-                  <div class="col-md-3">
-                    @if($acompanante->get_fecha_egreso()==null)
-                      {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
-                    @else
-                      <label> {{$acompanante->get_fecha_egreso()}} </label>
-                    @endif
-                  </div>
-               </div>
-             @endforeach
-
+              <div class="divTableBody">
+                 @foreach($historial->get_acompanantes() as $acompanante)
+                   <div class="divTableRow">
+                      <div class="divTableCell">
+                         <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
+                      </div>
+                      <div class="divTableCell">
+                        <label> {{$acompanante->get_fecha()}} </label>
+                      </div>
+                      <div class="divTableCell">
+                        @if($acompanante->get_fecha_egreso()==null)
+                          {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                        @else
+                          <label> {{$acompanante->get_fecha_egreso()}} </label>
+                        @endif
+                      </div>
+                   </div>
+                 @endforeach
+             </div>
 
             </div>
           </div>
@@ -196,25 +214,41 @@
         @if($paciente->get_like_paciente_list()==null)
           No acompañó nunca a un paciente
         @else
-          @foreach($paciente->get_like_paciente_list() as $acompanante)
-          <div class="row">
-             <div class="col-md-3">
-                <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
-             </div>
-             <div class="col-md-3">
-               <label> {{$acompanante->get_fecha()}} </label>
-             </div>
-             <div class="col-md-3">
-               @if($acompanante->get_fecha_egreso()==null)
-                 {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
-               @else
-                 <label> {{$acompanante->get_fecha_egreso()}} </label>
-               @endif
-             </div>
+        <div class="divTable greyGridTable">
+          <div class="divTableHeading">
+            <div class="divTableRow">
+               <div class="divTableHead">
+                  <label> Nombre </label>
+               </div>
+               <div class="divTableHead">
+                 <label> Fecha ingreso </label>
+               </div>
+               <div class="divTableHead">
+                 <label> Acciones/Fecha egreso </label>
+               </div>
+            </div>
           </div>
-          @endforeach
+          <div class="divTableBody">
+              @foreach($paciente->get_like_paciente_list() as $acompanante)
+                <div class="divTableRow">
+                   <div class="divTableCell">
+                      <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
+                   </div>
+                   <div class="divTableCell">
+                     <label> {{$acompanante->get_fecha()}} </label>
+                   </div>
+                   <div class="divTableCell">
+                     @if($acompanante->get_fecha_egreso()==null)
+                       {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                     @else
+                       <label> {{$acompanante->get_fecha_egreso()}} </label>
+                     @endif
+                   </div>
+                </div>
+                @endforeach
+            </div>
+          </div>
         @endif
-      </div>
      </div><!-- Histórico -->
 
      <div class="collapse" id="resumen_dieta">
@@ -222,40 +256,46 @@
            No hay consumiciones en su internación actual.
          @else
             <h3>Resumen dieta</h3>
-            <div class="row">
-                <div class="col-md-2">
-                   <label> Ración </label>
+            <div class="divTable greyGridTable">
+              <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead">
+                       <label> Ración </label>
+                    </div>
+                    <div class="divTableHead">
+                      <label> Cantidad </label>
+                    </div>
+                    <div class="divTableHead">
+                      <label> Estado </label>
+                    </div>
+                    <div class="divTableHead">
+                      <label> Acciones disponibles </label>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                  <label> Cantidad </label>
-                </div>
-                <div class="col-md-2">
-                  <label> Estado </label>
-                </div>
-                <div class="col-md-2">
-                  <label> Acciones disponibles </label>
-                </div>
-            </div><!--  Título-->
-            @foreach($paciente->historial_activo_generar_informe_get_renglones() as $informe)
-            <div class="row">
-                <div class="col-md-2">
-                   <label> {{$informe->get_racion_name()}} </label>
-                </div>
-                <div class="col-md-2">
-                  <label> {{$informe->get_cantidad()}} </label>
-                </div>
-                <div class="col-md-2">
-                  @if($informe->is_realizado()==true)
-                    <label> Finalizado </label>
-                  @else
-                    <label> No finalizado </label>
-                  @endif
-                </div>
-                <div class="col-md-2">
-                  <label> - </label>
-                </div>
-            </div><!--  Título-->
-            @endforeach
+              </div>
+              <div class="divTableBody">
+                @foreach($paciente->historial_activo_generar_informe_get_renglones() as $informe)
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                       <label> {{$informe->get_racion_name()}} </label>
+                    </div>
+                    <div class="divTableCell">
+                      <label> {{$informe->get_cantidad()}} </label>
+                    </div>
+                    <div class="divTableCell">
+                      @if($informe->is_realizado()==true)
+                        <label> Finalizado </label>
+                      @else
+                        <label> No finalizado </label>
+                      @endif
+                    </div>
+                    <div class="divTableCell">
+                      <label> - </label>
+                    </div>
+                </div><!--  Título-->
+                @endforeach
+              </div>
+            </div>
         @endif
      </div> <!-- Resumen dieta-->
 
