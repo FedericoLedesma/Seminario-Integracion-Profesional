@@ -58,6 +58,6 @@
 		</div>
 	{!!link_to_route('personal.edit', $title = 'Cambiar de sector', $parameters = [$personal],['class' => 'btn btn-warning'], $attributes = [])!!}
   {!!link_to_route('personas.edit', $title = 'Modificar datos personales', $parameters = [$personal->get_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
-  {!!link_to_route('personal.showProfesiones', $title = 'Profesiones', $parameters = [$personal->get_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
+  {!!link_to_route('personal.showProfesiones', $title = 'Especialidades', $parameters = [$personal->get_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
 @endif
 @endsection

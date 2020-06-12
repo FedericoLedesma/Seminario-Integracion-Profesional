@@ -79,7 +79,7 @@ Route::get('/habitaciones/historial/{id}', 'HabitacionController@historial')
 Route::resource('/habitaciones', 'HabitacionController');
 Route::resource('/camas', 'CamaController');
 Route::get('/pacientes/historial/{id}', 'PacienteController@historial')
-->name('pacientes.historial');
+	->name('pacientes.historial');
 Route::resource('/pacientes', 'PacienteController');
 Route::post('/menu_persona/pacientes/{paciente}/patologias','PacienteController@getPatologias');
 Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@alta')
@@ -111,13 +111,18 @@ Route::get('/personal/ingresarNuevo/personal', 'PersonalController@createPersona
 	->name('personal.createPaciente');
 Route::get('/personal/profesiones/show/{personal_id}', 'PersonalController@showProfesiones')
 	->name('personal.showProfesiones');
+Route::get('/personal/profesiones/add/', 'PersonalController@addProfesion')
+	->name('personal.addProfesion');
 Route::resource('/personal', 'PersonalController');
 Route::get('/profesion/agregar_a_personal/{personal_id}/{profesion_id}', 'ProfesionController@agregar')
 	->name('profesion.agregar');
 Route::get('/profesion/quitar_a_personal/{personal_id}/{profesion_id}', 'ProfesionController@quitar')
 	->name('profesion.quitar');
 Route::resource('/profesion', 'ProfesionController');
+Route::resource('/especialidad', 'EspecialidadController');
 
+Route::get('/personas/historial/{id}', 'PersonaController@historial')
+	->name('personas.historial');
 Route::resource('/personas', 'PersonaController');
 Route::resource('/patologias', 'PatologiaController');
 Route::get('/patologias/{patologia}/agregarAlimentosProhibidos',["as"=>"patologia.agregarAlimentosProhibidos", "uses"=> 'PatologiaController@agregarAlimentosProhibidos']);

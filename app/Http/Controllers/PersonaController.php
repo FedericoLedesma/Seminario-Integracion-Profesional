@@ -41,7 +41,7 @@ class PersonaController extends Controller
             break;
           case 'busqueda_dni':
             $personas=Persona::findByNumeroDoc($query);
-            
+
             $busqueda_por="DNI";
             break;
           case 'busqueda_name':
@@ -227,4 +227,10 @@ class PersonaController extends Controller
           'success' => 'No tiene permiso para eliminar usuario'
       ]);
     }*/
+
+    public function historial($id){
+      $persona = Persona::find($id);
+      return view('admin_personas.personas.historial',compact('persona'));
+    }
+
 }

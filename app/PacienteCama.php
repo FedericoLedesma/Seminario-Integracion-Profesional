@@ -86,6 +86,8 @@ class PacienteCama extends Model
       return $paciente;
     }
 
+    public function get_paciente_id(){return $this->paciente_id;}
+
     public static function buscar_paciente($id_cama){
       $res = Array();
       $con = static::where('cama_id','=',$id_cama)->get();

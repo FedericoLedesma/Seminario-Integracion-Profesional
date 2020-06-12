@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profesion;
+use App\Especialidad;
 
 class ProfesionController extends Controller
 {
@@ -142,7 +143,7 @@ class ProfesionController extends Controller
 
       public function agregar($personal_id,$profesion_id){
         $personal = Personal::find($personal_id);
-        $profesion = Profesion::find($profesion_id);
+        $profesion = Especialidad::find($profesion_id);
         if (($personal<>null)&&($profesion<>null)){
           $personal->add_profesion($profesion);
           return response()->json([
@@ -158,7 +159,7 @@ class ProfesionController extends Controller
 
       public function quitar($personal_id,$profesion_id){
         $personal = Personal::find($personal_id);
-        $profesion = Profesion::find($profesion_id);
+        $profesion = Especialidad::find($profesion_id);
         if (($personal<>null)&&($profesion<>null)){
           $personal->del_profesion($profesion);
           return response()->json([

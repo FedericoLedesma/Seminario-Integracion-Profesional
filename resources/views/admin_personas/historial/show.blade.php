@@ -23,7 +23,9 @@
 
 
 	    <div class="table-responsive">
-	    <h2>Historial de {{$historial->get_paciente_name()}} desde {{$historial->get_fecha_ingreso()}}</h2>
+	    <h2>Historial de {{$historial->get_paciente_name()}} desde {{$historial->get_fecha_ingreso()}}
+      {!!link_to_route('pacientes.historial', $title ='Detalles', $parameters = [$historial->get_paciente()->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
+      </h2>
         <div class="col-md-3 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">

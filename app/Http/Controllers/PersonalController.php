@@ -9,6 +9,7 @@ use App\Paciente;
 use App\Persona;
 use App\Sector;
 use App\Personal;
+use App\Profesion;
 use Carbon\Carbon;
 
 class PersonalController extends Controller
@@ -175,5 +176,17 @@ class PersonalController extends Controller
           'success' => 'No se pudo eliminar el personal !'
         ]);
       }
+    }
+
+    public function addProfesion(Request $request){
+      Log::debug($request);
+      $personal_id = $request->get('personal_id');
+      $profesion_id = $request->get('profesion_id');
+      $personal = Personal::find($personal_id);
+      $profesion = Profesion::find($profesion_id);
+      if (($personal<>null)&&($profesion<>null)){
+        $personal->add_profesion($profesion);
+      }
+      return $this->showProfesiones($personal_id);
     }
 }

@@ -39,12 +39,12 @@
 </div>
 
 <div class="container">
-    <!--  <div class="row">-->
+
     <div class="table-responsive">
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 	{!!	Form::label('titulo_tabla', 'Profesiones de '.$personal->get_name())!!}
+				 	<h3>Especialidades de {{$personal->get_name()}} {{$personal->get_apellido()}}</h3>
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
@@ -58,14 +58,12 @@
 
 						<tbody>
 						@if($profesiones)
-							@foreach($profesiones as $personal)
+							@foreach($profesiones as $profesion)
 							<tr>
-								<td>{{$personal->get_id()}}</td>
-								<td>{{$personal->get_name()}} {{$personal->get_apellido()}}</td>
-								<td>{!!link_to_route('profesion.show', $title = 'VER', $parameters = [$personal],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{{$profesion->get_id()}}</td>
+								<td>{{$profesion->get_name()}}</td>
+								<td>{!!link_to_route('profesion.show', $title = 'VER', $parameters = [$profesion],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($personal, ['route' => ['profesion.destroy', $personal], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $personal }}">Eliminar</button></td>
 								{!! Form::close() !!}
 
 							</tr>
@@ -77,5 +75,21 @@
 				</div>
 			  </div>
 	</div>
+
+	<h3>Asignar una especialidad</h3>
+	<div>
+		{!!Form::open(['method'=>'get','action'=>'PersonalController@addProfesion'])!!}
+			<input id='personal_id' name='personal_id' value={{$personal->get_id()}} size=3></input>
+			@if(true)
+				<select id='profesion_id' name='profesion_id'>
+					@foreach($personal->get_profesiones_disponibles() as $profesion)
+						<option value='{{$profesion->get_id()}}'> {{$profesion->get_name()}} </option>
+					@endforeach
+				</select>
+			@endif
+		{!!	Form::submit('Agregar',['class' => 'btn btn-success'])!!}
+		{!! Form::close() !!}
+	</div>
 </div>
+
 @endsection

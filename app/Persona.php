@@ -429,4 +429,51 @@ class Persona extends Model
   }
 
   public function get_acompanantes_desde_persona(){Acompanante::get_por_persona($this);}
+  public function to_paciente(){
+    $res = Paciente::find($this->get_id());
+    if ($res == null){
+      return null;
+    }
+    return $res;
+  }
+
+  public function get_historial_internacion_activo(){
+    $paciente = $this->to_paciente();
+    if ($paciente==null){
+      return null;
+    }
+    return $paciente->get_historial_internacion_activo();
+  }
+
+  public function get_historico_internacion(){
+    $paciente = $this->to_paciente();
+    if ($paciente==null){
+      return null;
+    }
+    return $paciente->get_historico_internacion();
+  }
+
+  public function get_like_paciente_list(){
+    $paciente = $this->to_paciente();
+    if ($paciente==null){
+      return null;
+    }
+    return $paciente->get_like_paciente_list();
+  }
+
+  public function historial_activo_generar_informe(){
+    $paciente = $this->to_paciente();
+    if ($paciente==null){
+      return null;
+    }
+    return $paciente->historial_activo_generar_informe();
+  }
+
+  public function historial_activo_generar_informe_get_renglones(){
+    $paciente = $this->to_paciente();
+    if ($paciente==null){
+      return null;
+    }
+    return $paciente->historial_activo_generar_informe_get_renglones();
+  }
 }
