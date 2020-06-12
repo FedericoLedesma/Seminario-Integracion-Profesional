@@ -33,7 +33,7 @@ class Movimiento extends Model
     $all_m=Movimiento::all();
     $movimientos=array();
     foreach ($all_m as $movimiento) {
-      $f=date_create($movimiento->creado);      
+      $f=date_create($movimiento->creado);
       if(($movimiento->racionDisponible->horario_racion->horario->id==$horario_id)&&($fecha== $f->format('Y-m-d'))){
         array_push($movimientos,$movimiento);
       }
@@ -59,7 +59,42 @@ class Movimiento extends Model
       ->orderBy('created_at', 'asc');
     }return null;
   }
-  public function racion_disponible(){
+  public static function findByFechaNombreRacion($fecha,$racion_name)
+  {
+    $movimientos_por_nombre=Movimiento::allPorNombreRacion($racion_name);
+    $movimientos=array();
+    foreach ($movimientos_por_nombre as $movimiento) {
+      $f=date_create($movimiento->creado);
+      if($fecha == $f->format('Y-m-d')){
+        array_push($movimientos,$movimiento);
+      }
+    }return $movimientos;
+  }
+  public static function findByHorarioFechaNombreRacion($horario_id,$fecha,$racion_name)
+  {
+    $movimientos_por_nombre=Movimiento::findByFechaNombreRacion($fecha,$racion_name);
+    $movimientos=array();
+    foreach ($movimientos_por_nombre as $movimiento) {
+      if($movimiento->racion_disponible->horario_racion->horario->id==$horario_id){
+        array_push($movimientos,$movimiento);
+      }
+    }return $movimientos;
+  }
+  public static function allPorNombreRacion($racion_name)
+  {
+    $all_m=Movimiento::all();
+    $movimientos=array();
+    foreach ($all_m as $movimiento) {
+      $str=$movimiento->racion_disponible->horario_racion->racion->name;
+      if(!stristr($str,$racion_name) === false){
+        array_push($movimientos,$movimiento);
+      }
+    }
+    return $movimientos;
+  }
+
+  public function racion_disponible()
+  {
     return $this->belongsTo('App\RacionesDisponibles', 'racion_disponible_id');
   }
   public function racion()

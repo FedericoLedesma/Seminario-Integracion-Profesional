@@ -19,19 +19,34 @@ class MovimientoController extends Controller
       $horario_id=$request->get('busqueda_horario_por');
       $fecha=$request->get('fecha');
       $busqueda_por=null;
-      $query=null;
+      $query=$request->get('racion_name');;
       Log::info($request);
-      if(!empty($horario_id)){
+      if(!empty($fecha)){
         if($horario_id=='0'){
-          Log::info('Buscando por fecha todos los horarios');
-          $movimientos=Movimiento::allFecha($fecha);
-          $busqueda_por="Fecha ".$fecha;
-          $query=" ";
+          if($query==""){
+            Log::info('Buscando por fecha todos los horarios');
+            $movimientos=Movimiento::allFecha($fecha);
+            $busqueda_por="Fecha ".$fecha;
+            $query=" ";
+          }else{
+            Log::info('Buscando por fecha nombre racion todos los horarios');
+            $movimientos=Movimiento::findByFechaNombreRacion($fecha,$query);
+            $busqueda_por="Fecha ".$fecha;
+            $query=" Racion: ".$query;
+          }
         }else {
-          $movimientos=Movimiento::allHorarioFecha($horario_id,$fecha);
-          $busqueda_por="Fecha ".$fecha;
-          $horario=Horario::findById($horario_id);
-          $query="Horario: ".$horario->name;
+          if($query==""){
+            $movimientos=Movimiento::allHorarioFecha($horario_id,$fecha);
+            $busqueda_por="Fecha ".$fecha;
+            $horario=Horario::findById($horario_id);
+            $query="Horario: ".$horario->name;
+          }else{
+            $movimientos=Movimiento::findByHorarioFechaNombreRacion($horario_id,$fecha,$query);
+            $busqueda_por="Fecha ".$fecha;
+            $horario=Horario::findById($horario_id);
+            $busqueda_por="Fecha ".$fecha." nombre racion horario";
+            $query="Horario: ".$horario->name."; Racion: ".$query;
+          }
         }
       }else {
         $movimientos=Movimiento::all();
