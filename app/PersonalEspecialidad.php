@@ -50,7 +50,7 @@ class PersonalEspecialidad extends Model
     public static function create_by_personal_profesion($personal,$profesion){
       $new = new PersonalEspecialidad([
         'personal_id'=>$personal->get_id(),
-        'profesion_id'=>$profesion->get_id(),
+        'especialidad_id'=>$profesion->get_id(),
         'fecha'=>Carbon::now(),
       ]);
       $new->save();

@@ -8,6 +8,7 @@ use App\Persona;
 use App\PersonalEspecialidad;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Especialidad;
 
 class Personal extends Model
 {
@@ -176,6 +177,24 @@ class Personal extends Model
 
       public function del_profesion($profesion){
         PersonalEspecialidad::destroy_by_personal_profesion($this,$profesion);
+      }
+
+      public function get_profesiones_disponibles(){
+        $res = array();
+        $all = Especialidad::all();
+        $asignadas = $this->get_profesiones();
+        foreach ($all as $prof) {
+          $flag = true;
+          foreach ($asignadas as $asignada) {
+            if ($prof->get_id()==$asignada->get_id()){
+              $flag = false;
+            }
+          }
+          if ($flag==true){
+            array_push($res,$prof);
+          }
+        }
+        return $res;
       }
 
 }

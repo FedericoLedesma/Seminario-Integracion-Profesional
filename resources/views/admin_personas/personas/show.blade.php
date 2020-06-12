@@ -89,7 +89,7 @@
 		</div>
 		</div>
 	{!!link_to_route('personas.edit', $title = 'MODIFICAR', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
-
+  {!!link_to_route('personas.historial', $title = 'Historial', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}
 
 
 
