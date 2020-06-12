@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
     	]);
 
       $acciones = ['alta','baja','modificacion','ver'];
-      $tablas = ['usuarios','roles','patologias','personas','raciones','alimentos',
+      $tablas = ['usuarios','roles','patologias','permisos','personas','raciones','alimentos',
       'tipos-patologias','raciones-disponibles','sectores','historial','menu','camas',
       'profesion','personal'];
 

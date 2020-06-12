@@ -85,8 +85,8 @@ class ProfesionController extends Controller
        */
       public function show($id)
       {
-          $cama=Profesion::find($id);
-          return view('admin_personas.personal.profesion.show',compact('cama'));
+          $profesion=Profesion::find($id);
+          return view('admin_personas.personal.profesion.show',compact('profesion'));
       }
 
       /**

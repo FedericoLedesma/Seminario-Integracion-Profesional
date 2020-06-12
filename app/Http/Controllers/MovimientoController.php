@@ -20,9 +20,9 @@ class MovimientoController extends Controller
       $fecha=$request->get('fecha');
       $busqueda_por=null;
       $query=null;
-      Log::info($horario_id);
-      if($request){
-        if($horario_id==0){
+      Log::info($request);
+      if(!empty($horario_id)){
+        if($horario_id=='0'){
           Log::info('Buscando por fecha todos los horarios');
           $movimientos=Movimiento::allFecha($fecha);
           $busqueda_por="Fecha ".$fecha;
@@ -30,7 +30,8 @@ class MovimientoController extends Controller
         }else {
           $movimientos=Movimiento::allHorarioFecha($horario_id,$fecha);
           $busqueda_por="Fecha ".$fecha;
-          $query="Horario ".$horario_id;
+          $horario=Horario::findById($horario_id);
+          $query="Horario: ".$horario->name;
         }
       }else {
         $movimientos=Movimiento::all();

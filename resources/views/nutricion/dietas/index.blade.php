@@ -131,7 +131,7 @@
 							<div class="divTableCell">{{$dieta->patologia->name}}</div>
 
 							<div class="divTableCell">{!!link_to_route('dietas.show', $title = 'VER', $parameters = [$dieta],['class' => 'btn btn-info'], $attributes = [])!!}
-						</a><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $dieta }}">Eliminar</button>
+						
 						</div>
 					</div>
 				</div>

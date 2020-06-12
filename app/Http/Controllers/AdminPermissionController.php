@@ -14,15 +14,17 @@ class AdminPermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
      public function __construct()
-   	{
-   		 $this->middleware('auth');
-   	}
+     {
+       $this->middleware(['permission:alta_permisos'],['only'=>['create','store']]);
+       $this->middleware(['permission:baja_permisos'],['only'=>['destroy']]);
+       $this->middleware(['permission:modificacion_permisos'],['only'=>['edit']]);
+       $this->middleware(['permission:ver_permisos'],['only'=>['index']]);
+      $this->middleware('auth');
+     }
 
     public function index(Request $request)
     {
-        //
-        $user=Auth::user();
-        if ($user->can('ver_permisos')){
+
         $query = $request->get('search');
   			$busqueda_por= $request->get('busqueda_por');
         if($request){
@@ -45,9 +47,8 @@ class AdminPermissionController extends Controller
   						break;
   				}
         }
-        	return  view('admin.permisos.index', compact('permisos','query','busqueda_por'));
-        }
-        return  redirect('/home');
+        return  view('admin.permisos.index', compact('permisos','query','busqueda_por'));
+
     }
 
     /**
@@ -57,17 +58,14 @@ class AdminPermissionController extends Controller
      */
     public function create()
     {
-        //esto se deben desactivar todas las rutas de abm de permisos
-        $user=Auth::user();
-        $acciones=['alta','baja','modificacion','ver'];
-        $tablas=['usuarios','roles','patologias','personas','raciones','alimentos',
-        'tipos-patologias','raciones-disponibles','sectores','historial','menu','camas',
-        'profesion','personal'];
-        if ($user->can('alta_permisos')){
-    	     return view('admin.permisos.create',compact('acciones','tablas'));
-         }
-    	//return view('admin.permisos.index');
-    	return redirect('/admin/permisos');
+
+      $acciones=['alta','baja','modificacion','ver'];
+      $tablas=['usuarios','roles','patologias','personas','raciones','alimentos',
+      'tipos-patologias','raciones-disponibles','sectores','historial','menu','camas',
+      'profesion','personal'];
+
+  	  return view('admin.permisos.create',compact('acciones','tablas'));
+
     }
 
     /**

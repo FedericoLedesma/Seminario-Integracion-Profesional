@@ -16,17 +16,6 @@
 	    <h1>Patologias registradas</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('patologias.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Patologia</button>

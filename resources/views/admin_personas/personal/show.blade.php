@@ -24,7 +24,7 @@
 
 	    <div class="table-responsive">
 	    <h2>Datos de {{$personal->get_name()}}</h2>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>

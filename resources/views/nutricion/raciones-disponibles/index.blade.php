@@ -167,12 +167,23 @@ div.blueTable {
 									<div class="divTableCell">{{$racionDisponible->fecha()}}</div>
 									<div class="divTableCell">{{$racionDisponible->stock_original}}</div>
 									<div class="divTableCell">{{$racionDisponible->cantidad_restante}}</div>
-
+                  @if($racionDisponible->fecha >= date("Y-m-d"))
 									<div class="divTableCell"><a href="#" class="btn btn-primary pull-right btn-agregar" data-id="{{$racionDisponible}}" data-toggle="modal" data-target="#create-stock">
 											Agregar
-									</a><a href="#" class="btn btn-success pull-right btn-movimientos" data-toggle="modal" data-target="#modal-movimientos-{{$racionDisponible->id}}">
+									</a>
+                  @else
+                    <div class="divTableCell"><a href="#" class="btn btn-primary pull-right btn-agregar disabled" data-id="{{$racionDisponible}}" data-toggle="modal" data-target="#create-stock" >
+  											Agregar
+  									</a>
+                  @endif
+                  <a href="#" class="btn btn-success pull-right btn-movimientos" data-toggle="modal" data-target="#modal-movimientos-{{$racionDisponible->id}}">
 											Movimientos
-									</a><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $racionDisponible }}">Eliminar</button>
+									</a>
+                  @if($racionDisponible->fecha >= date("Y-m-d"))
+                  <button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $racionDisponible }}">Eliminar</button>
+                  @else
+                  <button type="submit" class="btn btn-danger eliminar disabled" data-token="{{ csrf_token() }}" data-id="{{ $racionDisponible }}">Eliminar</button>
+                  @endif
 								</div>
 							</div>
 						</div>

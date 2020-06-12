@@ -5,22 +5,11 @@
 @endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($sector)
 	    <div class="table-responsive">
 	    <h2>Sector:  {{$sector->name}}</h2>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
