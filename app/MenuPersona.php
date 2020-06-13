@@ -596,7 +596,7 @@ class MenuPersona extends Model
       $raciones_disponibles = RacionesDisponibles::buscar_por_fechas_menores($fecha);
       foreach ($all as $menu) {
         foreach ($raciones_disponibles as $rac_dis) {
-          if($menu->get_racion_disponible_id()==$rac_dis->get_id()){
+          if(($menu->get_racion_disponible_id()==$rac_dis->get_id())&&($menu->realizado)){
             array_push($res,$menu);
           }
         }
@@ -629,7 +629,7 @@ class MenuPersona extends Model
     $all=static::buscar_entre_fechas_persona_id($persona_id,$fecha1,$fecha2);
     Log::debug('Horario id: '.$horario_id);
     foreach ($all as $menu) {
-      if ($menu->has_horario_id($horario_id)==true){
+      if (($menu->has_horario_id($horario_id)==true)&&($menu->realizado)){
         array_push($res,$menu);
       }
     }

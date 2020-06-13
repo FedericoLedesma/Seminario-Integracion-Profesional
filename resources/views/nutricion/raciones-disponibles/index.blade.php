@@ -206,6 +206,7 @@ div.blueTable {
 														<th scope="col">Racion</th>
 														<th scope="col">Horario</th>
 														<th scope="col">Fecha</th>
+                            <th scope="col">Fecha del mov.</th>
 														<th scope="col">Tipo de Mov.</th>
 														<th scope="col">Cantidad</th>
 														<th scope="col">ID Personal Responsable</th>
@@ -217,6 +218,7 @@ div.blueTable {
 														<td>{{$movimiento->racion_disponible->horario_racion->racion->name}}</td>
 														<td>{{$movimiento->racion_disponible->horario_racion->horario->name}}</td>
 														<td>{{$movimiento->racion_disponible->fecha()}}</td>
+                            <td>{{$movimiento->creado}}</td>
 														<td>{{$movimiento->tipoMovimiento->name}}</td>
 														<td>{{$movimiento->cantidad}}</td>
 														<td>

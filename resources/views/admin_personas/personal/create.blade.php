@@ -31,7 +31,7 @@
 
 	    <div>
         <div>
-          <a href="{{action('PersonalController@createPersonal')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>
+          <a href="{{action('PersonalController@createPersonal')}}" class="btn btn-primary">Ingresar a personal nuevo</a>
         </div>
         <div class="container">
             <!--  <div class="row">-->
