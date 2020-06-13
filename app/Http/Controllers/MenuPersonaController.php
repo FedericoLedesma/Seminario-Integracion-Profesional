@@ -445,6 +445,25 @@ class MenuPersonaController extends Controller
       }
 
     }
+    public function getMenuDePersona(Request $request){
+      Log::info($request);
+      $menus=MenuPersona::all();
+      $persona_id=1;
+      $query="";
+      $fecha_desde=$request->get('fecha_desde');
+      $fecha_hasta=$request->get('fecha_hasta');
+      $horario_id=$request->get('busqueda_horario_por');
+      $busqueda_por="";
+      if($horario_id=="0"){
+        //Se buscara por toodos los Horarios
+        $menus=MenuPersona::allPersonaEntreFechas($persona_id,$fecha_desde,$fecha_hasta);
+      }else {
+        $menus=MenuPersona::allPersonaEntreFechasHorario($persona_id,$fecha_desde,$fecha_hasta,$horario_id);
+      }
+
+      $horarios=array();
+      return view('admin_personas.pacientes.menus_persona_fecha',compact('menus','query','busqueda_por','horarios'));
+    }
 
 
 }

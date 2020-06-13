@@ -73,7 +73,7 @@
 @endsection
 @section('content')
 <h2>Informes de menús</h2>
-{!!Form::open(['route'=>'informe.generar-informe','method'=>'POST']) !!}
+{!!Form::open(['route'=>'informe.generar-informe','method'=>'POST','target'=>"_blank"]) !!}
 <div class="container">
   <div class="table-responsive">
 		<div class="col-md-10 col-md-offset-1">

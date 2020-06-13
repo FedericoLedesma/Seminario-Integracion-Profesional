@@ -80,6 +80,8 @@ Route::resource('/habitaciones', 'HabitacionController');
 Route::resource('/camas', 'CamaController');
 Route::get('/pacientes/historial/{id}', 'PacienteController@historial')
 	->name('pacientes.historial');
+Route::post('/pacientes/historial/raciones',["as"=>"pacientes.historial.raciones", "uses"=>'MenuPersonaController@getMenuDePersona']);
+
 Route::resource('/pacientes', 'PacienteController');
 Route::post('/menu_persona/pacientes/{paciente}/patologias','PacienteController@getPatologias');
 Route::get('/historialInternacion/alta/{id}', 'HistorialInternacionController@alta')

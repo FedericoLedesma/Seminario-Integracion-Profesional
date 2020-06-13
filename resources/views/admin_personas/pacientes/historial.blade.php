@@ -9,17 +9,7 @@
 @endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
 
--->
-</style>
 	   @include('layouts.error')
 	  	@if($paciente)
 
@@ -30,6 +20,47 @@
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_acompanhamiento">Acompañamiento</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Resumen dieta</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Dieta</button>
+      {!!Form::open(['route'=>'pacientes.historial.raciones','method'=>'POST','target'=>"_blank"]) !!}
+      <table>
+      	<thead>
+      		<tr>
+      			<td>
+      					{!!	Form::label('fecha', 'Fecha Desde')!!}
+      			</td>
+      			<td>
+      					{!!	Form::label('fecha_hasta', 'Fecha Hasta')!!}
+      			</td>
+      			<td>
+      					{!!	Form::label('horario', 'Horario')!!}
+      			</td>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr>
+      			<td>
+      					{!!Form::date('fecha_desde', \Carbon\Carbon::now(),['id'=>'fecha_desde']);!!}
+      			</td>
+      			<td>
+      					{!!Form::date('fecha_hasta_', \Carbon\Carbon::now(),['id'=>'fecha_hasta_']);!!}
+      			</td>
+      			<td>
+      			 <select class="browser-default custom-select" id="busqueda_horario_por" name="busqueda_horario_por">
+      				 <option value="0" >Todos</option>
+      				 @if($horarios)
+      					 @foreach($horarios as $horario)
+      						 <option value="{{$horario->id}}" >{{$horario->name}}</option>
+      					 @endforeach
+      				 @endif
+      			 </select>
+      			</td>
+            <td>
+              
+              	{!!	Form::submit('Buscar',['class'=>'btn btn-success'])!!}
+
+            </td>
+      		</tr>
+      	</tbody>
+      </table>
       <div class="collapse" id="historial_actual">
     	  <h4> Historial actual </h4>
         @if($paciente->get_historial_internacion_activo()==null)

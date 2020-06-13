@@ -34,7 +34,7 @@ class CreateAcompanantesTable extends Migration
 
             $table->timestamps();
 
-            #$table->unique(['paciente_id','fecha'], 'unique_acompanante_paciente_id_fecha');#Cada paciente puede tener un acompañante por fecha
+            $table->unique(['paciente_id','fecha','persona_id'], 'unique_acompanante_paciente_id_fecha');#Cada paciente puede tener un acompañante por fecha
             #$table->unique(['persona_id','fecha'], 'unique_acompanante_acompanante_id_fecha');#Cada acompañante puede tener un paciente por fecha
             #$table->unique(['persona_id','paciente_id','fecha'], 'unique_acompanante_acompanante_id_paciente_id_fecha');#Por si las moscas, comentar si pincha...
         });

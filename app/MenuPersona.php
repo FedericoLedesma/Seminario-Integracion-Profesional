@@ -94,6 +94,17 @@ class MenuPersona extends Model
       }
     }return $mp;
   }
+  public function scopeAllPersonaEntreFechasHorario($query,$persona_id,$fecha_desde,$fecha_hasta,$horario_id)
+  {
+    $mp=array();
+    $menus=MenuPersona::where('persona_id',$persona_id)->get();
+    foreach ($menus as $menu) {
+      if((($menu->racionDisponible->fecha>=$fecha_desde)&&($menu->racionDisponible->fecha<=$fecha_hasta)&&($horario_id==$menu->racionDisponible->horario_racion->horario->id))){
+        array_push($mp,$menu);
+        Log::info($menu);
+      }
+    }return $mp;
+  }
   public function scopeAllHorarioFecha($query,$horario_id,$fecha)
   {
     $mp=array();

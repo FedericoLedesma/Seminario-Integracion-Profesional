@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use App\Paciente;
 use App\TipoDocumento;
 use App\Persona;
+use App\Horario;
 use App\Patologia;
 use Illuminate\Support\Facades\Log;
 
@@ -83,6 +84,7 @@ class PacienteController extends Controller
 
   public function historial($id){
     $paciente = Paciente::find($id);
-    return view('admin_personas.pacientes.historial',compact('paciente'));
+    $horarios=Horario::all();
+    return view('admin_personas.pacientes.historial',compact('paciente','horarios'));
   }
 }
