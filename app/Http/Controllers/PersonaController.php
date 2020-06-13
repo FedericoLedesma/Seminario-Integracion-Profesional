@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Persona;
 use App\TipoDocumento;
 use App\Patologia;
+use App\Horario;
 use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonaRequest;
@@ -230,7 +231,8 @@ class PersonaController extends Controller
 
     public function historial($id){
       $persona = Persona::find($id);
-      return view('admin_personas.personas.historial',compact('persona'));
+      $horarios = Horario::all();
+      return view('admin_personas.personas.historial',compact('persona','horarios'));
     }
 
 }

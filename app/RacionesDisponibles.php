@@ -277,4 +277,12 @@ class RacionesDisponibles extends Model
         where('fecha','<=',$f_fin)->
         get();
     }
+
+    public static function buscar_por_fechas_menores($fecha){
+      return static::where('fecha','>=',$fecha)->get();
+    }
+
+    public function has_horario_id($horario_id){
+      return $this->get_horario_racion()->has_horario_id($horario_id);
+    }
 }

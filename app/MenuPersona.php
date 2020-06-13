@@ -580,6 +580,64 @@ class MenuPersona extends Model
     return $this->get_racion_disponible()->is_in_date_range($days);
   }
 
+  public static function buscar_entre_fechas_persona_id($persona_id,$fecha1,$fecha2){
+    if (($fecha1==null)&&($fecha2==null)){
+      return static::where('persona_id','=',$persona_id)->get();
+    }
+    if (($fecha1==null)||($fecha2==null)){
+      if ($fecha1<>null){
+        $fecha = $fecha1;
+      }
+      if ($fecha2<>null){
+        $fecha = $fecha2;
+      }
+      $res = array();
+      $all = static::where('persona_id','=',$persona_id)->get();
+      $raciones_disponibles = RacionesDisponibles::buscar_por_fechas_menores($fecha);
+      foreach ($all as $menu) {
+        foreach ($raciones_disponibles as $rac_dis) {
+          if($menu->get_racion_disponible_id()==$rac_dis->get_id()){
+            array_push($res,$menu);
+          }
+        }
+      }
+      return $res;
+    }
+    if ($fecha1<=$fecha2){
+      $min = $fecha1;
+      $max = $fecha2;
+    }
+    else{
+      $min = $fecha2;
+      $max = $fecha1;
+    }
+    $res = array();
+    $all = static::where('persona_id','=',$persona_id)->get();
+    $raciones_disponibles = RacionesDisponibles::buscar_entre_fechas($min,$max);
+    foreach ($all as $menu) {
+      foreach ($raciones_disponibles as $rac_dis) {
+        if($menu->get_racion_disponible_id()==$rac_dis->get_id()){
+          array_push($res,$menu);
+        }
+      }
+    }
+    return $res;
+  }
 
+  public static function buscar_entre_fechas_persona_id_horario_id($persona_id,$fecha1,$fecha2,$horario_id){
+    $res = array();
+    $all=static::buscar_entre_fechas_persona_id($persona_id,$fecha1,$fecha2);
+    Log::debug('Horario id: '.$horario_id);
+    foreach ($all as $menu) {
+      if ($menu->has_horario_id($horario_id)==true){
+        array_push($res,$menu);
+      }
+    }
+    return $res;
+  }
+
+  public function has_horario_id($horario_id){
+    return $this->get_racion_disponible()->has_horario_id($horario_id);
+  }
 
 }

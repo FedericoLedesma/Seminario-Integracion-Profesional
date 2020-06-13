@@ -103,5 +103,11 @@ class HorarioRacion extends Model
       $this->racion_id = $racion->get_id();
     }
 
+    public function has_horario_id($horario_id){
+      if ($this->get_horario_id()==$horario_id){
+        return true;
+      }
+      return false;
+    }
 
 }

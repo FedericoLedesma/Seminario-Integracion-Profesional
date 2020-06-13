@@ -19,7 +19,6 @@
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_historico">Histórico</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_acompanhamiento">Acompañamiento</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Resumen dieta</button>
-      <button class="btn btn-info" data-toggle="collapse" data-target="#resumen_dieta">Dieta</button>
       {!!Form::open(['route'=>'pacientes.historial.raciones','method'=>'POST','target'=>"_blank"]) !!}
       <table>
       	<thead>
@@ -54,7 +53,9 @@
       			 </select>
       			</td>
             <td>
-              
+              <div class='collapse'>
+                <input id='persona_id' name='persona_id' value={{$paciente->get_id()}}></input>
+              </div>
               	{!!	Form::submit('Buscar',['class'=>'btn btn-success'])!!}
 
             </td>

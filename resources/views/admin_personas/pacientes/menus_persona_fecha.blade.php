@@ -78,12 +78,12 @@
 
 	  	<title>Menu persona</title>
 
-	    <h1>Menús consumidos </h1>
+	    <h1>Menús consumidos por {{$persona->get_name()}} {{$persona->get_apellido()}} [ID: {{$persona->get_id()}}]</h1>
 	      @include('layouts.error')
 
 <div>
 	@if($query)
-		<div id="alert" name="alert-raciones" class="alert alert-info">Menús consumidos: {{$busqueda_por}} {{$query}}</div>
+		<div id="alert" name="alert-raciones" class="alert alert-info">Menús consumidos por: {{$busqueda_por}} {{$query}}</div>
 	@endif
 </div>
 	<div class="container">
@@ -103,9 +103,9 @@
 								@foreach($menus as $menu_persona)
 									<div class="divTableRow">
 										{{Log::debug(' Persona id: '.$menu_persona)}}
-										<div class="divTableCell">{{$menu_persona->racionDisponible->horario_racion->racion->name}}</div>
 										<div class="divTableCell">{{$menu_persona->get_horario_name()}}</div>
 										<div class="divTableCell">{{$menu_persona->get_racion_name()}}</div>
+										<div class="divTableCell">{{$menu_persona->get_fecha()}}</div>
 									</div>
 							@endforeach
 						@endif
