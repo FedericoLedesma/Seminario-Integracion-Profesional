@@ -99,5 +99,9 @@
 @endsection
 @section('script')
  <script src="{{asset('js/cama-script.js')}}"></script>
-
+ <script type="text/javascript">
+  $(document).ready(function(){
+     document.getElementById("nav-administracion").setAttribute("class", "nav-link active");
+    });
+ </script>
 @endsection

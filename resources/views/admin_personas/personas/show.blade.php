@@ -96,3 +96,10 @@
 
 @endif
 @endsection
+@section('script')
+<script type="text/javascript">
+ $(document).ready(function(){
+   document.getElementById("nav-personas").setAttribute("class", "nav-link active");
+   });
+</script>
+@endsection

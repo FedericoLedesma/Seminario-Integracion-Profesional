@@ -116,6 +116,13 @@ USUARIOS REGISTRADOS
 				<!--</div>-->
 @endsection
 @section('script')
- <script src="{{asset('js/user-script.js')}}"></script>
+ 	<script src="{{asset('js/user-script.js')}}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 console.log("hola");
+			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");
+			 document.getElementById("nav-usuarios-todos").setAttribute("class", "nav-link active");
+			});
+	</script>
 
 @endsection

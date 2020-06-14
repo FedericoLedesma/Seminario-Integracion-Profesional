@@ -133,3 +133,10 @@
     {!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = ['class'=>'btn btn-warning'])!!}
   </div>
 @endsection
+@section('script')
+<script type="text/javascript">
+ $(document).ready(function(){
+   document.getElementById("nav-personas").setAttribute("class", "nav-link active");
+   });
+</script>
+@endsection

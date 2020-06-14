@@ -54,7 +54,7 @@
       <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-stock">
           Agregar Stock
       </a></td>
-    
+
       </tr>
 		</table>
 		</div>
@@ -127,4 +127,10 @@
 @endsection
 @section('script')
  <script src="{{asset('js/racion-disponibles-script.js')}}"></script>
+ <script type="text/javascript">
+    $(document).ready(function(){
+      document.getElementById("nav-nutricion").setAttribute("class","nav-link active");
+      document.getElementById("nav-disponibilidad").setAttribute("class","nav-link active");
+    });
+ </script>
 @endsection

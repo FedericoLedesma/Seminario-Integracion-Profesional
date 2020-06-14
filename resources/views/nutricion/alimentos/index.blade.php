@@ -97,5 +97,11 @@
 @endsection
 @section('script')
  <script src="{{asset('js/alimento-script.js')}}"></script>
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		document.getElementById("nav-nutricion").setAttribute("class","nav-link active");
+ 		document.getElementById("nav-alimentos").setAttribute("class","nav-link active");
+ 		});
+ </script>
 
 @endsection

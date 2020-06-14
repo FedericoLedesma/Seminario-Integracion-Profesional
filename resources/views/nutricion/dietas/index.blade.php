@@ -131,7 +131,7 @@
 							<div class="divTableCell">{{$dieta->patologia->name}}</div>
 
 							<div class="divTableCell">{!!link_to_route('dietas.show', $title = 'VER', $parameters = [$dieta],['class' => 'btn btn-info'], $attributes = [])!!}
-						
+
 						</div>
 					</div>
 				</div>
@@ -139,4 +139,12 @@
 		@endif
 	</div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function(){
+		document.getElementById("nav-nutricion").setAttribute("class","nav-link active");		
+		document.getElementById("nav-dietas").setAttribute("class","nav-link active");
+		});
+</script>
 @endsection

@@ -57,3 +57,11 @@
 		{!! Form::close() !!}
 
 @endsection
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function(){
+		 document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
+		 document.getElementById("nav-patologias-create").setAttribute("class", "nav-link active");
+		});
+</script>
+@endsection

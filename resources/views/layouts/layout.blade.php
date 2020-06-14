@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="dropdown-divider"></div>
           <a href="{{ route('user.config') }}" class="dropdown-item">
 
-        	Configuracion
+        	Configuración
         	<i class="fas fa-angle-right"></i>
           </a>
 
@@ -107,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="{{route('home') }}" class="brand-link">
       <!--  <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">-->
-      <span class="brand-text font-weight-light">Nutricion</span>
+      <span class="brand-text font-weight-light">Nutrición</span>
     </a>
 
     <!-- Sidebar -->
@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">-->
         </div>
         <div class="info">
-          <a href="{{ route('user.perfil') }}" class="d-block">ROL:  </a>
+          <a href="{{ route('user.perfil') }}" class="d-block">ROL:  {{ Auth::user()->getRol() }}  </a>
         </div>
       </div>
 
@@ -128,9 +128,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                  <!--              usuarios        -->
-                 <li>Admin</li>
+
           <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link" id="nav-usuarios">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -139,13 +139,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link active">
+                <a href="{{ route('users.index') }}" class="nav-link" id="nav-usuarios-todos">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('users.create') }}" class="nav-link">
+                <a href="{{ route('users.create') }}" class="nav-link" id="nav-usuarios-create">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Usuario</p>
                 </a>
@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <!--                      -->
            <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link" id="nav-roles">
               <i class="nav-icon fas fa-id-card-alt"></i>
               <p>
                 Roles
@@ -163,13 +163,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('roles.index') }}" class="nav-link desactive">
+                <a href="{{ route('roles.index') }}" class="nav-link" id="nav-roles-todos">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('roles.create') }}" class="nav-link">
+                <a href="{{ route('roles.create') }}" class="nav-link" id="nav-roles-create">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Rol</p>
                 </a>
@@ -177,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
            <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link" id="nav-permisos">
               <i class="nav-icon fa fa-unlock-alt"></i>
               <p>
                 Permisos
@@ -186,13 +186,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('permisos.index') }}" class="nav-link active">
+                <a href="{{ route('permisos.index') }}" class="nav-link" id="nav-permisos-todos">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('permisos.create') }}" class="nav-link">
+                <a href="{{ route('permisos.create') }}" class="nav-link" id="nav-permisos-create">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Permiso</p>
                 </a>
@@ -201,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <!--              personas        -->
          <li class="nav-item has-treeview menu-close">
-           <a href="#" class="nav-link">
+           <a href="#" class="nav-link" id="nav-personas">
              <i class="nav-icon fas fa-user-friends"> </i>
              <p>Personas
                <i class="right fas fa-angle-left"></i>
@@ -209,13 +209,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
            </a>
            <ul class="nav nav-treeview">
              <li class="nav-item">
-               <a href="{{ route('personas.index') }}" class="nav-link">
+               <a href="{{ route('personas.index') }}" class="nav-link" id="nav-personas-todas">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Ver todas</p>
                </a>
              </li>
              <li class="nav-item">
-               <a href="{{ route('personas.create') }}" class="nav-link">
+               <a href="{{ route('personas.create') }}" class="nav-link" id="nav-personas-create">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Agregar Persona</p>
                </a>
@@ -223,34 +223,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
            </ul>
          </li>
          <!--           fin personas           -->
-         <!--              personal        -->
-        <!--<li class="nav-item has-treeview menu-close">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Personal
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ver todos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Agregar Personal</p>
-              </a>
-            </li>
-          </ul>
-        </li>-->
-        <!--           fin persona           -->
         <!--              patologias        -->
        <li class="nav-item has-treeview menu-close">
-         <a href="#" class="nav-link">
+         <a href="#" class="nav-link" id="nav-patologias">
            <i class="nav-icon fas fa-notes-medical"></i>
            <p>
              Patologías
@@ -259,15 +234,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
          </a>
          <ul class="nav nav-treeview">
            <li class="nav-item">
-             <a href="{{ route('patologias.index') }}" class="nav-link">
+             <a href="{{ route('patologias.index') }}" class="nav-link" id="nav-patologias-todas">
                <i class="far fa-circle nav-icon"></i>
                <p>Ver todas</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{ route('tipospatologias.index') }}" class="nav-link">
+             <a href="{{ route('tipospatologias.index') }}" class="nav-link" id="nav-tipospatologias">
                <i class="far fa-circle nav-icon"></i>
-               <p>Tipos de patologias</p>
+               <p>Tipos de patologías</p>
              </a>
            </li>
          </ul>
@@ -275,7 +250,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!--           fin patologias           -->
         <!--              nutricion        -->
        <li class="nav-item has-treeview menu-close">
-         <a href="#" class="nav-link">
+         <a href="#" class="nav-link" id="nav-nutricion">
            <i class="nav-icon fas fa-apple-alt"></i>
            <p>
              Nutrición
@@ -284,37 +259,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
          </a>
          <ul class="nav nav-treeview">
            <li class="nav-item">
-             <a href="{{ route('menu_persona.index') }}" class="nav-link">
+             <a href="{{ route('menu_persona.index') }}" class="nav-link" id="nav-menus">
                <i class="far fa-circle nav-icon"></i>
                <p>Menús</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{route('dietas.index')}}" class="nav-link">
+             <a href="{{route('dietas.index')}}" class="nav-link" id="nav-dietas">
                <i class="far fa-circle nav-icon"></i>
                <p>Dietas</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{ route('raciones.index') }}" class="nav-link">
+             <a href="{{ route('raciones.index') }}" class="nav-link" id="nav-raciones">
                <i class="far fa-circle nav-icon"></i>
                <p>Raciones</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{ route('raciones-disponibles.index') }}" class="nav-link">
+             <a href="{{ route('raciones-disponibles.index') }}" class="nav-link" id="nav-disponibilidad">
                <i class="far fa-circle nav-icon"></i>
                <p>Disponibilidad de Raciones</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{ route('alimentos.index') }}" class="nav-link">
+             <a href="{{ route('alimentos.index') }}" class="nav-link" id="nav-alimentos">
                <i class="far fa-circle nav-icon"></i>
                <p>Alimentos</p>
              </a>
            </li>
            <li class="nav-item">
-             <a href="{{ route('movimientos.index') }}" class="nav-link">
+             <a href="{{ route('movimientos.index') }}" class="nav-link" id="nav-movimientos">
                <i class="far fa-circle nav-icon"></i>
                <p>Movimientos</p>
              </a>
@@ -325,7 +300,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
        <!--              enfermería        -->
        <li class="nav-item has-treeview menu-close">
-        <a href="#" class="nav-link">
+        <a href="#" class="nav-link" id="nav-enfermeria">
           <i class="nav-icon left fas fa-user-md"></i>
           <p>
                 Enfermería
@@ -334,7 +309,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{ route('historialInternacion.index') }}" class="nav-link">
+            <a href="{{ route('historialInternacion.index') }}" class="nav-link" id="nav-internacion">
               <i class="far fa-circle nav-icon"></i>
               <p>Historial de pacientes</p>
             </a>
@@ -351,7 +326,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!--           fin enfermería           -->
        <!--              Admin. general        -->
        <li class="nav-item has-treeview menu-close">
-        <a href="#" class="nav-link">
+        <a href="#" class="nav-link" id="nav-administracion">
           <i class="nav-icon fas fa-cogs"></i>
           <p>
             Admin. general
@@ -360,26 +335,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{ route('sectores.index') }}" class="nav-link">
+            <a href="{{ route('sectores.index') }}" class="nav-link" id="nav-administracion-sectores">
               <i class="far fa-circle nav-icon"></i>
               <p>Sectores</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('habitaciones.index') }}" class="nav-link">
+            <a href="{{ route('habitaciones.index') }}" class="nav-link" id="nav-administracion-habitaciones">
               <i class="far fa-circle nav-icon"></i>
               <p>Habitaciones</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('personal.index') }}" class="nav-link">
+            <a href="{{ route('personal.index') }}" class="nav-link" id="nav-administracion-personal">
               <i class="far fa-circle nav-icon"></i>
               <p>Personal</p>
             </a>
           </li>
         </li>
         <li class="nav-item">
-          <a href="{{ route('profesion.index') }}" class="nav-link">
+          <a href="{{ route('profesion.index') }}" class="nav-link" id="nav-administracion-profesion">
             <i class="far fa-circle nav-icon"></i>
             <p>Profesión</p>
           </a>
@@ -420,40 +395,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-header -->
 
     <!-- Main content -->
-        <div class="content-wrapper">
+        <div class="content">
                 <!-- Content Header (Page header) -->
-                <div class="content-header">
 
-                </div>
                 <!-- /.content-header -->
 
                 <!-- Main content -->
                 <section class="content">
+                    <div class="container-fluid">
                     @yield('content')
+                    </div>
                 </section>
                 <!-- /.content -->
             </div>
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
+
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <!--<footer class="main-footer">-->
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
+    <!--<div class="float-right d-none d-sm-inline">
 
-    </div>
+    </div>-->
     <!-- Default to the left -->
-    <strong></strong>
-  </footer>
+    <!--<strong></strong>
+  </footer>-->
 </div>
 <!-- ./wrapper -->
 

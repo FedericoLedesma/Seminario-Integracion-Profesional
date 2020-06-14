@@ -5,28 +5,12 @@
 @section('navegacion')
 <li class="breadcrumb-item active">Personas</li>
 @endsection
+@section('titulo')
+Personas registradas
+@endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
-
-
-	    <h1>Personas registradas</h1>
-	      @include('layouts.error')
-
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
+	@include('layouts.error')
 <form method="get" action={{ route('personas.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Persona</button>
@@ -49,7 +33,7 @@
 <div class="container">
 
 	<div class="table-responsive">
-  	<div class="col-md-8 col-md-offset-2">
+  	<div class="col-md-auto col-md-offset-2">
 
  <div class="panel-heading">
 				 {!!Form::open(['route'=>'personas.index','method'=>'GET']) !!}
@@ -67,7 +51,7 @@
 					 </div>
 					{!! Form::close() !!}
 
-					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+					<table class="table table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">id</th>
@@ -112,4 +96,10 @@
 @section('script')
  <script src="{{asset('js/persona-script.js')}}"></script>
 
+ <script type="text/javascript">
+  $(document).ready(function(){
+    document.getElementById("nav-personas").setAttribute("class", "nav-link active");
+    document.getElementById("nav-personas-todas").setAttribute("class", "nav-link active");
+    });
+ </script>
 @endsection

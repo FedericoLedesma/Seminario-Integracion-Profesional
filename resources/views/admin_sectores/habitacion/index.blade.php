@@ -101,5 +101,10 @@
 @endsection
 @section('script')
  <script src="{{asset('js/habitacion-script.js')}}"></script>
-
+  <script type="text/javascript">
+   $(document).ready(function(){
+      document.getElementById("nav-administracion").setAttribute("class", "nav-link active");
+			document.getElementById("nav-administracion-habitaciones").setAttribute("class", "nav-link active");
+     });
+  </script>
 @endsection

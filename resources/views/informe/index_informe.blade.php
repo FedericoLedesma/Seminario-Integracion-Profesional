@@ -140,5 +140,9 @@
 
 @endsection
 @section('script')
-
+  <script type="text/javascript">
+   $(document).ready(function(){
+      document.getElementById("nav-menus").setAttribute("class", "nav-link active");
+     });
+  </script>
 @endsection

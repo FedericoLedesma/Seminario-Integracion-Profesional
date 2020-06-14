@@ -16,17 +16,7 @@
 	    <h1></h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 	<a href="{{action('HistorialInternacionController@create')}}" class="btn btn-primary">Ingreso de pacientes</a>
 <div>
 	<p>
@@ -44,7 +34,7 @@
 <div class="container">
     <!--  <div class="row">-->
     <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
+         <div class="col-md-auto col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
 				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}

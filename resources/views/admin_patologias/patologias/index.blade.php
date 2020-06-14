@@ -96,5 +96,10 @@
 @endsection
 @section('script')
  <script src="{{asset('js/patologia-script.js')}}"></script>
-
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		 document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
+ 		 document.getElementById("nav-patologias-todas").setAttribute("class", "nav-link active");	
+ 		});
+ </script>
 @endsection

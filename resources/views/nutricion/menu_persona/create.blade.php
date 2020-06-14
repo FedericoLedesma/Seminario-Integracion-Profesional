@@ -137,6 +137,13 @@
 @endif
 @endsection
 @section('script')
- <script src="{{asset('js/menu_persona-script.js')}}"></script>
+	<script src="{{asset('js/menu_persona-script.js')}}"></script>
+
+  <script type="text/javascript">
+   $(document).ready(function(){
+		 	document.getElementById("nav-nutricion").setAttribute("class", "nav-link active");
+      document.getElementById("nav-menus").setAttribute("class", "nav-link active");
+     });
+  </script>
 
 @endsection

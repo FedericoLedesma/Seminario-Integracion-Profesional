@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('personas.index') }}">PErsonas</a></li>
+    <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Personas</a></li>
 		<li class="breadcrumb-item active">Crear Persona</li>
 @endsection
 @section('content')
@@ -14,7 +14,7 @@
      <table>
         <tr>
          <td>
-             {!!	Form::label('numero_doc', 'Numero Doc.')!!}
+             {!!	Form::label('numero_doc', 'Número Doc.')!!}
          </td>
          <td>
              {!!	Form::text('numero_doc')!!}
@@ -55,7 +55,7 @@
        </tr>
         <tr>
          <td>
-             {!!	Form::label('direccion', 'Direccion')!!}
+             {!!	Form::label('direccion', 'Dirección')!!}
          </td>
          <td>
              {!!	Form::text('direccion')!!}
@@ -112,4 +112,12 @@
     </table>
 		{!! Form::close() !!}
 
+@endsection
+@section('script')
+<script type="text/javascript">
+ $(document).ready(function(){
+    document.getElementById("nav-personas").setAttribute("class", "nav-link active");
+    document.getElementById("nav-personas-create").setAttribute("class", "nav-link active");
+   });
+</script>
 @endsection

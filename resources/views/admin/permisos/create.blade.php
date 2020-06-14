@@ -58,3 +58,11 @@
 		{!! Form::close() !!}
 
 @endsection
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function(){
+		 document.getElementById("nav-permisos").setAttribute("class", "nav-link active");
+		 document.getElementById("nav-permisos-create").setAttribute("class", "nav-link active");	
+		});
+</script>
+@endsection

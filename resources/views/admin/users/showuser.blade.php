@@ -63,3 +63,11 @@
 		</div>
 		</div>
 @endsection
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 console.log("hola");
+			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");			
+			});
+	</script>
+@endsection

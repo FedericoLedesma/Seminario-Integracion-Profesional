@@ -33,3 +33,11 @@
 		{!! Form::close() !!}
 
 @endsection
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 document.getElementById("nav-roles").setAttribute("class", "nav-link active");	
+       document.getElementById("nav-roles-create").setAttribute("class", "nav-link active");
+			});
+	</script>
+@endsection

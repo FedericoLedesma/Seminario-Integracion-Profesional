@@ -163,3 +163,11 @@
 @endif
 
 @endsection
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function(){
+		document.getElementById("nav-nutricion").setAttribute("class","nav-link active");
+		document.getElementById("nav-dietas").setAttribute("class","nav-link active");
+		});
+</script>
+@endsection

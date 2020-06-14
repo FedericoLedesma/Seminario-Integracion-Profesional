@@ -18,15 +18,6 @@
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('tipospatologias.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Tipo de Patologia</button>
@@ -105,5 +96,12 @@
 @endsection
 @section('script')
  <script src="{{asset('js/tipo_patologia-script.js')}}"></script>
+
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		document.getElementById("nav-tipospatologias").setAttribute("class", "nav-link active"); 
+		document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
+ 		});
+ </script>
 
 @endsection

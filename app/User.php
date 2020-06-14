@@ -47,6 +47,14 @@ class User extends Authenticatable
          }
        }return null;
     }
+    public function getRol()
+    {
+     $roles=$this->getRoleNames();
+     foreach ($roles as $role) {
+       return $role;
+       break;
+     }
+    }
     public function personal()
     {
       return $this->belongsTo('App\Personal', 'personal_id');
