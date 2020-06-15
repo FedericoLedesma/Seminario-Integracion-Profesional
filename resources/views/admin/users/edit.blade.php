@@ -3,6 +3,9 @@
     <li class="breadcrumb-item"><a href="{{route('users.index') }}">Usuarios</a></li>
 		<li class="breadcrumb-item active">Editar Usuario</li>
 @endsection
+@section('titulo')
+  Editar usuario
+@endsection
 @section('content')
 
 <!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
@@ -10,7 +13,7 @@
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method'=> 'PUT'])!!}
 	 	@if($user)
-	    <h1>EDITAR usuarios</h1>
+	    <h3>Usuario {{$user->id}}</h3>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">
@@ -80,7 +83,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			 console.log("hola");
-			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");			
+			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");
 			});
 	</script>
 @endsection

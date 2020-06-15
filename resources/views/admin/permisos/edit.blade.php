@@ -1,12 +1,12 @@
 @extends('layouts.plantilla')
+@section('titulo')
+Editar permiso
+@endsection
 @section('content')
 
-<!-- EDIT PERMISSION -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 	 {!! Form::model($permission, ['route' => ['permisos.update', $permission->id], 'method'=> 'PUT'])!!}
 	 	@if($permission)
-	    <h1>Editar Permiso  {{$permission->name}}</h1>
+	    <h3>Permiso  {{$permission->name}}</h3>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">

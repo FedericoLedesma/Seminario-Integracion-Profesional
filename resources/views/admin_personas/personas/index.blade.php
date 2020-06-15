@@ -33,9 +33,8 @@ Personas registradas
 <div class="container">
 
 	<div class="table-responsive">
-  	<div class="col-md-auto col-md-offset-2">
-
- <div class="panel-heading">
+  	<div class="col-md-8 col-md-offset-2">
+ 			<div class="panel-heading">
 				 {!!Form::open(['route'=>'personas.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
@@ -50,17 +49,20 @@ Personas registradas
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
+				</div>
+			</div>
+			<div class="col-md-auto col-md-offset-2">
+				<div class="panel-heading">
 					<table class="table table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
-								<th scope="col">N.Doc</th>
+								<th scope="col">Número Doc.</th>
+								<th scope="col">Tipo Doc.</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Apellido</th>
 								<th scope="col">Fecha Nac.</th>
 								<th scope="col">EMail</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -70,13 +72,13 @@ Personas registradas
 						@if($personas)
 							@foreach($personas as $persona)
 							<tr>
-								<td>{{$persona->id}}</td>
 								<td>{{$persona->numero_doc}}</td>
+								<td>{{$persona->tipoDocumento->name}}</td>
 								<td>{{$persona->name}}</td>
 								<td>{{$persona->apellido}}</td>
-								<td>{{$persona->fecha_nac}}</td>
+								<td>{{$persona->fecha_nac()}}</td>
 								<td>{{$persona->email}}</td>
-								<td>{!!link_to_route('personas.show', $title = 'VER', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{!!link_to_route('personas.show', $title = 'Ver', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($persona, ['route' => ['personas.destroy', $persona], 'method'=> 'DELETE'])!!}
 						<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>

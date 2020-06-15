@@ -4,7 +4,7 @@
 <li class="breadcrumb-item active">Crear</li>
 @endsection
 @section('titulo')
-Agregar usuarios
+Agregar usuario
 @endsection
 @section('content')
 
@@ -24,7 +24,7 @@ Agregar usuarios
 	    <table>
 	    	<tr>
 	    	<td>
-		    {!!	Form::label('dni', 'DNI')!!}
+		    {!!	Form::label('numero_doc', 'Número doc.')!!}
 		    </td>
 		    <td>
 		   	{!!	Form::text('dni')!!}

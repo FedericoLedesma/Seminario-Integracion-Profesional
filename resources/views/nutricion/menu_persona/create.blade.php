@@ -3,21 +3,14 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menus</a></li>
-<li class="breadcrumb-item active">Crear Menu a Paciente</li>
+<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
+<li class="breadcrumb-item active">Crear menús para Pacientes</li>
+@endsection
+@section('titulo')
+Crear menús para Pacientes
 @endsection
 @section('content')
-
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
-
-
-	    <h1>Crear Menus para Pacientes</h1>
-	      @include('layouts.error')
-
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
+	@include('layouts.error')
 <div>
 	<p>
 		<span id="users-total">
@@ -51,16 +44,22 @@
 						 	</div>
 					</div>
 				{!! Form::close() !!}
-
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+  <div class="table-responsive">
+		<div class="col-md-auto col-md-offset-1">
+			<div class="panel-heading">
 				<table class="table table-striped table-hover ">
 					<thead >
 						<tr>
-							<th scope="col">id</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo Doc.</th>
-							<th scope="col">DNI</th>
-							<th scope="col">Accion</th>
+							<th scope="col">Número de doc.</th>
+							<th scope="col">Acción</th>
 							<th scope="col"></th>
 
 						</tr>
@@ -70,18 +69,17 @@
 						@if($pacientes)
 							@foreach($pacientes as $paciente)
 								<tr>
-									<td id="paciente_id">{{$paciente->get_id()}}</td>
 									<td>{{$paciente->get_name()}}</td>
 									<td>{{$paciente->get_apellido()}}</td>
 									<td>{{$paciente->get_tipo_documento_name()}}</td>
 									<td>{{$paciente->get_numero_doc()}}</td>
 
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
-									    Crear Menu
+									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-paciente_apellido="{{$paciente->get_apellido()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
+									    Crear menú
 									</a></td>
 									@if($paciente->acompananteActual())
 									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
-									    Menu Acompa.
+									    Menú Acompa.
 									</a></td>
 									@endif
 								</tr>
@@ -127,7 +125,7 @@
 
 						</div>
 						<div class="modal-footer">
-								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Racion</a>
+								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
 								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
 						</div>
 

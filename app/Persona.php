@@ -69,7 +69,11 @@ class Persona extends Model
         return $persona;
       }return array();
     }
-
+    public function fecha_nac()
+    {
+      $fecha_ = date("d/m/Y", strtotime($this->fecha_nac));
+      return $fecha_;
+    }
 
     public static function scopeFindByApellido($query,$apellido)
     {

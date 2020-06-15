@@ -6,6 +6,9 @@
 <li class="breadcrumb-item"><a href="{{route('permisos.index') }}">Permisos</a></li>
 <li class="breadcrumb-item active">Crear</li>
 @endsection
+@section('titulo')
+Agregar Permiso
+@endsection
 @section('content')
 
 
@@ -14,12 +17,12 @@
 <!-- mostrar una tabla con los roles que existen -->
 
 	    {!!Form::open(['method'=>'post','action'=>'AdminPermissionController@store'])!!}
-	    <h1>Agregar permiso</h1>
+
 	      @include('layouts.error')
 	    <table>
 	    	<tr>
 	    	<td>
-		    {!!	Form::label('name_accion', 'ACCION')!!}
+		    {!!	Form::label('name_accion', 'ACCIÓN')!!}
 		    </td>
 		    <td>
 					<select class="custom-select" id="option-accion" name="name_accion">
@@ -33,7 +36,7 @@
 		  	</tr>
 				<tr>
 					<td>
-					{!!	Form::label('name_table', 'TABLA')!!}
+					{!!	Form::label('name_table', 'MODULO')!!}
 					</td>
 					<td>
 						<select class="custom-select" id="option-tabla" name="name_table">
@@ -62,7 +65,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		 document.getElementById("nav-permisos").setAttribute("class", "nav-link active");
-		 document.getElementById("nav-permisos-create").setAttribute("class", "nav-link active");	
+		 document.getElementById("nav-permisos-create").setAttribute("class", "nav-link active");
 		});
 </script>
 @endsection

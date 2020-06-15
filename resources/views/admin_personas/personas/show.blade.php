@@ -3,23 +3,15 @@
     <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Persona</a></li>
 		<li class="breadcrumb-item active">Ver Persona</li>
 @endsection
+@section('titulo')
+  Ver persona
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($persona)
 	    <div class="table-responsive">
-	    <h2>Persona:  {{$persona->name}}</h2>
+	    <h3>Persona:  {{$persona->name}}</h3>
         <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
@@ -32,8 +24,12 @@
 				<td>{{$persona->tipoDocumento->name}}</td>
 			</tr>
       <tr>
-				<td>Numero_doc </td>
+				<td>Número de doc. </td>
 				<td>{{$persona->numero_doc}}</td>
+			</tr>
+      <tr>
+				<td>Tipo de doc. </td>
+				<td>{{$persona->tipoDocumento->name}}</td>
 			</tr>
 			<tr>
 				<td>Apellido </td>
@@ -44,7 +40,7 @@
 				<td>{{$persona->name}}</td>
 			</tr>
       <tr>
-				<td>Observacion </td>
+				<td>Observación </td>
 				<td>{{$persona->observacion}}</td>
 			</tr>
       <tr>
@@ -64,7 +60,7 @@
 				<td>{{$persona->sexo}}</td>
 			</tr>
       <tr>
-				<td>Patologias </td>
+				<td>Patologías </td>
 				<td>
           @foreach($persona->patologias as $patologia)
             {{$patologia->name }}</br>
@@ -76,11 +72,11 @@
 				<td>{{$persona->fecha_nac}}</td>
 			</tr>
 			<tr>
-				<td>CREADO </td>
+				<td>Creado </td>
 				<td>{{$persona->created_at}}</td>
 			</tr>
 			<tr>
-				<td>MODIFICADO </td>
+				<td>Modificado </td>
 				<td>{{$persona->updated_at}}</td>
 			</tr>
 
@@ -88,7 +84,7 @@
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('personas.edit', $title = 'MODIFICAR', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
+	{!!link_to_route('personas.edit', $title = 'Modificar', $parameters = [$persona],['class' => 'btn btn-warning'], $attributes = [])!!}
   {!!link_to_route('personas.historial', $title = 'Historial', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}
 
 

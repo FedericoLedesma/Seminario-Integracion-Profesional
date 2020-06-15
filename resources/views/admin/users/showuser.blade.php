@@ -3,26 +3,16 @@
 <li class="breadcrumb-item"><a href="{{route('users.index') }}">Usuarios</a></li>
 <li class="breadcrumb-item active">User {{$user->id}}</li>
 @endsection
+@section('titulo')
+	Ver usuario
+@endsection
 @section('content')
-
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 	   @include('layouts.error')
 	  	@if($user)
 
 
 	    <div class="table-responsive">
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
 	    <table class="table table-bordered table-striped">
 	    	<tr>
 	    		<td>ID USUARIO </td>
@@ -67,7 +57,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			 console.log("hola");
-			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");			
+			 document.getElementById("nav-usuarios").setAttribute("class", "nav-link active");
 			});
 	</script>
 @endsection

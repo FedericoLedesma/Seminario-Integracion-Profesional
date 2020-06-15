@@ -5,28 +5,15 @@
 @section('navegacion')
 <li class="breadcrumb-item active">Roles</li>
 @endsection
+@section('titulo')
+ROLES REGISTRADOS
+@endsection
 @section('content')
-
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 
 	  	<title>PAGINA PRINCIPAL ADMINISTRADOR</title>
 
-	    <h1>ROLES EXISTENTES</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('roles.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Rol</button>
@@ -49,7 +36,7 @@
 <div class="container">
     <!--  <div class="row">-->
     <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
+         <div class="col-md-auto col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
 				 {!!Form::open(['route'=>'roles.index','method'=>'GET']) !!}
@@ -70,12 +57,11 @@
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
+								<th scope="col">ID</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Guard Name</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -87,7 +73,6 @@
 							<tr>
 								<td>{{$role->id}}</td>
 								<td>{{$role->name}}</td>
-								<td>{{$role->guard_name}}</td>
 								<td>{{$role->created_at}}</td>
 								<td>{{$role->updated_at}}</td>
 								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$role],['class' => 'btn btn-info'], $attributes = [])!!}</td>

@@ -3,15 +3,14 @@
     <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Personas</a></li>
 		<li class="breadcrumb-item active">Crear Persona</li>
 @endsection
+@section('titulo')
+  Agregar persona
+@endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'PersonaController@store'])!!}
-    <h1>Agregar Persona</h1>
      @include('layouts.error')
-     <table>
+     <div class="col-md-8 col-md-offset-2">
+     <table class="table-responsive">
         <tr>
          <td>
              {!!	Form::label('numero_doc', 'Número Doc.')!!}
@@ -95,7 +94,7 @@
        </tr>
         <tr>
          <td>
-             {!!	Form::label('fecha_nac', 'Fecha Nacimiento')!!}
+             {!!	Form::label('fecha_nac', 'Fecha de nacimiento')!!}
          </td>
          <td>
             {!!Form::date('fecha_nac', \Carbon\Carbon::now()) !!}
@@ -110,6 +109,7 @@
          </td>
        </tr>
     </table>
+  </div>
 		{!! Form::close() !!}
 
 @endsection

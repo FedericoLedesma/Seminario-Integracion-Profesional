@@ -72,13 +72,15 @@
 </style>
 @endsection
 @section('navegacion')
-	<li class="breadcrumb-item active">Planillas</li>
+	<li class="breadcrumb-item active">Menus</li>
+@endsection
+@section('titulo')
+Menús de persona (planillas)
 @endsection
 @section('content')
 
 	  	<title>Menu persona</title>
 
-	    <h1>Menús de persona (planillas) </h1>
 	      @include('layouts.error')
 
 

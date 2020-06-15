@@ -4,6 +4,12 @@
 @endsection
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" crossorigin="anonymous">
+<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+@endsection
+@section('titulo')
+PERMISOS REGISTRADOS
 @endsection
 @section('content')
 
@@ -13,27 +19,22 @@
 
 	  	<title>PAGINA PRINCIPAL ADMINISTRADOR</title>
 
-	    <h1>PERMISIOS EXISTENTES</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" crossorigin="anonymous">
-<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
-<style>
-	<!--
-	.table{
-		 background-color: #E3EEE9;
 
 
-	}
-	-->
-</style>
 <form method="get" action={{ route('permisos.create') }}>
 
 	<button class="btn btn-primary" type="submit">Agregar Permiso</button>
 
 </form>
+<p>
+  <span id="users-total">
+    <!-- Aca deben ir el total de roles -->
+
+  </span>
+</p>
 <div>
 <div id="alert" class="alert alert-info"></div>
 	@if($query)
@@ -41,10 +42,8 @@
 	@endif
 </div>
 <div class="container">
-
-    <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
-
+  <div class="table-responsive">
+    <div class="col-md-8 col-md-offset-2">
 				 <div class="panel-heading">
 
 				 {!!Form::open(['route'=>'permisos.index','method'=>'GET']) !!}
@@ -61,8 +60,10 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
-
+        </div>
+    </div>
+    <div class="col-md-auto col-md-offset-2">
+         <div class="panel-heading">
 
 					<table class="table table-striped table-hover ">
 						<thead >
@@ -108,7 +109,7 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			 document.getElementById("nav-permisos").setAttribute("class", "nav-link active");
-       document.getElementById("nav-permisos-todos").setAttribute("class", "nav-link active");	
+       document.getElementById("nav-permisos-todos").setAttribute("class", "nav-link active");
  			});
  	</script>
 @endsection

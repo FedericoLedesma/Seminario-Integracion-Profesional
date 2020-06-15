@@ -3,6 +3,9 @@
     <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
 		<li class="breadcrumb-item active">Editar Rol</li>
 @endsection
+@section('titulo')
+  Editar Rol
+@endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->
@@ -10,10 +13,10 @@
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method'=> 'PUT'])!!}
 	 	@if($role)
-	    <h1>Editar Rol  {{$role->name}}</h1>
+	    <h3>Rol  {{$role->name}}</h3>
 	      @include('layouts.error')
 	    <div class="table-responsive">
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-4 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    	<td>
@@ -101,7 +104,8 @@
 		  </table>
 		@endif
 		</div>
-		</div>
+  </div>
+	</div>
 @endsection
 @section('script')
 	<script type="text/javascript">

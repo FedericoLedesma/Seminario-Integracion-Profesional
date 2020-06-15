@@ -3,16 +3,14 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menus</a></li>
-<li class="breadcrumb-item active">Crear Menu a Personal</li>
+<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
+<li class="breadcrumb-item active">Crear menús a Personal</li>
+@endsection
+@section('titulo')
+Crear menús para Personal
 @endsection
 @section('content')
-
-
-	    <h1>Crear Menus para Personal</h1>
-	      @include('layouts.error')
-
-
+ 	@include('layouts.error')
 <div>
 	<p>
 		<span id="users-total">
@@ -46,16 +44,21 @@
 						 	</div>
 					</div>
 				{!! Form::close() !!}
-
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+  <div class="table-responsive">
+		<div class="col-md-auto col-md-offset-1">
 				<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 					<thead >
 						<tr>
-							<th scope="col">id</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo Doc.</th>
-							<th scope="col">DNI</th>
-							<th scope="col">Accion</th>
+							<th scope="col">Número de doc.</th>
+							<th scope="col">Acción</th>
 							<th scope="col"></th>
 
 						</tr>
@@ -65,14 +68,13 @@
 						@if($personal)
 							@foreach($personal as $p)
 								<tr>
-									<td id="paciente_id">{{$p->id}}</td>
 									<td>{{$p->persona->name}}</td>
 									<td>{{$p->persona->apellido}}</td>
 									<td>{{$p->persona->tipoDocumento->name}}</td>
 									<td>{{$p->persona->numero_doc}}</td>
 
 									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
-									    Crear Menu
+									    Crear menú
 									</a></td>
 								</tr>
 							@endforeach

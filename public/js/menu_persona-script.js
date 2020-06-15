@@ -145,6 +145,7 @@
 			selectRaciones.remove(i);
 		}
 		var paciente_name= $(this).data("paciente_name");
+		var paciente_apellido= $(this).data("paciente_apellido");
 		var paciente= $(this).data("paciente");
 
 		localStorage.setItem('persona', JSON.stringify(paciente));
@@ -153,7 +154,7 @@
 		console.log(paciente_name);
 
 		var h4 = document.createElement("h4");
-		h4.innerHTML = "Crear menu para "+paciente_name;
+		h4.innerHTML = "Crear menú para "+paciente_name+" "+paciente_apellido;
 		h4.setAttribute("id","h4_modal");
 		h4.setAttribute("class","h4_modal");
 		document.getElementById("modal-header").appendChild(h4);
@@ -172,10 +173,10 @@
 		p.setAttribute("class", "p_modal_body");
 		var patologias = $(this).data("patologias");
 		if(patologias.length==0){
-			p.innerHTML = "No tiene patologias";
+			p.innerHTML = "No tiene patologías.";
 			document.getElementById("p_body").appendChild(p);
 		}else{
-			var s="Tiene las patologias : ";
+			var s="Tiene las patologías : ";
 			patologias.forEach(myFunction)
 			function myFunction(patologia, i) {
 				console.log(patologia.name);

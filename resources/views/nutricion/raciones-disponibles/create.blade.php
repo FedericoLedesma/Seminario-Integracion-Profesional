@@ -3,12 +3,13 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('raciones.index') }}">Raciones</a></li>
-		<li class="breadcrumb-item active">Crear Racion</li>
+    <li class="breadcrumb-item"><a href="{{route('raciones-disponibles.index') }}">Raciones Disponibles</a></li>
+		<li class="breadcrumb-item active">Agregar disponibilidad</li>
+@endsection
+@section('titulo')
+Agregar disponibilidad a una ración
 @endsection
 @section('content')
-
-    <h1>Agregar Racion</h1>
 		<div id="alert" class="alert alert-danger"></div>
      @include('layouts.error')
      <div class="container">
@@ -23,7 +24,7 @@
      							<tr>
      								<th scope="col">Fecha</th>
 										<th>Horario</th>
-										<th>Racion</th>
+										<th>Ración</th>
 										<th>Cantidad</th>
      							</tr>
      						</thead>
@@ -59,7 +60,7 @@
 									</td>
 									<td>
 											<a href="#" class="btn btn-success guardarDisponibilidad" id="guardarDisponibilidad">
-											    Guardar Disponibilidad
+											    Guardar disponibilidad
 											</a>
 									</td>
 								</tr>

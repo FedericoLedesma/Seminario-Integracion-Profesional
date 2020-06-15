@@ -2,85 +2,65 @@
 @section('token')
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<style>
-		div.blueTable {
-		  border: 1px solid #1F78B3;
-		  background-color: #EEEEEE;
-		  width: 100%;
-		  text-align: left;
-		  border-collapse: collapse;
-		}
-		.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
-		  border: 1px solid #AAAAAA;
-		  padding: 3px 2px;
-		}
-		.divTable.blueTable .divTableBody .divTableCell {
-		  font-size: 13px;
-		}
-		.divTable.blueTable .divTableRow:nth-child(even) {
-		  background: #CBD9F5;
-		}
-		.divTable.blueTable .divTableHeading {
-		  background: #566CA4;
-		  background: -moz-linear-gradient(top, #8091bb 0%, #677aad 66%, #566CA4 100%);
-		  background: -webkit-linear-gradient(top, #8091bb 0%, #677aad 66%, #566CA4 100%);
-		  background: linear-gradient(to bottom, #8091bb 0%, #677aad 66%, #566CA4 100%);
-		  border-bottom: 1px solid #444444;
-		}
-		.divTable.blueTable .divTableHeading .divTableHead {
-		  font-size: 15px;
-		  font-weight: bold;
-		  color: #FFFFFF;
-		  border-left: 2px solid #E6F5E4;
-		}
-		.divTable.blueTable .divTableHeading .divTableHead:first-child {
-		  border-left: none;
-		}
-
-		.blueTable .tableFootStyle {
-		  font-size: 14px;
-		  font-weight: bold;
-		  color: #4BFFAE;
-		  background: #D0E4F5;
-		  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-		  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-		  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-		  border-top: 2px solid #444444;
-		}
-		.blueTable .tableFootStyle {
-		  font-size: 14px;
-		}
-		.blueTable .tableFootStyle .links {
-			 text-align: right;
-		}
-		.blueTable .tableFootStyle .links a{
-		  display: inline-block;
-		  background: #1C6EA4;
-		  color: #FFFFFF;
-		  padding: 2px 8px;
-		  border-radius: 5px;
-		}
-		.blueTable.outerTableFooter {
-		  border-top: none;
-		}
-		.blueTable.outerTableFooter .tableFootStyle {
-		  padding: 3px 5px;
-		}
-		/* DivTable.com */
-		.divTable{ display: table; }
-		.divTableRow { display: table-row; }
-		.divTableHeading { display: table-header-group;}
-		.divTableCell, .divTableHead { display: table-cell;}
-		.divTableHeading { display: table-header-group;}
-		.divTableFoot { display: table-footer-group;}
-		.divTableBody { display: table-row-group;}
+	div.blueTable {
+	  width: 150%;
+	  height: 280;
+	  text-align: left;
+	}
+	.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+	  border: 0px solid #AAAAAA;
+	  padding: 18px 2px;
+	}
+	.divTable.blueTable .divTableBody .divTableCell {
+	  font-size: 15px;
+	}
+	.divTable.blueTable .divTableRow:nth-child(even) {
+	  background: #D4DAED;
+	}
+	.divTable.blueTable .divTableHeading {
+	  }
+	.divTable.blueTable .divTableHeading .divTableHead {
+	  font-size: 16px;
+	  font-weight: bold;
+	  color: #01030B;
+	}
+	.blueTable .tableFootStyle {
+	  font-weight: bold;
+	  color: #FFFFFF;
+	}
+	.blueTable .tableFootStyle .links {
+		 text-align: right;
+	}
+	.blueTable .tableFootStyle .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 3px 10px;
+	  border-radius: 5px;
+	}
+	.blueTable.outerTableFooter {
+	  border-top: none;
+	}
+	.blueTable.outerTableFooter .tableFootStyle {
+	  padding: 3px 5px;
+	}
+	/* DivTable.com */
+	.divTable{ display: table; }
+	.divTableRow { display: table-row; }
+	.divTableHeading { display: table-header-group;}
+	.divTableCell, .divTableHead { display: table-cell;}
+	.divTableHeading { display: table-header-group;}
+	.divTableFoot { display: table-footer-group;}
+	.divTableBody { display: table-row-group;}
 		</style>
 @endsection
 @section('navegacion')
 	<li class="breadcrumb-item active">Movimientos</li>
 @endsection
+@section('titulo')
+MOVIMIENTOS REGISTRADOS
+@endsection
 @section('content')
-
-<h1>Movimientos</h1>
 @include('layouts.error')
 @if($query)
 	<div id="alert" name="alert-raciones" class="alert alert-info">Movimientos por: {{$busqueda_por}} {{$query}}</div>
@@ -126,13 +106,13 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-10 col-md-offset-2">
+<div class="col-md-auto col-md-offset-2">
 	<div class="table-responsive">
 		<!--<div class="table table-striped table-hover ">  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 		<div class="divTable blueTable">
 			<div class="divTableHeading">
 				<div class="divTableRow">
-							<div class="divTableHead">Racion</div>
+							<div class="divTableHead">Ración</div>
 							<div class="divTableHead">Horario</div>
 							<div class="divTableHead">Fecha</div>
 							<div class="divTableHead">Fecha Mov.</div>

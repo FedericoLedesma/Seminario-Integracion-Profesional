@@ -71,8 +71,14 @@
     .divTableBody { display: table-row-group;}
   </style>
 @endsection
+@section('navegacion')
+<li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
+<li class="breadcrumb-item active">Informes de menús</li>
+@endsection
+@section('titulo')
+Informes de menús
+@endsection
 @section('content')
-<h2>Informes de menús</h2>
 {!!Form::open(['route'=>'informe.generar-informe','method'=>'POST','target'=>"_blank"]) !!}
 <div class="container">
   <div class="table-responsive">
@@ -82,10 +88,10 @@
           <div class="divTableRow">
 								<div class="divTableHead">Fecha <label id="desde">desde</label></div>
                 <div class="divTableHead" id="fecha_hasta_title">Fecha Hasta</div>
-								<div class="divTableHead">Tipo Persona</div>
+								<div class="divTableHead">Tipo de persona</div>
 								<div class="divTableHead">Horarios  </div>
 								<div class="divTableHead">Nombre Sector</div>
-								<div class="divTableHead">N. habitacion</div>
+								<div class="divTableHead">N. habitación</div>
 
             </div>
           </div>
@@ -142,6 +148,7 @@
 @section('script')
   <script type="text/javascript">
    $(document).ready(function(){
+      document.getElementById("nav-nutricion").setAttribute("class", "nav-link active");
       document.getElementById("nav-menus").setAttribute("class", "nav-link active");
      });
   </script>

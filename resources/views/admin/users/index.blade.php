@@ -12,16 +12,6 @@ USUARIOS REGISTRADOS
 
 @include('layouts.error')
 
-
-<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('users.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar usuario</button>
@@ -63,12 +53,19 @@ USUARIOS REGISTRADOS
             </div>
           </div>
 					{!! Form::close() !!}
-
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	  <div class="table-responsive">
+	    <div class="col-md-auto col-md-offset-2">
+				<div class="panel-heading">
 					<table class="table table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
-								<th scope="col">DNI</th>
+								<th scope="col">ID</th>
+								<th scope="col">Número Doc.</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Rol</th>
 								<th scope="col">Creado</th>

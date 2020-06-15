@@ -3,19 +3,11 @@
     <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
 		<li class="breadcrumb-item active">Ver Rol</li>
 @endsection
+@section('titulo')
+  Ver Rol
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($role)
 
@@ -23,8 +15,8 @@
 
 
 	    <div class="table-responsive">
-	    <h2>Rol  {{$role->name}}</h2>
-        <div class="col-md-3 col-md-offset-1">
+	    <h3>Rol  {{$role->name}}</h3>
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
@@ -45,9 +37,7 @@
 			</tr>
 
 		</table>
-		</div>
-		</div>
-		</div>
+
 	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role],['class' => 'btn btn-warning'], $attributes = [])!!}
 
 	<h3>Permisos asociados</h3>
@@ -71,6 +61,9 @@
 
 
 @endif
+</div>
+</div>
+</div>
 @endsection
 @section('script')
 	<script type="text/javascript">

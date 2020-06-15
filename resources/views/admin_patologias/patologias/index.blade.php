@@ -3,24 +3,16 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Patologias</li>
+<li class="breadcrumb-item active">Patologías</li>
+@endsection
+@section('titulo')
+	Patologías registradas
 @endsection
 @section('content')
-
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
-
-
-	    <h1>Patologias registradas</h1>
-	      @include('layouts.error')
+	@include('layouts.error')
 
 <form method="get" action={{ route('patologias.create') }}>
-
-		<button class="btn btn-primary" type="submit">Agregar Patologia</button>
-
-
+		<button class="btn btn-primary" type="submit">Agregar Patología</button>
 </form>
 <div>
 	<p>
@@ -31,7 +23,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-patologia" class="alert alert-info">Patologias con el {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-patologia" class="alert alert-info">Patologías con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
@@ -40,7 +32,7 @@
     <div class="table-responsive">
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
-				 <div class="panel-heading">
+
 				 {!!Form::open(['route'=>'patologias.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
@@ -55,15 +47,15 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
+				</div>
+				<div class="col-md-auto col-md-offset-2">
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Tipo de Patologia</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Descripción</th>
+								<th scope="col">Tipo de Patología</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -73,7 +65,6 @@
 						@if($patologias)
 							@foreach($patologias as $patologia)
 							<tr>
-								<td>{{$patologia->id}}</td>
 								<td>{{$patologia->name}}</td>
 								<td>{{$patologia->descripcion}}</td>
 								<td>{{$patologia->tipo_patologia_id}}</td>
@@ -86,20 +77,18 @@
 							</tr>
 								@endforeach
 							@endif
-
 					</table>
 				</div>
-				</div>
-			  </div>
-				 </div>
-				<!--</div>-->
+			</div>
+		</div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/patologia-script.js')}}"></script>
  <script type="text/javascript">
  	$(document).ready(function(){
  		 document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
- 		 document.getElementById("nav-patologias-todas").setAttribute("class", "nav-link active");	
+ 		 document.getElementById("nav-patologias-todas").setAttribute("class", "nav-link active");
  		});
  </script>
 @endsection
