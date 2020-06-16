@@ -6,7 +6,7 @@
 <li class="breadcrumb-item active">Personas</li>
 @endsection
 @section('titulo')
-Personas registradas
+PERSONAS REGISTRADAS
 @endsection
 @section('content')
 
@@ -39,8 +39,10 @@ Personas registradas
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-						 <option value="busqueda_id" >ID</option>
+
 						 <option value="busqueda_name" >Nombre</option>
+						 <option value="busqueda_name" >Apellido</option>
+						 <option value="busqueda_name" >Número doc.</option>
 					 </select>
 
 						 {!!	Form::text('personaid',null,['id'=>'personaid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}

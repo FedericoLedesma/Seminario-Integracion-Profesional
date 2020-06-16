@@ -3,14 +3,12 @@
     <li class="breadcrumb-item"><a href="{{route('pacientes.index') }}">Pacientes</a></li>
 		<li class="breadcrumb-item active">Crear paciente</li>
 @endsection
+@section('titulo')
+  Agregar paciente
+@endsection
 @section('content')
+    {!!Form::open(['method'=>'post','action'=>'PacienteController@store'])!!}
 
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
-	    {!!Form::open(['method'=>'post','action'=>'PacienteController@store'])!!}
-	    <h1>Agregar paciente</h1>
 	      @include('layouts.error')
 	    <table>
 	    	<tr>

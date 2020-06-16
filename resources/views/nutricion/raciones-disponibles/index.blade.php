@@ -181,7 +181,7 @@ div.blueTable {
   										<table class="table table-striped table-responsive ">
   											<thead >
   												<tr>
-  													<th scope="col">Racion</th>
+  													<th scope="col">Ración</th>
   													<th scope="col">Horario</th>
   													<th scope="col">Fecha</th>
                             <th scope="col">Fecha del mov.</th>

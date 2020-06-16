@@ -5,17 +5,17 @@
 @section('navegacion')
 <li class="breadcrumb-item active">Raciones</li>
 @endsection
+@section('titulo')
+	RACIONES REGISTRADAS
+@endsection
 @section('content')
 
+	@include('layouts.error')
 
-	    <h1>Raciones registradas</h1>
-	      @include('layouts.error')
-
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
 <form method="get" action={{ route('raciones.create') }}>
 
-		<button class="btn btn-primary" type="submit">Agregar Racion</button>
+		<button class="btn btn-primary" type="submit">Agregar Ración</button>
 
 
 </form>
@@ -32,16 +32,13 @@
 	@endif
 </div>
 <div class="container">
-
 	<div class="table-responsive">
   	<div class="col-md-8 col-md-offset-2">
-
- <div class="panel-heading">
+ 			<div class="panel-heading">
 				 {!!Form::open(['route'=>'raciones.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
-					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-						 <option value="busqueda_id" >ID</option>
+					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">						
 						 <option value="busqueda_name" >Nombre</option>
 					 </select>
 
@@ -51,14 +48,21 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="table-responsive">
+	  	<div class="col-md-auto col-md-offset-2">
+	 			<div class="panel-heading">
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Observacion</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Observación</th>
+								<th scope="col">Alimentos</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -68,10 +72,13 @@
 						@if($raciones)
 							@foreach($raciones as $racion)
 							<tr>
-								<td>{{$racion->id}}</td>
 								<td>{{$racion->name}}</td>
 								<td>{{$racion->observacion}}</td>
-								<td>{!!link_to_route('raciones.show', $title = 'VER', $parameters = [$racion->id],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>@foreach($racion->alimentos as $alimento)
+								  	{{$alimento->name}};
+									@endforeach
+								</td>
+								<td>{!!link_to_route('raciones.show', $title = 'Ver', $parameters = [$racion->id],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 
 								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $racion }}">Eliminar</button></td>

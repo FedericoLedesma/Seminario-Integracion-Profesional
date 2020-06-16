@@ -1,20 +1,18 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
-		<li class="breadcrumb-item active">Crear Patologia</li>
+    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologías</a></li>
+		<li class="breadcrumb-item active">Crear Patología</li>
+@endsection
+@section('titulo')
+  Agregar patología
 @endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'PatologiaController@store'])!!}
-    <h1>Agregar Patologia</h1>
      @include('layouts.error')
      <table>
         <tr>
          <td>
-             {!!	Form::label('tipo_patologia_id', 'Tipo de Patologia')!!}
+             {!!	Form::label('tipo_patologia_id', 'Tipo de Patología')!!}
          </td>
          <td>
              @if($tipos_patologias)
@@ -39,7 +37,7 @@
        </tr>
        <tr>
          <td>
-             {!!	Form::label('descripcion', 'Descripcion')!!}
+             {!!	Form::label('descripcion', 'Descripción')!!}
          </td>
          <td>
              {!!	Form::text('descripcion')!!}
@@ -47,7 +45,7 @@
        </tr>
        <tr>
          <td>
-             {!!	Form::submit('Guardar Patologia',['class' => 'btn btn-success'])!!}
+             {!!	Form::submit('Guardar Patología',['class' => 'btn btn-success'])!!}
          </td>
          <td>
              {!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}

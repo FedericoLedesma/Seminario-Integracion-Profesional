@@ -3,12 +3,15 @@
     <li class="breadcrumb-item"><a href="{{route('sectores.index') }}">Sectores</a></li>
 		<li class="breadcrumb-item active">Ver Sector</li>
 @endsection
+@section('titulo')
+Ver sector
+@endsection
 @section('content')
 
 	   @include('layouts.error')
 	  	@if($sector)
 	    <div class="table-responsive">
-	    <h2>Sector:  {{$sector->name}}</h2>
+	    <h4>Sector:  {{$sector->name}}</h4>
         <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
@@ -21,15 +24,23 @@
 				<td>{{$sector->name}}</td>
 			</tr>
       <tr>
-				<td>Descripcion </td>
+				<td>Descripción </td>
 				<td>{{$sector->descripcion}}</td>
 			</tr>
       <tr>
-				<td>CREADO </td>
+        <td>Habitaciones</td>
+        <td>
+          @foreach($sector->get_habitaciones() as $habitacion)
+          {{$habitacion->name}}</br>
+          @endforeach
+        </td>
+      </tr>
+      <tr>
+				<td>Creado </td>
 				<td>{{$sector->created_at}}</td>
 			</tr>
 			<tr>
-				<td>MODIFICADO </td>
+				<td>Modificado </td>
 				<td>{{$sector->updated_at}}</td>
 			</tr>
 

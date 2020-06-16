@@ -7,13 +7,16 @@
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales de pacientes</a></li>
 		<li class="breadcrumb-item active">Detalles historial de paciente</li>
 @endsection
+@section('titulo')
+Detalles de historial
+@endsection
 @section('content')
 
 
 	   @include('layouts.error')
 	  	@if($paciente)
 
-	    <h2>[Historial] Paciente:  {{$paciente->get_name()}}, [ID:{{$paciente->get_id()}}]</h2>
+	<h4>Historial del Paciente: {{$paciente->get_apellido()}} {{$paciente->get_name()}}</h4>
   <div name="Historial">
       <button class="btn btn-info" data-toggle="collapse" data-target="#historial_actual">Internación actual</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_historico">Histórico</button>
@@ -24,10 +27,10 @@
       	<thead>
       		<tr>
       			<td>
-      					{!!	Form::label('fecha', 'Fecha Desde')!!}
+      					{!!	Form::label('fecha', 'Fecha desde')!!}
       			</td>
       			<td>
-      					{!!	Form::label('fecha_hasta', 'Fecha Hasta')!!}
+      					{!!	Form::label('fecha_hasta', 'Fecha hasta')!!}
       			</td>
       			<td>
       					{!!	Form::label('horario', 'Horario')!!}
@@ -332,4 +335,12 @@
      </div> <!-- Resumen dieta-->
 
 @endif
+@endsection
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    document.getElementById("nav-enfermeria").setAttribute("class","nav-link active");
+    document.getElementById("nav-movimientos").setAttribute("class","nav-link active");
+    });
+</script>
 @endsection

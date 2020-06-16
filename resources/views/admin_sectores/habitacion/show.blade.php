@@ -75,13 +75,16 @@
     <li class="breadcrumb-item"><a href="{{route('habitaciones.index') }}">Habitaciones</a></li>
 		<li class="breadcrumb-item active">Ver habicación</li>
 @endsection
+@section('titulo')
+Ver habitación
+@endsection
 @section('content')
 
 	   @include('layouts.error')
 	  	@if($habitacion)
 
-	    <h2>Habitacion:  {{$habitacion->name}}</h2>
-        <div class="col-md-5 col-md-offset-1">
+	    <h4>Habitación:  {{$habitacion->name}}</h4>
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
            <div class="divTable blueTable">
 
@@ -110,11 +113,11 @@
           				<div class="divTableCell">{{$habitacion->get_sector_name()}}</div>
                 </div>
                 <div class="divTableRow">
-          				<div class="divTableCell">CREADO </div>
+          				<div class="divTableCell">Creado </div>
           				<div class="divTableCell">{{$habitacion->created_at}}</div>
                 </div>
           			<div class="divTableRow">
-          				<div class="divTableCell">MODIFICADO </div>
+          				<div class="divTableCell">Modificado </div>
           				<div class="divTableCell">{{$habitacion->updated_at}}</div>
           			</div>
 
@@ -122,7 +125,7 @@
           </div>
 		</div>
     <div class="divTableCell">{!!link_to_route('habitaciones.edit', $title = 'MODIFICAR', $parameters = [$habitacion->id],['class' => 'btn btn-warning'], $attributes = [])!!} </div>
-    <div class="divTableCell"><a href="/habitaciones/historial/{{$habitacion->id}}">Historial</a></div>
+    <div class="divTableCell"><a class="btn btn-info" href="/habitaciones/historial/{{$habitacion->id}}">Historial</a></div>
 
 
 

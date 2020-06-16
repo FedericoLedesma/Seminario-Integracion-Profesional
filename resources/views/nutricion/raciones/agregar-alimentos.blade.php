@@ -4,22 +4,26 @@
 @endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('raciones.index') }}">Raciones</a></li>
-		<li class="breadcrumb-item active">Editar Racion</li>
+		<li class="breadcrumb-item"><a href="/raciones/{{$racion->id}}/edit">Editar ración</a></li>
+		<li class="breadcrumb-item active">Agregar alimentos</li>
+@endsection
+@section('titulo')
+	Agregar alimentos a ración
 @endsection
 @section('content')
 
 	 	 {!! Form::model($racion, ['route' => ['raciones.update', $racion->id], 'method'=> 'PUT'])!!}
 	 	@if($racion)
-    	<h1>Agregar Alimentos a Racion  {{$racion->name}}</h1>
+    	<h4>{{$racion->name}}</h4>
       @include('layouts.error')
 	    <div class="table-responsive">
-      	<div class="col-md-6 col-md-offset-1">
+      	<div class="col-md-8 col-md-offset-1">
 	 				@endif
 					{!!	Form::label('lbl',"Buscar Alimento")!!}
 				<div class="input-group mb-3">
 				<select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-				 	<option value="busqueda_id" >ID</option>
-				 	<option value="busqueda_name" >Nombre</option>
+					<option value="busqueda_name" >Nombre</option>
+					<option value="busqueda_id" >ID</option>
 				</select>
 
 				{!!	Form::text('alimentoid',null,['id'=>'alimentoid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
@@ -61,11 +65,11 @@
      		</div>
 
 			 	<div class="alert alert-info" role="alert">
-			   	Presione "Editar Racion" para quitar alimentos y/o establecer cantidades.
+			   	Presione "Editar ración" para quitar alimentos y/o establecer cantidades.
 			 	</div>
 			 	<table class="table table-striped table-hover ">
 				 	<tr>
-				 		<td>{!!link_to_route('raciones.edit', $title = 'Editar Racion', $parameters = [$racion], $attributes = ['class'=>'btn btn-success'])!!}</td>
+				 		<td>{!!link_to_route('raciones.edit', $title = 'Editar ración', $parameters = [$racion], $attributes = ['class'=>'btn btn-success'])!!}</td>
 						<td>{!!link_to_route('raciones.show', $title = 'Volver', $parameters = [$racion], $attributes = ['class'=>'btn btn-warning'])!!}</td>
 				 	</tr>
 			 	</table>

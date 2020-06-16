@@ -5,25 +5,13 @@
 @section('navegacion')
 	<li class="breadcrumb-item active">Habitaciones</li>
 @endsection
+@section('titulo')
+	HABITACIONES REGISTRADAS
+@endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-	    <h1>Habitaciones registradas</h1>
-	      @include('layouts.error')
+	@include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('habitaciones.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar habitación</button>
@@ -50,7 +38,6 @@
 								 <div class="input-group mb-3">
 
 									 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-										 <option value="busqueda_id" >ID</option>
 										 <option value="busqueda_name" >Nombre</option>
 									 </select>
 
@@ -60,15 +47,21 @@
 									 </div>
 								 </div>
 								{!! Form::close() !!}
-
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+		 <div class="container">
+		     <div class="table-responsive">
+		          <div class="col-md-auto col-md-offset-2">
+		 					 <div class="panel-heading">
 								<table class="table table-striped table-hover ">
 									<thead >
 										<tr>
-											<th scope="col">id</th>
 											<th scope="col">Nombre</th>
 											<th scope="col">Descripcion</th>
 											<th scope="col">Sector</th>
-											<th scope="col">Accion</th>
+											<th scope="col">Acción</th>
 											<th scope="col"></th>
 
 										</tr>
@@ -78,7 +71,6 @@
 									@if($habitacion)
 										@foreach($habitacion as $h)
 										<tr>
-											<td>{{$h->id}}</td>
 											<td>{{$h->name}}</td>
 											<td>{{$h->descripcion}}</td>
 											<td>{{$h->get_sector_name()}}</td>

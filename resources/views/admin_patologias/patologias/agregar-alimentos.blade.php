@@ -6,14 +6,14 @@
     <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
 		<li class="breadcrumb-item active">Editar Patologia</li>
 @endsection
+@section('titulo')
+	Agregar alimentos prohibidos a Patología
+@endsection
 @section('content')
 
-<!-- EDIT DEL ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($patologia, ['route' => ['patologias.update', $patologia->id], 'method'=> 'PUT'])!!}
 	 	@if($patologia)
-	    <h1>Agregar Alimentos Prohibidos a Patologia  {{$patologia->name}}</h1>
+	    <h4>{{$patologia->name}}</h4>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-6 col-md-offset-1">
@@ -21,9 +21,9 @@
 				{!!	Form::label('lbl',"Buscar Alimento")!!}
      <div class="input-group mb-3">
 
-     <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-       <option value="busqueda_id" >ID</option>
+     <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">       
        <option value="busqueda_name" >Nombre</option>
+			 <option value="busqueda_id" >ID</option>
      </select>
 
        {!!	Form::text('alimentoid',null,['id'=>'alimentoid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}

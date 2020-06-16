@@ -3,13 +3,11 @@
     <li class="breadcrumb-item"><a href="{{route('habitaciones.index') }}">Habitaciones</a></li>
 		<li class="breadcrumb-item active">Crear habitación</li>
 @endsection
+@section('titulo')
+  Agregar habitación
+@endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'HabitacionController@store'])!!}
-    <h1>Agregar habitación</h1>
      @include('layouts.error')
      <table>
        <tr>
@@ -34,7 +32,7 @@
        </tr>
        <tr>
          <td>
-             {!!	Form::label('descripcion', 'Descripcion')!!}
+             {!!	Form::label('descripcion', 'Descripción')!!}
          </td>
          <td>
              {!!	Form::text('descripcion')!!}
@@ -42,7 +40,7 @@
        </tr>
        <tr>
          <td>
-             {!!	Form::submit('Guardar Sector',['class' => 'btn btn-success'])!!}
+             {!!	Form::submit('Guardar habitación',['class' => 'btn btn-success'])!!}
          </td>
          <td>
              {!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}

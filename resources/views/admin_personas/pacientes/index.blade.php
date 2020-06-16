@@ -5,6 +5,9 @@
 @section('navegacion')
 <li class="breadcrumb-item active">Pacientes</li>
 @endsection
+@section('titulo')
+PACIENTES REGISTRADOS
+@endsection
 @section('content')
 
 <!-- INDEX DEL ROL -->
@@ -13,20 +16,11 @@
 
 	  	<title>Índice de pacientes</title>
 
-	    <h1></h1>
+
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 	<a href="{{action('PacienteController@create')}}" class="btn btn-primary">Agregar pacientes</a>
 <div>
 	<p>

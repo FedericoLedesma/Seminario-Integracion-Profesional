@@ -58,6 +58,7 @@ Crear menús para Personal
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo Doc.</th>
 							<th scope="col">Número de doc.</th>
+              <th scope="col">Sector</th>
 							<th scope="col">Acción</th>
 							<th scope="col"></th>
 
@@ -72,7 +73,11 @@ Crear menús para Personal
 									<td>{{$p->persona->apellido}}</td>
 									<td>{{$p->persona->tipoDocumento->name}}</td>
 									<td>{{$p->persona->numero_doc}}</td>
-
+                  @if($p->persona->sectorFecha(date("Y-m-d")))
+										<td>{{$p->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+									@else
+										<td>-</td>
+									@endif
 									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear menú
 									</a></td>

@@ -1,20 +1,17 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Historial de pacientes</title>
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Historial de pacientes</li>
 @endsection
+@section('titulo')
+Historial de pacientes
+@endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
-	  	<title>Historial de pacientes</title>
-
-	    <h1></h1>
-	      @include('layouts.error')
+	@include('layouts.error')
 
 
 	<a href="{{action('HistorialInternacionController@create')}}" class="btn btn-primary">Ingreso de pacientes</a>
@@ -56,13 +53,12 @@
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Documento</th>
 								<th scope="col">Fecha ingreso</th>
 								<th scope="col">Sector</th>
 								<th scope="col">Habitación</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Acción</th>
 								<th scope="col">Dar alta</th>
 								<th scope="col"></th>
 
@@ -73,7 +69,6 @@
 						@if($historiales)
 							@foreach($historiales as $historial)
 							<tr>
-								<td>{{$historial->get_id()}}</td>
 								<td>{{$historial->get_name()}} {{$historial->get_apellido()}}</td>
 								<td>{{$historial->get_tipo_documento_name()}} {{$historial->get_numero_doc()}}</td>
 								<td>{{$historial->get_fecha_ingreso()}}</td>
@@ -99,5 +94,10 @@
 @endsection
 @section('script')
  <script src="{{asset('js/historial-script.js')}}"></script>
-
+ <script type="text/javascript">
+	 $(document).ready(function(){
+		 document.getElementById("nav-enfermeria").setAttribute("class","nav-link active");
+		 document.getElementById("nav-internacion").setAttribute("class","nav-link active");
+		 });
+ </script>
 @endsection

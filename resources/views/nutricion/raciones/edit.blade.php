@@ -6,18 +6,18 @@
     <li class="breadcrumb-item"><a href="{{route('raciones.index') }}">Raciones</a></li>
 		<li class="breadcrumb-item active">Editar Racion</li>
 @endsection
+@section('titulo')
+Editar ración
+@endsection
 @section('content')
 
-<!-- EDIT DEL ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($racion, ['route' => ['raciones.update', $racion->id], 'method'=> 'PUT'])!!}
 	 	@if($racion)
-	    <h1>Editar Racion  {{$racion->name}}</h1>
+
       <div id="alert" class="alert alert-info"></div>
 	      @include('layouts.error')
 	    <div class="table-responsive">
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-7 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
         <tr>
 	    	<td>ID </td>
@@ -25,11 +25,11 @@
 
         <tr>
   				<td>Nombre </td>
-  				<td>{!!	Form::text('name',$racion->name)!!}</td>
+  				<td>{!!	Form::text('name',$racion->name, $attributes = ['size'=>'60', 'style'=>"width:auto"])!!}</td>
   			</tr>
 				<tr>
-  				<td>Observacion </td>
-  				<td>{!!	Form::text('observacion',$racion->observacion)!!}</td>
+  				<td>Observación </td>
+  				<td>{!!	Form::text('observacion',$racion->observacion, $attributes = ['size'=>'40', 'style'=>"width:500px"])!!}</td>
   			</tr>
 		 </table>
 		 @endif
@@ -59,7 +59,7 @@
       @endforeach
         </tbody>
     </table>
-		   <h6>Horarios de la racion</h6>
+		   <h6>Horarios de la ración</h6>
 		<table class="table table-bordered table-hover table-striped">
 
 			<thead>
@@ -87,15 +87,12 @@
 
 
 		</div>
-		</div>
-    <div class="col-md-6 col-md-offset-6">
-
-  </div>
+		</div>  
 	<div class="modal fade" id="create">
 		<div class="modal-dialog">
 				<div class="modal-content">
 						<div class="modal-header">
-							<h4>Agregar Horario a la racion</h4>
+							<h4>Agregar Horario a la ración</h4>
 								<button type="button" class="close" data-dismiss="modal">
 										<span>×</span>
 								</button>
@@ -126,5 +123,5 @@
    		document.getElementById("nav-nutricion").setAttribute("class","nav-link active");
    		document.getElementById("nav-raciones").setAttribute("class","nav-link active");
    		});
-  </script> 
+  </script>
 @endsection

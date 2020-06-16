@@ -3,14 +3,17 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
-		<li class="breadcrumb-item active">Editar Patologia</li>
+    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologías</a></li>
+		<li class="breadcrumb-item active">Editar Patología</li>
+@endsection
+@section('titulo')
+  Editar patología
 @endsection
 @section('content')
 
 	{!! Form::model($patologia, ['route' => ['patologias.update', $patologia->id], 'method'=> 'PUT'])!!}
 	  @if($patologia)
-	  <h1>Editar Patologia  {{$patologia->name}}</h1>
+	  <h4> {{$patologia->name}}</h4>
     <div id="alert" class="alert alert-info"></div>
     @include('layouts.error')
     <div class="table-responsive">
@@ -24,7 +27,7 @@
   				  <td>{{$patologia->id}}</td>
     			</tr>
           <tr>
-    				<td>Tipo Patologia </td>
+    				<td>Tipo de Patología </td>
     				<td>
               @if($tipos_patologias)
                 <select name="tipo_patologia_id">
@@ -44,7 +47,7 @@
     				<td>{!!	Form::text('name',$patologia->name)!!}</td>
     			</tr>
           <tr>
-            <td>Descripcion </td>
+            <td>Descripción </td>
             <td>{!!	Form::text('descripcion',$patologia->descripcion)!!}</td>
           </tr>
 	   	    <tr>

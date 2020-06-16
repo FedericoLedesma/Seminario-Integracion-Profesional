@@ -5,25 +5,14 @@
 @section('navegacion')
 	<li class="breadcrumb-item active">Alimentos</li>
 @endsection
+@section('titulo')
+ ALIMENTOS REGISTRADOS
+@endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-	    <h1>Alimentos registrados</h1>
-	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
+ 	@include('layouts.error')
 
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('alimentos.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar Alimento</button>
@@ -49,9 +38,9 @@
 							 {!!Form::open(['route'=>'alimentos.index','method'=>'GET']) !!}
 								 <div class="input-group mb-3">
 
-									 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-										 <option value="busqueda_id" >ID</option>
+									 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">										 
 										 <option value="busqueda_name" >Nombre</option>
+										 <option value="busqueda_id" >ID</option>
 									 </select>
 
 									 {!!	Form::text('alimentoid',null,['id'=>'alimentoid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
@@ -64,9 +53,8 @@
 								<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 									<thead >
 										<tr>
-											<th scope="col">id</th>
 											<th scope="col">Nombre</th>
-											<th scope="col">Accion</th>
+											<th scope="col">Acción</th>
 											<th scope="col"></th>
 
 										</tr>
@@ -76,7 +64,6 @@
 									@if($alimentos)
 										@foreach($alimentos as $alimento)
 										<tr>
-											<td>{{$alimento->id}}</td>
 											<td>{{$alimento->name}}</td>
 											<td>{!!link_to_route('alimentos.show', $title = 'VER', $parameters = [$alimento],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 

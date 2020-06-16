@@ -6,7 +6,7 @@
 <li class="breadcrumb-item active">Patologías</li>
 @endsection
 @section('titulo')
-	Patologías registradas
+	PATOLOGÍAS REGISTRADAS
 @endsection
 @section('content')
 	@include('layouts.error')

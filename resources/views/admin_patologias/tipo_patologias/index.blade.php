@@ -3,24 +3,19 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Tipo de Patologias</li>
+<li class="breadcrumb-item active">Tipos de patologías</li>
+@endsection
+@section('titulo')
+	TIPOS DE PATOLOGÍAS REGISTRADAS
 @endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
+	@include('layouts.error')
 
-
-
-	    <h1>Tipos de Patologias registradas</h1>
-	      @include('layouts.error')
-
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
 
 <form method="get" action={{ route('tipospatologias.create') }}>
 
-		<button class="btn btn-primary" type="submit">Agregar Tipo de Patologia</button>
+		<button class="btn btn-primary" type="submit">Agregar tipo de Patología</button>
 
 
 </form>
@@ -33,16 +28,14 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-tipopatologia" class="alert alert-info">Patologias con el {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-tipopatologia" class="alert alert-info">Patologías con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
 <div class="container">
-    <!--  <div class="row">-->
-    <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
-             <!--<div class="panel panel-default">-->
-				 <div class="panel-heading">
+  <div class="table-responsive">
+    <div class="col-md-8 col-md-offset-2">
+				<div class="panel-heading">
 				 {!!Form::open(['route'=>'tipospatologias.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
@@ -57,14 +50,20 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-
+				</div>
+			</div>
+	  </div>
+	</div>
+	<div class="container">
+	  <div class="table-responsive">
+	    <div class="col-md-auto col-md-offset-2">
+					<div class="panel-heading">
 					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Observacion</th>
-								<th scope="col">Accion</th>
+								<th scope="col">Observación</th>
+								<th scope="col">Acción</th>
 								<th scope="col"></th>
 
 							</tr>
@@ -74,32 +73,29 @@
 						@if($tipos_patologias)
 							@foreach($tipos_patologias as $tipoPatologia)
 							<tr>
-								<td>{{$tipoPatologia->id}}</td>
 								<td>{{$tipoPatologia->name}}</td>
 								<td>{{$tipoPatologia->observacion}}</td>
 								<td>{!!link_to_route('tipospatologias.show', $title = 'VER', $parameters = [$tipoPatologia],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($tipoPatologia, ['route' => ['tipospatologias.destroy', $tipoPatologia], 'method'=> 'DELETE'])!!}
 								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $tipoPatologia }}">Eliminar</button></td>
-
 								{!! Form::close() !!}
 							</tr>
-								@endforeach
-							@endif
+							@endforeach
+						@endif
 
 					</table>
 				</div>
-				</div>
-			  </div>
-				 </div>
-				<!--</div>-->
+			</div>
+	  </div>
+	</div>
 @endsection
 @section('script')
  <script src="{{asset('js/tipo_patologia-script.js')}}"></script>
 
  <script type="text/javascript">
  	$(document).ready(function(){
- 		document.getElementById("nav-tipospatologias").setAttribute("class", "nav-link active"); 
+ 		document.getElementById("nav-tipospatologias").setAttribute("class", "nav-link active");
 		document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
  		});
  </script>

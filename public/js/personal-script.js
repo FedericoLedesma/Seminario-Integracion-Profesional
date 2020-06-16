@@ -40,7 +40,6 @@ $('.eliminar').click(function(e){
 
 $('#alert').show();
 		$.ajax({
-			alert('pepe');
 			type: 'DELETE',
 			url: url_destroy,
 			dataType: 'json',

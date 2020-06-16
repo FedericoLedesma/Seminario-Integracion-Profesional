@@ -3,24 +3,16 @@
     <li class="breadcrumb-item"><a href="{{route('alimentos.index') }}">Alimentos</a></li>
 		<li class="breadcrumb-item active">Ver Alimento</li>
 @endsection
+@section('titulo')
+  Ver alimento
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($alimento)
 	    <div class="table-responsive">
-	    <h2>Alimento:  {{$alimento->name}}</h2>
-        <div class="col-md-3 col-md-offset-1">
+	    <h4>Alimento:  {{$alimento->name}}</h4>
+        <div class="col-md-6 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>

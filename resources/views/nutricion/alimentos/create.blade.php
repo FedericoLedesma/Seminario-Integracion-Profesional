@@ -3,13 +3,12 @@
     <li class="breadcrumb-item"><a href="{{route('alimentos.index') }}">Alimentos</a></li>
 		<li class="breadcrumb-item active">Crear Alimento</li>
 @endsection
+@section('titulo')
+ Agregar alimento
+@endsection
 @section('content')
 
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'AlimentoController@store'])!!}
-    <h1>Agregar Alimento</h1>
      @include('layouts.error')
      <table>
        <tr>

@@ -1,24 +1,19 @@
-<head>
+@extends('layouts.layout')
+@section('token')
   <script
           src="https://code.jquery.com/jquery-3.5.1.js"
           integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
           crossorigin="anonymous">
   </script>
-</head>
-
-
-@extends('layouts.layout')
+@endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historial pacientes</a></li>
 		<li class="breadcrumb-item active">Ingresar paciente</li>
 @endsection
+@section('titulo')
+  Ingresar nueva persona
+@endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-    <h1>Ingresar nueva persona</h1>
-
 
     {!!Form::open(['method'=>'get','action'=>'HistorialInternacionController@ingresarNuevo'])!!}
     <div class="container">

@@ -5,25 +5,17 @@
 @extends('layouts.layout')
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('habitaciones.index') }}">Habitaciones</a></li>
-		<li class="breadcrumb-item active">Ver habicación</li>
+		<li class="breadcrumb-item active">Ver habitación</li>
+@endsection
+@section('titulo')
+  Historial de habitación
 @endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($habitacion)
-	    <h2>[{{$habitacion->get_sector_name()}}] Habitacion:  {{$habitacion->name}}</h2>
-	    <h4> Pacientes actuales </h4>
+	    <h4>Habitación:  {{$habitacion->name}}. Sector:{{$habitacion->get_sector_name()}}</h4>
+	    <h5> Pacientes actuales </h5>
       <div class="divTable greyGridTable">
         <div class="divTableHeading">
           <div class="divTableRow">
@@ -31,7 +23,7 @@
                 <label> Nombre </label>
              </div>
              <div class="divTableHead">
-               <label> Fecha ingreso a habitación</label>
+               <label> Fecha que ingresó a habitación</label>
              </div>
              <div class="divTableHead">
                <label> Información del paciente </label>
@@ -66,7 +58,7 @@
     @foreach($pacientes as $paciente)
       <div id="dieta{{$paciente->get_id()}}" class="collapse">
             @if(sizeof($paciente->get_historial_menues(null))>0)
-              <h3>Resumen de la dieta de {{$paciente->get_name()}} {{$paciente->get_apellido()}}</h3>
+              <h4>Resumen de la dieta de {{$paciente->get_name()}} {{$paciente->get_apellido()}}</h4>
               <div class="divTable greyGridTable">
                   <div class="divTableHeading">
                     <div class="divTableRow">
@@ -74,7 +66,7 @@
                           <label> Nombre </label>
                        </div>
                        <div class="divTableHead">
-                         <label> Fecha ingreso a habitación</label>
+                         <label> Fecha que ingresó a habitación</label>
                        </div>
                        <div class="divTableHead">
                          <label> Información del paciente </label>
@@ -104,7 +96,7 @@
               </div>
             </div>
             @else
-            <h3>Resumen de la dieta de {{$paciente->get_name()}} {{$paciente->get_apellido()}}</h3>
+            <h4>Resumen de la dieta de {{$paciente->get_name()}} {{$paciente->get_apellido()}}</h4>
             <div class="divTableRow">
               <label>No ha consumido nada en los últimos 30 días</label>
             </div>
@@ -120,10 +112,10 @@
                <label> Nombre </label>
             </div>
             <div class="divTableHead">
-              <label> Fecha ingreso </label>
+              <label> Fecha de ingreso </label>
             </div>
             <div class="divTableHead">
-              <label> Fecha egreso </label>
+              <label> Fecha de egreso </label>
             </div>
             <div class="divTableHead">
               <label> Dieta </label>
@@ -153,7 +145,7 @@
     @foreach($habitacion->get_historico_camas_paciente() as $pac_cama)
       <div id="historico_dieta{{$pac_cama->get_paciente()->get_id()}}" class="collapse">
         @if(sizeof($pac_cama->get_paciente()->get_historial_menues(null))>0)
-            <h3>Resumen de la dieta de {{$pac_cama->get_paciente()->get_name()}} {{$pac_cama->get_paciente()->get_apellido()}}</h3>
+            <h4>Resumen de la dieta de {{$pac_cama->get_paciente()->get_name()}} {{$pac_cama->get_paciente()->get_apellido()}}</h4>
             <div class="divTable greyGridTable">
                 <div class="divTableHeading">
                   <div class="divTableRow">
@@ -161,7 +153,7 @@
                         <label> Nombre </label>
                      </div>
                      <div class="divTableHead">
-                       <label> Fecha ingreso a habitación</label>
+                       <label> Fecha que ingresó a habitación</label>
                      </div>
                      <div class="divTableHead">
                        <label> Información del paciente </label>

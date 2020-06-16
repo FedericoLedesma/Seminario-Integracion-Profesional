@@ -3,6 +3,9 @@
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales</a></li>
 		<li class="breadcrumb-item active">Ver historial</li>
 @endsection
+@section('titulo')
+Historial de paciente
+@endsection
 @section('content')
 
 	   @include('layouts.error')
@@ -12,19 +15,20 @@
 
 
 	    <div class="table-responsive">
-	    <h2>Historial de {{$historial->get_paciente_name()}} desde {{$historial->get_fecha_ingreso()}}
-      {!!link_to_route('pacientes.historial', $title ='Detalles', $parameters = [$historial->get_paciente()->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
-      </h2>
-        <div class="col-md-7 col-md-offset-1">
+        <div>
+          {!!link_to_route('pacientes.historial', $title ='Historial detallado', $parameters = [$historial->get_paciente()->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
+
+        </div>
+        <div class="col-md-auto col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
-	    	<tr>
-	    		<td>ID Historial </td>
-				<td>{{$historial->get_id()}}</td>
-			</tr>
-			<tr>
+      <tr>
 				<td>Paciente </td>
 				<td>{{$historial->get_paciente_name()}} {{$historial->get_apellido()}}</td>
+			</tr>
+			<tr>
+				<td>Desde </td>
+				<td>{{$historial->get_fecha_ingreso()}}</td>
 			</tr>
 			<tr>
 				<td>Sector </td>

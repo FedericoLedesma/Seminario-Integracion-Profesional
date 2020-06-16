@@ -1,17 +1,16 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Patologias</a></li>
-		<li class="breadcrumb-item active">Editar Patologia</li>
+    <li class="breadcrumb-item"><a href="{{route('patologias.index') }}">Tipos de Patologías</a></li>
+		<li class="breadcrumb-item active">Editar tipo de Patología</li>
+@endsection
+@section('titulo')
+  Editar Tipo Patología
 @endsection
 @section('content')
 
-<!-- EDIT DEL ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-
 	 	{!! Form::model($tipoPatologia, ['route' => ['tipospatologias.update', $tipoPatologia->id], 'method'=> 'PUT'])!!}
 	 	@if($tipoPatologia)
-	    <h1>Editar Tipo Patologia  {{$tipoPatologia->name}}</h1>
+	    <h4>  {{$tipoPatologia->name}}</h4>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-3 col-md-offset-1">

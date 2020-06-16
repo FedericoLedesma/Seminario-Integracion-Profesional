@@ -141,13 +141,12 @@ MOVIMIENTOS REGISTRADOS
 								</div>
 								<div class="modal fade" id="modal-{{$movimiento->id}}">
 									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-movimiento-header" id="modal-movimiento-header">
+		                <div class="modal-content">
+		                  <div class="modal-header" id="modal-movimiento-header">							
+												<h4>Ración disponible</h4>
 												<button type="button" class="close" data-dismiss="modal">
 													<span>×</span>
 												</button>
-
-												<h4>Racion disponible</h4>
 											</div>
 											@if($movimiento->racion_disponible)
 											<div class="modal-movimiento-body">
@@ -155,7 +154,7 @@ MOVIMIENTOS REGISTRADOS
 													<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 														<thead >
 															<tr>
-																<th scope="col">Racion</th>
+																<th scope="col">Ración</th>
 																<th scope="col">Horario</th>
 																<th scope="col">Fecha</th>
 																<th scope="col">Stock</th>

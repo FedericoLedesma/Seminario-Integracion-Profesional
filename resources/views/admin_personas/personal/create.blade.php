@@ -19,12 +19,10 @@
   padding: 10px;
 }
 </style>
+@section('titulo')
+Agregar nuevo personal
+@endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-      <h1>Agregar nuevo personal</h1>
         @include('layouts.error')
 
 	    {!!Form::open(['method'=>'post','action'=>'PersonalController@store'])!!}
@@ -33,6 +31,7 @@
         <div>
           <a href="{{action('PersonalController@createPersonal')}}" class="btn btn-primary">Ingresar a personal nuevo</a>
         </div>
+        <p></p>
         <div class="container">
             <!--  <div class="row">-->
             <div class="table-responsive">
@@ -54,6 +53,14 @@
         						 </div>
         					 </div>
         					{!! Form::close() !!}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="table-responsive">
+                 <div class="col-md-auto col-md-offset-2">
+                 <div class="panel-heading">
         					{!!	Form::label('titulo_tabla', 'Personas ingresadas en el sistema')!!}
         					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
         						<thead >

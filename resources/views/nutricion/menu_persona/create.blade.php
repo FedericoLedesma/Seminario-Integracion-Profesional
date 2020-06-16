@@ -59,6 +59,7 @@ Crear menús para Pacientes
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo Doc.</th>
 							<th scope="col">Número de doc.</th>
+							<th scope="col">Sector</th>
 							<th scope="col">Acción</th>
 							<th scope="col"></th>
 
@@ -73,7 +74,11 @@ Crear menús para Pacientes
 									<td>{{$paciente->get_apellido()}}</td>
 									<td>{{$paciente->get_tipo_documento_name()}}</td>
 									<td>{{$paciente->get_numero_doc()}}</td>
-
+									@if($paciente->persona->sectorFecha(date("Y-m-d")))
+										<td>{{$paciente->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+									@else
+										<td>-</td>
+									@endif
 									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-paciente_apellido="{{$paciente->get_apellido()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear menú
 									</a></td>

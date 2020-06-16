@@ -4,15 +4,14 @@
 @endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('raciones.index') }}">Raciones</a></li>
-		<li class="breadcrumb-item active">Crear Racion</li>
+		<li class="breadcrumb-item active">Crear Ración</li>
+@endsection
+@section('titulo')
+	Agregar ración
 @endsection
 @section('content')
 
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'RacionController@store'])!!}
-    <h1>Agregar Racion</h1>
      @include('layouts.error')
      <div class="container">
 
@@ -24,7 +23,7 @@
      						<thead >
      							<tr>
      								<th scope="col">Nombre</th>
-										<th>Observacion</th>
+										<th>Observación</th>
      							</tr>
      						</thead>
 

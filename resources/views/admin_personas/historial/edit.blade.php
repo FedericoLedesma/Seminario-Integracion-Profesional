@@ -12,6 +12,9 @@
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales</a></li>
 		<li class="breadcrumb-item active">Traslado de paciente</li>
 @endsection
+@section('titulo')
+  Trasladar de habitación
+@endsection
 @section('content')
 
 <!-- EDIT DEL ROLE -->
@@ -19,13 +22,16 @@
 <!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($historial, ['route' => ['historialInternacion.update', $historial->get_id()], 'method'=> 'PUT'])!!}
 	 	@if($historial)
-	    <h1>Trasladar de habitación a {{$historial->get_paciente_name()}}</h1>
+	    <h4> Paciente {{$historial->get_paciente_name()}}</h4>
 	      @include('layouts.error')
 	    <div class="table-responsive">
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
 	    <table class="table table-bordered table-hover table-striped">
-          <div>
+          <tr>
+            <td>
                {!!	Form::label('sector_id', 'Sector')!!}
+            </td>
+            <td>
                @if($sectores)
                  <select name="sectores" id='sectores'>
                  <!--	<option selected>Seleccione el Rol</option>validar-->
@@ -36,9 +42,14 @@
                @endforeach
                 </select>
               @endIf
-          </div>
-          <div id='select_habitacion' name='select_habitacion'>
-               {!!	Form::label('habitacion', 'Habitacion')!!}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+               {!!	Form::label('habitacion', 'Habitación')!!}
+            </td>
+            <td id='select_habitacion' name='select_habitacion'>
                @if($habitaciones)
                  <select name="habitacion_id">
                    <!--	<option selected>Seleccione el Rol</option>validar-->
@@ -49,11 +60,12 @@
                    @endforeach
                 </select>
               @endIf
-          </div>
+            </td>
+          </tr>
 		     <td>{!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
 		    </td>
 		    <td>
-		   	{!!link_to_route('historialInternacion.show', $title = 'CANCELAR', $parameters = [$historial], $attributes = [])!!}
+		   	{!!link_to_route('historialInternacion.show', $title = 'CANCELAR', $parameters = [$historial], $attributes = ['class'=>'btn btn-primary'])!!}
 		   	</td>
 		   	</tr>
 		 </table>

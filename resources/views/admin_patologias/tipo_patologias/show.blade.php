@@ -3,23 +3,15 @@
     <li class="breadcrumb-item"><a href="{{route('tipospatologias.index') }}">Tipos de Patologias</a></li>
 		<li class="breadcrumb-item active">Ver Tipo de Patologia</li>
 @endsection
+@section('titulo')
+  Ver tipo de patología
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($tipoPatologia)
 	    <div class="table-responsive">
-	    <h2>Tipo de Patologia:  {{$tipoPatologia->name}}</h2>
+	    <h4>Tipo de Patologia:  {{$tipoPatologia->name}}</h4>
         <div class="col-md-3 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">

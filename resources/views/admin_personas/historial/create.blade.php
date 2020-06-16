@@ -1,13 +1,11 @@
-<head>
-  <script
-          src="https://code.jquery.com/jquery-3.5.1.js"
-          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-          crossorigin="anonymous">
-  </script>
-</head>
-
-
 @extends('layouts.layout')
+@section('token')
+<script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous">
+</script>
+@endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historial pacientes</a></li>
 		<li class="breadcrumb-item active">Ingresar paciente</li>
@@ -19,13 +17,11 @@
   padding: 10px;
 }
 </style>
+@section('titulo')
+  Ingresar paciente
+@endsection
 @section('content')
-
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-      <h1>Ingresar paciente</h1>
-        @include('layouts.error')
+  @include('layouts.error')
 
 	    {!!Form::open(['method'=>'post','action'=>'HistorialInternacionController@store'])!!}
 
@@ -33,12 +29,12 @@
         <div>
           <a href="{{action('HistorialInternacionController@createPaciente')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>
         </div>
+        <p>
+        </p>
         <div class="container">
-            <!--  <div class="row">-->
-            <div class="table-responsive">
-                 <div class="col-md-8 col-md-offset-2">
-                     <!--<div class="panel panel-default">-->
-        				 <div class="panel-heading">
+          <div class="table-responsive">
+            <div class="col-md-8 col-md-offset-2">
+        			 <div class="panel-heading">
         				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
         					 <div class="input-group mb-3">
 
@@ -54,6 +50,14 @@
         						 </div>
         					 </div>
         					{!! Form::close() !!}
+        			 </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="table-responsive">
+            <div class="col-md-auto col-md-offset-2">
+        			 <div class="panel-heading">
         					{!!	Form::label('titulo_tabla', 'Pacientes activos')!!}
         					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
         						<thead >
@@ -140,5 +144,11 @@
 			});
 		});
 	});
+</script>
+<script type="text/javascript">
+ $(document).ready(function(){
+    document.getElementById("nav-enfermeria").setAttribute("class", "nav-link active");
+    document.getElementById("nav-internacion").setAttribute("class", "nav-link active");
+   });
 </script>
 @endsection

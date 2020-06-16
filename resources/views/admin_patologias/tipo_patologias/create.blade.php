@@ -1,15 +1,15 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('tipospatologias.index') }}">Tipos de Patologias</a></li>
+    <li class="breadcrumb-item"><a href="{{route('tipospatologias.index') }}">Tipos de Patologías</a></li>
 		<li class="breadcrumb-item active">Crear Tipo Patologia</li>
+@endsection
+@section('titulo')
+  Agregar Tipo de Patología
 @endsection
 @section('content')
 
-<!-- CREATE ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
     {!!Form::open(['method'=>'post','action'=>'TipoPatologiaController@store'])!!}
-    <h1>Agregar Tipo de Patologia</h1>
+
      @include('layouts.error')
      <table>
        <tr>
@@ -22,7 +22,7 @@
        </tr>
        <tr>
          <td>
-             {!!	Form::label('observacion', 'Observacion')!!}
+             {!!	Form::label('observacion', 'Observación')!!}
          </td>
          <td>
              {!!	Form::text('observacion')!!}
