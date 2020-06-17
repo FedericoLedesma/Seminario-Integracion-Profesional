@@ -17,6 +17,7 @@ use App\Dieta;
 use App\User;
 use App\Movimiento;
 use App\DietaActiva;
+use Spatie\Permission\Models\Permission;
 class Prueb extends Seeder
 {
     /**
@@ -74,14 +75,7 @@ class Prueb extends Seeder
       */
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
-      $racionD=RacionesDisponibles::all();
-      foreach ($racionD as $r) {
-        $mov=$r->movimientos();
-        foreach ($mov as $m) {
-            echo $m->racion_disponible->horario_racion->racion->name;
-
-        }
-      }
+    Permission::create(['name'=>'nuevoper','guard_name'=>'web']);
 
     }
 }

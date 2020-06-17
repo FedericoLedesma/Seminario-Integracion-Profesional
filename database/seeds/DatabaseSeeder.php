@@ -33,29 +33,29 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
       $tipo_doc=TipoDocumento::create([
-        'name'=>'dni',
+        'name'=>'DNI',
       ]);
       $persona = Persona::create([
           #'id'=>1,
-          'name'=>'pepe',
-          'apellido'=>'carlitos',
+          'name'=>'FEDERICO',
+          'apellido'=>'ADMIN',
           'tipo_documento_id'=>$tipo_doc->id,
-          'numero_doc'=>1234,
-          'direccion'=>'10 n° 100',
-          'email'=>'a',
-          'provincia'=>'a',
-          'localidad'=>' a',
-          'sexo'=>'a',
-          'fecha_nac'=>Carbon::now()
+          'numero_doc'=>40000000,
+          'direccion'=>'LAVALLE 1506',
+          'email'=>'admin@seminario.com',
+          'provincia'=>'BUENOS AIRES',
+          'localidad'=>'GENERAL RODRIGUEZ',
+          'sexo'=>'MASCULINO',
+          'fecha_nac'=>'1997-02-02'
       ]);
       $personal=Personal::create([
         'id'=>$persona->id,
       ]);
         // $this->call(UsersTableSeeder::class);
     	DB::table('users')->insert([
-    			'dni' => '1234',
-    			'name'=>'admin',
-				'personal_id'=>1,
+    			'dni' => '40000000',
+    			'name'=>'ADMIN',
+				   'personal_id'=>1,
     			'password'=>bcrypt('12345678'),
 
     	]);
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
 
       foreach ($acciones as $accion) {
         foreach ($tablas as $tabla) {
-          DB::table('permissions')->insert([
+          Permission::create([
         			'name' => $accion.'_'.$tabla,
         			'guard_name'=>'web',
         	]);
@@ -100,8 +100,8 @@ class DatabaseSeeder extends Seeder
 
 	}
 
-  public static function cargar_admin_y_permisos(){
-    User::create([
+  /*public static function cargar_admin_y_permisos(){
+  User::create([
         'dni' => '1234',
         'name'=>'admin',
         'password'=>bcrypt('12345678'),
@@ -188,8 +188,7 @@ class DatabaseSeeder extends Seeder
     $role->givePermissionTo($permiso);
     }
     $user->assignRole('Administrador');
-  }
-
+  }*/
   private static function cargar_raciones_ali(){
     $r1 = Racion::create([
       'name'=>'churrasco con fideos',
@@ -253,220 +252,430 @@ class DatabaseSeeder extends Seeder
 
   private static function cargar_horarios(){
     $data = [
-      'name'=>'desayuno'
+      'name'=>'Desayuno'
     ];
     $h1 = new Horario($data);
     $h1->save();
     $data = [
-      'name'=>'colación'
+      'name'=>'Colación'
     ];
     $h2 = new Horario($data);
     $h2->save();
     $data = [
-      'name'=>'almuerzo'
+      'name'=>'Almuerzo'
     ];
     $h3 = new Horario($data);
     $h3->save();
     $data = [
-      'name'=>'merienda'
+      'name'=>'Merienda'
     ];
     $h4 = new Horario($data);
     $h4->save();
     $data = [
-      'name'=>'cena'
+      'name'=>'Cena'
     ];
     $h5 = new Horario($data);
     $h5->save();
   }
 
   private static function cargar_tipo_documentos(){
+
     $data =[
-      'name'=>'DNI'
-    ];
-    $t1 = new TipoDocumento($data);
-    $t1->save();
-    $data =[
-      'name'=>'libreta cívica'
+      'name'=>'Libreta Cívica'
     ];
     $t2 = new TipoDocumento($data);
     $t2->save();
     $data =[
-      'name'=>'indocumentado'
+      'name'=>'Indocumentado'
     ];
     $t3 = new TipoDocumento($data);
     $t3->save();
     $data =[
-      'name'=>'pasaporte'
+      'name'=>'Pasaporte'
     ];
     $t4 = new TipoDocumento($data);
     $t4->save();
+    $data =[
+      'name'=>'Libreta Enrolamiento'
+    ];
+    $t5 = new TipoDocumento($data);
+    $t5->save();
+    $data =[
+      'name'=>'CUIL'
+    ];
+    $t6 = new TipoDocumento($data);
+    $t6->save();
+    $data =[
+      'name'=>'CI Extranjeros'
+    ];
+    $t7 = new TipoDocumento($data);
+    $t7->save();
   }
 
   private static function cargar_personas(){
     static::cargar_tipo_documentos();
     $data = [
-      'numero_doc'=>66666666,
-      'apellido'=>'gomez',
-      'name'=>'juan',
+      'numero_doc'=>31241573,
+      'apellido'=>'AGUIRRE',
+      'name'=>'ANDRES',
       'observacion'=>'OK',
-      'direccion'=>'independencia 601',
-      'email'=>'juan@test.com',
-      'provincia'=>'buenos aires',
-      'localidad'=>'moreno',
-      'sexo'=>'masculino',
+      'direccion'=>'INDEPENDENCIA 601',
+      'email'=>'andres@test.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MORENO',
+      'sexo'=>'MASCULINO',
       'fecha_nac'=>'1960-5-5',
       'tipo_documento_id'=>1,
     ];
     $p1 = new Persona($data);
     $p1->save();
     $data = [
-      'numero_doc'=>77777777,
-      'apellido'=>'lopez',
-      'name'=>'juan',
+      'numero_doc'=>34154498,
+      'apellido'=>'ARBO',
+      'name'=>'CECILIA',
       'observacion'=>'OK',
-      'direccion'=>'rivadavia 36001',
+      'direccion'=>'RIVADAVIA 36001',
       'email'=>'lopez.juan@test.com',
-      'provincia'=>'buenos aires',
+      'provincia'=>'BUENOS AIRES',
       'localidad'=>'1800-1-1',
-      'sexo'=>'masculino',
-      'fecha_nac'=>'1960-5-5',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1960-2-8',
       'tipo_documento_id'=>1,
     ];
     $p2 = new Persona($data);
     $p2->save();
     $data = [
-      'numero_doc'=>66666665,
-      'apellido'=>'gomez',
-      'name'=>'juan',
+      'numero_doc'=>16582895,
+      'apellido'=>'ARDUINO',
+      'name'=>'MARIO EUGENIO',
       'observacion'=>'OK',
-      'direccion'=>'independencia 606',
-      'email'=>'juan2@test.com',
-      'provincia'=>'buenos aires',
-      'localidad'=>'moreno',
-      'sexo'=>'masculino',
-      'fecha_nac'=>'1960-5-5',
+      'direccion'=>'BALCARCE 606',
+      'email'=>'arduinoma@test.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MERLO',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1985-2-2',
       'tipo_documento_id'=>1,
     ];
     $p3 = new Persona($data);
     $p3->save();
     $data = [
-      'numero_doc'=>88888888,
-      'apellido'=>'ricardi',
-      'name'=>'carla',
+      'numero_doc'=>22576032,
+      'apellido'=>'BAIONI',
+      'name'=>'GABRIELA ROBERTA',
       'observacion'=>'OK',
-      'direccion'=>'-',
+      'direccion'=>'LIBERTAD 2548',
       'email'=>'carla@test.com',
-      'provincia'=>'buenos aires',
-      'localidad'=>'luján',
-      'sexo'=>'femenino',
-      'fecha_nac'=>'1970-5-5',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'LUJÁN',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1989-5-5',
       'tipo_documento_id'=>1,
     ];
     $p4 = new Persona($data);
     $p4->save();
     $data = [
-      'numero_doc'=>99999999,
-      'apellido'=>'fernandez',
-      'name'=>'maria',
+      'numero_doc'=>13214174,
+      'apellido'=>'FERNANDEZ',
+      'name'=>'MARIA',
       'observacion'=>'OK',
-      'direccion'=>'calle 14 n° 355',
+      'direccion'=>'CALLE 14 N°.355',
       'email'=>'-',
-      'provincia'=>'buenos aires',
-      'localidad'=>'san andrés de giles',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'SAN ANDRÉS DE GILES',
       'sexo'=>'femenino',
-      'fecha_nac'=>'1980-5-5',
+      'fecha_nac'=>'1979-2-15',
       'tipo_documento_id'=>1,
     ];
     $p5 = new Persona($data);
     $p5->save();
     $data = [
-      'numero_doc'=>44444444,
-      'apellido'=>'pepe',
-      'name'=>'pepe',
+      'numero_doc'=>24618959,
+      'apellido'=>'BARCOS',
+      'name'=>'PEDRO',
       'observacion'=>'OK',
       'direccion'=>'-',
       'email'=>'-',
       'provincia'=>'-',
       'localidad'=>'-',
-      'sexo'=>'masculino',
-      'fecha_nac'=>null,
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1965-11-8',
       'tipo_documento_id'=>1,
     ];
     $p6 = new Persona($data);
     $p6->save();
     $data = [
-      'numero_doc'=>0,
-      'apellido'=>'',
-      'name'=>'Accidente moto 2020-5-5',
-      'observacion'=>'Persona no identificada (amnesia)',
-      'direccion'=>'-',
-      'email'=>'-',
-      'provincia'=>'-',
-      'localidad'=>'-',
-      'sexo'=>'masculino',
-      'fecha_nac'=>null,
+      'numero_doc'=>12566554,
+      'apellido'=>'BENITEZ',
+      'name'=>'VERONICA',
+      'observacion'=>'-',
+      'direccion'=>'JUAN MANUEL DE ROSAS 456',
+      'email'=>'veronica@gmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'LUJÁN',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1995-12-12',
       'tipo_documento_id'=>3,
     ];
     $p7 = new Persona($data);
     $p7->save();
     $data = [
-      'numero_doc'=>33333333,
-      'apellido'=>'gonzalez',
-      'name'=>'gabriela',
+      'numero_doc'=>95531632,
+      'apellido'=>'BERGE',
+      'name'=>'PAMELA',
       'observacion'=>'OK',
-      'direccion'=>'-',
-      'email'=>'-',
-      'provincia'=>'buenos aires',
-      'localidad'=>'-',
-      'sexo'=>'femenino',
+      'direccion'=>'LA PINTA 287',
+      'email'=>'pamela@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MORON',
+      'sexo'=>'FEMENINO',
       'fecha_nac'=>'1990-5-5',
       'tipo_documento_id'=>1,
     ];
     $p8 = new Persona($data);
     $p8->save();
     $data = [
-      'numero_doc'=>66666666,
-      'apellido'=>'oliverti',
-      'name'=>'ricardo',
+      'numero_doc'=>12647194,
+      'apellido'=>'OLIVERTI',
+      'name'=>'RICARDO',
       'observacion'=>'OK',
-      'direccion'=>'independencia 600',
-      'email'=>'-',
-      'provincia'=>'misiones',
-      'localidad'=>'misiones',
-      'sexo'=>'masculino',
-      'fecha_nac'=>'1960-5-5',
+      'direccion'=>'PUEYRREDON 600',
+      'email'=>'oliverti@test.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'JAUREGUI',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1990-5-5',
       'tipo_documento_id'=>1,
     ];
     $p9 = new Persona($data);
     $p9->save();
     $data = [
-      'numero_doc'=>77777777,
-      'apellido'=>'gomez',
-      'name'=>'juan',
+      'numero_doc'=>19325205,
+      'apellido'=>'GOMEZ',
+      'name'=>'FABIAN',
       'observacion'=>'OK',
-      'direccion'=>'independencia 600',
-      'email'=>'-',
-      'provincia'=>'buenos aires',
-      'localidad'=>'moreno',
-      'sexo'=>'masculino',
-      'fecha_nac'=>'1960-5-5',
+      'direccion'=>'SAN MARTIN 1245',
+      'email'=>'fabian@yahoo.com.ar',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MORENO',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1989-7-2',
       'tipo_documento_id'=>1,
     ];
     $p10 = new Persona($data);
     $p10->save();
     $data = [
-      'numero_doc'=>66666666,
-      'apellido'=>'gomez',
-      'name'=>'juan',
+      'numero_doc'=>16809531,
+      'apellido'=>'BENITEZ',
+      'name'=>'CARLOS',
       'observacion'=>'OK',
-      'direccion'=>'independencia 600',
-      'email'=>'-',
-      'provincia'=>'buenos aires',
-      'localidad'=>'moreno',
-      'sexo'=>'masculino',
-      'fecha_nac'=>'1960-5-5',
+      'direccion'=>'EL FACÓN 1245',
+      'email'=>'benitezzz@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1977-7-27',
       'tipo_documento_id'=>1,
     ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>17448901,
+      'apellido'=>'MALLO',
+      'name'=>'MARCOS AGUSTIN',
+      'observacion'=>'OK',
+      'direccion'=>'EL AMANECER 145',
+      'email'=>'malloyo@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1987-7-25',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>20987908,
+      'apellido'=>'PIGHIN',
+      'name'=>'NELIDA CLARA',
+      'observacion'=>'OK',
+      'direccion'=>'EL PERICÓN 4564',
+      'email'=>'nelidacp@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MARCOS PAZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1998-5-27',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>21040557,
+      'apellido'=>'PEREZ',
+      'name'=>'JULIO ANDRES',
+      'observacion'=>'OK',
+      'direccion'=>'CARLOS PELLEGRINI 198',
+      'email'=>'perezjulio@gmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MORENO',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1980-10-5',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>21399214,
+      'apellido'=>'MASSA',
+      'name'=>'DOLORES GUADALUPE',
+      'observacion'=>'OK',
+      'direccion'=>'AGÜERO 457',
+      'email'=>'massaaguero@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MORENO',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1979-9-13',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>17448901,
+      'apellido'=>'MENSEGUEZ',
+      'name'=>'LUCIA LAURA',
+      'observacion'=>'OK',
+      'direccion'=>'JOSE C. PAZ 544',
+      'email'=>'menseguez12@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1989-9-7',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>17448901,
+      'apellido'=>'BRANDAN',
+      'name'=>'CELIA',
+      'observacion'=>'OK',
+      'direccion'=>'PIEDAS 1245',
+      'email'=>'brandancelia@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1977-7-27',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>16821037,
+      'apellido'=>'BRASILI',
+      'name'=>'FERNANDO',
+      'observacion'=>'OK',
+      'direccion'=>'VIDT 1245',
+      'email'=>'brasili@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'LOBOS',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1978-7-17',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>13285797,
+      'apellido'=>'BRUNO',
+      'name'=>'SEBASTIAN LEANDRO',
+      'observacion'=>'OK',
+      'direccion'=>'PINCIROLLI 4578',
+      'email'=>'bruno@gmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1997-7-27',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>27033530,
+      'apellido'=>'VALERO',
+      'name'=>'CESAR JOSUÉ',
+      'observacion'=>'OK',
+      'direccion'=>'SARMIENTO 9852',
+      'email'=>'sarmiento@hotmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1992-2-15',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>18860528,
+      'apellido'=>'TELIAS',
+      'name'=>'ESTEBAN HERNAN',
+      'observacion'=>'OK',
+      'direccion'=>'ALMIRANTE BROWN 192',
+      'email'=>'hernan@hotmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MARCOS PAZ',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1991-2-19',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>24834180,
+      'apellido'=>'TORRES',
+      'name'=>'MARIA JOSE',
+      'observacion'=>'OK',
+      'direccion'=>'CONSTITUCIÓN 1233',
+      'email'=>'torresmj@hotmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MARCOS PAZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1996-2-15',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>26725275,
+      'apellido'=>'SOTELO',
+      'name'=>'NATALIA MARIA',
+      'observacion'=>'OK',
+      'direccion'=>'AVELLANEDA 1230',
+      'email'=>'soteloa@yahoo.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'GENERAL RODRIGUEZ',
+      'sexo'=>'FEMENINO',
+      'fecha_nac'=>'1994-8-2',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
+    $data = [
+      'numero_doc'=>14490519,
+      'apellido'=>'TOLEDO',
+      'name'=>'MARCOS GABRIEL',
+      'observacion'=>'OK',
+      'direccion'=>'EL MATE 2154',
+      'email'=>'toledomg@hotmail.com',
+      'provincia'=>'BUENOS AIRES',
+      'localidad'=>'MERLO',
+      'sexo'=>'MASCULINO',
+      'fecha_nac'=>'1985-2-2',
+      'tipo_documento_id'=>1,
+    ];
+    $p10 = new Persona($data);
+    $p10->save();
   }
 
   private static function cargar_personal_y_pacientes(){
