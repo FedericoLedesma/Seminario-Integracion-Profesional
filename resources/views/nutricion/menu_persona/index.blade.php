@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Menú persona</title>
 <style>
 	div.blueTable {
 	border: 1px solid #1C6EA4;
@@ -72,16 +73,14 @@
 </style>
 @endsection
 @section('navegacion')
-	<li class="breadcrumb-item active">Menus</li>
+	<li class="breadcrumb-item active">Menús</li>
 @endsection
 @section('titulo')
-Menús de persona (planillas)
+MENÚS DE PERSONAS (PLANILLAS)
 @endsection
 @section('content')
 
-	  	<title>Menu persona</title>
-
-	      @include('layouts.error')
+ @include('layouts.error')
 
 
 <container justify-content="space-evenly">

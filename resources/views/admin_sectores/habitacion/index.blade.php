@@ -59,8 +59,10 @@
 									<thead >
 										<tr>
 											<th scope="col">Nombre</th>
-											<th scope="col">Descripcion</th>
+											<th scope="col">Descripción</th>
 											<th scope="col">Sector</th>
+											<th scope="col">Cantidad de camas</th>
+											<th scope="col">Camas sin ocupar</th>
 											<th scope="col">Acción</th>
 											<th scope="col"></th>
 
@@ -74,6 +76,8 @@
 											<td>{{$h->name}}</td>
 											<td>{{$h->descripcion}}</td>
 											<td>{{$h->get_sector_name()}}</td>
+											<td>{{count($h->get_camas())}}</td>
+											<td>{{count($h->get_camas_desocupadas())}}</td>
 											<td>{!!link_to_route('habitaciones.show', $title = 'VER', $parameters = [$h],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 											{!! Form::model($h, ['route' => ['habitaciones.destroy', $h], 'method'=> 'DELETE'])!!}

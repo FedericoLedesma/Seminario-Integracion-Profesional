@@ -27,8 +27,8 @@ Historial de paciente
 				<td>{{$historial->get_paciente_name()}} {{$historial->get_apellido()}}</td>
 			</tr>
 			<tr>
-				<td>Desde </td>
-				<td>{{$historial->get_fecha_ingreso()}}</td>
+				<td>Internación desde </td>
+				<td>{{date("d/m/Y",strtotime($historial->get_fecha_ingreso()))}}</td>
 			</tr>
 			<tr>
 				<td>Sector </td>
@@ -52,11 +52,11 @@ Historial de paciente
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$historial->created_at}}</td>
+				<td>{{date("d/m/Y h:i:s", strtotime($historial->created_at))}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$historial->updated_at}}</td>
+				<td>{{date("d/m/Y h:i:s", strtotime($historial->updated_at))}}</td>
 			</tr>
 
 		</table>

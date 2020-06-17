@@ -42,7 +42,7 @@ USUARIOS REGISTRADOS
           <div class="input-group mb-3">
 
           <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-            <option value="busqueda_id" >ID</option>
+
             <option value="busqueda_dni" >Número Doc.</option>
             <option value="busqueda_name" >Nombre</option>
           </select>
@@ -64,9 +64,10 @@ USUARIOS REGISTRADOS
 					<table class="table table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Número Doc.</th>
+								<th scope="col">Número doc.</th>
+								<th scope="col">Tipo de doc.</th>
 								<th scope="col">Nombre</th>
+								<th scope="col">Apellido</th>
 								<th scope="col">Rol</th>
 								<th scope="col">Creado</th>
 								<th scope="col">Actualizado</th>
@@ -79,17 +80,18 @@ USUARIOS REGISTRADOS
 						@if($users)
 							@foreach($users as $user)
 							<tr>
-								<td>{{$user->id}}</td>
-								<td>{{$user->dni}}</td>
-								<td>{{$user->name}}</td>
+								<td>{{$user->personal->persona->numero_doc}}</td>
+								<td>{{$user->personal->persona->tipoDocumento->name}}</td>
+								<td>{{$user->personal->persona->name}}</td>
+								<td>{{$user->personal->persona->apellido}}</td>
 								<?php
 								$roles=$user->getRoleNames();
 								?>
 								@foreach($roles as $rol)
 								<td>{{$rol}}</td>
 								@endforeach
-								<td>{{$user->created_at}}</td>
-								<td>{{$user->updated_at}}</td>
+								<td>@if($user->created_at){{date("d/m/Y H:i:s", strtotime($user->created_at))}}@endif</td>
+								<td>@if($user->updated_at){{date("d/m/Y H:i:s", strtotime($user->updated_at))}}@endif</td>
 								<td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method'=> 'DELETE'])!!}

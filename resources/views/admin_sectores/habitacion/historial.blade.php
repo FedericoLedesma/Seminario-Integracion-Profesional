@@ -40,7 +40,7 @@
                   {!!link_to_route('pacientes.historial', $title = $paciente->get_name(), $parameters = [$paciente->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
                 </div>
                 <div class="divTableCell">
-                  <label> {{$paciente->get_habitacion_actual_fecha_ingreso()}} </label>
+                  <label> {{date("d/m/Y", strtotime($paciente->get_habitacion_actual_fecha_ingreso()))}} </label>
                 </div>
                 <div class="divTableCell">
                   <button class="btn btn-info" data-toggle="collapse" data-target="#dieta{{$paciente->get_id()}}">Ver resumen dieta</button>
@@ -62,18 +62,18 @@
               <div class="divTable greyGridTable">
                   <div class="divTableHeading">
                     <div class="divTableRow">
-                       <div class="divTableHead">
-                          <label> Nombre </label>
-                       </div>
-                       <div class="divTableHead">
-                         <label> Fecha que ingresó a habitación</label>
-                       </div>
-                       <div class="divTableHead">
-                         <label> Información del paciente </label>
-                       </div>
-                       <div class="divTableHead">
-                         <label> Acciones </label>
-                       </div>
+                      <div class="divTableHead">
+                         <label> Fecha </label>
+                      </div>
+                      <div class="divTableHead">
+                        <label> Horario</label>
+                      </div>
+                      <div class="divTableHead">
+                        <label> Ración</label>
+                      </div>
+                      <div class="divTableHead">
+                        <label> Acciones </label>
+                      </div>
                     </div>
                  </div>
               <div class="divTableBody">
@@ -150,13 +150,13 @@
                 <div class="divTableHeading">
                   <div class="divTableRow">
                      <div class="divTableHead">
-                        <label> Nombre </label>
+                        <label> Fecha </label>
                      </div>
                      <div class="divTableHead">
-                       <label> Fecha que ingresó a habitación</label>
+                       <label> Horario</label>
                      </div>
                      <div class="divTableHead">
-                       <label> Información del paciente </label>
+                       <label> Ración</label>
                      </div>
                      <div class="divTableHead">
                        <label> Acciones </label>

@@ -133,7 +133,7 @@ MOVIMIENTOS REGISTRADOS
 								</div>
 								<div class="divTableCell">{{$movimiento->racion_disponible->horario_racion->horario->name}}</div>
 								<div class="divTableCell">{{$movimiento->racion_disponible->fecha()}}</div>
-								<div class="divTableCell">{{$movimiento->creado}}</div>
+								<div class="divTableCell">{{date("d/m/Y H:i:s", strtotime($movimiento->creado))}}</div>
 								<div class="divTableCell">{{$movimiento->tipoMovimiento->name}}</div>
 								<div class="divTableCell">{{$movimiento->cantidad}}</div>
 								<div class="divTableCell">
@@ -142,7 +142,7 @@ MOVIMIENTOS REGISTRADOS
 								<div class="modal fade" id="modal-{{$movimiento->id}}">
 									<div class="modal-dialog">
 		                <div class="modal-content">
-		                  <div class="modal-header" id="modal-movimiento-header">							
+		                  <div class="modal-header" id="modal-movimiento-header">
 												<h4>Ración disponible</h4>
 												<button type="button" class="close" data-dismiss="modal">
 													<span>×</span>

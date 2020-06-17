@@ -37,11 +37,11 @@
 			</tr>
 			<tr>
 				<td>Creado </td>
-				<td>{{$racion->created_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($racion->created_at))}}</td>
 			</tr>
 			<tr>
 				<td>Modificado </td>
-				<td>{{$racion->updated_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($racion->updated_at))}}</td>
 			</tr>
 
 		</table>

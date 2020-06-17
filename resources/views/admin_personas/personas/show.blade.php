@@ -11,8 +11,8 @@
 	   @include('layouts.error')
 	  	@if($persona)
 	    <div class="table-responsive">
-	    <h3>Persona:  {{$persona->name}}</h3>
-        <div class="col-md-6 col-md-offset-1">
+	    <h3>Persona: {{$persona->apellido}} {{$persona->name}}</h3>
+        <div class="col-md-8 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
@@ -62,22 +62,26 @@
       <tr>
 				<td>Patologías </td>
 				<td>
+          @if(count($persona->patologias)>0)
           @foreach($persona->patologias as $patologia)
             {{$patologia->name }}</br>
           @endforeach
+          @else
+          {{"No tiene patologías"}}
+          @endif
         </td>
 			</tr>
       <tr>
 				<td>Fecha de Nacimiento </td>
-				<td>{{$persona->fecha_nac}}</td>
+				<td>{{date("d/m/Y", strtotime($persona->fecha_nac))}}</td>
 			</tr>
 			<tr>
 				<td>Creado </td>
-				<td>{{$persona->created_at}}</td>
+				<td>@if($persona->created_at){{date("d/m/Y H:i:s", strtotime($persona->created_at))}}@endif</td>
 			</tr>
 			<tr>
 				<td>Modificado </td>
-				<td>{{$persona->updated_at}}</td>
+				<td>@if($persona->updated_at){{date("d/m/Y H:i:s", strtotime($persona->updated_at))}}@endif</td>
 			</tr>
 
 		</table>

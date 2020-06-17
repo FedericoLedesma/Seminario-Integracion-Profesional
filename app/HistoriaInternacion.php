@@ -7,6 +7,7 @@ use App\Paciente;
 use Carbon\Carbon;
 use App\Acompanante;
 use App\Informes\InformeRacion;
+use DateTime;
 
 class HistoriaInternacion extends Model
 {
@@ -163,10 +164,11 @@ class HistoriaInternacion extends Model
   }
 
   public function add_acompanante(Persona $persona){
+    $fecha_actual= new DateTime(date("Y-m-d"));
     $acom = new Acompanante([
       'persona_id'=>$persona->get_id(),
       'paciente_id'=>$this->get_paciente_id(),
-      'fecha'=>$this->get_fecha_ingreso(),
+      'fecha'=>$fecha_actual,//$this->get_fecha_ingreso(),
     ]);
     $acom->save();
   }

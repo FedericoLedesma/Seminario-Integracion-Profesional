@@ -111,12 +111,14 @@ class InformeController extends Controller
                   $fecha = date("d/m/Y", strtotime($fecha));
                   $fecha_hasta= date("d/m/Y", strtotime($fecha_hasta));
                   $busqueda_por='Fecha desde: '.$fecha. ' Hasta: '. $fecha_hasta;
-                  $query='Horario: '.$busqueda_horario_por;
+                  $horario=Horario::findById($busqueda_horario_por);
+                  $query='Horario: '.$horario->name;
                 }else {
                   $menus=MenuPersona::allHorarioFecha($busqueda_horario_por,$fecha);
                   $fecha = date("d/m/Y", strtotime($fecha));
                   $busqueda_por='Fecha: '.$fecha;
-                  $query='Horario: '.$busqueda_horario_por;
+                  $horario=Horario::findById($busqueda_horario_por);
+                  $query='Horario: '.$horario->name;
                 }
               }
             break;
@@ -168,7 +170,8 @@ class InformeController extends Controller
                 $query='Fecha desde: '.$fecha." Hasta: ".$fecha_hasta." Horario: ".$busqueda_horario_por;
               }else{
                 $fecha = date("d/m/Y", strtotime($fecha));
-                $query='Fecha: '.$fecha." Horario: ".$busqueda_horario_por;
+                $horario=Horario::findById($busqueda_horario_por);
+                $query='Fecha: '.$fecha." Horario: ".$horario->name;
               }
             }
             break;
@@ -233,7 +236,8 @@ class InformeController extends Controller
                 $fecha_hasta = date("d/m/Y", strtotime($fecha_hasta));
                 $query=$query.' Fecha desde: '.$fecha.' hasta:'.$fecha_hasta.' Horario: '.$busqueda_horario_por;
               }else {
-                $query=$query.' Fecha: '.$fecha.' Horario'.$busqueda_horario_por;
+                $horario=Horario::findById($busqueda_horario_por);
+                $query=$query.' Fecha: '.$fecha.' Horario'.$horario->name;
               }
             }
             break;

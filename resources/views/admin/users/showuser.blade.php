@@ -38,11 +38,11 @@
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$user->created_at}}</td>
+				<td>@if($user->created_at){{date("d/m/Y H:i:s", strtotime($user->created_at))}}@endif</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$user->updated_at}}</td>
+				<td>@if($user->updated_at){{date("d/m/Y H:i:s", strtotime($user->updated_at))}}@endif</td>
 			</tr>
 
 		</table>

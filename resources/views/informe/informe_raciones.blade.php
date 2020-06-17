@@ -13,7 +13,7 @@
         <table>
           <thead >
             <tr>
-              <th scope="col">Racion</th>
+              <th scope="col">Ración</th>
               <th scope="col">Cantidad </th>
             </tr>
           </thead>
@@ -33,7 +33,7 @@
         <h3>Raciones que aún no se entregaron</h3>
         @if($raciones_a_preparar)
           @foreach($raciones_a_preparar as $racion)
-          <p>Racion: {{$racion->name}}. Cantidad: {{$cantidad_raciones_a_preparar[$racion->id]}}</p>
+          <p>Ración: {{$racion->name}}. Cantidad: {{$cantidad_raciones_a_preparar[$racion->id]}}</p>
           <div class="divTable blueTable">
             <div class="divTableHeading">
               <div class="divTableRow">
@@ -54,7 +54,7 @@
             </div>
             @endforeach
           </div>
-        
+
           @endforeach
         @endif
     </div>

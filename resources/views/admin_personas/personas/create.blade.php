@@ -65,7 +65,7 @@
              {!!	Form::label('email', 'EMail')!!}
          </td>
          <td>
-             {!!	Form::text('email')!!}
+             {!!	Form::email('email')!!}
          </td>
        </tr>
         <tr>

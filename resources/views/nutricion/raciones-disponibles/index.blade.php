@@ -9,6 +9,7 @@ div.blueTable {
 .divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
   border: 0px solid #AAAAAA;
   padding: 10px 0px;
+  border: 1px solid #B7B7B7;
 }
 .divTable.blueTable .divTableBody .divTableCell {
   font-size: 15px;

@@ -196,3 +196,28 @@
 
 	        });
 	});
+	$('.nuevoAlimento').click(function(e){
+		//evita cargar la pagina
+		var name=	document.getElementById("nameAlimento").value;
+		console.log(name);
+		var url="/alimentos";
+		$.ajax({
+			type: 'POST',
+			url: url,
+			dataType: 'json',
+			data:{name},
+				success: function (data) {
+					if (data.estado=='true'){
+
+								console.log(data.success);
+							}else{
+									console.log(data.success);
+							}
+							},
+							error: function (data) {
+									console.log('Error:', data);
+							}
+
+				});
+
+	});

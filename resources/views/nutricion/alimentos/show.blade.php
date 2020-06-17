@@ -25,11 +25,11 @@
 			</tr>
       <tr>
 				<td>CREADO </td>
-				<td>{{$alimento->created_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($alimento->created_at))}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$alimento->updated_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($alimento->updated_at))}}</td>
 			</tr>
 
 		</table>

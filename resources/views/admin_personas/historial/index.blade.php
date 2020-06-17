@@ -71,7 +71,7 @@ Historial de pacientes
 							<tr>
 								<td>{{$historial->get_name()}} {{$historial->get_apellido()}}</td>
 								<td>{{$historial->get_tipo_documento_name()}} {{$historial->get_numero_doc()}}</td>
-								<td>{{$historial->get_fecha_ingreso()}}</td>
+								<td>{{date("d/m/Y", strtotime($historial->get_fecha_ingreso()))}}</td>
 								<td>{{$historial->get_sector_actual_name()}}</td>
 								<td>{!!link_to_route('habitaciones.historial', $title = $historial->get_habitacion_actual_name(), $parameters = [$historial->get_habitacion_actual()],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 								<td>{!!link_to_route('historialInternacion.show', $title = 'VER', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>

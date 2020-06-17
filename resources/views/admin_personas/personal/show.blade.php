@@ -3,19 +3,11 @@
     <li class="breadcrumb-item"><a href="{{route('personal.index') }}">Personal</a></li>
 		<li class="breadcrumb-item active">Ver personal</li>
 @endsection
+@section('titulo')
+Ver personal
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($personal)
 
@@ -23,8 +15,8 @@
 
 
 	    <div class="table-responsive">
-	    <h2>Datos de {{$personal->get_name()}}</h2>
-        <div class="col-md-6 col-md-offset-1">
+	    <h4>Datos de {{$personal->get_apellido()}} {{$personal->get_name()}}</h4>
+        <div class="col-md-auto col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
@@ -39,17 +31,61 @@
 				<td>Apellido </td>
 				<td>{{$personal->get_apellido()}}</td>
 			</tr>
+      <tr>
+				<td>Tipo Doc </td>
+				<td>{{$personal->persona->tipoDocumento->name}}</td>
+			</tr>
+      <tr>
+				<td>Número de doc. </td>
+				<td>{{$personal->persona->numero_doc}}</td>
+			</tr>
+      <tr>
+				<td>Tipo de doc. </td>
+				<td>{{$personal->persona->tipoDocumento->name}}</td>
+			</tr>
+      <tr>
+				<td>EMail </td>
+				<td>{{$personal->persona->email}}</td>
+			</tr>
+      <tr>
+				<td>Provincia </td>
+				<td>{{$personal->persona->provincia}}</td>
+			</tr>
+      <tr>
+				<td>Localidad </td>
+				<td>{{$personal->persona->localidad}}</td>
+			</tr>
+      <tr>
+				<td>Sexo </td>
+				<td>{{$personal->persona->sexo}}</td>
+			</tr>
+      <tr>
+				<td>Patologías </td>
+				<td>
+          @if(count($personal->persona->patologias)>0)
+          @foreach($personal->persona->patologias as $patologia)
+            {{$patologia->name }}</br>
+          @endforeach
+          @else
+          {{"No tiene patologías"}}
+          @endif
+        </td>
+			</tr>
+      <tr>
+				<td>Fecha de Nacimiento </td>
+				<td>{{date("d/m/Y", strtotime($personal->persona->fecha_nac))}}</td>
+			</tr>
 			<tr>
 				<td>Sector </td>
 				<td>{{$personal->get_sector_name()}}</td>
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$personal->created_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($personal->created_at))}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$personal->updated_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($personal->updated_at))}}</td>
 			</tr>
 
 		</table>

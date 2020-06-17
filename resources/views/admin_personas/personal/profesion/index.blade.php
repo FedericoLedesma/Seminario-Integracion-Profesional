@@ -5,25 +5,13 @@
 @section('navegacion')
 	<li class="breadcrumb-item active">Profesiones</li>
 @endsection
+@section('titulo')
+	PROFESIONES REGISTRADAS
+@endsection
 @section('content')
 
-<!-- INDEX DEL ROL -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-	    <h1>Profesiones registradas</h1>
 	      @include('layouts.error')
 
-<!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
-
-		<style>
-<!--
-.table{
-	 background-color: #E3EEE9;
-
-
-}
--->
-</style>
 <form method="get" action={{ route('profesion.create') }}>
 
 		<button class="btn btn-primary" type="submit">Agregar profesión</button>
@@ -38,7 +26,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-cama" class="alert alert-info">Camas con el {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-cama" class="alert alert-info">Profesiones con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
@@ -50,7 +38,6 @@
 								 <div class="input-group mb-3">
 
 									 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-										 <option value="busqueda_id" >ID</option>
 										 <option value="busqueda_name" >Nombre</option>
 									 </select>
 
@@ -64,9 +51,8 @@
 								<table class="table table-striped table-hover ">
 									<thead >
 										<tr>
-											<th scope="col">id</th>
 											<th scope="col">Nombre</th>
-											<th scope="col">Accion</th>
+											<th scope="col">Acción</th>
 											<th scope="col"></th>
 
 										</tr>

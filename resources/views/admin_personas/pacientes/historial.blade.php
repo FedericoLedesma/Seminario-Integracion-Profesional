@@ -81,7 +81,7 @@ Detalles de historial
                    <label> Habitación </label>
                  </div>
                  <div class="divTableHead">
-                   <label> Fecha ingreso </label>
+                   <label> Fecha de ingreso </label>
                  </div>
                  <div class="divTableHead">
                    <label> Acciones/Fecha egreso </label>
@@ -98,14 +98,14 @@ Detalles de historial
                         {!!link_to_route('habitaciones.historial', $title = $pac_cama->get_habitacion_name(), $parameters = [$pac_cama->get_habitacion()],['class' => 'btn btn-warning'], $attributes = [])!!}
                       </div>
                       <div class="divTableCell">
-                        <label> {{$pac_cama->get_fecha_ingreso()}} </label>
+                        <label> {{date("d/m/Y", strtotime($pac_cama->get_fecha_ingreso()))}} </label>
                       </div>
                       <div class="divTableCell">
                         @if($pac_cama->get_fecha_egreso()==null)
                           {!!link_to_route('historialInternacion.edit', $title = 'Traslado', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                           {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$pac_cama->get_paciente()->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                         @else
-                          <label> {{$pac_cama->get_fecha_egreso()}} </label>
+                          <label> {{date("d/m/Y", strtotime($pac_cama->get_fecha_egreso()))}} </label>
                         @endif
                       </div>
                    </div>
@@ -127,7 +127,7 @@ Detalles de historial
                      <label> Nombre </label>
                   </div>
                   <div class="divTableHead">
-                    <label> Fecha ingreso </label>
+                    <label> Fecha de ingreso </label>
                   </div>
                   <div class="divTableHead">
                     <label> Acciones/Fecha egreso </label>
@@ -141,13 +141,13 @@ Detalles de historial
                         <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
                      </div>
                      <div class="divTableCell">
-                       <label> {{$acompanante->get_fecha()}} </label>
+                       <label> {{date("d/m/Y", strtotime($acompanante->get_fecha()))}} </label>
                      </div>
                      <div class="divTableCell">
                        @if($acompanante->get_fecha_egreso()==null)
                          {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                        @else
-                         <label> {{$acompanante->get_fecha_egreso()}} </label>
+                         <label> {{date("d/m/Y", strtotime($acompanante->get_fecha_egreso()))}} </label>
                        @endif
                      </div>
                   </div>
@@ -162,7 +162,7 @@ Detalles de historial
       <div id="lista_historico" class="collapse">
         <h3> Histórico </h3>
         @foreach($paciente->get_historico_internacion() as $historial)
-          <h4>Internación {{$historial->get_fecha_ingreso()}} hasta {{$historial->get_fecha_egreso()}}
+          <h4>Internación {{date("d/m/Y", strtotime($historial->get_fecha_ingreso()))}} hasta {{date("d/m/Y", strtotime($historial->get_fecha_egreso()))}}
             <button class="btn btn-info" data-toggle="collapse" data-target="#historial{{$historial->get_id()}}">Mostrar</button>
           </h4>
           <div class="collapse" id="historial{{$historial->get_id()}}">
@@ -197,7 +197,7 @@ Detalles de historial
                           <label> {{$pac_cama->get_fecha_ingreso()}} </label>
                         </div>
                         <div class="divTableCell">
-                            <label> {{$pac_cama->get_fecha_egreso()}} </label>
+                            <label> {{date("d/m/Y", strtotime($pac_cama->get_fecha_egreso()))}} </label>
                         </div>
                      </div>
                    @endforeach
@@ -226,13 +226,13 @@ Detalles de historial
                          <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
                       </div>
                       <div class="divTableCell">
-                        <label> {{$acompanante->get_fecha()}} </label>
+                        <label> {{date("d/m/Y", strtotime($acompanante->get_fecha()))}} </label>
                       </div>
                       <div class="divTableCell">
                         @if($acompanante->get_fecha_egreso()==null)
                           {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                         @else
-                          <label> {{$acompanante->get_fecha_egreso()}} </label>
+                          <label> {{date("d/m/Y", strtotime($acompanante->get_fecha_egreso()))}} </label>
                         @endif
                       </div>
                    </div>
@@ -270,13 +270,13 @@ Detalles de historial
                       <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
                    </div>
                    <div class="divTableCell">
-                     <label> {{$acompanante->get_fecha()}} </label>
+                     <label> {{date("d/m/Y", strtotime($acompanante->get_fecha()))}} </label>
                    </div>
                    <div class="divTableCell">
                      @if($acompanante->get_fecha_egreso()==null)
                        {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$paciente->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                      @else
-                       <label> {{$acompanante->get_fecha_egreso()}} </label>
+                       <label> {{date("d/m/Y", strtotime($acompanante->get_fecha_egreso()))}} </label>
                      @endif
                    </div>
                 </div>

@@ -84,7 +84,7 @@ PERMISOS REGISTRADOS
 							<tr>
 								<td>{{$permission->id}}</td>
 								<td>{{$permission->name}}</td>
-							  <td>{{$permission->created_at}}</td>
+							  <td>{{date("d/m/Y h:i:s", strtotime($permission->created_at))}}</td>
 
 								{!! Form::model($permission, ['route' => ['permisos.destroy', $permission->id], 'method'=> 'DELETE'])!!}
                 @if((((!($permission->id==9))&&(!($permission->id==10)))&&(!($permission->id==7)))&&(!($permission->id==8)))

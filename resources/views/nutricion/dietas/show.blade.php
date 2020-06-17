@@ -114,8 +114,8 @@
 						@foreach($dieta->dietaActiva as $d_a)
 						<div class="divTableRow">
 							<div class="divTableCell">{{$d_a->id}}</div>
-							<div class="divTableCell">{{$d_a->fecha}}</div>
-							<div class="divTableCell">{{$d_a->fecha_final}}</div>
+							<div class="divTableCell">{{$d_a->fecha()}}</div>
+							<div class="divTableCell">{{$d_a->fecha_final()}}</div>
 							<div class="divTableCell">
 								<a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-{{$d_a->id}}">
 									Raciones asociadas
@@ -128,7 +128,7 @@
 								<div class="modal-content">
 									<div class="modal-header" id="modal-header">
 										<h4>Raciones asociadas a la dieta activa {{$d_a->id}} </br>
-											Entre las fecha {{$d_a->fecha}} / {{$d_a->fecha_final}} </h4>
+											Entre las fecha {{date("d/m/Y", strtotime($d_a->fecha))}} - @if($d_a->fecha_final) {{date("d/m/Y", strtotime($d_a->fecha_final))}}@else {{"hoy"}}@endif </h4>
 										<button type="button" class="close" data-dismiss="modal">
 											<span>×</span>
 										</button>

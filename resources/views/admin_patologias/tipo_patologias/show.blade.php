@@ -29,11 +29,11 @@
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$tipoPatologia->created_at}}</td>
+				<td>@if($tipoPatologia->created_at){{date("d/m/Y H:i:s", strtotime($tipoPatologia->created_at))}}@endif</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$tipoPatologia->updated_at}}</td>
+				<td>@if($tipoPatologia->updated_at){{date("d/m/Y H:i:s", strtotime($tipoPatologia->updated_at))}}@endif</td>
 			</tr>
 
 		</table>

@@ -91,4 +91,17 @@ class DietaActiva extends Model
       }
       return $res;
     }
+    public function fecha()
+    {
+      $fecha_ = date("d/m/Y", strtotime($this->fecha));
+      return $fecha_;
+    }
+    public function fecha_final()
+    {
+      if($this->fecha_final){
+        $fecha_ = date("d/m/Y", strtotime($this->fecha_final));
+        return $fecha_;
+      }return null;
+
+    }
 }

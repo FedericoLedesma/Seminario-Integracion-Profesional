@@ -73,8 +73,8 @@ ROLES REGISTRADOS
 							<tr>
 								<td>{{$role->id}}</td>
 								<td>{{$role->name}}</td>
-								<td>{{$role->created_at}}</td>
-								<td>{{$role->updated_at}}</td>
+								<td>@if($role->created_at){{date("d/m/Y h:i:s", strtotime($role->created_at))}}@endif</td>
+								<td>@if($role->updated_at){{date("d/m/Y h:i:s", strtotime($role->updated_at))}}@endif</td>
 								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$role],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
 								{!! Form::model($role, ['route' => ['roles.destroy', $role->id], 'method'=> 'DELETE'])!!}

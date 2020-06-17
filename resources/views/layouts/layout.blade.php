@@ -30,6 +30,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 -->
+<style>
+.navbar-verde {
+  background-color: #95EEE9;
+}
+</style>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -102,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-light-primary navbar-verde elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home') }}" class="brand-link">
       <!--  <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -294,6 +300,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <p>Movimientos</p>
              </a>
            </li>
+           <li class="nav-item">
+             <a href="{{ route('informes.index') }}" class="nav-link" id="nav-movimientos">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Informes</p>
+             </a>
+           </li>
          </ul>
        </li>
        <!--           fin persona           -->
@@ -337,7 +349,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="{{ route('sectores.index') }}" class="nav-link" id="nav-administracion-sectores">
               <i class="far fa-circle nav-icon"></i>
-              <p>Sectores</p>
+              <p class="text-dark">Sectores</p>
             </a>
           </li>
           <li class="nav-item">

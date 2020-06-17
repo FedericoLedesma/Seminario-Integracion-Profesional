@@ -114,11 +114,11 @@ Ver habitación
                 </div>
                 <div class="divTableRow">
           				<div class="divTableCell">Creado </div>
-          				<div class="divTableCell">{{$habitacion->created_at}}</div>
+          				<div class="divTableCell">{{date("d/m/Y H:i:s", strtotime($habitacion->created_at))}}</div>
                 </div>
           			<div class="divTableRow">
           				<div class="divTableCell">Modificado </div>
-          				<div class="divTableCell">{{$habitacion->updated_at}}</div>
+          				<div class="divTableCell">{{date("d/m/Y H:i:s", strtotime($habitacion->updated_at))}}</div>
           			</div>
 
             </div>
