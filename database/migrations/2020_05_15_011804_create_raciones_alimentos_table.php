@@ -18,6 +18,7 @@ class CreateRacionesAlimentosTable extends Migration
             $table->unsignedBigInteger('racion_id');
             $table->unsignedBigInteger('alimento_id');
             $table->float('cantidad',5,2);
+            $table->unsignedInteger('unidad_id')->nullable();
             $table->timestamps();
 
 			#$table->primary(['id'],'primary_key_racion_alimento');
@@ -33,6 +34,10 @@ class CreateRacionesAlimentosTable extends Migration
                 ->references('id')
                 ->on('alimento');
 
+            $table->foreign('unidad_id')
+                ->references('id')
+                ->on('unidad')
+                ->onDelete('cascade');
 
 
         });

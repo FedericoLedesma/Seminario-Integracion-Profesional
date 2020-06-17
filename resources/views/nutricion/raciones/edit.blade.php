@@ -39,6 +39,7 @@ Editar ración
           <tr>
             <td>Nombre</td>
             <td>Cantidad</td>
+						<td>Unidad</td>
             <td>Quitar</td>
           </tr>
         </thead>
@@ -50,7 +51,22 @@ Editar ración
                    {{$alimento->name}}
                </td>
                <td>
-								 <input type="number" value="{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}" name="cantidad-{{$alimento->id}}" min="0"  step="0.1"><label>gr.</label>
+								 <input type="number" value="{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}" name="cantidad-{{$alimento->id}}" min="0"  step="0.1">
+							 </td>
+							 <td>
+								 @if($unidades)
+									 <select name="unidad-{{$alimento->id}}">
+										 @foreach ($unidades as $unidad)
+
+										 <!-- Opciones de la lista -->
+											 @if($unidad->id==$racion->racion_alimento($alimento->id)->unidad->id)
+											 <option value="{{$unidad->id}}" selected>{{$unidad->name}}</option>
+											 @else
+											 <option value="{{$unidad->id}}" >{{$unidad->name}}</option>  <!-- Opci�n por defecto -->
+											 @endif
+										 @endforeach
+									 </select>
+								 @endIf
                </td>
                	<td><button type="submit" class="btn btn-danger quitarAlimento" data-token="{{ csrf_token() }}" data-id="{{ $alimento }}" data-racion="{{ $racion }}">X</button></td>
             </tr>
@@ -87,7 +103,7 @@ Editar ración
 
 
 		</div>
-		</div>  
+		</div>
 	<div class="modal fade" id="create">
 		<div class="modal-dialog">
 				<div class="modal-content">

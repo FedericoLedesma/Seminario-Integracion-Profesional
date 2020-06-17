@@ -38,7 +38,7 @@
 				 {!!Form::open(['route'=>'raciones.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
-					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">						
+					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
 						 <option value="busqueda_name" >Nombre</option>
 					 </select>
 
@@ -74,9 +74,12 @@
 							<tr>
 								<td>{{$racion->name}}</td>
 								<td>{{$racion->observacion}}</td>
-								<td>@foreach($racion->alimentos as $alimento)
-								  	{{$alimento->name}};
-									@endforeach
+								<td>
+									@if(count($racion->racion_alimentos)>0)
+										@foreach($racion->alimentos as $alimento)
+									  	{{$alimento->name}} ({{$alimento->pivot->cantidad}} @if($racion->racion_alimento($alimento->id)->unidad){{$racion->racion_alimento($alimento->id)->unidad->name}}@endif)</br>
+										@endforeach
+									@endif
 								</td>
 								<td>{!!link_to_route('raciones.show', $title = 'Ver', $parameters = [$racion->id],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 

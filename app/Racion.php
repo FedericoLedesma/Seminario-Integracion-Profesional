@@ -86,12 +86,13 @@ class Racion extends Model
      return $alimentos;
    }
 
-   public function add_alimento(Alimento $alimento, int $cantidad){
+   public function add_alimento(Alimento $alimento, int $cantidad,$unidad_id){
      if (($alimento<>null)||($cantidad>0)){
        RacionAlimento::create([
          'racion_id'=>$this->id,
          'alimento_id'=>$alimento->id,
          'cantidad'=>$cantidad,
+         'unidad_id'=>$unidad_id,
        ]);
       return true;
       }
@@ -191,7 +192,13 @@ class Racion extends Model
   public function alimentos()
   {
     return $this->belongsToMany('App\Alimento', 'racion_alimento')
-    ->withPivot('cantidad');
+    ->withPivot('cantidad','unidad_id');
+  }
+  public function racion_alimentos(){
+      return $this->hasMany('App\RacionAlimento','racion_id');
+  }
+  public function racion_alimento($alimento_id){
+      return $this->racion_alimentos->where('alimento_id',$alimento_id)->first();
   }
   public function getAlimento($id)
   {

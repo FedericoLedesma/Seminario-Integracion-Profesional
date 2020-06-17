@@ -19,6 +19,7 @@ use App\PacienteCama;
 use App\Habitacion;
 use App\HorarioRacion;
 use App\RacionesDisponibles;
+use App\Unidad;
 use Illuminate\Support\Facades\Log;
 use App\HistoriaInternacion;
 #use Database\Menu_personaSeeder;
@@ -191,62 +192,70 @@ class DatabaseSeeder extends Seeder
   }*/
   private static function cargar_raciones_ali(){
     $r1 = Racion::create([
-      'name'=>'churrasco con fideos',
+      'name'=>'CHURRASCO CON FIDEOS',
     ]);
 
     $r2 = Racion::create([
-      'name'=>'milanesa con pure de papas',
+      'name'=>'MILANESA CON PURE DE PAPAS',
     ]);
 
     $r3 = Racion::create([
-      'name'=>'pizza de cebolla',
+      'name'=>'PIZZA DE CEBOLLA',
     ]);
 
     $r4 = Racion::create([
-      'name'=>'te con galletitas y flan',
+      'name'=>'TÉ CON GALLETITAS DE AGUA',
     ]);
 
     $r5 = Racion::create([
-      'name'=>'gelatinas con galletitas y mermelada',
+      'name'=>'GELATINA DE FRUTILLA',
     ]);
 
     $r6 = Racion::create([
-      'name'=>'sopa',
+      'name'=>'SOPA',
     ]);
 
     $a1 = Alimento::create([
-      'name'=>'lechuga'
+      'name'=>'LECHUGA'
     ]);
 
     $a2 = Alimento::create([
-      'name'=>'carne de vaca'
+      'name'=>'CARNE DE VACA'
     ]);
 
     $a3 = Alimento::create([
-      'name'=>'galletitas de agua'
+      'name'=>'GALLETITAS DE AGUA'
     ]);
 
     $a4 = Alimento::create([
-      'name'=>'cebolla'
+      'name'=>'CEBOLLA'
     ]);
 
     $a5 = Alimento::create([
-      'name'=>'fideos'
+      'name'=>'FIDEOS'
     ]);
 
     $a6 = Alimento::create([
-      'name'=>'mermelada'
+      'name'=>'MERMELADA'
     ]);
-
-    $r1->add_alimento($a2,100);
-    $r1->add_alimento($a5,100);
-    $r2->add_alimento($a2,200);
-    $r3->add_alimento($a4,200);
-    $r4->add_alimento($a3,200);
-    $r5->add_alimento($a3,200);
-    $r5->add_alimento($a6,200);
-    $r6->add_alimento($a1,200);
-    $r6->add_alimento($a4,200);
+    $u= Unidad::create([
+      'name'=>'Kilogramos'
+    ]);
+    $u2= Unidad::create([
+      'name'=>'Gramos'
+    ]);
+    $u3= Unidad::create([
+      'name'=>'Litros'
+    ]);
+    $r1->add_alimento($a2,100,$u2->id);
+    $r1->add_alimento($a5,100,$u2->id);
+    $r2->add_alimento($a2,200,$u2->id);
+    $r3->add_alimento($a4,200,$u2->id);
+    $r4->add_alimento($a3,200,$u2->id);
+    $r5->add_alimento($a3,200,$u2->id);
+    $r5->add_alimento($a6,200,$u2->id);
+    $r6->add_alimento($a1,200,$u2->id);
+    $r6->add_alimento($a4,200,$u2->id);
 
   }
 

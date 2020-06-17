@@ -31,7 +31,7 @@
 				<td>Alimentos </td>
 				<td>
           @foreach($racion->alimentos as $alimento)
-            {{$alimento->name}}, cantidad: {{$alimento->pivot->cantidad}} gr.</br>
+            {{$alimento->name}}, cantidad: {{$alimento->pivot->cantidad}} @if($racion->racion_alimento($alimento->id)->unidad){{$racion->racion_alimento($alimento->id)->unidad->name}}@endif</br>
           @endforeach
         </td>
 			</tr>

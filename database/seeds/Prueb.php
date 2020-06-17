@@ -75,7 +75,12 @@ class Prueb extends Seeder
       */
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
-    Permission::create(['name'=>'nuevoper','guard_name'=>'web']);
-
+     $racion=Racion::findById(2);
+    /* foreach ($racion->racion_alimentos as $r_a) {
+       echo $r_a->alimento->name."  ".$r_a->cantidad."  ".$r_a->unidad->name;
+       // code...
+     }*/
+     $s=$racion->racion_alimento(2)->unidad->name;
+     echo $s;
     }
 }

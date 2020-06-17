@@ -10,7 +10,7 @@ class RacionAlimento extends Model
     protected $table = "racion_alimento";
 
     protected $fillable = [
-        'id', 'racion_id', 'alimento_id', 'cantidad',
+        'id', 'racion_id', 'alimento_id', 'cantidad','unidad_id',
     ];
     public $timestamps = false;
     public static function findById($racion_id,$alimento_id)
@@ -73,6 +73,19 @@ class RacionAlimento extends Model
         array_push($res,Racion::find($ali_rac->racion_id));
       }
       return $res;
+    }
+
+    public function unidad()
+    {
+      return $this->belongsTo('App\Unidad', 'unidad_id');
+    }
+    public function alimento()
+    {
+      return $this->belongsTo('App\Alimento', 'alimento_id');
+    }
+    public function racion()
+    {
+      return $this->belongsTo('App\Racion', 'racion_id');
     }
 
 }

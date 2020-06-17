@@ -7,6 +7,7 @@ use App\RacionesDisponibles;
 use Illuminate\Http\Request;
 use App\Alimento;
 use App\Horario;
+use App\Unidad;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RacionRequest;
 
@@ -101,7 +102,8 @@ class RacionController extends Controller
     {
         $horarios=Horario::all();
         $racion=Racion::findById($id);
-        return view('nutricion.raciones.edit', compact('racion','horarios'));
+        $unidades=Unidad::all();
+        return view('nutricion.raciones.edit', compact('racion','horarios','unidades'));
     }
 
     /**
@@ -121,9 +123,9 @@ class RacionController extends Controller
           foreach ($racion->alimentos as $alimento) {
             Log::info($request['cantidad-'.$alimento->id]);
             if(!($request['cantidad-'.$alimento->id]=='')){
-
+              $unidad_id=$request['unidad-'.$alimento->id];
               $cantidad=$request['cantidad-'.$alimento->id];
-              $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad]);
+              $racion->alimentos()->updateExistingPivot($alimento->id, ['cantidad'=>$cantidad,'unidad_id'=>$unidad_id]);
             }
 
           }
@@ -209,7 +211,7 @@ class RacionController extends Controller
           $alimento=Alimento::findById($idAlimento);
           Log::info($alimento);
           try{
-          $racion->alimentos()->attach($alimento,['cantidad'=>0]);
+          $racion->alimentos()->attach($alimento,['cantidad'=>0,'unidad_id'=>2]);
           $racion->save();
           }catch (\Exception $e) {}
         }
