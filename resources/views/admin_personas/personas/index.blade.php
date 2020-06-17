@@ -41,8 +41,8 @@ PERSONAS REGISTRADAS
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
 
 						 <option value="busqueda_name" >Nombre</option>
-						 <option value="busqueda_name" >Apellido</option>
-						 <option value="busqueda_name" >Número doc.</option>
+						 <option value="busqueda_apellido" >Apellido</option>
+						 <option value="busqueda_dni" >Número doc.</option>
 					 </select>
 
 						 {!!	Form::text('personaid',null,['id'=>'personaid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}

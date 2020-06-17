@@ -37,7 +37,7 @@ class HabitacionController extends Controller
             $busqueda_por="ID";
             break;
           case 'busqueda_name':
-              $habitacion=Habitacion::findByName($query)->get();
+              $habitacion=Habitacion::findByName(strtoupper($query))->get();
               $busqueda_por="NOMBRE";
             break;
           default:
@@ -73,7 +73,7 @@ class HabitacionController extends Controller
         $data=$request->all();
         Log::debug($data);
         $habitacion=Habitacion::create([
-            'name' => $data['name'],
+            'name' =>strtoupper($data['name']),
             'descripcion'=>$data['descripcion'],
             'sector_id'=>$data['sector_id'],
           ]);
@@ -117,7 +117,7 @@ class HabitacionController extends Controller
     public function update(Request $request,$id)
     {
         $habitacion=Habitacion::find($id);
-        $habitacion->name=$request->name;
+        $habitacion->name=strtoupper($request->name);
         $habitacion->descripcion=$request->descripcion;
         $habitacion->set_sector_id($request->sector_id);
         $habitacion->save();

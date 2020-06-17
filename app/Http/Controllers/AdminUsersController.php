@@ -100,7 +100,6 @@ class AdminUsersController extends Controller
 				if($personal){
 					$user=User::create([
 							'dni'=>$data['dni'],
-							'name' => $data['name'],
 							'personal_id'=>$personal->id,
 							'password' => bcrypt($data['dni'])
 					]);

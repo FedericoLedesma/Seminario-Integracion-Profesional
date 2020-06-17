@@ -54,14 +54,6 @@ Agregar usuario
 		   	</td>
 		   	</tr>
 
-		   	<tr>
-	    	<td>
-		    {!!	Form::label('name', 'NOMBRE')!!}
-		    </td>
-		    <td>
-		   	{!!	Form::text('name')!!}
-		   	</td>
-		   	</tr>
 
 		   	<tr>
 	    	<td>

@@ -40,7 +40,6 @@ class UserController extends Controller
 		$data=$request->all();
 		User::create([
 				'dni'=>$data['dni'],
-				'name' => $data['name'],
 				'password' => bcrypt($data['password'])
 		]);
 		return redirect('/admin/users');

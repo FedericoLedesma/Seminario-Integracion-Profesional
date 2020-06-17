@@ -25,15 +25,13 @@ class UserRequest extends FormRequest
     {
         return [
         		'dni'=>'required|numeric|max:999999999999|unique:users',
-        		'name'=>'required',
-        		
+
         ];
     }
     public function messages()
     {
     	return $messages=[
 				'dni.required'=>"El campo DNI es requerido",
-				'name.required'=>"El campo Nombre es requerido",
 				'dni.numeric'=>"El campo DNI debe ser numerico",
 				'dni.max'=>"El numero de DNI deber ser menor a 999999999999",
         'dni.unique'=>"El DNI ya se encuentra registrado ",

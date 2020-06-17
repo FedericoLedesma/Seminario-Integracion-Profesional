@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->bigInteger('dni')->unique();
             $table->unsignedBigInteger('personal_id');
             $table->foreign('personal_id')->references('id')->on('personal');
-            $table->string('name');
           //  $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -11,6 +11,7 @@ use App\Persona;
 use App\Sector;
 use App\Habitacion;
 use Carbon\Carbon;
+use App\Http\Requests\PacienteRequest;
 
 class HistorialInternacionController extends Controller
 {
@@ -160,17 +161,17 @@ class HistorialInternacionController extends Controller
       return view('admin_personas.historial.createPaciente',compact('personas_no_internadas','tipos_documentos','sectores','habitaciones'));
     }
 
-    public function ingresarNuevo(Request $request){
+    public function ingresarNuevo(PacienteRequest $request){
       $data=$request->all();
       $persona= new Persona([
-          'name' => $data['name'],
+          'name' => strtoupper($data['name']),
           'numero_doc'=>$data['numero_doc'],
-          'apellido'=>$data['apellido'],
-          'direccion'=>$data['direccion'],
+          'apellido'=>strtoupper($data['apellido']),
+          'direccion'=>strtoupper($data['direccion']),
           'email'=>$data['email'],
-          'provincia'=>$data['provincia'],
-          'localidad'=>$data['localidad'],
-          'sexo'=>$data['sexo'],
+          'provincia'=>strtoupper($data['provincia']),
+          'localidad'=>strtoupper($data['localidad']),
+          'sexo'=>strtoupper($data['sexo']),
           'fecha_nac'=>$data['fecha_nac'],
           'tipo_documento_id'=>$data['tipo_documento_id'],
         ]);

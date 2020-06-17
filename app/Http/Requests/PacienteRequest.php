@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PersonaRequest extends FormRequest
+class PacienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,6 @@ class PersonaRequest extends FormRequest
               'apellido'=>'required',
               'direccion'=>'required',
               'provincia'=>'required',
-              'email'=>'required|email:rfc,dns',
               'localidad'=>'required',
               'sexo'=>'required',
               'fecha_nac'=>'required',
@@ -45,9 +44,7 @@ class PersonaRequest extends FormRequest
           'numero_doc.unique'=>"El numero de documento ya se encuentra registrado ",
           'name.required'=>"El campo Nombre es requerido",
           'apellido.required'=>"El campo Apellido es requerido",
-          'direccion.required'=>"El campo Direccion es requerido",
-          'email.required'=>"El campo Email es requerido",
-          'email'=>'El email es invalido',
+          'direccion.required'=>"El campo Direccion es requerido",          
           'provincia.required'=>"El Provincia Nombre es requerido",
           'localidad.required'=>"El campo localidad es requerido",
           'sexo.required'=>"El campo sexo es requerido",

@@ -83,11 +83,11 @@
            @endIf
         </div>
       </div>
-      <div class="row" id='select_habitacion' name='select_habitacion'>
+      <div class="row">
         <div class="col-sm col-lg-3">
            {!!	Form::label('habitacion', 'Habitacion')!!}
         </div>
-        <div class="col-sm">
+        <div class="col-sm" id='select_habitacion' name='select_habitacion'>
            @if($habitaciones)
              <select name="habitacion_id">
              <!--	<option selected>Seleccione el Rol</option>validar-->

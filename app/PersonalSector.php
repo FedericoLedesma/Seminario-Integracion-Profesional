@@ -9,7 +9,7 @@ class PersonalSector extends Model
   protected $table = "personal_sector";
 
   protected $fillable = [
-      'id', 'sector_id', 'personal_id','fecha',
+      'id', 'sector_id', 'personal_id','fecha','fecha_hasta',
   ];
   public $timestamps = false;
 

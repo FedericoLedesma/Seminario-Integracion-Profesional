@@ -14,6 +14,7 @@ use App\HorarioRacion;
 use App\RacionesDisponibles;
 use App\MenuPersona;
 use App\Dieta;
+use App\Sector;
 use App\User;
 use App\Movimiento;
 use App\DietaActiva;
@@ -75,12 +76,15 @@ class Prueb extends Seeder
       */
     //  $acompanante=Acompanante::findById(1);
       //echo $acompanante->paciente;
-     $racion=Racion::findById(2);
+     //$racion=Racion::findById(2);
     /* foreach ($racion->racion_alimentos as $r_a) {
        echo $r_a->alimento->name."  ".$r_a->cantidad."  ".$r_a->unidad->name;
        // code...
      }*/
-     $s=$racion->racion_alimento(2)->unidad->name;
-     echo $s;
+     /*$s=$racion->racion_alimento(2)->unidad->name;
+     echo $s;*/
+     $personal=Personal::findById(9);
+     $sector=Sector::findById(2);
+     $personal->reubicar_personal($sector);
     }
 }

@@ -43,19 +43,19 @@ class PersonaController extends Controller
           case 'busqueda_dni':
             $personas=Persona::findByNumeroDoc($query);
 
-            $busqueda_por="DNI";
+            $busqueda_por="NUMERO DE DOCUMENTO";
             break;
           case 'busqueda_name':
-              $personas=Persona::where('name','LIKE','%'.$query.'%')
+              $personas=Persona::where('name','LIKE','%'.strtoupper($query).'%')
               ->orderBy('id','asc')
               ->get();
                 $busqueda_por="NOMBRE";
             break;
             case 'busqueda_apellido':
-                $personas=Persona::where('apellido','LIKE','%'.$query.'%')
+                $personas=Persona::where('apellido','LIKE','%'.strtoupper($query).'%')
                 ->orderBy('id','asc')
                 ->get();
-                $busqueda_por="NOMBRE";
+                $busqueda_por="APELLIDO";
               break;
           default:
             $personas=Persona::all();
@@ -90,14 +90,14 @@ class PersonaController extends Controller
     {
         $data=$request->all();
         $persona=Persona::create([
-            'name' => $data['name'],
-            'numero_doc'=>$data['numero_doc'],
-            'apellido'=>$data['apellido'],
-            'direccion'=>$data['direccion'],
+            'name' => strtoupper($data['name']),
+            'numero_doc'=>strtoupper($data['numero_doc']),
+            'apellido'=>strtoupper($data['apellido']),
+            'direccion'=>strtoupper($data['direccion']),
             'email'=>$data['email'],
-            'provincia'=>$data['provincia'],
-            'localidad'=>$data['localidad'],
-            'sexo'=>$data['sexo'],
+            'provincia'=>strtoupper($data['provincia']),
+            'localidad'=>strtoupper($data['localidad']),
+            'sexo'=>strtoupper($data['sexo']),
             'fecha_nac'=>$data['fecha_nac'],
             'tipo_documento_id'=>$data['tipo_documento_id'],
           ]);
@@ -158,14 +158,14 @@ class PersonaController extends Controller
         if($persona){
           $persona->numero_doc=$request->numero_doc;
           $persona->tipo_documento_id=$request->tipo_documento_id;
-          $persona->apellido=$request->apellido;
-          $persona->name=$request->name;
-          $persona->observacion=$request->observacion;
-          $persona->direccion=$request->direccion;
+          $persona->apellido=strtoupper($request->apellido);
+          $persona->name=strtoupper($request->name);
+          $persona->observacion=strtoupper($request->observacion);
+          $persona->direccion=strtoupper($request->direccion);
           $persona->email=$request->email;
-          $persona->provincia=$request->provincia;
-          $persona->localidad=$request->localidad;
-          $persona->sexo=$request->sexo;
+          $persona->provincia=strtoupper($request->provincia);
+          $persona->localidad=strtoupper($request->localidad);
+          $persona->sexo=strtoupper($request->sexo);
           $persona->fecha_nac=$request->fecha_nac;
           $persona->save();
 

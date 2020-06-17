@@ -96,7 +96,10 @@ class PersonalController extends Controller
         ]);
         $personal->save();
       }
+      Log::debug($personal);
       $sector = Sector::find($request->get('sectores'));
+      $personal = Personal::find($persona_id);
+      Log::debug($personal);
       $personal->reubicar_personal($sector);
         return $this->index($request);
     }
@@ -122,13 +125,13 @@ class PersonalController extends Controller
       $data=$request->all();
       $persona= new Persona([
           'name' => $data['name'],
-          'numero_doc'=>$data['numero_doc'],
-          'apellido'=>$data['apellido'],
-          'direccion'=>$data['direccion'],
+          'numero_doc'=>strtoupper($data['numero_doc']),
+          'apellido'=>strtoupper($data['apellido']),
+          'direccion'=>strtoupper($data['direccion']),
           'email'=>$data['email'],
-          'provincia'=>$data['provincia'],
-          'localidad'=>$data['localidad'],
-          'sexo'=>$data['sexo'],
+          'provincia'=>strtoupper($data['provincia']),
+          'localidad'=>strtoupper($data['localidad']),
+          'sexo'=>strtoupper($data['sexo']),
           'fecha_nac'=>$data['fecha_nac'],
           'tipo_documento_id'=>$data['tipo_documento_id'],
         ]);

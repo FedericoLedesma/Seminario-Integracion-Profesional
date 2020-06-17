@@ -55,8 +55,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
     	DB::table('users')->insert([
     			'dni' => '40000000',
-    			'name'=>'ADMIN',
-				   'personal_id'=>1,
+				  'personal_id'=>1,
     			'password'=>bcrypt('12345678'),
 
     	]);
