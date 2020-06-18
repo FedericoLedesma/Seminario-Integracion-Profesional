@@ -1,6 +1,61 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+	div.blueTable {
+	  width: 100%;
+	  text-align: left;
+	}
+	.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+	  border: 0px solid #AAAAAA;
+	  padding: 10px 0px;
+	}
+	.divTable.blueTable .divTableBody .divTableCell {
+	  font-size: 15px;
+		text-align: center;
+	}
+	.divTable.blueTable .divTableRow:nth-child(even) {
+	  background: #D4DAED;
+	}
+	.divTable.blueTable .divTableHeading {
+		border-bottom: 2px solid #444444;
+	  }
+	.divTable.blueTable .divTableHeading .divTableHead {
+	  font-size: 16px;
+	  font-weight: bold;
+	  color: #01030B;
+		text-align: center;
+		border-bottom: 2px solid #444444;
+	}
+	.blueTable .tableFootStyle {
+	  font-weight: bold;
+	  color: #FFFFFF;
+	}
+	.blueTable .tableFootStyle .links {
+		 text-align: right;
+	}
+	.blueTable .tableFootStyle .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 2px 8px;
+	  border-radius: 5px;
+	}
+	.blueTable.outerTableFooter {
+	  border-top: none;
+	}
+	.blueTable.outerTableFooter .tableFootStyle {
+	  padding: 3px 5px;
+	}
+	/* DivTable.com */
+	.divTable{ display: table; }
+	.divTableRow { display: table-row; }
+	.divTableHeading { display: table-header-group;}
+	.divTableCell, .divTableHead { display: table-cell;}
+	.divTableHeading { display: table-header-group;}
+	.divTableFoot { display: table-footer-group;}
+	.divTableBody { display: table-row-group;}
+</style>
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
@@ -34,7 +89,7 @@ Crear menús para Pacientes
 
 					  <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
 					 		<option value="busqueda_name" >Nombre y/o apellido</option>
-						 	<option value="busqueda_dni" > Número DNI </option>
+						 	<option value="busqueda_dni" > Número de documento </option>
 						 	<option value="busqueda_sector" > Sector </option>
 					 	</select>
 
@@ -52,91 +107,98 @@ Crear menús para Pacientes
   <div class="table-responsive">
 		<div class="col-md-auto col-md-offset-1">
 			<div class="panel-heading">
-				<table class="table table-striped table-hover ">
-					<thead >
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Apellido</th>
-							<th scope="col">Tipo Doc.</th>
-							<th scope="col">Número de doc.</th>
-							<th scope="col">Sector</th>
-							<th scope="col">Acción</th>
-							<th scope="col"></th>
+				<div class="divTable blueTable">
+					<div class="divTableHeading">
+						<div class="divTableRow">
+							<div class="divTableHead">Nombre</div>
+							<div class="divTableHead">Apellido</div>
+							<div class="divTableHead">Tipo Doc.</div>
+							<div class="divTableHead">Número de doc.</div>
+							<div class="divTableHead">Sector</div>
+							<div class="divTableHead">Acción</div>
+							<div class="divTableHead"></div>
 
-						</tr>
-					</thead>
+						</div>
+					</div>
 
-					<tbody>
+					<div class="divTableBody">
 						@if($pacientes)
 							@foreach($pacientes as $paciente)
-								<tr>
-									<td>{{$paciente->get_name()}}</td>
-									<td>{{$paciente->get_apellido()}}</td>
-									<td>{{$paciente->get_tipo_documento_name()}}</td>
-									<td>{{$paciente->get_numero_doc()}}</td>
+						  	<div class="divTableRow">
+									<div class="divTableCell">{{$paciente->get_name()}}</div>
+									<div class="divTableCell">{{$paciente->get_apellido()}}</div>
+									<div class="divTableCell">{{$paciente->get_tipo_documento_name()}}</div>
+									<div class="divTableCell">{{$paciente->get_numero_doc()}}</div>
 									@if($paciente->persona->sectorFecha(date("Y-m-d")))
-										<td>{{$paciente->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+										<div class="divTableCell">{{$paciente->persona->sectorFecha(date("Y-m-d"))->name}}</div>
 									@else
-										<td>-</td>
+										<div class="divTableCell">-</div>
 									@endif
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-paciente_apellido="{{$paciente->get_apellido()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
+									<div class="divTableCell">
+										<a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-paciente_apellido="{{$paciente->get_apellido()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear menú
-									</a></td>
-									@if($paciente->acompananteActual())
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
-									    Menú Acompa.
-									</a></td>
-									@endif
-								</tr>
+										</a>
+										@if($paciente->acompananteActual())
+										<a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}"data-paciente_apellido="{{$paciente->acompananteActual()->persona->apellido}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
+										    Menú Acompa.
+										</a>
+										@endif
+									</div>
+
+									<div class="modal fade" id="create">
+										<div class="modal-dialog">
+												<div class="modal-content">
+														<div class="modal-header" id="modal-header">
+
+														</div>
+														<div class="modal-body">
+															<div id="p_body">
+
+															</div>
+															<div id="alert-modal" class="alert alert-modal alert-danger"></div>
+															<table>
+																<tr>
+																	<td>
+																	{!!	Form::label('hor_id', 'Horario')!!}
+																	<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
+																		<option selected value= 0> Seleccione horario </option>
+																		@foreach($horarios as $horario)
+																			@if(!($paciente->persona->tiene_menu_hoy_en_horario($horario->id)))
+																				<option value= {{$horario->id}} >{{$horario->name}}</option>
+																			@endif
+																		@endforeach
+																	</select>
+																	</td>
+																	<td>
+																		{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
+																		<select class="browser-default custom-select" id="racion_id" name="racion_id">
+																			<option value= 0>Raciones recomendadas</option>
+																		</select>
+																	</td>
+																</tr>
+															</table>
+
+														</div>
+														<div class="modal-footer">
+																<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
+																<a href="" class="btn btn-success guardar_menu" >Guardar</a>
+														</div>
+
+												</div>
+										</div>
+									</div>
+								</div>
+
 							@endforeach
 						@endif
-
-				</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 @if($pacientes)
-	<div class="modal fade" id="create">
-		<div class="modal-dialog">
-				<div class="modal-content">
-						<div class="modal-header" id="modal-header">
 
-						</div>
-						<div class="modal-body">
-							<div id="p_body">
-
-							</div>
-							<div id="alert-modal" class="alert alert-modal alert-danger"></div>
-							<table>
-								<tr>
-									<td>
-									{!!	Form::label('hor_id', 'Horario')!!}
-									<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-										<option selected value= 0> Seleccione horario </option>
-										@foreach($horarios as $horario)
-										<option value= {{$horario->id}} >{{$horario->name}}</option>
-										@endforeach
-									</select>
-									</td>
-									<td>
-										{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
-										<select class="browser-default custom-select" id="racion_id" name="racion_id">
-											<option value= 0>Raciones recomendadas</option>
-										</select>
-									</td>
-								</tr>
-							</table>
-
-						</div>
-						<div class="modal-footer">
-								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
-								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
-						</div>
-
-				</div>
-		</div>
-	</div>
 @endif
 @endsection
 @section('script')

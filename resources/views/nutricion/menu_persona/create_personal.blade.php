@@ -1,6 +1,61 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+	div.blueTable {
+	  width: 100%;
+	  text-align: left;
+	}
+	.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+	  border: 0px solid #AAAAAA;
+	  padding: 10px 0px;
+	}
+	.divTable.blueTable .divTableBody .divTableCell {
+	  font-size: 15px;
+		text-align: center;
+	}
+	.divTable.blueTable .divTableRow:nth-child(even) {
+	  background: #D4DAED;
+	}
+	.divTable.blueTable .divTableHeading {
+		border-bottom: 2px solid #444444;
+	  }
+	.divTable.blueTable .divTableHeading .divTableHead {
+	  font-size: 16px;
+	  font-weight: bold;
+	  color: #01030B;
+		text-align: center;
+		border-bottom: 2px solid #444444;
+	}
+	.blueTable .tableFootStyle {
+	  font-weight: bold;
+	  color: #FFFFFF;
+	}
+	.blueTable .tableFootStyle .links {
+		 text-align: right;
+	}
+	.blueTable .tableFootStyle .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 2px 8px;
+	  border-radius: 5px;
+	}
+	.blueTable.outerTableFooter {
+	  border-top: none;
+	}
+	.blueTable.outerTableFooter .tableFootStyle {
+	  padding: 3px 5px;
+	}
+	/* DivTable.com */
+	.divTable{ display: table; }
+	.divTableRow { display: table-row; }
+	.divTableHeading { display: table-header-group;}
+	.divTableCell, .divTableHead { display: table-cell;}
+	.divTableHeading { display: table-header-group;}
+	.divTableFoot { display: table-footer-group;}
+	.divTableBody { display: table-row-group;}
+</style>
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
@@ -51,41 +106,43 @@ Crear menús para Personal
 <div class="container">
   <div class="table-responsive">
 		<div class="col-md-auto col-md-offset-1">
-				<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
-					<thead >
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Apellido</th>
-							<th scope="col">Tipo Doc.</th>
-							<th scope="col">Número de doc.</th>
-              <th scope="col">Sector</th>
-							<th scope="col">Acción</th>
-							<th scope="col"></th>
+      <div class="panel-heading">
+        <div class="divTable blueTable">
+          <div class="divTableHeading">
+            <div class="divTableRow">
+							<div class="divTableHead">Nombre</div>
+							<div class="divTableHead">Apellido</div>
+							<div class="divTableHead">Tipo Doc.</div>
+							<div class="divTableHead">Número de doc.</div>
+              <div class="divTableHead">Sector</div>
+							<div class="divTableHead">Acción</div>
+							<div class="divTableHead"></div>
 
-						</tr>
-					</thead>
+            </div>
+          </div>
 
-					<tbody>
+					<div class="divTableBody">
 						@if($personal)
 							@foreach($personal as $p)
-								<tr>
-									<td>{{$p->persona->name}}</td>
-									<td>{{$p->persona->apellido}}</td>
-									<td>{{$p->persona->tipoDocumento->name}}</td>
-									<td>{{$p->persona->numero_doc}}</td>
+								<div class="divTableRow">
+									<div class="divTableCell">{{$p->persona->name}}</div>
+									<div class="divTableCell">{{$p->persona->apellido}}</div>
+									<div class="divTableCell">{{$p->persona->tipoDocumento->name}}</div>
+									<div class="divTableCell">{{$p->persona->numero_doc}}</div>
                   @if($p->persona->sectorFecha(date("Y-m-d")))
-										<td>{{$p->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+										<div class="divTableCell">{{$p->persona->sectorFecha(date("Y-m-d"))->name}}</div>
 									@else
-										<td>-</td>
+										<div class="divTableCell">-</div>
 									@endif
-									<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
+									<div class="divTableCell"><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear menú
-									</a></td>
-								</tr>
+									</a></div>
+								</div>
 							@endforeach
 						@endif
 
-				</table>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>

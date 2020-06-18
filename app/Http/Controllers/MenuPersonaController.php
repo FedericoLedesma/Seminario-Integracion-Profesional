@@ -331,12 +331,12 @@ class MenuPersonaController extends Controller
               $mp->save();
               return response([
                 'success'=>'true',
-                'data'=>"Menu realizado con exito",
+                'data'=>"Menú realizado con exito",
               ]);
             }catch (\Exception $e) {
               return response([
                 'success'=>'false',
-                'data'=>"Esta persona ya tiene una racion asignada para este horario",
+                'data'=>"Esta persona ya tiene una ración asignada para este horario",
               ]);
             }
           }
@@ -347,11 +347,11 @@ class MenuPersonaController extends Controller
             ]);
           }
         }else {
-          Log::info("Esta persona ya tiene una racion asignada para este horario");
+          Log::info("Esta persona ya tiene una ración asignada para este horario");
 
           return response([
             'success'=>'false',
-            'data'=>"Esta persona ya tiene una racion asignada para este horario",
+            'data'=>"Esta persona ya tiene una ración asignada para este horario",
           ]);
         }
 
@@ -433,19 +433,19 @@ class MenuPersonaController extends Controller
         if($menuPersona->realizado){
           return response()->json([
                 'estado'=>'false',
-                'success' => 'No se puede eliminar un menu realizado',
+                'success' => 'No se puede eliminar un menú realizado',
             ]);
         }else{
           $menuPersona->delete();
           return response()->json([
                 'estado'=>'true',
-                'success' => 'Se elimino correctamente el menu',
+                'success' => 'Se eliminó correctamente el menú',
             ]);
         }
       } catch (\Exception $e) {
         return response()->json([
               'estado'=>'false',
-              'success' => 'No se pudo eliminar el menu de la persona',
+              'success' => 'No se pudo eliminar el menú de la persona',
           ]);
       }
 
@@ -470,5 +470,23 @@ class MenuPersonaController extends Controller
       return view('admin_personas.pacientes.menus_persona_fecha',compact('menus','query','busqueda_por','horarios','persona'));
     }
 
+    public function getHorarios(Request $request)
+    {
+      Log::info("GET HORARIOS");
+      Log::info($request);
+      $persona_id=$request->get('persona_id');
+      $persona=Persona::findById($persona_id);
+      $hs=Horario::all();
+      $horarios=array();
+      foreach ($hs as $h) {
+        if(!($persona->tiene_menu_hoy_en_horario($h->id))){
+            array_push($horarios,$h);
+            Log::info($h);
+        }
+      }
+      return response([
+        'horarios'=>$horarios,
+      ]);
+    }
 
 }

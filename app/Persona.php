@@ -11,6 +11,7 @@ use App\RacionesDisponibles;
 use App\Racion;
 use App\MenuPersona;
 use App\Acompanante;
+use DateTime;
 use Illuminate\Support\Facades\Log;
 
 class Persona extends Model
@@ -320,7 +321,13 @@ class Persona extends Model
         Log::Debug('Saliendo de: '.__CLASS__.' || método: '.__FUNCTION__);
         return $menues;
       }
-
+      public function tiene_menu_hoy_en_horario($horario_id)
+      {
+        $menu=MenuPersona::get_menu_por_persona_horario_fecha($this->id,$horario_id,date('Y-m-d'));
+        if(!empty($menu)){
+          return true;
+        }return false;
+      }
   /**
    métodos estáticos
    */

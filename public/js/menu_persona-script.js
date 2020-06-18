@@ -187,6 +187,46 @@
 			document.getElementById("p_body").appendChild(p);
 		}
 
+		//OBTENER LOS HORARIOS Y MOSTRARLOS
+		var selectHorarios=document.getElementById("horario_id");
+		for (i = selectHorarios.length - 1; i >= 0; i--) {
+			selectHorarios.remove(i);
+		}
+		var url="/ver-horarios-menus";
+		var persona = JSON.parse(localStorage.getItem('persona'));
+		console.log(persona.id);
+		var persona_id=persona.id;
+		$.ajax({
+			type: 'get',
+			url: url,
+			dataType: 'json',
+			data:{persona_id},
+				success: function (data) {
+							console.log(data);
+							var miOption=document.createElement("option");
+							miOption.setAttribute("value",0);
+							miOption.setAttribute("label","Seleccione un horario");
+							selectHorarios.appendChild(miOption);
+							data.horarios.forEach(myFunction)
+							function myFunction(item, i) {
+										console.log(item.id);
+										console.log(item.name);
+										var miOption=document.createElement("option");
+										miOption.setAttribute("value",item.id);
+										miOption.setAttribute("label",item.name);
+										selectHorarios.appendChild(miOption);
+
+								i++;
+
+								}
+							},
+							error: function (data) {
+								console.log('Error:', data);
+
+							}
+		});
+		document.getElementById("horario_id").options[0].selected=true;
+
 	});
 	$('.guardar_menu').click(function(e){
 		e.preventDefault();

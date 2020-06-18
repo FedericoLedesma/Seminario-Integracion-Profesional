@@ -83,8 +83,14 @@ class Prueb extends Seeder
      }*/
      /*$s=$racion->racion_alimento(2)->unidad->name;
      echo $s;*/
-     $personal=Personal::findById(9);
+     /*$personal=Personal::findById(9);
      $sector=Sector::findById(2);
-     $personal->reubicar_personal($sector);
+     $personal->reubicar_personal($sector);*/
+     $paciente=Paciente::findById(5);
+     if($paciente->persona->tiene_menu_hoy_en_horario(1)){
+       echo "tiene menu";
+     }else{
+       echo "no tiene menu";
+     }
     }
 }
