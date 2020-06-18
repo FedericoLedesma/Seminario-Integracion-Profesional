@@ -90,7 +90,7 @@ class AdminRolesController extends Controller
         //
 
     	Role::create([
-    			'name' => strtoupper($request['name']),
+    			'name' => ucwords($request['name']),
 
     	]);
     	return redirect('/admin/roles');

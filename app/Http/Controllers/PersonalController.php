@@ -125,13 +125,13 @@ class PersonalController extends Controller
       $data=$request->all();
       $persona= new Persona([
           'name' => $data['name'],
-          'numero_doc'=>strtoupper($data['numero_doc']),
-          'apellido'=>strtoupper($data['apellido']),
-          'direccion'=>strtoupper($data['direccion']),
+          'numero_doc'=>ucwords($data['numero_doc']),
+          'apellido'=>ucwords($data['apellido']),
+          'direccion'=>ucwords($data['direccion']),
           'email'=>$data['email'],
-          'provincia'=>strtoupper($data['provincia']),
-          'localidad'=>strtoupper($data['localidad']),
-          'sexo'=>strtoupper($data['sexo']),
+          'provincia'=>ucwords($data['provincia']),
+          'localidad'=>ucwords($data['localidad']),
+          'sexo'=>ucwords($data['sexo']),
           'fecha_nac'=>$data['fecha_nac'],
           'tipo_documento_id'=>$data['tipo_documento_id'],
         ]);

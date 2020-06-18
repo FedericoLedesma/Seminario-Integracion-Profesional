@@ -16,7 +16,7 @@
              {!!	Form::label('numero_doc', 'Número Doc.')!!}
          </td>
          <td>
-             {!!	Form::text('numero_doc')!!}
+             <input type="number" id="numero_doc" name="numero_doc" min="0" step="1" value="0">
          </td>
        </tr>
         <tr>

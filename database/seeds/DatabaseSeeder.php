@@ -38,15 +38,15 @@ class DatabaseSeeder extends Seeder
       ]);
       $persona = Persona::create([
           #'id'=>1,
-          'name'=>'FEDERICO',
-          'apellido'=>'ADMIN',
+          'name'=>'Federico',
+          'apellido'=>'Admin',
           'tipo_documento_id'=>$tipo_doc->id,
           'numero_doc'=>40000000,
-          'direccion'=>'LAVALLE 1506',
+          'direccion'=>'Lavalle 1506',
           'email'=>'admin@seminario.com',
-          'provincia'=>'BUENOS AIRES',
-          'localidad'=>'GENERAL RODRIGUEZ',
-          'sexo'=>'MASCULINO',
+          'provincia'=>'Buenos Aires',
+          'localidad'=>'General Rodriguez',
+          'sexo'=>'Masculino',
           'fecha_nac'=>'1997-02-02'
       ]);
       $personal=Personal::create([
@@ -191,51 +191,51 @@ class DatabaseSeeder extends Seeder
   }*/
   private static function cargar_raciones_ali(){
     $r1 = Racion::create([
-      'name'=>'CHURRASCO CON FIDEOS',
+      'name'=>'Churrasco con fideos',
     ]);
 
     $r2 = Racion::create([
-      'name'=>'MILANESA CON PURE DE PAPAS',
+      'name'=>'Milanesas con pure de papas',
     ]);
 
     $r3 = Racion::create([
-      'name'=>'PIZZA DE CEBOLLA',
+      'name'=>'Pizza de cebolla',
     ]);
 
     $r4 = Racion::create([
-      'name'=>'TÉ CON GALLETITAS DE AGUA',
+      'name'=>'Té con galletitas de agua',
     ]);
 
     $r5 = Racion::create([
-      'name'=>'GELATINA DE FRUTILLA',
+      'name'=>'Gelatina de frutilla',
     ]);
 
     $r6 = Racion::create([
-      'name'=>'SOPA',
+      'name'=>'Sopa',
     ]);
 
     $a1 = Alimento::create([
-      'name'=>'LECHUGA'
+      'name'=>'Lechuga'
     ]);
 
     $a2 = Alimento::create([
-      'name'=>'CARNE DE VACA'
+      'name'=>'Carne de vaca'
     ]);
 
     $a3 = Alimento::create([
-      'name'=>'GALLETITAS DE AGUA'
+      'name'=>'Galletitas de agua'
     ]);
 
     $a4 = Alimento::create([
-      'name'=>'CEBOLLA'
+      'name'=>'Cebolla'
     ]);
 
     $a5 = Alimento::create([
-      'name'=>'FIDEOS'
+      'name'=>'Fideos'
     ]);
 
     $a6 = Alimento::create([
-      'name'=>'MERMELADA'
+      'name'=>'Mermelada'
     ]);
     $u= Unidad::create([
       'name'=>'Kilogramos'
@@ -324,14 +324,14 @@ class DatabaseSeeder extends Seeder
     static::cargar_tipo_documentos();
     $data = [
       'numero_doc'=>31241573,
-      'apellido'=>'AGUIRRE',
-      'name'=>'ANDRES',
+      'apellido'=>'Aguirre',
+      'name'=>'Andres',
       'observacion'=>'OK',
-      'direccion'=>'INDEPENDENCIA 601',
+      'direccion'=>'Independencia 601',
       'email'=>'andres@test.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MORENO',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Moreno',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1960-5-5',
       'tipo_documento_id'=>1,
     ];
@@ -339,14 +339,14 @@ class DatabaseSeeder extends Seeder
     $p1->save();
     $data = [
       'numero_doc'=>34154498,
-      'apellido'=>'ARBO',
-      'name'=>'CECILIA',
+      'apellido'=>'Arbo',
+      'name'=>'Cecilia',
       'observacion'=>'OK',
-      'direccion'=>'RIVADAVIA 36001',
+      'direccion'=>'Rivadavia 36001',
       'email'=>'lopez.juan@test.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'1800-1-1',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Merlo',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1960-2-8',
       'tipo_documento_id'=>1,
     ];
@@ -354,14 +354,14 @@ class DatabaseSeeder extends Seeder
     $p2->save();
     $data = [
       'numero_doc'=>16582895,
-      'apellido'=>'ARDUINO',
-      'name'=>'MARIO EUGENIO',
+      'apellido'=>'Arduino',
+      'name'=>'Mario Eugenio',
       'observacion'=>'OK',
-      'direccion'=>'BALCARCE 606',
+      'direccion'=>'Balcarce 606',
       'email'=>'arduinoma@test.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MERLO',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Merlo',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1985-2-2',
       'tipo_documento_id'=>1,
     ];
@@ -369,14 +369,14 @@ class DatabaseSeeder extends Seeder
     $p3->save();
     $data = [
       'numero_doc'=>22576032,
-      'apellido'=>'BAIONI',
-      'name'=>'GABRIELA ROBERTA',
+      'apellido'=>'Baioni',
+      'name'=>'Gabriela Roberta',
       'observacion'=>'OK',
-      'direccion'=>'LIBERTAD 2548',
-      'email'=>'carla@test.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'LUJÁN',
-      'sexo'=>'FEMENINO',
+      'direccion'=>'Libertad 2548',
+      'email'=>'Baionig@test.com',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Luján',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1989-5-5',
       'tipo_documento_id'=>1,
     ];
@@ -384,14 +384,14 @@ class DatabaseSeeder extends Seeder
     $p4->save();
     $data = [
       'numero_doc'=>13214174,
-      'apellido'=>'FERNANDEZ',
-      'name'=>'MARIA',
-      'observacion'=>'OK',
-      'direccion'=>'CALLE 14 N°.355',
+      'apellido'=>'Fernandez',
+      'name'=>'Maria',
+      'observacion'=>'Ok',
+      'direccion'=>'Calle 14 N°.355',
       'email'=>'-',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'SAN ANDRÉS DE GILES',
-      'sexo'=>'femenino',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'San Andrés de Giles',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1979-2-15',
       'tipo_documento_id'=>1,
     ];
@@ -399,14 +399,14 @@ class DatabaseSeeder extends Seeder
     $p5->save();
     $data = [
       'numero_doc'=>24618959,
-      'apellido'=>'BARCOS',
-      'name'=>'PEDRO',
-      'observacion'=>'OK',
+      'apellido'=>'Barcos',
+      'name'=>'Pedro',
+      'observacion'=>'Ok',
       'direccion'=>'-',
       'email'=>'-',
       'provincia'=>'-',
       'localidad'=>'-',
-      'sexo'=>'MASCULINO',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1965-11-8',
       'tipo_documento_id'=>1,
     ];
@@ -414,14 +414,14 @@ class DatabaseSeeder extends Seeder
     $p6->save();
     $data = [
       'numero_doc'=>12566554,
-      'apellido'=>'BENITEZ',
-      'name'=>'VERONICA',
+      'apellido'=>'Benitez',
+      'name'=>'Verónica',
       'observacion'=>'-',
-      'direccion'=>'JUAN MANUEL DE ROSAS 456',
+      'direccion'=>'Juan Manuel de Rosas 456',
       'email'=>'veronica@gmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'LUJÁN',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Luján',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1995-12-12',
       'tipo_documento_id'=>3,
     ];
@@ -429,14 +429,14 @@ class DatabaseSeeder extends Seeder
     $p7->save();
     $data = [
       'numero_doc'=>95531632,
-      'apellido'=>'BERGE',
-      'name'=>'PAMELA',
+      'apellido'=>'Berge',
+      'name'=>'Pamela',
       'observacion'=>'OK',
-      'direccion'=>'LA PINTA 287',
+      'direccion'=>'La Pinta 287',
       'email'=>'pamela@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MORON',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Morón',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1990-5-5',
       'tipo_documento_id'=>1,
     ];
@@ -444,14 +444,14 @@ class DatabaseSeeder extends Seeder
     $p8->save();
     $data = [
       'numero_doc'=>12647194,
-      'apellido'=>'OLIVERTI',
-      'name'=>'RICARDO',
+      'apellido'=>'Oliverti',
+      'name'=>'Ricardo',
       'observacion'=>'OK',
-      'direccion'=>'PUEYRREDON 600',
+      'direccion'=>'Pueyrredón 600',
       'email'=>'oliverti@test.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'JAUREGUI',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Jauregui',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1990-5-5',
       'tipo_documento_id'=>1,
     ];
@@ -459,14 +459,14 @@ class DatabaseSeeder extends Seeder
     $p9->save();
     $data = [
       'numero_doc'=>19325205,
-      'apellido'=>'GOMEZ',
-      'name'=>'FABIAN',
+      'apellido'=>'Gomez',
+      'name'=>'Fabián',
       'observacion'=>'OK',
-      'direccion'=>'SAN MARTIN 1245',
+      'direccion'=>'San Martín 1245',
       'email'=>'fabian@yahoo.com.ar',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MORENO',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Moreno',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1989-7-2',
       'tipo_documento_id'=>1,
     ];
@@ -474,14 +474,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>16809531,
-      'apellido'=>'BENITEZ',
-      'name'=>'CARLOS',
+      'apellido'=>'Benitez',
+      'name'=>'Carlos',
       'observacion'=>'OK',
-      'direccion'=>'EL FACÓN 1245',
+      'direccion'=>'El Facón 1245',
       'email'=>'benitezzz@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1977-7-27',
       'tipo_documento_id'=>1,
     ];
@@ -489,14 +489,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>17448901,
-      'apellido'=>'MALLO',
-      'name'=>'MARCOS AGUSTIN',
+      'apellido'=>'Mallo',
+      'name'=>'Marcos Agustín',
       'observacion'=>'OK',
-      'direccion'=>'EL AMANECER 145',
+      'direccion'=>'El Amanecer 145',
       'email'=>'malloyo@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1987-7-25',
       'tipo_documento_id'=>1,
     ];
@@ -504,14 +504,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>20987908,
-      'apellido'=>'PIGHIN',
-      'name'=>'NELIDA CLARA',
+      'apellido'=>'Pighin',
+      'name'=>'Nelida Clara',
       'observacion'=>'OK',
-      'direccion'=>'EL PERICÓN 4564',
+      'direccion'=>'El Pericón 4564',
       'email'=>'nelidacp@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MARCOS PAZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Marcos Paz',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1998-5-27',
       'tipo_documento_id'=>1,
     ];
@@ -519,14 +519,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>21040557,
-      'apellido'=>'PEREZ',
-      'name'=>'JULIO ANDRES',
+      'apellido'=>'Perez',
+      'name'=>'Julio Andres',
       'observacion'=>'OK',
       'direccion'=>'CARLOS PELLEGRINI 198',
       'email'=>'perezjulio@gmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MORENO',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Moreno',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1980-10-5',
       'tipo_documento_id'=>1,
     ];
@@ -534,14 +534,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>21399214,
-      'apellido'=>'MASSA',
-      'name'=>'DOLORES GUADALUPE',
+      'apellido'=>'Massa',
+      'name'=>'Dolores Guadalupe',
       'observacion'=>'OK',
-      'direccion'=>'AGÜERO 457',
+      'direccion'=>'Agüero 457',
       'email'=>'massaaguero@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MORENO',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Moreno',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1979-9-13',
       'tipo_documento_id'=>1,
     ];
@@ -549,14 +549,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>17448901,
-      'apellido'=>'MENSEGUEZ',
-      'name'=>'LUCIA LAURA',
+      'apellido'=>'Menseguez',
+      'name'=>'Lucía Laura',
       'observacion'=>'OK',
-      'direccion'=>'JOSE C. PAZ 544',
+      'direccion'=>'Jose C. Paz 544',
       'email'=>'menseguez12@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1989-9-7',
       'tipo_documento_id'=>1,
     ];
@@ -564,14 +564,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>17448901,
-      'apellido'=>'BRANDAN',
-      'name'=>'CELIA',
+      'apellido'=>'Brandan',
+      'name'=>'Celia',
       'observacion'=>'OK',
-      'direccion'=>'PIEDAS 1245',
+      'direccion'=>'Piedras 1245',
       'email'=>'brandancelia@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1977-7-27',
       'tipo_documento_id'=>1,
     ];
@@ -581,14 +581,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>16821037,
-      'apellido'=>'BRASILI',
-      'name'=>'FERNANDO',
+      'apellido'=>'Brasili',
+      'name'=>'Fernando',
       'observacion'=>'OK',
-      'direccion'=>'VIDT 1245',
+      'direccion'=>'Vidt 1245',
       'email'=>'brasili@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'LOBOS',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Lobos',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1978-7-17',
       'tipo_documento_id'=>1,
     ];
@@ -596,14 +596,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>13285797,
-      'apellido'=>'BRUNO',
-      'name'=>'SEBASTIAN LEANDRO',
+      'apellido'=>'Bruno',
+      'name'=>'Sebastian Leandro',
       'observacion'=>'OK',
-      'direccion'=>'PINCIROLLI 4578',
+      'direccion'=>'Pinciroli 4578',
       'email'=>'bruno@gmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1997-7-27',
       'tipo_documento_id'=>1,
     ];
@@ -611,14 +611,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>27033530,
-      'apellido'=>'VALERO',
-      'name'=>'CESAR JOSUÉ',
+      'apellido'=>'Valero',
+      'name'=>'Cesar Josué',
       'observacion'=>'OK',
-      'direccion'=>'SARMIENTO 9852',
+      'direccion'=>'Sarmiento 9852',
       'email'=>'sarmiento@hotmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1992-2-15',
       'tipo_documento_id'=>1,
     ];
@@ -626,14 +626,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>18860528,
-      'apellido'=>'TELIAS',
-      'name'=>'ESTEBAN HERNAN',
+      'apellido'=>'Telias',
+      'name'=>'Esteban Hernan',
       'observacion'=>'OK',
-      'direccion'=>'ALMIRANTE BROWN 192',
+      'direccion'=>'Almirante Brown 192',
       'email'=>'hernan@hotmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MARCOS PAZ',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Marcos Paz',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1991-2-19',
       'tipo_documento_id'=>1,
     ];
@@ -641,14 +641,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>24834180,
-      'apellido'=>'TORRES',
-      'name'=>'MARIA JOSE',
+      'apellido'=>'Torres',
+      'name'=>'Maria José',
       'observacion'=>'OK',
-      'direccion'=>'CONSTITUCIÓN 1233',
+      'direccion'=>'Constitución 1233',
       'email'=>'torresmj@hotmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MARCOS PAZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Marcos Paz',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1996-2-15',
       'tipo_documento_id'=>1,
     ];
@@ -656,14 +656,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>26725275,
-      'apellido'=>'SOTELO',
-      'name'=>'NATALIA MARIA',
+      'apellido'=>'Sotelo',
+      'name'=>'Natalia María',
       'observacion'=>'OK',
-      'direccion'=>'AVELLANEDA 1230',
+      'direccion'=>'Avellaneda 1230',
       'email'=>'soteloa@yahoo.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'GENERAL RODRIGUEZ',
-      'sexo'=>'FEMENINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'General Rodriguez',
+      'sexo'=>'Femenino',
       'fecha_nac'=>'1994-8-2',
       'tipo_documento_id'=>1,
     ];
@@ -671,14 +671,14 @@ class DatabaseSeeder extends Seeder
     $p10->save();
     $data = [
       'numero_doc'=>14490519,
-      'apellido'=>'TOLEDO',
-      'name'=>'MARCOS GABRIEL',
+      'apellido'=>'Tolosa',
+      'name'=>'Marcos Román',
       'observacion'=>'OK',
-      'direccion'=>'EL MATE 2154',
+      'direccion'=>'El mate 2154',
       'email'=>'toledomg@hotmail.com',
-      'provincia'=>'BUENOS AIRES',
-      'localidad'=>'MERLO',
-      'sexo'=>'MASCULINO',
+      'provincia'=>'Buenos Aires',
+      'localidad'=>'Merlo',
+      'sexo'=>'Masculino',
       'fecha_nac'=>'1985-2-2',
       'tipo_documento_id'=>1,
     ];
@@ -990,25 +990,25 @@ class DatabaseSeeder extends Seeder
 
 
     $data= [
-      'name'=>'PABELLÓN 1',
-      'descripcion'=>'TERAPIA INTENSIVA Y CUIDADOS PALIATIVOS',
+      'name'=>'Pabellón 1',
+      'descripcion'=>'Terapia intesiva y cuidados paliativos',
     ];
     $s1= new Sector($data);
     $s1->save();
     $data= [
       'name'=>'PABELLON 4',
-      'descripcion'=>'HOSPITAL DE DÍA',
+      'descripcion'=>'Hospital de día',
     ];
     $s2= new Sector($data);
     $s2->save();
     $data= [
-      'name'=>'PABELLÓN 3',
-      'descripcion'=>'AGUDOS',
+      'name'=>'Pabellón 3',
+      'descripcion'=>'Agudos',
     ];
     $s3= new Sector($data);
     $s3->save();
     $data= [
-      'name'=>'CENTRO DE JUBILADOS',
+      'name'=>'Centro de jubilados',
       'descripcion'=>'-',
     ];
     $s4= new Sector($data);
@@ -1016,52 +1016,52 @@ class DatabaseSeeder extends Seeder
 
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'HABITACIÓN 1',
-      'descripcion'=>'CUIDADOS PALIATIVOS',
+      'name'=>'Habitación 1',
+      'descripcion'=>'Cuidados paliativos',
     ];
     //--------habitacion 1 sector 1--------------------------
     $h1= new Habitacion($data);
     $h1->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'HABITACIÓN 2',
-      'descripcion'=>'CUIDADOS PALIATIVOS',
+      'name'=>'Habitación 2',
+      'descripcion'=>'Cuidados paliativos',
     ];
     $h2= new Habitacion($data);
     $h2->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'HABITACIÓN 3',
-      'descripcion'=>'TERAPIA INTENSIVA',
+      'name'=>'Habitación 3',
+      'descripcion'=>'Terapia intensiva',
     ];
     $h3= new Habitacion($data);
     $h3->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'HABITACIÓN 4',
-      'descripcion'=>'TERAPIA INTENSIVA',
+      'name'=>'Habitación 4',
+      'descripcion'=>'Terapia intensiva',
     ];
     $h4= new Habitacion($data);
     $h4->save();
     //------------habitacion 2 sector 2------------------
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'HABITACIÓN 1',
-      'descripcion'=>'INTERNACIÓN COMÚN',
+      'name'=>'Habitación 1',
+      'descripcion'=>'Internación común',
     ];
     $h1s2= new Habitacion($data);
     $h1s2->save();
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'HABITACIÓN 2',
-      'descripcion'=>'INTERNACIÓN COMÚN',
+      'name'=>'Habitación 2',
+      'descripcion'=>'Internación común',
     ];
     $h2s2= new Habitacion($data);
     $h2s2->save();
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'HABITACION 3',
-      'descripcion'=>'MATERNIDAD',
+      'name'=>'Habitación 3',
+      'descripcion'=>'Maternidad',
     ];
     $h2s2= new Habitacion($data);
     $h2s2->save();

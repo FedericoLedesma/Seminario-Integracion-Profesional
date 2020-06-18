@@ -80,7 +80,7 @@
                 @foreach($paciente->get_historial_menues(null) as $menues)
                   <div class="divTableRow">
                     <div class="divTableCell">
-                      <label> {{$menues->get_fecha()}} </label>
+                      <label> {{date("d/m/Y", strtotime($menues->get_fecha()))}} </label>
                     </div>
                     <div class="divTableCell">
                       <label> {{$menues->get_horario_name()}} </label>
@@ -129,10 +129,10 @@
                   {!!link_to_route('pacientes.historial', $title = $pac_cama->get_name(), $parameters = [$pac_cama->get_paciente_id()],['class' => 'btn btn-info'], $attributes = [])!!}
                </div>
                <div class="divTableCell">
-                 <label> {{$pac_cama->get_fecha_ingreso()}} </label>
+                 <label> {{date("d/m/Y", strtotime($pac_cama->get_fecha_ingreso()))}} </label>
                </div>
                <div class="divTableCell">
-                  <label> {{$pac_cama->get_fecha_egreso()}} </label>
+                  <label> {{date("d/m/Y", strtotime($pac_cama->get_fecha_egreso()))}} </label>
                </div>
                <div class="divTableCell">
                  <button class="btn btn-info" data-toggle="collapse" data-target="#historico_dieta{{$pac_cama->get_paciente()->get_id()}}">Ver resumen dieta</button>
@@ -167,7 +167,7 @@
                 @foreach($pac_cama->get_paciente()->get_historial_menues(null) as $menues)
                   <div class="divTableRow">
                     <div class="divTableCell">
-                      <label> {{$menues->get_fecha()}} </label>
+                      <label> {{date("d/m/Y", strtotime($menues->get_fecha()))}} </label>
                     </div>
                     <div class="divTableCell">
                       <label> {{$menues->get_horario_name()}} </label>

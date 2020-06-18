@@ -164,14 +164,14 @@ class HistorialInternacionController extends Controller
     public function ingresarNuevo(PacienteRequest $request){
       $data=$request->all();
       $persona= new Persona([
-          'name' => strtoupper($data['name']),
+          'name' => ucwords($data['name']),
           'numero_doc'=>$data['numero_doc'],
-          'apellido'=>strtoupper($data['apellido']),
-          'direccion'=>strtoupper($data['direccion']),
+          'apellido'=>ucwords($data['apellido']),
+          'direccion'=>ucwords($data['direccion']),
           'email'=>$data['email'],
-          'provincia'=>strtoupper($data['provincia']),
-          'localidad'=>strtoupper($data['localidad']),
-          'sexo'=>strtoupper($data['sexo']),
+          'provincia'=>ucwords($data['provincia']),
+          'localidad'=>ucwords($data['localidad']),
+          'sexo'=>ucwords($data['sexo']),
           'fecha_nac'=>$data['fecha_nac'],
           'tipo_documento_id'=>$data['tipo_documento_id'],
         ]);

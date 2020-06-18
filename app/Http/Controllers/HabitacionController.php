@@ -37,7 +37,7 @@ class HabitacionController extends Controller
             $busqueda_por="ID";
             break;
           case 'busqueda_name':
-              $habitacion=Habitacion::findByName(strtoupper($query))->get();
+              $habitacion=Habitacion::findByName(ucwords($query))->get();
               $busqueda_por="NOMBRE";
             break;
           default:
@@ -74,7 +74,7 @@ class HabitacionController extends Controller
         Log::debug($data);
         try{
           $habitacion=Habitacion::create([
-              'name' =>strtoupper($data['name']),
+              'name' =>ucwords($data['name']),
               'descripcion'=>$data['descripcion'],
               'sector_id'=>$data['sector_id'],
             ]);
@@ -122,7 +122,7 @@ class HabitacionController extends Controller
     {
       try{
         $habitacion=Habitacion::find($id);
-        $habitacion->name=strtoupper($request->name);
+        $habitacion->name=ucwords($request->name);
         $habitacion->descripcion=$request->descripcion;
         $habitacion->set_sector_id($request->sector_id);
         $habitacion->save();

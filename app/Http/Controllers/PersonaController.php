@@ -90,14 +90,14 @@ class PersonaController extends Controller
     {
         $data=$request->all();
         $persona=Persona::create([
-            'name' => strtoupper($data['name']),
-            'numero_doc'=>strtoupper($data['numero_doc']),
-            'apellido'=>strtoupper($data['apellido']),
-            'direccion'=>strtoupper($data['direccion']),
+            'name' => ucwords($data['name']),
+            'numero_doc'=>ucwords($data['numero_doc']),
+            'apellido'=>ucwords($data['apellido']),
+            'direccion'=>ucwords($data['direccion']),
             'email'=>$data['email'],
-            'provincia'=>strtoupper($data['provincia']),
-            'localidad'=>strtoupper($data['localidad']),
-            'sexo'=>strtoupper($data['sexo']),
+            'provincia'=>ucwords($data['provincia']),
+            'localidad'=>ucwords($data['localidad']),
+            'sexo'=>ucwords($data['sexo']),
             'fecha_nac'=>$data['fecha_nac'],
             'tipo_documento_id'=>$data['tipo_documento_id'],
           ]);
@@ -158,14 +158,14 @@ class PersonaController extends Controller
         if($persona){
           $persona->numero_doc=$request->numero_doc;
           $persona->tipo_documento_id=$request->tipo_documento_id;
-          $persona->apellido=strtoupper($request->apellido);
-          $persona->name=strtoupper($request->name);
-          $persona->observacion=strtoupper($request->observacion);
-          $persona->direccion=strtoupper($request->direccion);
+          $persona->apellido=ucwords($request->apellido);
+          $persona->name=ucwords($request->name);
+          $persona->observacion=ucwords($request->observacion);
+          $persona->direccion=ucwords($request->direccion);
           $persona->email=$request->email;
-          $persona->provincia=strtoupper($request->provincia);
-          $persona->localidad=strtoupper($request->localidad);
-          $persona->sexo=strtoupper($request->sexo);
+          $persona->provincia=ucwords($request->provincia);
+          $persona->localidad=ucwords($request->localidad);
+          $persona->sexo=ucwords($request->sexo);
           $persona->fecha_nac=$request->fecha_nac;
           $persona->save();
 

@@ -71,7 +71,7 @@ class AlimentoController extends Controller
     {
       $data=$request->all();
       $alimento=Alimento::create([
-          'name' => strtoupper($data['name']),
+          'name' => ucwords($data['name']),
         ]);
 
       $alimento->save();
@@ -111,7 +111,7 @@ class AlimentoController extends Controller
     public function update(AlimentoRequest $request, Alimento $alimento)
     {
       if($alimento){
-        $alimento->name=strtoupper($request->name);
+        $alimento->name=ucwords($request->name);
         $alimento->save();
 
       }

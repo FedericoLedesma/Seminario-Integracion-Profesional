@@ -146,14 +146,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link" id="nav-usuarios-todos">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ver todos</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('users.create') }}" class="nav-link" id="nav-usuarios-create">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar Usuario</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Agregar Usuario</p>
                 </a>
               </li>
             </ul>
@@ -170,14 +170,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('roles.index') }}" class="nav-link" id="nav-roles-todos">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ver todos</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('roles.create') }}" class="nav-link" id="nav-roles-create">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar Rol</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Agregar Rol</p>
                 </a>
               </li>
             </ul>
@@ -193,14 +193,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('permisos.index') }}" class="nav-link" id="nav-permisos-todos">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ver todos</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Ver todos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('permisos.create') }}" class="nav-link" id="nav-permisos-create">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar Permiso</p>
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p class="text-dark">Agregar Permiso</p>
                 </a>
               </li>
              </ul>
@@ -216,14 +216,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
            <ul class="nav nav-treeview">
              <li class="nav-item">
                <a href="{{ route('personas.index') }}" class="nav-link" id="nav-personas-todas">
-                 <i class="far fa-circle nav-icon"></i>
-                 <p>Ver todas</p>
+                 <i class="fa fa-circle nav-icon"></i>
+                 <p class="text-dark">Ver todas</p>
                </a>
              </li>
              <li class="nav-item">
                <a href="{{ route('personas.create') }}" class="nav-link" id="nav-personas-create">
-                 <i class="far fa-circle nav-icon"></i>
-                 <p>Agregar Persona</p>
+                 <i class="fa fa-circle nav-icon"></i>
+                 <p class="text-dark">Agregar Persona</p>
                </a>
              </li>
            </ul>
@@ -241,14 +241,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
          <ul class="nav nav-treeview">
            <li class="nav-item">
              <a href="{{ route('patologias.index') }}" class="nav-link" id="nav-patologias-todas">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Ver todas</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Ver todas</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('tipospatologias.index') }}" class="nav-link" id="nav-tipospatologias">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Tipos de patologías</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Tipos de patologías</p>
              </a>
            </li>
          </ul>
@@ -266,44 +266,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
          <ul class="nav nav-treeview">
            <li class="nav-item">
              <a href="{{ route('menu_persona.index') }}" class="nav-link" id="nav-menus">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Menús</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Menús</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{route('dietas.index')}}" class="nav-link" id="nav-dietas">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Dietas</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Dietas</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('raciones.index') }}" class="nav-link" id="nav-raciones">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Raciones</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Raciones</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('raciones-disponibles.index') }}" class="nav-link" id="nav-disponibilidad">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Disponibilidad de Raciones</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Disponibilidad de Raciones</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('alimentos.index') }}" class="nav-link" id="nav-alimentos">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Alimentos</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Alimentos</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('movimientos.index') }}" class="nav-link" id="nav-movimientos">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Movimientos</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Movimientos</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="{{ route('informes.index') }}" class="nav-link" id="nav-movimientos">
-               <i class="far fa-circle nav-icon"></i>
-               <p>Informes</p>
+               <i class="fa fa-circle nav-icon"></i>
+               <p class="text-dark">Informes</p>
              </a>
            </li>
          </ul>
@@ -322,8 +322,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{ route('historialInternacion.index') }}" class="nav-link" id="nav-internacion">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Historial de pacientes</p>
+              <i class="fa fa-circle nav-icon"></i>
+              <p class="text-dark">Historial de pacientes</p>
             </a>
           </li>
           <!-- <li class="nav-item">
@@ -348,27 +348,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{ route('sectores.index') }}" class="nav-link" id="nav-administracion-sectores">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fa fa-circle nav-icon"></i>
               <p class="text-dark">Sectores</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('habitaciones.index') }}" class="nav-link" id="nav-administracion-habitaciones">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Habitaciones</p>
+              <i class="fa fa-circle nav-icon"></i>
+              <p class="text-dark">Habitaciones</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('personal.index') }}" class="nav-link" id="nav-administracion-personal">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Personal</p>
+              <i class="fa fa-circle nav-icon"></i>
+              <p class="text-dark">Personal</p>
             </a>
           </li>
         </li>
         <li class="nav-item">
           <a href="{{ route('profesion.index') }}" class="nav-link" id="nav-administracion-profesion">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Profesión</p>
+            <i class="fa fa-circle nav-icon"></i>
+            <p class="text-dark">Profesión</p>
           </a>
         </li>
 
@@ -389,11 +389,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-8">
             <h1 class="m-0 text-dark">@yield('titulo')</h1>
 
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home') }}">Home</a></li>
               @yield('navegacion')

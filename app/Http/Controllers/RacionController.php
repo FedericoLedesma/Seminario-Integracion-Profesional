@@ -73,7 +73,7 @@ class RacionController extends Controller
     {
         $data=$request->all();
         $racion=Racion::create([
-            'name' => strtoupper($data['name']),
+            'name' => ucfirst($data['name']),
             'observacion' => $data['observacion'],
           ]);
         $racion->save();
@@ -117,7 +117,7 @@ class RacionController extends Controller
     {
           Log::info($request);
           $racion=Racion::findById($id);
-          $racion->name=strtoupper($request->name);
+          $racion->name=ucfirst($request->name);
           $racion->observacion=$request->observacion;
           $racion->save();
 

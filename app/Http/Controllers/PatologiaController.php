@@ -42,7 +42,7 @@ class PatologiaController extends Controller
             $busqueda_por="ID";
             break;
           case 'busqueda_name':
-              $patologias=Patologia::findByName(strtoupper($query))->get();
+              $patologias=Patologia::findByName($query)->get();
               $busqueda_por="NOMBRE";
             break;
             case 'busqueda_tipo_patologia':
@@ -83,7 +83,7 @@ class PatologiaController extends Controller
     {
         $data=$request->all();
         $patologia=Patologia::create([
-            'name' => strtoupper($data['name']),
+            'name' => ucwords($data['name']),
             'descripcion'=>$data['descripcion'],
 
           ]);
@@ -143,7 +143,7 @@ class PatologiaController extends Controller
     public function update(PatologiaRequest $request, Patologia $patologia)
     {
         if($patologia){
-          $patologia->name=strtoupper($request->name);
+          $patologia->name=ucwords($request->name);
           $patologia->tipo_patologia_id=$request->tipo_patologia_id;
           $patologia->save();
           $fecha= new DateTime(date("Y-m-d"));

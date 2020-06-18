@@ -5,7 +5,7 @@
 @extends('layouts.layout')
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historiales de pacientes</a></li>
-		<li class="breadcrumb-item active">Detalles historial de paciente</li>
+		<li class="breadcrumb-item active">Detalles de historial</li>
 @endsection
 @section('titulo')
 Detalles de historial
@@ -303,9 +303,9 @@ Detalles de historial
                     <div class="divTableHead">
                       <label> Estado </label>
                     </div>
-                    <div class="divTableHead">
+                  <!--  <div class="divTableHead">
                       <label> Acciones disponibles </label>
-                    </div>
+                    </div>-->
                 </div>
               </div>
               <div class="divTableBody">
@@ -324,9 +324,9 @@ Detalles de historial
                         <label> No finalizado </label>
                       @endif
                     </div>
-                    <div class="divTableCell">
+                  <!--  <div class="divTableCell">
                       <label> - </label>
-                    </div>
+                    </div>-->
                 </div><!--  Título-->
                 @endforeach
               </div>
