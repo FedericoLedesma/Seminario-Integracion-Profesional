@@ -151,7 +151,7 @@ Crear menús para Pacientes
 														<div class="modal-header" id="modal-header">
 
 														</div>
-														<div class="modal-body">
+														<div class="modal-body" id="modal-body">
 															<div id="p_body">
 
 															</div>

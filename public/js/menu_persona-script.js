@@ -154,10 +154,18 @@
 		console.log(paciente_name);
 
 		var h4 = document.createElement("h4");
-		h4.innerHTML = "Crear menú para "+paciente_name+" "+paciente_apellido;
+		h4.innerHTML = "Crear menú ";
 		h4.setAttribute("id","h4_modal");
 		h4.setAttribute("class","h4_modal");
 		document.getElementById("modal-header").appendChild(h4);
+
+		var p_modal = document.createElement("p");
+		p_modal.innerHTML = paciente_name+" "+paciente_apellido;
+		p_modal.setAttribute("id","h4_modal");
+		p_modal.setAttribute("class","h4_modal");
+		document.getElementById("p_body").appendChild(p_modal);
+
+
 		var btn = document.createElement("BUTTON");
 		var dateSpan = document.createElement('span')
 		dateSpan.innerHTML = "×";

@@ -49,7 +49,7 @@
             <div class="divTableBody">
               <div class="divTableRow">
                 <div class="divTableCell">{{$alimento->name}}</div>
-                <div class="divTableCell">{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}} gr.</div>
+                <div class="divTableCell">{{$racion->getAlimento($alimento->id)->first()->pivot->cantidad}}  @if($racion->racion_alimento($alimento->id)->unidad){{$racion->racion_alimento($alimento->id)->unidad->name}}@endif</div>
               </div>
             </div>
             @endforeach

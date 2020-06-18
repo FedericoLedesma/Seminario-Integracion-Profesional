@@ -134,7 +134,7 @@ Crear menús para Personal
 									@else
 										<div class="divTableCell">-</div>
 									@endif
-									<div class="divTableCell"><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
+									<div class="divTableCell"><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-paciente_apellido="{{$p->persona->apellido}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
 									    Crear menú
 									</a></div>
 								</div>
@@ -154,7 +154,7 @@ Crear menús para Personal
 						<div class="modal-header" id="modal-header">
 
 						</div>
-						<div class="modal-body">
+						<div class="modal-body" id="modal-body">
 							<div id="p_body">
 
 							</div>
