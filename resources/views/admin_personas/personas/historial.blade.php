@@ -7,23 +7,15 @@
     <li class="breadcrumb-item"><a href="{{route('personas.index') }}">Personas</a></li>
 		<li class="breadcrumb-item active">Detalles historial de personas</li>
 @endsection
+@section('titulo')
+  Detalles del historial de persona
+@endsection
 @section('content')
 
-<!-- Esto lo cree como alternativa de create.blade.php pero este hereda de layouts -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
-<style>
-<!--
-	.table-resposive{
-		float:left;
-	}
-
--->
-</style>
 	   @include('layouts.error')
 	  	@if($persona)
 
-	    <h2>[Historial] {{$persona->get_name()}} {{$persona->get_apellido()}}, [ID:{{$persona->get_id()}}]</h2>
+	    <h5>{{$persona->get_name()}} {{$persona->get_apellido()}}</h5>
   <div name="Historial">
       <button class="btn btn-info" data-toggle="collapse" data-target="#historial_actual">Internación actual</button>
       <button class="btn btn-info" data-toggle="collapse" data-target="#lista_historico">Histórico</button>
