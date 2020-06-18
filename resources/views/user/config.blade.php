@@ -35,7 +35,7 @@ Configuracion de mi perfil
 		    {!!	Form::label('dni', 'DNI')!!}
 		    </td>
 		    <td>
-		  {!!	Form::text('dni',$user->dni)!!}
+		  {!!	Form::label('dni',$user->dni)!!}
 		   	</td>
 		   	</tr>
 		   	<tr>
@@ -43,22 +43,22 @@ Configuracion de mi perfil
 		    {!!	Form::label('name', 'NOMBRE')!!}
 		    </td>
 		    <td>
-		   	{!!	Form::text('name',$user->name)!!}
+		   	{!!	Form::label('name',$user->personal->persona->name)!!}
 		   	</td>
 		   	</tr>
 		   	<tr>
 	    	<td>
-		     <td>{!!Form::submit('Guardar')!!}
+		     <td>
 		    </td>
 		    </tr>
 		   	<tr>
 		   	<td>
-		   	{!!link_to_route('user.cambiarpass', $title = 'CAMBIAR CONTRASE&Ntilde;A', $parameters = [$user], $attributes = [])!!}
+		   	{!!link_to_route('user.cambiarpass', $title = 'CAMBIAR CONTRASEÑA', $parameters = [$user], $attributes = ['class' => 'btn btn-info'])!!}
 		   	</td>
 		   	</tr>
 		   	<tr>
 		    <td>
-		   	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = [])!!}
+		   	{!!link_to_route('users.show', $title = 'CANCELAR', $parameters = [$user], $attributes = ['class' => 'btn btn-warning'])!!}
 		   	</td>
 		   	</tr>
 		 </table>

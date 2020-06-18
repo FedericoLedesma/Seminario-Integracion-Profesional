@@ -6,6 +6,7 @@ use \App\Horario;
 use \App\Racion;
 use \App\Persona;
 use \App\Movimiento;
+use \App\Http\Requests\DisponibilidadRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +108,7 @@ class RacionesDisponiblesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DisponibilidadRequest $request)
     {
         Log::info($request);
         try{

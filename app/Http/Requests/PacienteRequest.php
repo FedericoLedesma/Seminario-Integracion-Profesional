@@ -31,7 +31,7 @@ class PacienteRequest extends FormRequest
               'provincia'=>'required',
               'localidad'=>'required',
               'sexo'=>'required',
-              'fecha_nac'=>'required',
+              'fecha_nac'=>'required|before_or_equal:'.date('Y-m-d'),
               'tipo_documento_id'=>'required',
            ];
        }
@@ -44,12 +44,13 @@ class PacienteRequest extends FormRequest
           'numero_doc.unique'=>"El numero de documento ya se encuentra registrado ",
           'name.required'=>"El campo Nombre es requerido",
           'apellido.required'=>"El campo Apellido es requerido",
-          'direccion.required'=>"El campo Direccion es requerido",          
+          'direccion.required'=>"El campo Direccion es requerido",
           'provincia.required'=>"El Provincia Nombre es requerido",
           'localidad.required'=>"El campo localidad es requerido",
           'sexo.required'=>"El campo sexo es requerido",
           'fecha_nac.required'=>"El campo fecha nacimiento es requerido",
           'tipo_documento_id.required'=>"El campo tipo documento es requerido",
+          'fecha_nac.before_or_equal'=>'La fecha de nacimiento debe ser menor o igual a la fecha actual',
 
    		];
        }

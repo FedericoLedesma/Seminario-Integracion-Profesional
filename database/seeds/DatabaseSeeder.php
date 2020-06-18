@@ -990,25 +990,25 @@ class DatabaseSeeder extends Seeder
 
 
     $data= [
-      'name'=>'Sector 1',
-      'descripcion'=>'-',
+      'name'=>'PABELLÓN 1',
+      'descripcion'=>'TERAPIA INTENSIVA Y CUIDADOS PALIATIVOS',
     ];
     $s1= new Sector($data);
     $s1->save();
     $data= [
-      'name'=>'Sector 2',
-      'descripcion'=>'-',
+      'name'=>'PABELLON 4',
+      'descripcion'=>'HOSPITAL DE DÍA',
     ];
     $s2= new Sector($data);
     $s2->save();
     $data= [
-      'name'=>'Sector 3',
-      'descripcion'=>'-',
+      'name'=>'PABELLÓN 3',
+      'descripcion'=>'AGUDOS',
     ];
     $s3= new Sector($data);
     $s3->save();
     $data= [
-      'name'=>'Sector 4',
+      'name'=>'CENTRO DE JUBILADOS',
       'descripcion'=>'-',
     ];
     $s4= new Sector($data);
@@ -1016,52 +1016,52 @@ class DatabaseSeeder extends Seeder
 
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'h1',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 1',
+      'descripcion'=>'CUIDADOS PALIATIVOS',
     ];
     //--------habitacion 1 sector 1--------------------------
     $h1= new Habitacion($data);
     $h1->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'h2',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 2',
+      'descripcion'=>'CUIDADOS PALIATIVOS',
     ];
     $h2= new Habitacion($data);
     $h2->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'h3',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 3',
+      'descripcion'=>'TERAPIA INTENSIVA',
     ];
     $h3= new Habitacion($data);
     $h3->save();
     $data= [
       'sector_id'=>$s1->id,
-      'name'=>'h4',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 4',
+      'descripcion'=>'TERAPIA INTENSIVA',
     ];
     $h4= new Habitacion($data);
     $h4->save();
     //------------habitacion 2 sector 2------------------
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'h2s1',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 1',
+      'descripcion'=>'INTERNACIÓN COMÚN',
     ];
     $h1s2= new Habitacion($data);
     $h1s2->save();
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'h2s2',
-      'descripcion'=>'-',
+      'name'=>'HABITACIÓN 2',
+      'descripcion'=>'INTERNACIÓN COMÚN',
     ];
     $h2s2= new Habitacion($data);
     $h2s2->save();
     $data= [
       'sector_id'=>$s2->id,
-      'name'=>'h3s3',
-      'descripcion'=>'-',
+      'name'=>'HABITACION 3',
+      'descripcion'=>'MATERNIDAD',
     ];
     $h2s2= new Habitacion($data);
     $h2s2->save();

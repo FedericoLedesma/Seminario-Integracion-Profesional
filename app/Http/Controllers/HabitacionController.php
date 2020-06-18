@@ -72,14 +72,18 @@ class HabitacionController extends Controller
     {
         $data=$request->all();
         Log::debug($data);
-        $habitacion=Habitacion::create([
-            'name' =>strtoupper($data['name']),
-            'descripcion'=>$data['descripcion'],
-            'sector_id'=>$data['sector_id'],
-          ]);
+        try{
+          $habitacion=Habitacion::create([
+              'name' =>strtoupper($data['name']),
+              'descripcion'=>$data['descripcion'],
+              'sector_id'=>$data['sector_id'],
+            ]);
 
-        $habitacion->save();
-        return redirect('/habitaciones');
+          $habitacion->save();
+          return redirect('/habitaciones');
+        } catch (\Exception $e) {
+          return redirect('/habitaciones');
+        }
     }
 
     /**
@@ -116,6 +120,7 @@ class HabitacionController extends Controller
      */
     public function update(Request $request,$id)
     {
+      try{
         $habitacion=Habitacion::find($id);
         $habitacion->name=strtoupper($request->name);
         $habitacion->descripcion=$request->descripcion;
@@ -127,6 +132,11 @@ class HabitacionController extends Controller
           $habitacion->set_cantidad_camas($request->cantidad_camas);
         #}
         return redirect('/habitaciones');
+      } catch (\Exception $e) {
+        $habitacion=Habitacion::find($id);
+        $sectores=Sector::all();
+        return view('admin_sectores.habitacion.edit',compact('habitacion','sectores'));
+      }
     }
 
     /**

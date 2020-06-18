@@ -32,7 +32,7 @@ class PersonaRequest extends FormRequest
               'email'=>'required|email:rfc,dns',
               'localidad'=>'required',
               'sexo'=>'required',
-              'fecha_nac'=>'required',
+              'fecha_nac'=>'required|before_or_equal:'.date('Y-m-d'),
               'tipo_documento_id'=>'required',
            ];
        }
@@ -52,6 +52,7 @@ class PersonaRequest extends FormRequest
           'localidad.required'=>"El campo localidad es requerido",
           'sexo.required'=>"El campo sexo es requerido",
           'fecha_nac.required'=>"El campo fecha nacimiento es requerido",
+          'fecha_nac.before_or_equal'=>'La fecha de nacimiento debe ser menor o igual a la fecha actual',
           'tipo_documento_id.required'=>"El campo tipo documento es requerido",
 
    		];

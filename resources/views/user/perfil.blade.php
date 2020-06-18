@@ -15,13 +15,29 @@ MI PERFIL
 				<td>{{$user->id}}</td>
 			</tr>
 			<tr>
-				<td>DNI </td>
+				<td>NÚMERO DE DOCUMENTO </td>
 				<td>{{$user->dni}}</td>
 			</tr>
 			<tr>
+				<td>TIPO DE DOCUMENTO </td>
+				<td>{{$user->personal->persona->tipoDocumento->name}}</td>
+			</tr>
+			<tr>
 				<td>NOMBRE </td>
-				<td>{{$user->name}}</td>
+				<td>{{$user->personal->persona->name}}</td>
 			 </tr>
+			 <tr>
+ 				<td>APELLIDO </td>
+ 				<td>{{$user->personal->persona->apellido}}</td>
+ 			 </tr>
+			 <tr>
+ 				<td>FECHA DE NACIMIENTO </td>
+ 				<td>{{date("d/m/Y", strtotime($user->personal->persona->fecha_nac))}}</td>
+ 			 </tr>
+			 <tr>
+ 				<td>EMAIL </td>
+ 				<td>{{$user->personal->persona->email}}</td>
+ 			 </tr>
 			 <tr>
 				<td>ROL </td>
 				<?php
@@ -34,11 +50,11 @@ MI PERFIL
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$user->created_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($user->created_at))}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$user->updated_at}}</td>
+				<td>{{date("d/m/Y H:i:s", strtotime($user->updated_at))}}</td>
 			</tr>
 
 		</table>

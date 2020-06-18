@@ -32,7 +32,7 @@ class PersonaEditRequest extends FormRequest
               'provincia'=>'required',
               'localidad'=>'required',
               'sexo'=>'required',
-              'fecha_nac'=>'required',
+              'fecha_nac'=>'required|before_or_equal:'.date('Y-m-d'),
               'tipo_documento_id'=>'required',
            ];
        }
@@ -52,6 +52,7 @@ class PersonaEditRequest extends FormRequest
           'sexo.required'=>"El campo sexo es requerido",
           'fecha_nac.required'=>"El campo fecha nacimiento es requerido",
           'tipo_documento_id.required'=>"El campo tipo documento es requerido",
+          'fecha_nac.before_or_equal'=>'La fecha de nacimiento debe ser menor o igual a la fecha actual',
 
    		];
        }
