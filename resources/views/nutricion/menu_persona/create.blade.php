@@ -103,7 +103,7 @@ Crear menús para Pacientes
 		</div>
 	</div>
 </div>
-<div class="container">
+
   <div class="table-responsive">
 		<div class="col-md-auto col-md-offset-1">
 			<div class="panel-heading">
@@ -196,10 +196,8 @@ Crear menús para Pacientes
 			</div>
 		</div>
 	</div>
-</div>
-@if($pacientes)
 
-@endif
+
 @endsection
 @section('script')
 	<script src="{{asset('js/menu_persona-script.js')}}"></script>

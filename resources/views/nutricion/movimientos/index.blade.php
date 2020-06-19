@@ -3,30 +3,38 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<style>
 	div.blueTable {
-	  width: 150%;
-	  height: 280;
-	  text-align: left;
+	  width: 100%;
+	  text-align: center;
+	  border-collapse: collapse;
 	}
 	.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
 	  border: 0px solid #AAAAAA;
-	  padding: 18px 2px;
+	  padding: 5px 2px;
 	}
 	.divTable.blueTable .divTableBody .divTableCell {
 	  font-size: 15px;
 	}
 	.divTable.blueTable .divTableRow:nth-child(even) {
-	  background: #D4DAED;
+	  background: #E0DDED;
 	}
 	.divTable.blueTable .divTableHeading {
-	  }
+	    border-bottom: 2px solid #444444;
+	}
 	.divTable.blueTable .divTableHeading .divTableHead {
-	  font-size: 16px;
+	  font-size: 15px;
 	  font-weight: bold;
-	  color: #01030B;
 	}
 	.blueTable .tableFootStyle {
+	  font-size: 14px;
 	  font-weight: bold;
-	  color: #FFFFFF;
+	  background: #D0E4F5;
+	  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  border-top: 2px solid #444444;
+	}
+	.blueTable .tableFootStyle {
+	  font-size: 14px;
 	}
 	.blueTable .tableFootStyle .links {
 		 text-align: right;
@@ -35,7 +43,7 @@
 	  display: inline-block;
 	  background: #1C6EA4;
 	  color: #FFFFFF;
-	  padding: 3px 10px;
+	  padding: 2px 8px;
 	  border-radius: 5px;
 	}
 	.blueTable.outerTableFooter {
@@ -67,7 +75,7 @@ MOVIMIENTOS REGISTRADOS
 @endif
 <div class="container">
 	<div class="table-responsive">
-  	<div class="col-md-9 col-md-offset-1">
+  	<div class="col-md-auto col-md-offset-1">
 			<div class="panel-heading">
 				 {!!Form::open(['route'=>'movimientos.index','method'=>'GET']) !!}
 					<div class="input-group mb-3">
@@ -106,8 +114,8 @@ MOVIMIENTOS REGISTRADOS
 		</div>
 	</div>
 </div>
-<div class="col-md-auto col-md-offset-2">
-	<div class="table-responsive">
+<div class="table-responsive">
+	<div class="col-md-auto">
 		<!--<div class="table table-striped table-hover ">  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 		<div class="divTable blueTable">
 			<div class="divTableHeading">

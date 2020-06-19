@@ -4,12 +4,12 @@
 <style>
 div.blueTable {
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 .divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
   border: 0px solid #AAAAAA;
   padding: 10px 0px;
-  border: 1px solid #B7B7B7;
+
 }
 .divTable.blueTable .divTableBody .divTableCell {
   font-size: 15px;
@@ -18,11 +18,14 @@ div.blueTable {
   background: #D4DAED;
 }
 .divTable.blueTable .divTableHeading {
+
   }
 .divTable.blueTable .divTableHeading .divTableHead {
   font-size: 16px;
   font-weight: bold;
   color: #01030B;
+  border-bottom: 1px solid #646D75;
+  border-top: 1px solid #646D75;
 }
 .blueTable .tableFootStyle {
   font-weight: bold;

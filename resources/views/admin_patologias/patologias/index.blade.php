@@ -27,7 +27,7 @@
 	@endif
 </div>
 
-<div class="container">
+
     <!--  <div class="row">-->
     <div class="table-responsive">
          <div class="col-md-8 col-md-offset-2">
@@ -80,7 +80,7 @@
 					</table>
 				</div>
 			</div>
-		</div>
+
 
 @endsection
 @section('script')

@@ -103,7 +103,7 @@ Crear menús para Personal
 		</div>
 	</div>
 </div>
-<div class="container">
+
   <div class="table-responsive">
 		<div class="col-md-auto col-md-offset-1">
       <div class="panel-heading">
@@ -146,7 +146,7 @@ Crear menús para Personal
 			</div>
 		</div>
 	</div>
-</div>
+
 @if($personal)
 	<div class="modal fade" id="create">
 		<div class="modal-dialog">
@@ -181,7 +181,7 @@ Crear menús para Personal
 
 						</div>
 						<div class="modal-footer">
-								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Racion</a>
+								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Ración</a>
 								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
 						</div>
 

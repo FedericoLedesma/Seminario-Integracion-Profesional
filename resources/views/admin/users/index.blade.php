@@ -57,9 +57,9 @@ USUARIOS REGISTRADOS
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<!--<div class="container">-->
 	  <div class="table-responsive">
-	    <div class="col-md-auto col-md-offset-2">
+	    <div class="col-md-auto">
 				<div class="panel-heading">
 					<table class="table table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
@@ -111,7 +111,6 @@ USUARIOS REGISTRADOS
 				</div>
 				</div>
 			  </div>
-				 </div>
 				<!--</div>-->
 @endsection
 @section('script')

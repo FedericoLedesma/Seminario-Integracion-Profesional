@@ -105,7 +105,7 @@ MENÚS DE PERSONAS (PLANILLAS)
 {!!Form::open(['route'=>'menu_persona.index','method'=>'GET']) !!}
 <div class="container">
   <div class="table-responsive">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-auto col-md-offset-1">
       <div class="divTable blueTable">
         <div class="divTableHeading">
           <div class="divTableRow">
@@ -163,11 +163,11 @@ MENÚS DE PERSONAS (PLANILLAS)
 		</div>
 	</div>
 </div>
-	<div class="container">
-	  <div class="table-responsive">
-			<div class="col-md-11 col-md-offset-2">
+
+
+			<div class="col-md-auto">
 				<div class="panel-heading">
-					<table class="table table-striped table-hover ">
+					<table class="table table-striped table-hover table-responsive-xl ">
 						<thead >
 							<tr>
 								<th scope="col">Persona</th>
@@ -225,8 +225,8 @@ MENÚS DE PERSONAS (PLANILLAS)
 					</table>
 			</div>
 		</div>
-	</div>
-</div>
+
+
 
 @endsection
 @section('script')

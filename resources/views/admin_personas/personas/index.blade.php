@@ -30,7 +30,7 @@ PERSONAS REGISTRADAS
 	@endif
 </div>
 
-<div class="container">
+
 
 	<div class="table-responsive">
   	<div class="col-md-8 col-md-offset-2">
@@ -94,7 +94,7 @@ PERSONAS REGISTRADAS
 			</div>
 		</div>
 	</div>
-</div>
+
 
 @endsection
 @section('script')

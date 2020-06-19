@@ -54,7 +54,7 @@
 			</div>
 	  </div>
 	</div>
-	<div class="container">
+
 	  <div class="table-responsive">
 	    <div class="col-md-auto col-md-offset-2">
 					<div class="panel-heading">
@@ -88,7 +88,7 @@
 				</div>
 			</div>
 	  </div>
-	</div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/tipo_patologia-script.js')}}"></script>

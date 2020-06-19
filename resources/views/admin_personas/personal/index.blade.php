@@ -52,7 +52,7 @@ PERSONAL REGISTRADO
 			</div>
 		</div>
 	</div>
-	<div class="container">
+
 	    <div class="table-responsive">
 	         <div class="col-md-auto col-md-offset-2">
 					 <div class="panel-heading">
@@ -91,8 +91,7 @@ PERSONAL REGISTRADO
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/personal-script.js')}}"></script>

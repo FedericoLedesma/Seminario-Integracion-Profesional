@@ -28,7 +28,7 @@ Historial de pacientes
 	@endif
 </div>
 
-<div class="container">
+
     <!--  <div class="row">-->
     <div class="table-responsive">
          <div class="col-md-auto col-md-offset-2">
@@ -89,8 +89,7 @@ Historial de pacientes
 				</div>
 				</div>
 			  </div>
-	</div>
-</div>
+
 @endsection
 @section('script')
  <script src="{{asset('js/historial-script.js')}}"></script>
