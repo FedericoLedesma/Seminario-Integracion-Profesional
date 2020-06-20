@@ -44,7 +44,7 @@ El proyecto fue desarrollado para el sector de nutrición del Hospital Nacional 
 ## Guía de instalación
 
 - Clonar el repositorio utilizando `git clone https://github.com/FedericoLedesma/Seminario-Integracion-Profesional.git`
-- Ejecutar `composer install` para instalar las dependencias
+- Instalar las dependencias ejecutando `composer install`
 - Crear una base de datos con codificación `utf8mb4_general_ci` 
 - Renombrar el archivo de configuración con el comando `copy .env.example .env` 
 - Migrar la base de datos con `php artisan migrate` 
