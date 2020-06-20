@@ -185,7 +185,8 @@ class RacionController extends Controller
 
       public function agregarAlimentos($id){
         $racion=Racion::findById($id);
-        return view('nutricion.raciones.agregar-alimentos', compact('racion'));
+        $alimentos=Alimento::getAlimentosQueNoContieneRacion($racion);
+        return view('nutricion.raciones.agregar-alimentos_v2', compact('racion','alimentos'));
       }
 
       public function quitarAlimento(Request $request){

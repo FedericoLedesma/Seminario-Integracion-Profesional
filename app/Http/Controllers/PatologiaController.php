@@ -196,9 +196,11 @@ class PatologiaController extends Controller
     }
     public function agregarAlimentosProhibidos($id){
       $patologia=Patologia::findById($id);
-      return view('admin_patologias.patologias.agregar-alimentos',compact('patologia'));
+      $alimentos=Alimento::getAlimentosQueNoContienePatologia($patologia);
+      return view('admin_patologias.patologias.agregar-alimentos',compact('patologia','alimentos'));
     }
     public function guardarAlimentos(Request $request){
+      Log::info($request);
       Log::info($request->data[0]);
       $id=$request->data[0];
       $patologia=Patologia::findById($id);

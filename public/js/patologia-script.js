@@ -13,10 +13,11 @@
 				e.preventDefault();
 			$('#tablealimentosAgregados tr').remove();
 				console.log( $(this).data("id"));
-				var id= $(this).data("id");
+				var patologia= $(this).data("id");
 				var array=[];
-
-				var a=document.querySelectorAll('input[type=checkbox]:checked');
+				var id=patologia.id;
+			//	var a=document.querySelectorAll('input[type=checkbox]:checked');
+				var a=document.getElementById("bootstrap-duallistbox-selected-list_");
 				console.log(a);
 				for (var i = 0; i < a.length; i++) {
 					console.log(a[i].value);
@@ -34,7 +35,7 @@
 					success: function (data) {
 							console.log(data);
 
-							data.alimentos.forEach(myFunction)
+						/*	data.alimentos.forEach(myFunction)
 
 							function myFunction(item, i) {
 								console.log(item.id);
@@ -46,8 +47,8 @@
 							//	document.getElementById("tablealimentos").appendChild(checkbox);
 								i++;
 								$('#tablealimentos tr').remove();
-							}
-
+							}*/
+							location.href="/patologias/"+id+"/edit";
 								},
 								error: function (data) {
 										console.log('Error:', data);

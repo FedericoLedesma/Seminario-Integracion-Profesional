@@ -155,6 +155,7 @@ class PersonaController extends Controller
      */
     public function update(PersonaEditRequest $request, Persona $persona)//crear un request para validar
     {
+        Log::info($request);
         if($persona){
           $persona->numero_doc=$request->numero_doc;
           $persona->tipo_documento_id=$request->tipo_documento_id;
@@ -207,7 +208,24 @@ class PersonaController extends Controller
         }
         return redirect('/personas');
     }
+    public function agregarPatologias(Request $request)
+    {
+      Log::info($request);
+      $fecha= new DateTime(date("Y-m-d"));
+      $persona=Persona::findById($request->get('id'));
+      $patologias=$request->get('array');
+      if($patologias){
+        foreach ($patologias as $patologia) {
+          try{
+          $persona->patologias()->attach($patologia,['fecha' => $fecha]);
+          } catch (\Exception $e) {
 
+          }
+        }
+      }return response()->json([
+          'estado'=>'true',
+      ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -221,6 +239,22 @@ class PersonaController extends Controller
       return response()->json([
           'estado'=>'true',
           'success' => 'Persona eliminada con exito!'
+      ]);
+    }
+
+
+    public function quitarPatologia(Request $request){
+      Log::debug("Quitar Patologia de persona");
+      Log::info($request);
+      $idPersona=$request->data[0];
+      $idPatologia=$request->data[1];
+      $persona=Persona::findById($idPersona);
+      Log::info($persona);
+      $fecha= new DateTime(date("Y-m-d"));
+      $persona->patologias()->updateExistingPivot($idPatologia, ['hasta'=>$fecha]);
+      return response()->json([
+          'estado'=>'true',
+          'success' => 'Alimento quitado con exito!'
       ]);
     }
     /*  return response()->json([

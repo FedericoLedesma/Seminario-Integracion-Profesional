@@ -127,6 +127,10 @@ Route::resource('/especialidad', 'EspecialidadController');
 Route::get('/personas/historial/{id}', 'PersonaController@historial')
 	->name('personas.historial');
 Route::resource('/personas', 'PersonaController');
+Route::PUT('/personas/{persona}/agregarPatologias', 'PersonaController@agregarPatologias');
+Route::PUT('/personas/{persona}/quitarpatologia', 'PersonaController@quitarPatologia');
+
+
 Route::resource('/patologias', 'PatologiaController');
 Route::get('/patologias/{patologia}/agregarAlimentosProhibidos',["as"=>"patologia.agregarAlimentosProhibidos", "uses"=> 'PatologiaController@agregarAlimentosProhibidos']);
 Route::PUT('/patologias/{patologia}/guardaralimentos-prohibidos', 'PatologiaController@guardarAlimentos');

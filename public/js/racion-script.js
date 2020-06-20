@@ -16,7 +16,8 @@
 				var id= $(this).data("id");
 				var array=[];
 
-				var a=document.querySelectorAll('input[type=checkbox]:checked');
+			//	var a=document.querySelectorAll('input[type=checkbox]:checked');
+			var a=document.getElementById("bootstrap-duallistbox-selected-list_");
 				console.log(a);
 				for (var i = 0; i < a.length; i++) {
 			  	console.log(a[i].value);
@@ -34,9 +35,9 @@
 					success: function (data) {
 							console.log(data);
 
-							data.alimentos.forEach(myFunction)
+							//data.alimentos.forEach(myFunction)
 
-							function myFunction(item, i) {
+						/*	function myFunction(item, i) {
 								console.log(item.id);
 								var fila="<tr><td>"+item.name+"</td><td>";
 
@@ -46,7 +47,7 @@
 							//	document.getElementById("tablealimentos").appendChild(checkbox);
 								i++;
 								$('#tablealimentos tr').remove();
-							}
+							}*/ location.href="/raciones/"+id+"/edit";
 
 								},
 								error: function (data) {
