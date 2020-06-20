@@ -10,7 +10,7 @@ Mg. Bibiana Rossi <br/>
 Lic. Viviana Chapetto <br/>
 Lic. David Petrocelli <br/>
 
-## Integrantes del grupo:
+## Integrantes del grupo
 Larena Estaban Nicolás <br/>
 Ledesma Arnaldo Federico <br/>
 Cravero Cristian <br/>
