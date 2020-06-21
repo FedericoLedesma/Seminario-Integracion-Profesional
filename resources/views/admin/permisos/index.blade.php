@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css" crossorigin="anonymous">
 <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 @endsection
 @section('titulo')
 PERMISOS REGISTRADOS
@@ -41,38 +47,16 @@ PERMISOS REGISTRADOS
 		<div id="alert" name="alert-permisos" class="alert alert-info">Roles con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
-<div class="container">
   <div class="table-responsive">
-    <div class="col-md-8 col-md-offset-2">
-				 <div class="panel-heading">
-
-				 {!!Form::open(['route'=>'permisos.index','method'=>'GET']) !!}
-					 <div class="input-group mb-3">
-
-					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-						 <option value="busqueda_id" >ID</option>
-						 <option value="busqueda_name" >Nombre</option>
-					 </select>
-
-						 {!!	Form::text('permisoid',null,['id'=>'permisoid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
-						 <div class="input-group-append">
-							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
-						 </div>
-					 </div>
-					{!! Form::close() !!}
-        </div>
-    </div>
     <div class="col-md-auto col-md-offset-2">
-         <div class="panel-heading">
-
-					<table class="table table-striped table-hover ">
+      <div class="panel-heading">
+       <div class="card-body">
+         <table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
-								<th scope="col">id</th>
+								<th scope="col">ID</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Creado</th>
-							<!--	<th scope="col">Actualizado</th>
-								<th scope="col">Modificar</th>-->
 								<th scope="col">Eliminar</th>
 
 							</tr>
@@ -85,12 +69,7 @@ PERMISOS REGISTRADOS
 								<td>{{$permission->id}}</td>
 								<td>{{$permission->name}}</td>
 							  <td>{{date("d/m/Y h:i:s", strtotime($permission->created_at))}}</td>
-
-								{!! Form::model($permission, ['route' => ['permisos.destroy', $permission->id], 'method'=> 'DELETE'])!!}
-                @if((((!($permission->id==9))&&(!($permission->id==10)))&&(!($permission->id==7)))&&(!($permission->id==8)))
 								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $permission->id }}">X</button></td>
-                @endif
-								{!! Form::close() !!}
 
 							</tr>
 								@endforeach
@@ -100,16 +79,39 @@ PERMISOS REGISTRADOS
 
 					</table>
 				</div>
-				</div>
-			  </div>
-				 </div>
+      </div>
+    </div>
+  </div>
 @endsection
 @section('script')
  <script src="{{asset('js/permission-script.js')}}"></script>
+ <!-- DataTables -->
+ <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
  	<script type="text/javascript">
  		$(document).ready(function(){
  			 document.getElementById("nav-permisos").setAttribute("class", "nav-link active");
        document.getElementById("nav-permisos-todos").setAttribute("class", "nav-link active");
  			});
  	</script>
+  <script>
+ 	$(function () {
+ 		$("#example1").DataTable({
+ 			"responsive": true,
+ 			"autoWidth": false,
+ 		});
+ 		$('#example2').DataTable({
+ 			"paging": true,
+ 			"lengthChange": false,
+ 			"searching": false,
+ 			"ordering": true,
+ 			"info": true,
+ 			"autoWidth": false,
+ 			"responsive": true,
+ 		});
+ 	});
+  </script>
 @endsection

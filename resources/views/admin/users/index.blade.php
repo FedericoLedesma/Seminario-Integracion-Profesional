@@ -1,6 +1,11 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Usuarios</li>
@@ -31,12 +36,12 @@ USUARIOS REGISTRADOS
 	@endif
 </div>
 
-<div class="container">
+<!--<div class="container">-->
     <!--  <div class="row">-->
-    <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
+  <!--  <div class="table-responsive">
+         <div class="col-md-8 col-md-offset-2">-->
              <!--<div class="panel panel-default">-->
-				 <div class="panel-heading">
+		<!--		 <div class="panel-heading">
 
 				 {!!Form::open(['route'=>'users.index','method'=>'GET']) !!}
           <div class="input-group mb-3">
@@ -56,12 +61,11 @@ USUARIOS REGISTRADOS
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<!--<div class="container">-->
-	  <div class="table-responsive">
-	    <div class="col-md-auto">
-				<div class="panel-heading">
-					<table class="table table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+	    <div class="table-responsive">
+				<div class="card-body">
+					<table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">Número doc.</th>
@@ -69,10 +73,7 @@ USUARIOS REGISTRADOS
 								<th scope="col">Nombre</th>
 								<th scope="col">Apellido</th>
 								<th scope="col">Rol</th>
-								<th scope="col">Creado</th>
-								<th scope="col">Actualizado</th>
 								<th scope="col">Acción</th>
-								<th scope="col"></th>
 
 							</tr>
 						</thead>
@@ -90,16 +91,14 @@ USUARIOS REGISTRADOS
 								@foreach($roles as $rol)
 								<td>{{$rol}}</td>
 								@endforeach
-								<td>@if($user->created_at){{date("d/m/Y H:i:s", strtotime($user->created_at))}}@endif</td>
-								<td>@if($user->updated_at){{date("d/m/Y H:i:s", strtotime($user->updated_at))}}@endif</td>
-								<td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{!!link_to_route('users.show', $title = 'VER', $parameters = [$user],['class' => 'btn btn-info btn-sm'], $attributes = [])!!}
 
-								{!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method'=> 'DELETE'])!!}
+
                   @if(!($user->id==1))
-  								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $user->id }}">Eliminar</button></td>
-  								<!--  <td>{!!	Form::submit('ELIMINAR')!!}</td>-->
+  								<button type="submit" class="btn btn-danger btn-sm eliminar" data-token="{{ csrf_token() }}" data-id="{{ $user->id }}">Eliminar</button></td>
+  								@else
+									<button type="submit" class="btn btn-sm btn-danger disabled">Eliminar</button>
 									@endif
-								{!! Form::close() !!}
 
 							</tr>
 								@endforeach
@@ -109,12 +108,17 @@ USUARIOS REGISTRADOS
 
 					</table>
 				</div>
-				</div>
-			  </div>
+	    </div>
 				<!--</div>-->
 @endsection
 @section('script')
  	<script src="{{asset('js/user-script.js')}}"></script>
+	<!-- DataTables -->
+	<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			 console.log("hola");
@@ -123,4 +127,21 @@ USUARIOS REGISTRADOS
 			});
 	</script>
 
+	<script>
+ 	$(function () {
+ 		$("#example1").DataTable({
+ 			"responsive": true,
+ 			"autoWidth": false,
+ 		});
+ 		$('#example2').DataTable({
+ 			"paging": true,
+ 			"lengthChange": false,
+ 			"searching": false,
+ 			"ordering": true,
+ 			"info": true,
+ 			"autoWidth": false,
+ 			"responsive": true,
+ 		});
+ 	});
+  </script>
 @endsection

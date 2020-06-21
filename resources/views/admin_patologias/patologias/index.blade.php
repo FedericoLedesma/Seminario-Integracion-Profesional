@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Patologías</li>
@@ -30,10 +37,10 @@
 
     <!--  <div class="row">-->
     <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
+         <!--<div class="col-md-8 col-md-offset-2">-->
              <!--<div class="panel panel-default">-->
 
-				 {!!Form::open(['route'=>'patologias.index','method'=>'GET']) !!}
+				<!-- {!!Form::open(['route'=>'patologias.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -47,16 +54,15 @@
 						 </div>
 					 </div>
 					{!! Form::close() !!}
-				</div>
-				<div class="col-md-auto col-md-offset-2">
-					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+				</div>-->
+				<div class="card-body">
+					<table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">Nombre</th>
 								<th scope="col">Descripción</th>
 								<th scope="col">Tipo de Patología</th>
 								<th scope="col">Acción</th>
-								<th scope="col"></th>
 
 							</tr>
 						</thead>
@@ -68,12 +74,9 @@
 								<td>{{$patologia->name}}</td>
 								<td>{{$patologia->descripcion}}</td>
 								<td>{{$patologia->tipo_patologia_id}}</td>
-								<td>{!!link_to_route('patologias.show', $title = 'VER', $parameters = [$patologia],['class' => 'btn btn-info'], $attributes = [])!!}</td>
-
-								{!! Form::model($patologia, ['route' => ['patologias.destroy', $patologia], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $patologia }}">Eliminar</button></td>
-
-								{!! Form::close() !!}
+								<td>{!!link_to_route('patologias.show', $title = 'VER', $parameters = [$patologia],['class' => 'btn btn-info'], $attributes = [])!!}
+									<button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $patologia }}">Eliminar</button>
+								</td>
 							</tr>
 								@endforeach
 							@endif
@@ -85,10 +88,34 @@
 @endsection
 @section('script')
  <script src="{{asset('js/patologia-script.js')}}"></script>
+ <!-- DataTables -->
+ <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
  <script type="text/javascript">
  	$(document).ready(function(){
  		 document.getElementById("nav-patologias").setAttribute("class", "nav-link active");
  		 document.getElementById("nav-patologias-todas").setAttribute("class", "nav-link active");
  		});
+ </script>
+
+ <script>
+	$(function () {
+		$("#example1").DataTable({
+			"responsive": true,
+			"autoWidth": false,
+		});
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"searching": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": false,
+			"responsive": true,
+		});
+	});
  </script>
 @endsection

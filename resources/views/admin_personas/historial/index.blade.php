@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
 <title>Historial de pacientes</title>
 @endsection
 @section('navegacion')
@@ -34,7 +41,7 @@ Historial de pacientes
          <div class="col-md-auto col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
+			<!--	 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -48,9 +55,10 @@ Historial de pacientes
 							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
 						 </div>
 					 </div>
-					{!! Form::close() !!}
+					{!! Form::close() !!}-->
 					{!!	Form::label('titulo_tabla', 'Pacientes activos')!!}
-					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+					<div class="card-body">
+						<table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">Nombre</th>
@@ -60,7 +68,7 @@ Historial de pacientes
 								<th scope="col">Habitación</th>
 								<th scope="col">Acción</th>
 								<th scope="col">Dar alta</th>
-								<th scope="col"></th>
+
 
 							</tr>
 						</thead>
@@ -77,9 +85,7 @@ Historial de pacientes
 								<td>{!!link_to_route('historialInternacion.show', $title = 'VER', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 								<td>{!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($historial, ['route' => ['historialInternacion.destroy', $historial->id], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $historial->id }}">Eliminar</button></td>
-								{!! Form::close() !!}
+
 
 							</tr>
 								@endforeach
@@ -89,14 +95,38 @@ Historial de pacientes
 				</div>
 				</div>
 			  </div>
-
+    </div>
 @endsection
 @section('script')
  <script src="{{asset('js/historial-script.js')}}"></script>
+ <!-- DataTables -->
+ <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+ <!-- AdminLTE App -->
  <script type="text/javascript">
 	 $(document).ready(function(){
 		 document.getElementById("nav-enfermeria").setAttribute("class","nav-link active");
 		 document.getElementById("nav-internacion").setAttribute("class","nav-link active");
 		 });
  </script>
+
+	<script>
+	 $(function () {
+	   $("#example1").DataTable({
+	     "responsive": true,
+	     "autoWidth": false,
+	   });
+	   $('#example2').DataTable({
+	     "paging": true,
+	     "lengthChange": false,
+	     "searching": false,
+	     "ordering": true,
+	     "info": true,
+	     "autoWidth": false,
+	     "responsive": true,
+	   });
+	 });
+	</script>
 @endsection

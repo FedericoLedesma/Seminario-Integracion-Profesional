@@ -2,6 +2,12 @@
 @section('token')
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Personal del hospital</title>
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+	<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Personal</li>
@@ -27,37 +33,13 @@ PERSONAL REGISTRADO
 	@endif
 </div>
 
-<div class="container">
-    <!--  <div class="row">-->
-    <div class="table-responsive">
-         <div class="col-md-8 col-md-offset-2">
-             <!--<div class="panel panel-default">-->
-				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'personal.index','method'=>'GET']) !!}
-					 <div class="input-group mb-3">
 
-					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
-						 <option value="busqueda_nombre_persona" >Nombre y/o apellido</option>
-						 <option value="busqueda_dni" > Número doc. </option>
-						 <option value="busqueda_nombre_sector" > Sector </option>
-					 </select>
-
-						 {!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
-						 <div class="input-group-append">
-							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
-						 </div>
-					 </div>
-					{!! Form::close() !!}
-				</div>
-			</div>
-		</div>
-	</div>
-
-	    <div class="table-responsive">
-	         <div class="col-md-auto col-md-offset-2">
-					 <div class="panel-heading">
-					{!!	Form::label('titulo_tabla', 'Personal del hospital')!!}
-					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+  <div class="table-responsive">
+    <div class="col-md-auto col-md-offset-2">
+			<div class="panel-heading">
+				{!!	Form::label('titulo_tabla', 'Personal del hospital')!!}
+				<div class="card-body">
+					<table id="example1" class="table table-bordered table-striped">
 						<thead >
 							<tr>
 
@@ -65,7 +47,6 @@ PERSONAL REGISTRADO
 								<th scope="col">Documento</th>
 								<th scope="col">Sector</th>
 								<th scope="col">Acción</th>
-								<th scope="col"></th>
 
 							</tr>
 						</thead>
@@ -77,11 +58,9 @@ PERSONAL REGISTRADO
 								<td>{{$personal->get_name()}} {{$personal->get_apellido()}}</td>
 								<td>{{$personal->get_tipo_documento_name()}} {{$personal->get_numero_doc()}}</td>
 								<td>{{$personal->get_sector_name()}}</td>
-								<td>{!!link_to_route('personal.show', $title = 'Ver', $parameters = [$personal],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{!!link_to_route('personal.show', $title = 'Ver', $parameters = [$personal],['class' => 'btn btn-info'], $attributes = [])!!}
 
-								{!! Form::model($personal, ['route' => ['personal.destroy', $personal], 'method'=> 'DELETE'])!!}
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $personal }}">Eliminar</button></td>
-								{!! Form::close() !!}
+									<button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $personal }}">Eliminar</button></td>
 
 							</tr>
 								@endforeach
@@ -95,6 +74,11 @@ PERSONAL REGISTRADO
 @endsection
 @section('script')
  <script src="{{asset('js/personal-script.js')}}"></script>
+ <!-- DataTables -->
+ <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
  <script type="text/javascript">
   $(document).ready(function(){
@@ -102,5 +86,21 @@ PERSONAL REGISTRADO
      document.getElementById("nav-administracion-personal").setAttribute("class", "nav-link active");
     });
  </script>
-
+ <script>
+ $(function () {
+	 $("#example1").DataTable({
+		 "responsive": true,
+		 "autoWidth": false,
+	 });
+	 $('#example2').DataTable({
+		 "paging": true,
+		 "lengthChange": false,
+		 "searching": false,
+		 "ordering": true,
+		 "info": true,
+		 "autoWidth": false,
+		 "responsive": true,
+	 });
+ });
+ </script>
 @endsection

@@ -18,12 +18,8 @@ Editar Persona
 @endsection
 @section('content')
 
-<!-- EDIT DEL ROLE -->
-<!-- validar los campos y establecer el campo contrase�a -->
-<!-- mostrar una tabla con los roles que existen -->
 	 	 {!! Form::model($persona, ['route' => ['personas.update', $persona->id], 'method'=> 'PUT'])!!}
 	 	@if($persona)
-	    <h3>Persona  {{$persona->name}}</h3>
 	      @include('layouts.error')
 	    <div class="table-responsive">
         <div class="col-md-6 col-md-offset-1">
@@ -96,8 +92,9 @@ Editar Persona
 		 @endif
 
 		</div>
-    @if($persona->patologias)
+    @if(count($persona->patologias)>0)
     <h5>Patologías que tiene esta persona</h5>
+    <div class="col-md-6 col-md-offset-6">
      <table class="table table-bordered table-hover table-striped">
        <thead>
          <tr>
@@ -122,17 +119,19 @@ Editar Persona
          @endforeach
        </tbody>
      </table>
+   </div>
    @endif
 		</div>
-    <div class="col-md-6 col-md-offset-6">
+    <div class="col-md-6 col-md-offset-6 mb-3">
       {!!Form::submit('Guardar',['class'=>'btn btn-success'])!!}
-      {!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = ['class'=>'btn btn-warning'])!!}
       <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
       Agregar patologias
       </a>
+      {!!link_to_route('personas.show', $title = 'CANCELAR', $parameters = [$persona], $attributes = ['class'=>'btn btn-warning'])!!}
     </div>
-  {!! Form::close() !!}
 
+
+  {!! Form::close() !!}
 
   <div class="modal fade" id="create">
     <div class="modal-dialog modal-lg">

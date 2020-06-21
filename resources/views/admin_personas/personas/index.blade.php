@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item active">Personas</li>
@@ -32,7 +39,7 @@ PERSONAS REGISTRADAS
 
 
 
-	<div class="table-responsive">
+<!--	<div class="table-responsive">
   	<div class="col-md-8 col-md-offset-2">
  			<div class="panel-heading">
 				 {!!Form::open(['route'=>'personas.index','method'=>'GET']) !!}
@@ -53,9 +60,13 @@ PERSONAS REGISTRADAS
 					{!! Form::close() !!}
 				</div>
 			</div>
-			<div class="col-md-auto col-md-offset-2">
-				<div class="panel-heading">
-					<table class="table table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">DataTable with default features</h3>
+				</div>-->
+				<!-- /.card-header -->
+				<div class="card-body">
+					<table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">Número Doc.</th>
@@ -64,8 +75,7 @@ PERSONAS REGISTRADAS
 								<th scope="col">Apellido</th>
 								<th scope="col">Fecha Nac.</th>
 								<th scope="col">EMail</th>
-								<th scope="col">Acción</th>
-								<th scope="col"></th>
+								<th scope="col">Acción</th>								
 
 							</tr>
 						</thead>
@@ -80,12 +90,9 @@ PERSONAS REGISTRADAS
 								<td>{{$persona->apellido}}</td>
 								<td>{{$persona->fecha_nac()}}</td>
 								<td>{{$persona->email}}</td>
-								<td>{!!link_to_route('personas.show', $title = 'Ver', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}</td>
-
-								{!! Form::model($persona, ['route' => ['personas.destroy', $persona], 'method'=> 'DELETE'])!!}
-						<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button></td>
-									<!--<td><button type="submit" class="btn btn-danger eliminar">Eliminar</button></td>-->
-								{!! Form::close() !!}
+								<td>{!!link_to_route('personas.show', $title = 'Ver', $parameters = [$persona],['class' => 'btn btn-info'], $attributes = [])!!}
+									<button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $persona }}">Eliminar</button>
+								</td>
 							</tr>
 								@endforeach
 							@endif
@@ -93,17 +100,40 @@ PERSONAS REGISTRADAS
 					</table>
 			</div>
 		</div>
-	</div>
+	<!--</div>-->
 
 
 @endsection
 @section('script')
  <script src="{{asset('js/persona-script.js')}}"></script>
-
+ <!-- DataTables -->
+ <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+ <!-- AdminLTE App -->
  <script type="text/javascript">
   $(document).ready(function(){
     document.getElementById("nav-personas").setAttribute("class", "nav-link active");
     document.getElementById("nav-personas-todas").setAttribute("class", "nav-link active");
     });
+ </script>
+
+ <script>
+   $(function () {
+     $("#example1").DataTable({
+       "responsive": true,
+       "autoWidth": false,
+     });
+     $('#example2').DataTable({
+       "paging": true,
+       "lengthChange": false,
+       "searching": false,
+       "ordering": true,
+       "info": true,
+       "autoWidth": false,
+       "responsive": true,
+     });
+   });
  </script>
 @endsection

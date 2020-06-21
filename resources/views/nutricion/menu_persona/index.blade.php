@@ -70,7 +70,19 @@
 	.divTableHeading { display: table-header-group;}
 	.divTableFoot { display: table-footer-group;}
 	.divTableBody { display: table-row-group;}
+	th{
+	font-size: 14px;
+	}
+	td{
+	font-size: 14px;
+	}
 </style>
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 @endsection
 @section('navegacion')
 	<li class="breadcrumb-item active">Menús</li>
@@ -166,8 +178,8 @@ MENÚS DE PERSONAS (PLANILLAS)
 
 
 			<div class="col-md-auto">
-				<div class="panel-heading">
-					<table class="table table-striped table-hover table-responsive-xl ">
+				<div class="card-body">
+					<table id="example2" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
 						<thead >
 							<tr>
 								<th scope="col">Persona</th>
@@ -178,8 +190,7 @@ MENÚS DE PERSONAS (PLANILLAS)
 								<th scope="col">Ración</th>
 								<th scope="col">Fecha</th>
 								<th scope="col">Realizado</th>
-								<th scope="col">Acción</th>
-								<th scope="col"></th>
+								<th scope="col">Acción</th>						
 
 							</tr>
 						</thead>
@@ -210,11 +221,11 @@ MENÚS DE PERSONAS (PLANILLAS)
 								<td>{{$menu_persona->racionDisponible->fecha()}}</td>
 								<td>{{$menu_persona->isRealizado_str()}}</td>
 								@if($menu_persona->realizado)
-								<td><button type="submit" class="btn btn-success entregar"  disabled>Entregar</button></td>
-								<td><button type="submit" class="btn btn-danger eliminar" disabled>Eliminar</button></td>
+								<td><button type="submit" class="btn btn-success btn-sm entregar"  disabled>Entregar</button>
+								<button type="submit" class="btn btn-danger btn-sm eliminar" disabled>Eliminar</button></td>
 								@else
-								<td><button type="submit" class="btn btn-success entregar" id="btn-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Entregar</button></td>
-								<td><button type="submit" class="btn btn-danger eliminar" id="btn-eliminar-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Eliminar</button></td>
+								<td><button type="submit" class="btn btn-success btn-sm entregar" id="btn-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Entregar</button>
+								<button type="submit" class="btn btn-danger btn-sm eliminar" id="btn-eliminar-{{$menu_persona->id}}" data-token="{{ csrf_token() }}" data-id="{{ $menu_persona }}">Eliminar</button></td>
 								@endif
 
 							{!! Form::close() !!}
@@ -231,6 +242,31 @@ MENÚS DE PERSONAS (PLANILLAS)
 @endsection
 @section('script')
   <script src="{{asset('js/menu_persona-script.js')}}"></script>
+
+	<!-- DataTables -->
+	<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+	 <script>
+	 $(function () {
+		 $("#example1").DataTable({
+			 "responsive": true,
+			 "autoWidth": false,
+		 });
+		 $('#example2').DataTable({
+			 "paging": true,
+			 "lengthChange": false,
+			 "searching": false,
+			 "ordering": true,
+			 "info": true,
+			 "autoWidth": false,
+			 "responsive": true,
+		 });
+	 });
+	 </script>
+
 	<script type="text/javascript">
     $(document).ready(function(){
 			document.getElementById("nav-nutricion").setAttribute("class", "nav-link active");
