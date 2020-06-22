@@ -5,11 +5,7 @@
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous">
 </script>
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 
 @endsection
 @section('navegacion')
@@ -37,13 +33,36 @@
         </div>
         <p>
         </p>
-        <div class="table-responsive">
-          <div class="col-md-auto col-md-offset-2">
-      			 <div class="panel-heading">
-      					{!!	Form::label('titulo_tabla', 'Personas registradas')!!}
-                <div class="card-body">
-        					<table id="example1" class="table table-bordered table-striped"><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
-          					<thead >
+        <div class="container">
+          <div class="table-responsive">
+            <div class="col-md-8 col-md-offset-2">
+        			 <div class="panel-heading">
+        				 {!!Form::open(['route'=>'historialInternacion.index','method'=>'GET']) !!}
+        					 <div class="input-group mb-3">
+
+        					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
+        						 <option value="busqueda_nombre_persona" >Nombre y/o apellido</option>
+        						 <option value="busqueda_dni" > Número DNI </option>
+        						 <option value="busqueda_nombre_sector" > Sector </option>
+        					 </select>
+
+        						 {!!	Form::text('roleid',null,['id'=>'roleid','class'=>'form-control','name'=>'search','placeholder'=>'Ingrese el texto'])!!}
+        						 <div class="input-group-append">
+        							{!!	Form::submit('Buscar',['class'=>'btn btn-success btn-buscar'])!!}
+        						 </div>
+        					 </div>
+        					{!! Form::close() !!}
+        			 </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="table-responsive">
+            <div class="col-md-auto col-md-offset-2">
+        			 <div class="panel-heading">
+        					{!!	Form::label('titulo_tabla', 'Pacientes activos')!!}
+        					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
+        						<thead >
         							<tr>
         								<th scope="col">ID</th>
         								<th scope="col">Nombre</th>
@@ -128,11 +147,7 @@
 		});
 	});
 </script>
-<!-- DataTables -->
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
 
 <script type="text/javascript">
  $(document).ready(function(){
@@ -140,21 +155,5 @@
     document.getElementById("nav-internacion").setAttribute("class", "nav-link active");
    });
 </script>
-<script>
-$(function () {
-  $("#example1").DataTable({
-    "responsive": true,
-    "autoWidth": false,
-  });
-  $('#example2').DataTable({
-    "paging": true,
-    "lengthChange": false,
-    "searching": false,
-    "ordering": true,
-    "info": true,
-    "autoWidth": false,
-    "responsive": true,
-  });
-});
-</script>
+
 @endsection

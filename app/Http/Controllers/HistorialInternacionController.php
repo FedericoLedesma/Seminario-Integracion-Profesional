@@ -195,11 +195,30 @@ class HistorialInternacionController extends Controller
     }
 
     public function addAcompanante(Request $request){
+      Log::debug("addAcompanante");
       Log::debug($request);
       $historial = HistoriaInternacion::find($request->get('historial_id'));
       $persona = Persona::find($request->get('persona_id'));
-      $historial->add_acompanante($persona);
-      return $this->sucess();
+      try{
+        if($historial->get_paciente()->acompananteActual()){
+          return response()->json([
+            'estado'=>'false',
+            'success' => 'Hubo un error, este paciente ya tiene un acompañante'
+          ]);
+        }else{
+          $historial->add_acompanante($persona);
+          //return $this->sucess();
+          return response()->json([
+            'estado'=>'true',
+            'success' => 'Acompañante asignado con éxito!'
+          ]);
+        }
+      } catch (\Exception $e) {
+        return response()->json([
+          'estado'=>'false',
+          'success' => 'Hubo un error, este paciente ya tiene un acompañante'
+        ]);
+      }
     }
 
     public function createAcompanante($historial){
