@@ -6,7 +6,6 @@
         crossorigin="anonymous">
 </script>
 
-
 @endsection
 @section('navegacion')
     <li class="breadcrumb-item"><a href="{{route('historialInternacion.index') }}">Historial pacientes</a></li>
@@ -26,7 +25,6 @@
   @include('layouts.error')
 
 	    {!!Form::open(['method'=>'post','action'=>'HistorialInternacionController@store'])!!}
-
 	    <div>
         <div>
           <a href="{{action('HistorialInternacionController@createPaciente')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>
@@ -62,8 +60,7 @@
         			 <div class="panel-heading">
         					{!!	Form::label('titulo_tabla', 'Pacientes activos')!!}
         					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
-        						<thead >
-        							<tr>
+                    <tr>
         								<th scope="col">ID</th>
         								<th scope="col">Nombre</th>
         								<th scope="col">Tipo de doc.</th>
@@ -72,11 +69,9 @@
         								<th scope="col">Habitación</th>
         								<th scope="col">Peso</th>
         								<th scope="col">Ingresar</th>
-
         							</tr>
         						</thead>
-
-        						<tbody>
+                    <tbody>
         						@if($personas_no_internadas)
         							@foreach($personas_no_internadas as $persona)
                       {!!Form::open(['route'=>'historialInternacion.storeExistente','method'=>'GET']) !!}
@@ -89,7 +84,7 @@
         								<td>{{$persona->get_tipo_documento_name()}}</td>
         								<td>{{$persona->get_numero_doc()}}</td>
                         <td>
-                          <select class="browser-default custom-select" id="sectores" name="sectores">
+                          <select class="browser-default custom-select sectores" id="sectores-{{$persona->id}}" name="sectores">
                             @if($sectores)
                               @foreach($sectores as $sector)
                                 <option value= {{$sector->get_id()}}>{{$sector->get_name()}}</option>
@@ -97,7 +92,7 @@
                             @endif
                           <select/>
                         </td>
-                        <td><div id='select_habitacion' name='select_habitacion'>
+                        <td><div id='select_habitacion-{{$persona->id}}' name='select_habitacion'>
                           <select id="habitacion_id" name="habitacion_id">
                             @if($habitaciones)
                               @foreach($habitaciones as $habitacion)
@@ -105,50 +100,45 @@
                               @endforeach
                             @endif
                           </select>
-                        </td></div>
+                          </div>
+                        </td>
         								<td>
-                          <input type="number" id="peso" name="peso" value="0"/>
+                          <input id="peso" name="peso" value="0" size=3/>
                         </td>
         								<td>
 
           								{!!	Form::submit('Ingresar',['class' => 'btn btn-success'])!!}
-
                         </td>
-
         							</tr>
                       {!! Form::close() !!}
     								@endforeach
     							@endif
-                </tbody>
-        			</table>
-        		</div>
-        	</div>
-        </div>
-    	</div>
-    </div>
 
+        					</table>
+        				</div>
+        				</div>
+        			  </div>
+	    </div>
 		{!! Form::close() !!}
 
 @endsection
 @section('script')
 <script type="text/javascript">
 	$("document").ready(function(){
-
-
-		$("#sectores").change(function(){
+		$(".sectores").change(function(){
+      var id=this.id;
+      var habitaciones_id=id.replace('sectores','select_habitacion');
 			var token = '{{csrf_token()}}';
 			$.ajax({
 				type:"get",
-				url:	"/forms/habitaciones_disponibles/select/" + $('#sectores').val(),
+				url:	"/forms/habitaciones_disponibles/select/" + $('#'+this.id).val(),
 				success:function(r){
-					$('#select_habitacion').html(r);
+					$('#'+habitaciones_id).html(r);
 				}
 			});
 		});
 	});
 </script>
-
-
 <script type="text/javascript">
  $(document).ready(function(){
     document.getElementById("nav-enfermeria").setAttribute("class", "nav-link active");
