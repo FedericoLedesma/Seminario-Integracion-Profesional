@@ -120,7 +120,8 @@
 			 }return("");
 	 }
 	};
-	$('.eliminar').click(function(e){
+$('#example1 tbody').on( 'click', '[class*=eliminar]', function (e) {
+	//$('.eliminar').click(function(e){
 
 		e.preventDefault();//evita cargar la pagina
 
@@ -144,7 +145,12 @@
 					data:{data:patologia},
 		    	success: function (data) {
 						if (data.estado=='true'){
-						   		row.fadeOut();
+								var table=$("#example1").DataTable();
+								if ($(row).hasClass('child')) {
+								 table.row($(row).prev('tr')).remove().draw();
+								} else {
+								table.row($(row)).remove().draw();
+								}
 	        			$('#alert').html(data.success);
 							  	console.log(data.success);
 								}else{
@@ -158,6 +164,7 @@
 
 	        });
 	});
+
 	$('.quitarAlimento').click(function(e){
 
 		e.preventDefault();//evita cargar la pagina

@@ -62,7 +62,8 @@
 			 }return("");
 	 }
 	};
-	$('.entregar').click(function(e){
+	$('#example2 tbody').on( 'click', '[class*=entregar]', function (e) {
+	//$('.entregar').click(function(e){
 		var menu_persona = $(this).data("id");
 		//var btn=document.getElementById("btn-"+menu_persona.id).disabled = true;
 		e.preventDefault();//evita cargar la pagina
@@ -81,6 +82,7 @@
 							$('#alert').html(data.success);
 							}else{
 								console.log(data.success);
+								$('#alert').html(data.success);
 							}
 							},
 							error: function (data) {
@@ -90,8 +92,8 @@
 							}
 				});
 	});
-
-	$('.eliminar').click(function(e){
+	$('#example2 tbody').on( 'click', '[class*=eliminar]', function (e) {
+	//$('.eliminar').click(function(e){
 
 		e.preventDefault();//evita cargar la pagina
 
@@ -115,7 +117,12 @@
 					data:{menu_persona},
 		    	success: function (data) {
 						if (data.estado=='true'){
-						   		row.fadeOut();
+								var table=$("#example2").DataTable();
+								if ($(row).hasClass('child')) {
+								 table.row($(row).prev('tr')).remove().draw();
+								} else {
+								table.row($(row)).remove().draw();
+								}
 	        			$('#alert').html(data.success);
 							  	console.log(data.success);
 								}else{
@@ -129,7 +136,8 @@
 
 	        });
 	});
-	$('.crear_menu').click(function(e){
+	$('#example1 tbody').on( 'click', '[class*=crear_menu]', function (e) {
+	//$('.crear_menu').click(function(e){
 		var elemento=document.getElementById("modal-header");
 		$('#alert-modal').hide();
 		e.preventDefault();//evita cargar la pagina

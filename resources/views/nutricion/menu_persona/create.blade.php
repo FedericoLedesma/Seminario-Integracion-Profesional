@@ -56,6 +56,9 @@
 	.divTableFoot { display: table-footer-group;}
 	.divTableBody { display: table-row-group;}
 </style>
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
@@ -79,7 +82,7 @@ Crear menús para Pacientes
 	@endif
 </div>
 
-<div class="container">
+<!--<div class="container">
   <div class="table-responsive">
 		<div class="col-md-10 col-md-offset-1">
 
@@ -145,48 +148,6 @@ Crear menús para Pacientes
 										@endif
 									</div>
 
-									<div class="modal fade" id="create">
-										<div class="modal-dialog">
-												<div class="modal-content">
-														<div class="modal-header" id="modal-header">
-
-														</div>
-														<div class="modal-body" id="modal-body">
-															<div id="p_body">
-
-															</div>
-															<div id="alert-modal" class="alert alert-modal alert-danger"></div>
-															<table>
-																<tr>
-																	<td>
-																	{!!	Form::label('hor_id', 'Horario')!!}
-																	<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-																		<option selected value= 0> Seleccione horario </option>
-																		@foreach($horarios as $horario)
-																			@if(!($paciente->persona->tiene_menu_hoy_en_horario($horario->id)))
-																				<option value= {{$horario->id}} >{{$horario->name}}</option>
-																			@endif
-																		@endforeach
-																	</select>
-																	</td>
-																	<td>
-																		{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
-																		<select class="browser-default custom-select" id="racion_id" name="racion_id">
-																			<option value= 0>Raciones recomendadas</option>
-																		</select>
-																	</td>
-																</tr>
-															</table>
-
-														</div>
-														<div class="modal-footer">
-																<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
-																<a href="" class="btn btn-success guardar_menu" >Guardar</a>
-														</div>
-
-												</div>
-										</div>
-									</div>
 								</div>
 
 							@endforeach
@@ -195,13 +156,119 @@ Crear menús para Pacientes
 				</div>
 			</div>
 		</div>
+	</div>-->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead >
+				<tr>
+					<th scope="col">Apellido</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Numero Doc.</th>
+					<th scope="col">Tipo doc. </th>
+					<th scope="col">Sector</th>
+					<th scope="col">Habitación</th>
+					<th scope="col">Acción</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@if($pacientes)
+					@foreach($pacientes as $paciente)
+					<tr>
+						<td>{{$paciente->persona->apellido}}</td>
+						<td>{{$paciente->persona->name}}</td>
+						<td>{{$paciente->persona->numero_doc}}</td>
+						<td>{{$paciente->persona->tipoDocumento->name}}</td>
+						@if($paciente->persona->sectorFecha(date("Y-m-d")))
+							<td>{{$paciente->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+						@else
+							<td>-</td>
+						@endif
+						@if($paciente->persona->habitacionFecha(date("Y-m-d")))
+							<td>{{$paciente->persona->habitacionFecha(date("Y-m-d"))->name}}</td>
+						@else
+							<td>-</td>
+						@endif
+						<td>
+							<a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente}}" data-paciente_name="{{$paciente->get_name()}}" data-paciente_apellido="{{$paciente->get_apellido()}}" data-patologias="{{$paciente->persona->patologias}}" data-toggle="modal" data-target="#create">
+								Crear menú
+							</a>
+							@if($paciente->acompananteActual())
+							<a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$paciente->acompananteActual()->persona}}" data-paciente_name="{{$paciente->acompananteActual()->persona->name}}"data-paciente_apellido="{{$paciente->acompananteActual()->persona->apellido}}" data-patologias="{{$paciente->acompananteActual()->persona->patologias}}" data-toggle="modal" data-target="#create">
+									Menú Acompa.
+							</a>
+							@endif
+						</td>
+					</tr>
+					@endforeach
+				@endif
+			</tbody>
+		</table>
 	</div>
+	@if($pacientes)
+	<div class="modal fade" id="create">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header" id="modal-header">
 
+						</div>
+						<div class="modal-body" id="modal-body">
+							<div id="p_body">
 
+							</div>
+							<div id="alert-modal" class="alert alert-modal alert-danger"></div>
+							<table>
+								<tr>
+									<td>
+									{!!	Form::label('hor_id', 'Horario')!!}
+									<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
+										<option selected value= 0> Seleccione horario </option>
+									</select>
+									</td>
+									<td>
+										{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
+										<select class="browser-default custom-select" id="racion_id" name="racion_id">
+											<option value= 0>Raciones recomendadas</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+						<div class="modal-footer">
+								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
+								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
+						</div>
+
+				</div>
+		</div>
+	</div>
+	@endif
 @endsection
 @section('script')
 	<script src="{{asset('js/menu_persona-script.js')}}"></script>
+	<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
+	 <script>
+	 $(function () {
+		 $("#example1").DataTable({
+			 "responsive": true,
+			 "autoWidth": false,
+		 });
+		 $('#example2').DataTable({
+			 "paging": true,
+			 "lengthChange": false,
+			 "searching": false,
+			 "ordering": true,
+			 "info": true,
+			 "autoWidth": false,
+			 "responsive": true,
+		 });
+	 });
+	 </script>
   <script type="text/javascript">
    $(document).ready(function(){
 		 	document.getElementById("nav-nutricion").setAttribute("class", "nav-link active");

@@ -21,7 +21,8 @@ function getQueryVariable() {
 		 }return("");
  }
 };
-$('.eliminar').click(function(e){
+$('#example1 tbody').on( 'click', '[class*=eliminar]', function (e) {
+//$('.eliminar').click(function(e){
 
 	e.preventDefault();//evita cargar la pagina
 

@@ -21,7 +21,8 @@
 			 }return("");
 	 }
 	};
-	$('.eliminar').click(function(e){
+	$('#example1 tbody').on( 'click', '[class*=eliminar]', function (e) {
+	//$('.eliminar').click(function(e){
 
 		e.preventDefault();//evita cargar la pagina
 
@@ -32,7 +33,7 @@
 		var row = $(this).parents('tr');
 		var token = $(this).data("token");
 		var alimento = $(this).data("id");
-
+		
 		//validar el usuario
 		var url_destroy = "alimentos/:id";
 		url_destroy = url_destroy.replace(':id',alimento.id);

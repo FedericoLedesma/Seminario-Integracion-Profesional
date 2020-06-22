@@ -396,12 +396,20 @@ class MenuPersonaController extends Controller
       $menuPersona=$request->get('menu_persona');
       $menuPersona=MenuPersona::findById($menuPersona['id']);
       Log::info($request);
-      $menuPersona->realizado=true;
-      $menuPersona->save();
-      return response()->json([
-            'estado'=>'true',
-            'success' => 'Se registro exitosamente como realizado',
-        ]);
+      if(!$menuPersona->realizado){
+        $menuPersona->realizado=true;
+        $menuPersona->save();
+        return response()->json([
+              'estado'=>'true',
+              'success' => 'Se registro exitosamente como realizado',
+          ]);
+      }else{
+        return response()->json([
+              'estado'=>'false',
+              'success' => 'Ya está registrado como realizado',
+          ]);
+      }
+
     }
 
     /**

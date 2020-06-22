@@ -56,6 +56,9 @@
 	.divTableFoot { display: table-footer-group;}
 	.divTableBody { display: table-row-group;}
 </style>
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('navegacion')
 <li class="breadcrumb-item"><a href="{{route('menu_persona.index') }}">Menús</a></li>
@@ -79,7 +82,7 @@ Crear menús para Personal
 	@endif
 </div>
 
-<div class="container">
+<!---<div class="container">
   <div class="table-responsive">
 		<div class="col-md-8 col-md-offset-1">
 
@@ -104,7 +107,7 @@ Crear menús para Personal
 	</div>
 </div>
 
-  <div class="table-responsive">
+	<div class="table-responsive">
 		<div class="col-md-auto col-md-offset-1">
       <div class="panel-heading">
         <div class="divTable blueTable">
@@ -145,6 +148,41 @@ Crear menús para Personal
         </div>
 			</div>
 		</div>
+	</div>-->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead >
+				<tr>
+					<th scope="col">Apellido</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Numero Doc.</th>
+					<th scope="col">Tipo doc. </th>
+					<th scope="col">Sector</th>
+					<th scope="col">Acción</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@if($personal)
+					@foreach($personal as $p)
+					<tr>
+						<td>{{$p->persona->apellido}}</td>
+						<td>{{$p->persona->name}}</td>
+						<td>{{$p->persona->numero_doc}}</td>
+						<td>{{$p->persona->tipoDocumento->name}}</td>
+						@if($p->persona->sectorFecha(date("Y-m-d")))
+							<td>{{$p->persona->sectorFecha(date("Y-m-d"))->name}}</td>
+						@else
+							<td>-</td>
+						@endif
+						<td><a href="#" class="btn btn-primary pull-right crear_menu" data-paciente="{{$p}}" data-paciente_name="{{$p->persona->name}}" data-paciente_apellido="{{$p->persona->apellido}}" data-patologias="{{$p->persona->patologias}}" data-toggle="modal" data-target="#create">
+								Crear menú
+						</a></td>
+					</tr>
+					@endforeach
+				@endif
+			</tbody>
+		</table>
 	</div>
 
 @if($personal)
@@ -165,9 +203,7 @@ Crear menús para Personal
 									{!!	Form::label('hor_id', 'Horario')!!}
 									<select class="browser-default custom-select" data-paciente="{{$p}}" id="horario_id" name="horario_id">
 										<option selected value= 0> Seleccione horario </option>
-										@foreach($horarios as $horario)
-										<option value= {{$horario->id}} >{{$horario->name}}</option>
-										@endforeach
+
 									</select>
 									</td>
 									<td>
@@ -192,6 +228,28 @@ Crear menús para Personal
 @endsection
 @section('script')
 	<script src="{{asset('js/menu_persona-script.js')}}"></script>
+	<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+	<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+	 <script>
+	 $(function () {
+		 $("#example1").DataTable({
+			 "responsive": true,
+			 "autoWidth": false,
+		 });
+		 $('#example2').DataTable({
+			 "paging": true,
+			 "lengthChange": false,
+			 "searching": false,
+			 "ordering": true,
+			 "info": true,
+			 "autoWidth": false,
+			 "responsive": true,
+		 });
+	 });
+	 </script>
 
   <script type="text/javascript">
    $(document).ready(function(){

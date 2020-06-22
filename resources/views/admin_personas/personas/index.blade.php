@@ -75,7 +75,7 @@ PERSONAS REGISTRADAS
 								<th scope="col">Apellido</th>
 								<th scope="col">Fecha Nac.</th>
 								<th scope="col">EMail</th>
-								<th scope="col">Acción</th>								
+								<th scope="col">Acción</th>
 
 							</tr>
 						</thead>
