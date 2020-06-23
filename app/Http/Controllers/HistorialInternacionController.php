@@ -66,7 +66,15 @@ class HistorialInternacionController extends Controller
       $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
       $tipos_documentos = TipoDocumento::all();
       $sectores = Sector::all();
-      $habitaciones = Habitacion::get_disponibles();
+      //$habitaciones = Habitacion::get_disponibles();
+      $habitaciones=array();
+      foreach ($sectores as $sector ) {
+        if(count($sector->get_habitaciones_disponibles())>0){
+          $habitaciones=$sector->get_habitaciones_disponibles();
+          break;
+        }
+      }
+
       return view('admin_personas.historial.create',compact('personas_no_internadas','tipos_documentos','sectores','habitaciones'));
     }
 
@@ -117,6 +125,7 @@ class HistorialInternacionController extends Controller
     }
 
     public function storeExistente(Request $request){
+      Log::info("StoreExistente");
       Log::debug($request);
       $persona_id = $request->get('persona_id');
       $persona = Persona::find($persona_id);
@@ -137,9 +146,17 @@ class HistorialInternacionController extends Controller
         ]);
         $historial->save();
         $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
-        return view('admin_personas.historial.addAcompanante',
-          compact('personas_no_internadas','historial'));
+        //return view('admin_personas.historial.addAcompanante',
+          //compact('personas_no_internadas','historial'));
+          return response()->json([
+            'estado'=>'true',
+            'historial_id'=>$historial->get_id(),
+          ]);
       }//Acá abajo se debería notificar al usuario
+      return response()->json([
+        'estado'=>'false',
+        'historial_id'=>'error',
+      ]);
       return $this->create($request);
     }
 
