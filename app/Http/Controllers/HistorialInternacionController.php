@@ -166,8 +166,9 @@ class HistorialInternacionController extends Controller
         return $this->index('{}');
       }
       $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
+      $tipos_documentos = TipoDocumento::all();
       return view('admin_personas.historial.addAcompanante',
-        compact('personas_no_internadas','historial'));
+        compact('personas_no_internadas','historial','tipos_documentos'));
     }
 
     public function createPaciente(Request $request){
@@ -205,8 +206,9 @@ class HistorialInternacionController extends Controller
         ]);
         $historial->save();
         $personas_no_internadas = HistoriaInternacion::get_personas_no_internadas();
+        $tipos_documentos=TipoDocumento::all();
         return view('admin_personas.historial.addAcompanante',
-          compact('personas_no_internadas','historial'));
+          compact('personas_no_internadas','historial','tipos_documentos'));
       }//Acá abajo se debería notificar al usuario
       return $this->create($request);
     }
@@ -246,22 +248,33 @@ class HistorialInternacionController extends Controller
     public function storeNewAcompanante(Request $request){
       Log::debug($request);
       $data=$request->all();
-      $persona= new Persona([
-          'name' => $data['name'],
-          'numero_doc'=>$data['numero_doc'],
-          'apellido'=>$data['apellido'],
-          'direccion'=>$data['direccion'],
-          'email'=>$data['email'],
-          'provincia'=>$data['provincia'],
-          'localidad'=>$data['localidad'],
-          'sexo'=>$data['sexo'],
-          'fecha_nac'=>$data['fecha_nac'],
-          'tipo_documento_id'=>$data['tipo_documento_id'],
+      try{
+        $persona= new Persona([
+            'name' => $data['name'],
+            'numero_doc'=>$data['numero_doc'],
+            'apellido'=>$data['apellido'],
+            'direccion'=>$data['direccion'],
+            'email'=>$data['email'],
+            'provincia'=>$data['provincia'],
+            'localidad'=>$data['localidad'],
+            'sexo'=>$data['sexo'],
+            'fecha_nac'=>$data['fecha_nac'],
+            'tipo_documento_id'=>$data['tipo_documento_id'],
+          ]);
+        $persona->save();
+        $historial = HistoriaInternacion::find($request->get('historial_id'));
+        $historial->add_acompanante($persona);
+        //return $this->sucess();
+        return response()->json([
+          'estado'=>'true',
+          'success' => 'Acompañante asignado con éxito!'
         ]);
-      $persona->save();
-      $historial = HistoriaInternacion::find($request->get('historial_id'));
-      $historial->add_acompanante($persona);
-      return $this->sucess();
+      }catch (\Exception $e) {
+        return response()->json([
+          'estado'=>'false',
+          'success' => 'Hubo un error, este paciente ya tiene un acompañante o el acompañante ya existe'
+        ]);
+      }
     }
 
     public function sucess(){

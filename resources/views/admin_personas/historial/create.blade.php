@@ -33,7 +33,8 @@
 
 	    <div>
         <div>
-          <a href="{{action('HistorialInternacionController@createPaciente')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>
+          <!--<a href="{{action('HistorialInternacionController@createPaciente')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>-->
+          <a href="" data-toggle="modal" data-target="#modal" class="btn btn-primary">Ingresar a paciente nuevo </a>
         </div>
         <p>
         </p>
@@ -99,10 +100,10 @@
                                 @endif
                               @endforeach
                             @endif
-                          <select/>
+                          </select>
                         </td>
                         <td><div id='select_habitacion-{{$persona->id}}' name='select_habitacion'>
-                          <select id="habitacion_id" name="habitacion_id">
+                          <select id="habitacion_id" class="browser-default custom-select" name="habitacion_id">
                             @if($habitaciones)
                               @foreach($habitaciones as $habitacion)
                                 <option value= {{$habitacion->get_id()}}>{{$habitacion->get_name()}}</option>
@@ -130,7 +131,149 @@
             </div>
           </div>
   	    </div>
+        <div class="modal fade" id="modal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" id="modal-movimiento-header">
+                <h4>Registrar nuevo paciente</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>×</span>
+                </button>
+              </div>
+              {!!Form::open(['method'=>'get','action'=>'HistorialInternacionController@ingresarNuevo'])!!}
+              <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Número de documento</label>
+                          <input id="numero_doc"  class="form-control" name="numero_doc" type="number" min="1000000" max="999999999" required></input>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Tipo de doc.</label>
+                          @if($tipos_documentos)
+                            <select name="tipo_documento_id" class="browser-default custom-select">
+                              @foreach ($tipos_documentos as $tipos_documento)
+                              <option value="{{$tipos_documento->id}}" >{{$tipos_documento->name}}</option>
+                              @endforeach
+                           </select>
+                         @endIf
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Apellidos</label>
+                          <input type="text" name="apellido" class="form-control" placeholder="Apellidos ...">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Nombres</label>
+                          <input type="text" name="name" class="form-control" placeholder="Nombres ...">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" name="email" class="form-control" placeholder="Email (opcional) ...">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Domicilio</label>
+                          <input type="text" name="direccion" class="form-control" placeholder="Domicilio ...">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Localidad</label>
+                          <input type="text" name="localidad" class="form-control" placeholder="Localidad ...">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Provincia</label>
+                          <input type="text" name="provincia" class="form-control" placeholder="Provincia ...">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Sexo</label>
+                          <input type="text" name="sexo" class="form-control" placeholder="Sexo ...">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Fecha de Nacimiento</label>
+                          <input id="fecha_nac" class="form-control" name="fecha_nac" type="date" required value="{{\Carbon\Carbon::now()->toDateString()}}"></input>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Peso</label>
+                          <input id="peso" class="form-control" name="peso" type="number" min="0" max="99999999" step="0.1" required></input>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Sector</label>
+                          <select class="browser-default custom-select sectores" id="sectores-modal" name="sectores">
+                            @if($sectores)
+                              @foreach($sectores as $sector)
+                                @if(count($sector->get_habitaciones_disponibles())>0)
+                                <option value= {{$sector->get_id()}}>{{$sector->get_name()}}</option>
+                                @endif
+                              @endforeach
+                            @endif
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Habitación</label>
+                          <div id='select_habitacion-modal' name='select_habitacion-modal'>
+                             @if($habitaciones)
+                               <select name="habitacion_id" class="browser-default custom-select">
+                               <!--	<option selected>Seleccione el Rol</option>validar-->
+                             @foreach ($habitaciones as $habitacion)
+                             <!-- Opciones de la lista -->
+                               <option value="{{$habitacion->id}}" >{{$habitacion->name}}</option> <!-- Opci�n por defecto -->
 
+                             @endforeach
+                              </select>
+                            @endIf
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <div class="modal-footer">
+	               {!!	Form::submit('Guardar Persona',['class' => 'btn btn-success'])!!}
+                {!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}
+	            </div>
+              {!! Form::close() !!}
+            </div>
+          </div>
+        </div>
 
 @endsection
 @section('script')
