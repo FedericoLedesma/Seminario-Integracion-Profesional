@@ -34,7 +34,7 @@ class Personal extends Model
       if($personal->persona->numero_doc==$dni){
         return $personal;
       }
-    }
+    }return null;
   }
   public function persona()
   {

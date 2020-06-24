@@ -19,11 +19,10 @@ Agregar acompañante a un paciente
 	<div id="alert" class="alert alert-danger"></div>
 <div>
   <div>
-    <a href="{{action('HistorialInternacionController@sucess')}}" class="btn btn-primary">No agregar ningún acompañante</a>
-    <a href="{{action('HistorialInternacionController@createAcompanante', $historial->get_id())}}" class="btn btn-primary">Ingresar nueva persona como acompañante</a>
-    <a href="" data-toggle="modal" data-target="#modal" class="btn btn-primary">Ingresar a nuevo </a>
+    	{!!link_to_route('historialInternacion.show', $title = 'No agregar acompañante', $parameters = [$historial],['class' => 'btn btn-info'])!!}
+    <a href="" data-toggle="modal" data-target="#modal" class="btn btn-primary">Registrar nuevo acompañante </a>
   </div>
-  <div class="container">
+
       <!--  <div class="row">-->
       <div class="table-responsive">
            <div class="col-md-auto col-md-offset-2">
@@ -44,6 +43,8 @@ Agregar acompañante a un paciente
                </div>
              </div>
             {!! Form::close() !!}-->
+            <p>
+            </p>
             {!!	Form::label('titulo_tabla', 'Personas registradas')!!}
             <div class="card-body">
           		<table id="example1" class="table table-bordered table-striped">
@@ -88,7 +89,7 @@ Agregar acompañante a un paciente
           </div>
     </div>
   </div>
-</div>
+
 
 <div class="modal fade" id="modal">
   <div class="modal-dialog modal-lg">
@@ -184,9 +185,8 @@ Agregar acompañante a un paciente
       </div>
       <div class="modal-footer">
         <a href="#" class="btn btn-success" id="registrar" data-historial_id="{{$historial->get_id()}}">
-          registrar
+          Registrar
         </a>
-         {!!	Form::submit('Guardar Persona',['class' => 'btn btn-success'])!!}
         {!!	Form::reset('Borrar',['class' => 'btn btn-secondary'])!!}
       </div>
       {!! Form::close() !!}

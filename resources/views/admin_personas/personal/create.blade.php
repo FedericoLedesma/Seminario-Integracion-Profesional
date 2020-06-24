@@ -61,7 +61,7 @@ Agregar nuevo personal
             <div class="table-responsive">
                  <div class="col-md-auto col-md-offset-2">
                  <div class="panel-heading">
-        					{!!	Form::label('titulo_tabla', 'Personas ingresadas en el sistema')!!}
+        					{!!	Form::label('titulo_tabla', 'Personas registradas en el sistema')!!}
         					<table class="table table-striped table-hover "><!--  align="center" border="2" cellpadding="2" cellspacing="2" style="width: 900px;">-->
         						<thead >
         							<tr>

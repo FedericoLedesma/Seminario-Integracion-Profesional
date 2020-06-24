@@ -121,21 +121,32 @@ class PersonalController extends Controller
       return view('admin_personas.personal.createPersonal',compact('personas_no_internadas','tipos_documentos','sectores'));
     }
 
-    public function ingresarNuevo(Request $request){
+    public function ingresarNuevo(Request $request)
+    {
       $data=$request->all();
-      $persona= new Persona([
-          'name' => $data['name'],
-          'numero_doc'=>ucwords($data['numero_doc']),
-          'apellido'=>ucwords($data['apellido']),
-          'direccion'=>ucwords($data['direccion']),
-          'email'=>$data['email'],
-          'provincia'=>ucwords($data['provincia']),
-          'localidad'=>ucwords($data['localidad']),
-          'sexo'=>ucwords($data['sexo']),
-          'fecha_nac'=>$data['fecha_nac'],
-          'tipo_documento_id'=>$data['tipo_documento_id'],
-        ]);
-      $persona->save();
+      $per=Personal::buscar_por_numero_doc($data['numero_doc']);
+      $persona=Persona::findByNumeroDoc($data['numero_doc']);
+      if(empty($persona)){
+        $persona= new Persona([
+            'name' => ucwords($data['name']),
+            'numero_doc'=>$data['numero_doc'],
+            'apellido'=>ucwords($data['apellido']),
+            'direccion'=>ucwords($data['direccion']),
+            'email'=>$data['email'],
+            'provincia'=>ucwords($data['provincia']),
+            'localidad'=>ucwords($data['localidad']),
+            'sexo'=>ucwords($data['sexo']),
+            'fecha_nac'=>$data['fecha_nac'],
+            'tipo_documento_id'=>$data['tipo_documento_id'],
+          ]);
+        $persona->save();
+      }else {
+        $persona->direccion = ucwords($data['direccion']);
+        $persona->email = $data['email'];
+        $persona->provincia = ucwords($data['provincia']);
+        $persona->localidad = ucwords($data['localidad']);
+        $persona->save();
+      }
       $personal = new Personal(['id'=> $persona->id]);
       $personal->save();
       $personal = Personal::find($persona->id);
