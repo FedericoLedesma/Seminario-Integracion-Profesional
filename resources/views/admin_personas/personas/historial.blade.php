@@ -64,6 +64,7 @@
       		</tr>
       	</tbody>
       </table>
+        {!! Form::close() !!}
       <div class="collapse" id="historial_actual">
     	  <h4> Historial actual </h4>
         @if($persona->get_historial_internacion_activo()==null)
