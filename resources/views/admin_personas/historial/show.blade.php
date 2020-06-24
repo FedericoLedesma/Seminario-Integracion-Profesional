@@ -15,10 +15,6 @@ Historial de paciente
 
 
 	    <div class="table-responsive">
-        <div>
-          {!!link_to_route('pacientes.historial', $title ='Historial detallado', $parameters = [$historial->get_paciente()->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
-
-        </div>
         <div class="col-md-auto col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
@@ -63,12 +59,16 @@ Historial de paciente
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('historialInternacion.edit', $title = 'Cambiar de habitación', $parameters = [$historial],['class' => 'btn btn-warning'], $attributes = [])!!}
-  {!!link_to_route('personas.edit', $title = 'Modificar datos de paciente', $parameters = [$historial->get_paciente_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
-  {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}
+    <div class="mb-2">
+      {!!link_to_route('pacientes.historial', $title ='Historial detallado', $parameters = [$historial->get_paciente()->get_id()],['class' => 'btn btn-info'], $attributes = [])!!}
+
+    </div>
+	{!!link_to_route('historialInternacion.edit', $title = 'Cambiar de habitación', $parameters = [$historial],['class' => 'btn btn-warning mb-2'], $attributes = [])!!}
+  {!!link_to_route('personas.edit', $title = 'Modificar datos de paciente', $parameters = [$historial->get_paciente_persona()],['class' => 'btn btn-warning mb-2'], $attributes = [])!!}
+  {!!link_to_route('historialInternacion.alta', $title = 'ALTA', $parameters = [$historial],['class' => 'btn btn-info mb-2'], $attributes = [])!!}
   @if($historial->have_acompanante()==true)
-    {!!link_to_route('personas.edit', $title = 'Modificar datos de acompañante', $parameters = [$historial->get_acompanante_persona()],['class' => 'btn btn-warning'], $attributes = [])!!}
-    {!!link_to_route('historialInternacion.altaAcompanante', $title = 'Quitar acompañante', $parameters = [$historial],['class' => 'btn btn-info'], $attributes = [])!!}
+    {!!link_to_route('personas.edit', $title = 'Modificar datos de acompañante', $parameters = [$historial->get_acompanante_persona()],['class' => 'btn btn-warning mb-2'], $attributes = [])!!}
+    {!!link_to_route('historialInternacion.altaAcompanante', $title = 'Quitar acompañante', $parameters = [$historial],['class' => 'btn btn-info mb-2'], $attributes = [])!!}
   @endif
 @endif
 @endsection
