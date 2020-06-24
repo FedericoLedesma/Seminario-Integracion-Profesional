@@ -93,7 +93,7 @@
             {!!	Form::label('email', 'EMail')!!}
         </div>
         <div class="col-sm">
-            <input id="email" name="email" type="text" required></input>
+            <input id="email" name="email" type="email" required></input>
         </div>
       </div>
        <div class="row">

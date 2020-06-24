@@ -22,7 +22,7 @@ Agregar acompañante a un paciente
     	{!!link_to_route('historialInternacion.show', $title = 'No agregar acompañante', $parameters = [$historial],['class' => 'btn btn-info'])!!}
     <a href="" data-toggle="modal" data-target="#modal" class="btn btn-primary">Registrar nuevo acompañante </a>
   </div>
-
+@include('layouts.error')
       <!--  <div class="row">-->
       <div class="table-responsive">
            <div class="col-md-auto col-md-offset-2">
@@ -63,7 +63,6 @@ Agregar acompañante a un paciente
               @if($personas_no_internadas)
                 @foreach($personas_no_internadas as $persona)
                 {!!Form::open(['route'=>'historialInternacion.addAcompanante','method'=>'GET']) !!}
-                @include('layouts.error')
                 <tr>
                   <td>{{$persona->get_apellido()}}</td>
                   <td>{{$persona->get_name()}} </td>
@@ -142,7 +141,7 @@ Agregar acompañante a un paciente
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="text" id="email" name="email" class="form-control" placeholder="Email (opcional) ...">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email (opcional) ...">
                 </div>
               </div>
               <div class="col-sm-6">

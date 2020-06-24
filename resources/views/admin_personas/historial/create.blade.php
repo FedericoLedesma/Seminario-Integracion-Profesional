@@ -28,10 +28,7 @@
   Ingresar paciente
 @endsection
 @section('content')
-  @include('layouts.error')
 
-
-	    <div>
         <div>
           <!--<a href="{{action('HistorialInternacionController@createPaciente')}}" class="btn btn-primary">Ingresar a paciente nuevo</a>-->
           <a href="" data-toggle="modal" data-target="#modal" class="btn btn-primary">Ingresar a paciente nuevo </a>
@@ -61,7 +58,7 @@
             </div>
           </div>
         </div>-->
-
+  @include('layouts.error')
           <div class="table-responsive">
             <div class="col-md-auto col-md-offset-2">
       					{!!	Form::label('titulo_tabla', 'Personas no internadas')!!}
@@ -83,7 +80,6 @@
         						@if($personas_no_internadas)
         							@foreach($personas_no_internadas as $persona)
                       {!!Form::open(['route'=>'historialInternacion.storeExistente','method'=>'GET']) !!}
-                      @include('layouts.error')
                       <tr>
         							<!--	<td>
                           <input id="persona_id" name="persona_id" value="{{$persona->get_id()}}" size=3 readonly/>
@@ -130,7 +126,7 @@
               </div>
             </div>
           </div>
-  	    </div>
+
         <div class="modal fade" id="modal">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -168,13 +164,13 @@
                         <!-- text input -->
                         <div class="form-group">
                           <label>Apellidos</label>
-                          <input type="text" name="apellido" class="form-control" placeholder="Apellidos ...">
+                          <input type="text" name="apellido" class="form-control" placeholder="Apellidos ..." required>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Nombres</label>
-                          <input type="text" name="name" class="form-control" placeholder="Nombres ...">
+                          <input type="text" name="name" class="form-control" placeholder="Nombres ..." required>
                         </div>
                       </div>
                     </div>
@@ -182,13 +178,13 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Email</label>
-                          <input type="text" name="email" class="form-control" placeholder="Email (opcional) ...">
+                          <input type="email" name="email" class="form-control" placeholder="Email (opcional) ..." required>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Domicilio</label>
-                          <input type="text" name="direccion" class="form-control" placeholder="Domicilio ...">
+                          <input type="text" name="direccion" class="form-control" placeholder="Domicilio ..." required>
                         </div>
                       </div>
                     </div>
@@ -197,13 +193,13 @@
                         <!-- text input -->
                         <div class="form-group">
                           <label>Localidad</label>
-                          <input type="text" name="localidad" class="form-control" placeholder="Localidad ...">
+                          <input type="text" name="localidad" class="form-control" placeholder="Localidad ..." required>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Provincia</label>
-                          <input type="text" name="provincia" class="form-control" placeholder="Provincia ...">
+                          <input type="text" name="provincia" class="form-control" placeholder="Provincia ..." required>
                         </div>
                       </div>
                     </div>
@@ -212,7 +208,7 @@
                         <!-- text input -->
                         <div class="form-group">
                           <label>Sexo</label>
-                          <input type="text" name="sexo" class="form-control" placeholder="Sexo ...">
+                          <input type="text" name="sexo" class="form-control" placeholder="Sexo ..." required>
                         </div>
                       </div>
                       <div class="col-sm-6">
