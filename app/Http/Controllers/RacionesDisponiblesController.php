@@ -330,9 +330,17 @@ class RacionesDisponiblesController extends Controller
       Se debe corregir.
       */
     //  array_push($raciones_name,$racion_recomendada);
+      $rd=RacionesDisponibles::buscar_por_racion_horario_fecha($racion_recomendada->id,$horario_id,$f);
+      array_push($raciones,$rd);
       foreach ($raciones_d as $racion) {
       //  if(!($racion->id==$r_d_recomendada->id)){
-          array_push($raciones,$racion);
+          if(!empty($racion_recomendada)){
+            if(!($racion->horario_racion->racion->name==$racion_recomendada->name)){
+              array_push($raciones,$racion);
+            }
+          }else{
+            array_push($raciones,$racion);
+          }
       //  }
       }
       //$raciones = $persona->get_raciones_disponibles($f,$horario);//Este metodo devuelve la racion concreta, no la racionDisponible.

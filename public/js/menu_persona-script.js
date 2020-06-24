@@ -36,7 +36,11 @@
 											console.log(racion.name);
 											var miOption=document.createElement("option");
 											miOption.setAttribute("value",item.id);
-											miOption.setAttribute("label",racion.name);
+											if(i==0){
+												miOption.setAttribute("label",racion.name+" (recomendado)");
+											}else{
+												miOption.setAttribute("label",racion.name);
+											}
 											selectRaciones.appendChild(miOption);
 										}
 										j++;

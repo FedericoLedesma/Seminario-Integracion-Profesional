@@ -55,6 +55,9 @@
 	.divTableHeading { display: table-header-group;}
 	.divTableFoot { display: table-footer-group;}
 	.divTableBody { display: table-row-group;}
+	.modal-lg {
+       max-width: 35% !important;
+		 }
 </style>
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -207,7 +210,7 @@ Crear menús para Pacientes
 	</div>
 	@if($pacientes)
 	<div class="modal fade" id="create">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 						<div class="modal-header" id="modal-header">
 
