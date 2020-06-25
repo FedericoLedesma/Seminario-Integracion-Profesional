@@ -145,6 +145,7 @@ class PatologiaController extends Controller
         if($patologia){
           $patologia->name=ucwords($request->name);
           $patologia->tipo_patologia_id=$request->tipo_patologia_id;
+          $patologia->descripcion=ucwords($request->descripcion);
           $patologia->save();
           $fecha= new DateTime(date("Y-m-d"));
           try{
