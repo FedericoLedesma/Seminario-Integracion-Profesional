@@ -253,10 +253,11 @@ class InformeController extends Controller
         if($solo_raciones=="true"){
           $raciones_id=array();
           $raciones_a_preparar_id=array();
-          foreach ($menus as  $menu) {
-            array_push($raciones_id,$menu->racionDisponible->horario_racion->racion->id);
+          foreach ($menus as  $menu) {          
             if(!$menu->realizado){
               array_push($raciones_a_preparar_id,$menu->racionDisponible->horario_racion->racion->id);
+            }else{
+              array_push($raciones_id,$menu->racionDisponible->horario_racion->racion->id);
             }
           }
           $cantidad_raciones_a_preparar=array_count_values($raciones_a_preparar_id);
