@@ -55,9 +55,6 @@
 	.divTableHeading { display: table-header-group;}
 	.divTableFoot { display: table-footer-group;}
 	.divTableBody { display: table-row-group;}
-	.modal-lg {
-       max-width: 35% !important;
-		 }
 </style>
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -210,7 +207,7 @@ Crear menús para Pacientes
 	</div>
 	@if($pacientes)
 	<div class="modal fade" id="create">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog">
 				<div class="modal-content">
 						<div class="modal-header" id="modal-header">
 
@@ -220,23 +217,26 @@ Crear menús para Pacientes
 
 							</div>
 							<div id="alert-modal" class="alert alert-modal alert-danger"></div>
-							<table>
-								<tr>
-									<td>
-									{!!	Form::label('hor_id', 'Horario')!!}
-									<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
-										<option selected value= 0> Seleccione horario </option>
-									</select>
-									</td>
-									<td>
-										{!!	Form::label('racion_id', 'Raciones Recomendadas')!!}
+							<div class="row">
+								<div class="col-sm-5">
+									<!-- text input -->
+									<div class="form-group">
+										{!!	Form::label('hor_id', 'Horario')!!}
+										<select class="browser-default custom-select" data-paciente="{{$paciente}}" id="horario_id" name="horario_id">
+											<option selected value= 0> Seleccione horario </option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-7">
+									<div class="form-group">
+										{!!	Form::label('racion_id', 'Raciones disponibles')!!}
 										<select class="browser-default custom-select" id="racion_id" name="racion_id">
 											<option value= 0>Raciones recomendadas</option>
 										</select>
-									</td>
-								</tr>
-							</table>
-
+									</div>
+								</div>
+								<p class="ml-2">(*) Ración recomendada.</p>
+							</div>
 						</div>
 						<div class="modal-footer">
 								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>

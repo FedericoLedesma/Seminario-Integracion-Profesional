@@ -37,7 +37,7 @@
 											var miOption=document.createElement("option");
 											miOption.setAttribute("value",item.id);
 											if(i==0){
-												miOption.setAttribute("label",racion.name+" (recomendado)");
+												miOption.setAttribute("label",racion.name+"*");
 											}else{
 												miOption.setAttribute("label",racion.name);
 											}
