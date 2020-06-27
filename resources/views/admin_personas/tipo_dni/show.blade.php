@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="{{route('roles.index') }}">Roles</a></li>
-		<li class="breadcrumb-item active">Ver Rol</li>
+    <li class="breadcrumb-item"><a href="{{route('tipoDocumento.index') }}">Tipos de documento</a></li>
+		<li class="breadcrumb-item active">Ver tipo de documento</li>
 @endsection
 @section('content')
 
@@ -17,57 +17,38 @@
 -->
 </style>
 	   @include('layouts.error')
-	  	@if($role)
+	  	@if($tipo)
 
 
 
 
 	    <div class="table-responsive">
-	    <h2>Rol  {{$role->name}}</h2>
+	    <h2>Tipo de documento</h2>
         <div class="col-md-3 col-md-offset-1">
          <div class="panel-heading">
 	    <table class="table table-bordered table-hover table-striped">
 	    	<tr>
 	    		<td>ID </td>
-				<td>{{$role->id}}</td>
+				<td>{{$tipo->id}}</td>
 			</tr>
 			<tr>
 				<td>NOMBRE </td>
-				<td>{{$role->name}}</td>
+				<td>{{$tipo->name}}</td>
 			</tr>
 			<tr>
 				<td>CREADO </td>
-				<td>{{$role->created_at}}</td>
+				<td>{{$tipo->created_at}}</td>
 			</tr>
 			<tr>
 				<td>MODIFICADO </td>
-				<td>{{$role->updated_at}}</td>
+				<td>{{$tipo->updated_at}}</td>
 			</tr>
 
 		</table>
 		</div>
 		</div>
 		</div>
-	{!!link_to_route('roles.edit', $title = 'MODIFICAR', $parameters = [$role],['class' => 'btn btn-warning'], $attributes = [])!!}
-
-	<h3>Permisos asociados</h3>
-	@if($permisos)
-	<div class="table-resposive">
-        <div class="panel-heading">
-		    <table class="table table-bordered table-striped">
-		    @foreach($permisos as $permiso)
-		    	<tr>
-			 		<td>
-			 			<label>{{$permiso}}</label>
-			 		</td>
-				</tr>
-
-				@endforeach
-			</table>
-		</div>
-	</div>
-	@endif
-
+	{!!link_to_route('tipoDocumento.edit', $title = 'MODIFICAR', $parameters = [$tipo],['class' => 'btn btn-warning'], $attributes = [])!!}
 
 
 @endif

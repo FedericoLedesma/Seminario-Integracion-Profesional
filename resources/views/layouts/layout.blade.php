@@ -374,6 +374,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <p class="text-dark">Profesión</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('tipoDocumento.index') }}" class="nav-link" id="nav-administracion-profesion">
+            <i class="fa fa-circle nav-icon"></i>
+            <p class="text-dark">Tipos de documento</p>
+          </a>
+        </li>
 
         </ul>
        </li>

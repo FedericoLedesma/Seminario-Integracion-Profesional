@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('navegacion')
-<li class="breadcrumb-item active">Roles</li>
+<li class="breadcrumb-item active">Tipos de documentos</li>
 @endsection
 @section('content')
 
@@ -11,9 +11,9 @@
 <!-- validar los campos y establecer el campo contrase�a -->
 <!-- mostrar una tabla con los roles que existen -->
 
-	  	<title>PAGINA PRINCIPAL ADMINISTRADOR</title>
+	  	<title>Tipos de documentos</title>
 
-	    <h1>ROLES EXISTENTES</h1>
+	    <h1>Tipos de documentos existentes</h1>
 	      @include('layouts.error')
 
 <!-- UTILIZAR PLANTILLA BLADE PARA PERSONALIZAR LAS TABLAS SE REPITE CON ROLES -->
@@ -27,9 +27,9 @@
 }
 -->
 </style>
-<form method="get" action={{ route('roles.create') }}>
+<form method="get" action={{ route('tipoDocumento.create') }}>
 
-		<button class="btn btn-primary" type="submit">Agregar Rol</button>
+		<button class="btn btn-primary" type="submit">Agregar tipo de documento</button>
 
 
 </form>
@@ -42,7 +42,7 @@
 	</p>
 	<div id="alert" class="alert alert-info"></div>
 	@if($query)
-		<div id="alert" name="alert-roles" class="alert alert-info">Roles con el {{$busqueda_por}} = {{$query}}</div>
+		<div id="alert" name="alert-roles" class="alert alert-info">Tipos de documentos con el {{$busqueda_por}} = {{$query}}</div>
 	@endif
 </div>
 
@@ -52,7 +52,7 @@
          <div class="col-md-8 col-md-offset-2">
              <!--<div class="panel panel-default">-->
 				 <div class="panel-heading">
-				 {!!Form::open(['route'=>'roles.index','method'=>'GET']) !!}
+				 {!!Form::open(['route'=>'tipoDocumento.index','method'=>'GET']) !!}
 					 <div class="input-group mb-3">
 
 					 <select class="browser-default custom-select" id="busqueda_por" name="busqueda_por">
@@ -82,19 +82,19 @@
 						</thead>
 
 						<tbody>
-						@if($roles)
-							@foreach($roles as $role)
+						@if($tipoDoc)
+							@foreach($tipoDoc as $tipo)
 							<tr>
-								<td>{{$role->id}}</td>
-								<td>{{$role->name}}</td>
-								<td>{{$role->guard_name}}</td>
-								<td>{{$role->created_at}}</td>
-								<td>{{$role->updated_at}}</td>
-								<td>{!!link_to_route('roles.show', $title = 'VER', $parameters = [$role],['class' => 'btn btn-info'], $attributes = [])!!}</td>
+								<td>{{$tipo->id}}</td>
+								<td>{{$tipo->name}}</td>
+								<td>{{$tipo->guard_name}}</td>
+								<td>{{$tipo->created_at}}</td>
+								<td>{{$tipo->updated_at}}</td>
+								<td>{!!link_to_route('tipoDocumento.show', $title = 'VER', $parameters = [$tipo],['class' => 'btn btn-info'], $attributes = [])!!}</td>
 
-								{!! Form::model($role, ['route' => ['roles.destroy', $role->id], 'method'=> 'DELETE'])!!}
-								@if(!($role->id==1))
-								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $role->id }}">Eliminar</button></td>
+								{!! Form::model($tipo, ['route' => ['tipoDocumento.destroy', $tipo->id], 'method'=> 'DELETE'])!!}
+								@if(!($tipo->id==1))
+								<td><button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $tipo->id }}">Eliminar</button></td>
 								@endif
 								{!! Form::close() !!}
 
@@ -110,6 +110,6 @@
 				<!--</div>-->
 @endsection
 @section('script')
- <script src="{{asset('js/role-script.js')}}"></script>
+ <script src="{{asset('js/tipoDocumento-script.js')}}"></script>
 
 @endsection

@@ -64,7 +64,11 @@
       		</tr>
       	</tbody>
       </table>
+<<<<<<< HEAD
         {!! Form::close() !!}
+=======
+	  {!! Form::close() !!}
+>>>>>>> 32362c7ba7a2b650fc4634b327c5efc108a71044
       <div class="collapse" id="historial_actual">
     	  <h4> Historial actual </h4>
         @if($persona->get_historial_internacion_activo()==null)
@@ -145,7 +149,7 @@
                      </div>
                      <div class="divTableCell">
                        @if($acompanante->get_fecha_egreso()==null)
-                         {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$persona->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                         {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$acompanante->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
                        @else
                          <label> {{$acompanante->get_fecha_egreso()}} </label>
                        @endif
@@ -252,7 +256,7 @@
 
       <div id="lista_acompanhamiento" class="collapse">
         <h3>Historial de acompañamiento</h3>
-        @if($persona->get_like_paciente_list()==null)
+        @if($persona->acompanante()==null)
           No acompañó nunca a un paciente
         @else
         <div class="divTable greyGridTable">
@@ -270,7 +274,7 @@
             </div>
           </div>
           <div class="divTableBody">
-              @foreach($persona->get_like_paciente_list() as $acompanante)
+              @foreach($persona->toAcompanante() as $acompanante)
                 <div class="divTableRow">
                    <div class="divTableCell">
                       <label> {{$acompanante->get_name()}} {{$acompanante->get_apellido()}} </label>
@@ -280,7 +284,7 @@
                    </div>
                    <div class="divTableCell">
                      @if($acompanante->get_fecha_egreso()==null)
-                       {!!link_to_route('historialInternacion.altaAcompanante', $title = 'ALTA', $parameters = [$persona->get_historial_internacion_activo()],['class' => 'btn btn-warning'], $attributes = [])!!}
+                       
                      @else
                        <label> {{$acompanante->get_fecha_egreso()}} </label>
                      @endif

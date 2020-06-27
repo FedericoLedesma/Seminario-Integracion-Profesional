@@ -439,6 +439,10 @@ class Persona extends Model
     return $this->hasOne('App\Acompanante');
   }
 
+  public function toAcompanante(){
+    return Acompanante::getByPersonaID($this->get_id());
+  }
+
   public function get_acompanantes_desde_persona(){Acompanante::get_por_persona($this);}
   public function to_paciente(){
     $res = Paciente::find($this->get_id());
@@ -469,7 +473,7 @@ class Persona extends Model
     if ($paciente==null){
       return null;
     }
-    return $paciente->get_like_paciente_list();
+    return $paciente;
   }
 
   public function historial_activo_generar_informe(){

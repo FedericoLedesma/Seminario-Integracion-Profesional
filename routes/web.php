@@ -129,7 +129,7 @@ Route::get('/personas/historial/{id}', 'PersonaController@historial')
 Route::resource('/personas', 'PersonaController');
 Route::PUT('/personas/{persona}/agregarPatologias', 'PersonaController@agregarPatologias');
 Route::PUT('/personas/{persona}/quitarpatologia', 'PersonaController@quitarPatologia');
-
+Route::resource('/tipoDocumento', 'TipoDocumentoController');
 
 Route::resource('/patologias', 'PatologiaController');
 Route::get('/patologias/{patologia}/agregarAlimentosProhibidos',["as"=>"patologia.agregarAlimentosProhibidos", "uses"=> 'PatologiaController@agregarAlimentosProhibidos']);
