@@ -310,7 +310,7 @@ class RacionesDisponiblesController extends Controller
         Tiene patologias, entonces se recuperan todas las raciones disponible para el dia y horario segun la patologia
         */
         Log::info("TIENE PATOLOGIAS".$persona->name);
-        $raciones_d=RacionesDisponibles::getRacionesDisponiblesPatologias($patologias,$fecha,$horario_id);
+        $raciones_d=RacionesDisponibles::getRacionesDisponiblesPatologiasVersionB($patologias,$fecha,$horario_id);
         Log::info($raciones_d);
       }
 
@@ -337,8 +337,8 @@ class RacionesDisponiblesController extends Controller
       }
       //$raciones = $persona->get_raciones_disponibles($f,$horario);//Este metodo devuelve la racion concreta, no la racionDisponible.
       foreach ($raciones as $racion) {
-        $r=Racion::findById($racion->horario_racion->racion->id);
-        array_push($raciones_name,$r);
+        //$r=Racion::findById($racion->horario_racion->racion->id);
+        array_push($raciones_name,$racion);
       }
       Log::info($raciones_name);
       return response([
