@@ -110,7 +110,7 @@ class RacionesDisponibles extends Model
           if ($racionD->get_horario_id()==$horario_id){
             $racion = $racionD->get_racion();
             if ($racion->get_id()==$racionX->get_id()){
-              array_push($res,$racion);
+              array_push($res,$racionD);
             }
           }
         }
@@ -208,7 +208,7 @@ class RacionesDisponibles extends Model
     public function get_horario(){return $this->get_horario_racion()->get_horario();}
     public function get_racion(){return $this->get_horario_racion()->get_racion();}
     public function get_racion_id(){return $this->get_racion()->get_id();}
-    
+
     public function get_horario_id(){return $this->get_horario_racion()->get_horario_id();}
     public function fecha()
     {
