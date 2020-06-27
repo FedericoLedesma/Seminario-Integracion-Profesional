@@ -204,7 +204,7 @@ div.blueTable {
   													<td>{{$movimiento->tipoMovimiento->name}}</td>
   													<td>{{$movimiento->cantidad}}</td>
   													<td>
-  														<a href="/personas/{{$movimiento->personal->id}}">{{$movimiento->personal->id}} - {{$movimiento->personal->persona->apellido}}  </a>
+  														<a href="/personas/{{$movimiento->user->personal->id}}">{{$movimiento->user->id}} - {{$movimiento->user->personal->persona->apellido}}  </a>
   													</td>
   												</tr>
   											@endforeach

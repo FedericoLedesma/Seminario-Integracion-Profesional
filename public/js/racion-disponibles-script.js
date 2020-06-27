@@ -253,19 +253,19 @@
 $('.guardarDisponibilidad').click(function(e){
 
 	e.preventDefault();//evita cargar la pagina
-
+	var user_id = $(this).data("user_id");
 	var horario_id=document.getElementById("option-horario").value;
 	var fecha=document.getElementById("fecha").value;
 	var racion_id=document.getElementById("miSelect").value;
 	var cantidad=document.getElementById("cantidad").value;
 	console.log(racion_id);
-
+	console.log(user_id);
 	var url="/raciones-disponibles";
 	$.ajax({
 		type: 'POST',
 		url: url,
 		dataType: 'json',
-		data:{data:[horario_id,fecha,racion_id,cantidad]},
+		data:{data:[horario_id,fecha,racion_id,cantidad,user_id]},
 			success: function (data) {
 						console.log(data);
 							if(!(data.data=="error")){
@@ -364,7 +364,7 @@ $('.btn-agregar').click(function(e){
 $('.btn-movimientos').click(function(e){
 	e.preventDefault();
 	localStorage.setItem('racionDisponible',JSON.stringify($(this).data("id")));
-	
+
 });
 $('.guardarStock').click(function(e){
 

@@ -145,7 +145,7 @@ MOVIMIENTOS REGISTRADOS
 								<div class="divTableCell">{{$movimiento->tipoMovimiento->name}}</div>
 								<div class="divTableCell">{{$movimiento->cantidad}}</div>
 								<div class="divTableCell">
-									<a href="/personas/{{$movimiento->personal->id}}">{{$movimiento->personal->id}} - {{$movimiento->personal->persona->apellido}}  </a>
+									<a href="/personas/{{$movimiento->user->personal->id}}">{{$movimiento->user->id}} - {{$movimiento->user->personal->persona->apellido}}  </a>
 								</div>
 								<div class="modal fade" id="modal-{{$movimiento->id}}">
 									<div class="modal-dialog">

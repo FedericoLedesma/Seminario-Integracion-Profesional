@@ -59,7 +59,7 @@ Agregar disponibilidad a una ración
 										</a>-->
 									</td>
 									<td>
-											<a href="#" class="btn btn-success guardarDisponibilidad" id="guardarDisponibilidad">
+											<a href="#" class="btn btn-success guardarDisponibilidad" id="guardarDisponibilidad" data-user_id= {{Auth::user()->id}}>
 											    Guardar disponibilidad
 											</a>
 									</td>

@@ -114,6 +114,8 @@ class RacionesDisponiblesController extends Controller
         try{
           $horarioId=$request->data[0];
           $racionId=$request->data[2];
+          $user_id=$request->data[4];
+          Log::info($user_id);
           $racion=Racion::findById($racionId);
           $horario_pivot=$racion->horarios()->wherePivot('horario_id',$horarioId)->first();
           if($horario_pivot){
@@ -125,6 +127,7 @@ class RacionesDisponiblesController extends Controller
           if((!(empty($horario_racion_id)))&&($request->data[1]>=$fecha_actual->format('Y-m-d'))){
             $creado=new DateTime(date("Y-m-d H:i:s"));
             $user=Auth::user();
+            Log::info($user);
             $racionDisponible=RacionesDisponibles::create([
                 'horario_racion_id' => $horario_racion_id,
                 'fecha' => $request->data[1],
@@ -140,7 +143,7 @@ class RacionesDisponiblesController extends Controller
             $movimiento=Movimiento::create([
               'racion_disponible_id'=>$racionDisponible->id,
               'creado'=>$creado,
-              'user_id'=>$user->personal_id,
+              'user_id'=>$user_id,//$user->personal_id,
               'tipo_movimiento_id'=>1,
               'cantidad'=>$request->data[3],
             ]);
@@ -200,6 +203,7 @@ class RacionesDisponiblesController extends Controller
         $cantidad_stock=$request->cantidad_stock;
         $cantidad_realizados=$request->cantidad_realizados;
         $racionDisponible=$request->racionDisponible;
+        $user_id=$request->user_id;
         $rd=RacionesDisponibles::findById($racionDisponible['id']);
         Log::info('Update Racion Disponible');
         Log::info($rd);
@@ -218,7 +222,7 @@ class RacionesDisponiblesController extends Controller
           $movimiento=Movimiento::create([
             'racion_disponible_id'=>$rd->id,
             'creado'=>$creado,
-            'user_id'=>$user->personal_id,
+            'user_id'=>$user_id,//$user->personal_id,
             'tipo_movimiento_id'=>1,
             'cantidad'=>$cantidad_realizados,
           ]);
