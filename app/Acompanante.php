@@ -186,6 +186,10 @@ class Acompanante extends Model
     return $this->paciente->camasFecha($fecha)->habitacion;
   }
 
+  public function get_historial_internacion_activo(){
+    return $this->get_persona()->get_historial_internacion_activo();
+  }
+
   public static function get_entre_fechas_por_paciente($f_ini,$f_fin,$paciente){
     $res = array();
     if ($f_fin==null){
@@ -211,5 +215,9 @@ class Acompanante extends Model
 
   public static function get_por_persona($persona){
     return static::where('persona_id','=',$persona->get_id())->get();
+  }
+
+  public static function getByPersonaID($persona_id){
+    return static::where('persona_id','=',$persona_id)->get();
   }
 }
