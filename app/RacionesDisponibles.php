@@ -75,6 +75,49 @@ class RacionesDisponibles extends Model
       return $r_d;
     }
 
+    public static function getRacionesDisponiblesPatologiasVersionB($patologias,$fecha,$horario_id)
+    {
+      Log::Debug("static function getRacionesDisponiblesPatologias");
+      $raciones_disponibles= RacionesDisponibles::getRacionesDisponiblesFecha($fecha)->get();
+      Log::Debug("Obtengo todas las raciones disponibles para la fecha");
+
+      $res=array();
+      $raciones=array();
+      $flag = true;
+      foreach ($patologias as $patologia) {
+        Log::Debug("Patologia ".$patologia->name);
+        $racionesPatologia = $patologia->get_raciones_por_patologia();
+        if ($flag==true){
+          $res = $racionesPatologia;
+          $flag=false;
+        }
+        else{
+          $aux = $res;
+          $res = array();
+          foreach ($racionesPatologia as $racion) {
+            foreach ($aux as $racionX){
+              if ($racionX->get_id()==$racion->get_id()){
+                array_push($res,$racion);
+              }
+            }
+          }
+        }
+      }
+      $aux = $res;
+      $res = array();
+      foreach ($raciones_disponibles as $racionD) {
+        foreach($aux as $racionX){
+          if ($racionD->get_horario_id()==$horario_id){
+            $racion = $racionD->get_racion();
+            if ($racion->get_id()==$racionX->get_id()){
+              array_push($res,$racion);
+            }
+          }
+        }
+      }
+      return $res;
+    }
+
     public static function buscar_por_racion_horario_fecha($racion_id, $horario_id, $fecha){
       $raciones_disponibles_fecha = static::where('fecha','=', $fecha)->get();
       //$horario_racion = HorarioRacion::buscar_por_unique_key_horario_racion($horario_id,$racion_id);
@@ -165,7 +208,8 @@ class RacionesDisponibles extends Model
     public function get_horario(){return $this->get_horario_racion()->get_horario();}
     public function get_racion(){return $this->get_horario_racion()->get_racion();}
     public function get_racion_id(){return $this->get_racion()->get_id();}
-
+    
+    public function get_horario_id(){return $this->get_horario_racion()->get_horario_id();}
     public function fecha()
     {
       $fecha_ = date("d/m/Y", strtotime($this->fecha));
