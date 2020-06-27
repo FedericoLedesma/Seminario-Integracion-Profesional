@@ -337,8 +337,9 @@ class RacionesDisponiblesController extends Controller
       }
       //$raciones = $persona->get_raciones_disponibles($f,$horario);//Este metodo devuelve la racion concreta, no la racionDisponible.
       foreach ($raciones as $racion) {
-        //$r=Racion::findById($racion->horario_racion->racion->id);
-        array_push($raciones_name,$racion);
+        $r=Racion::findById($racion->horario_racion->racion->id);
+        Log::debug($r);
+        array_push($raciones_name,$r);
       }
       Log::info($raciones_name);
       return response([
