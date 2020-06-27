@@ -208,6 +208,7 @@ class RacionesDisponibles extends Model
     public function get_horario(){return $this->get_horario_racion()->get_horario();}
     public function get_racion(){return $this->get_horario_racion()->get_racion();}
     public function get_racion_id(){return $this->get_racion()->get_id();}
+    public function get_racion_name(){return $this->get_racion()->get_name();}
 
     public function get_horario_id(){return $this->get_horario_racion()->get_horario_id();}
     public function fecha()
