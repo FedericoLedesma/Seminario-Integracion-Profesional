@@ -127,8 +127,8 @@ class RacionesDisponiblesController extends Controller
           if((!(empty($horario_racion_id)))&&($request->data[1]>=$fecha_actual->format('Y-m-d'))){
             $creado=new DateTime(date("Y-m-d H:i:s"));
           //  $user=Auth::user();
-          
-            Log::info($user);
+
+            //Log::info($user);
             $racionDisponible=RacionesDisponibles::create([
                 'horario_racion_id' => $horario_racion_id,
                 'fecha' => $request->data[1],
