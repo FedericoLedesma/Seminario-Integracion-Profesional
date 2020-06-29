@@ -4,6 +4,22 @@
   <h2 align="center">Trabajo Práctico de Campo</h2>   
 </p>
 
+## Índice
+* [Docentes](#docentes)
+* [Integranes del grupo](#integrantes-del-grupo)
+* [Acerca del proyecto](#acerca-del-proyecto)
+    * [Objetivos alcanzados](#objetivos-alcanzados)
+* [Herramientas utilizadas para el desarrollo](#herramientas-utilizadas-para-el-desarrollo)
+* [Demo](#demo)
+* [Guía de instalación](#guía-de-instalación)
+* [Manual de usuario](#manual-de-usuario)
+* [Screenshots](#screenshots)
+    * [Desktop](#desktop)
+    * [Mobile](#mobile)
+    
+* [Documentación](#documentación)
+* [Licencia](#licencia)
+
 
 ## Docentes
 Mg. Bibiana Rossi <br/>
@@ -11,9 +27,11 @@ Lic. Viviana Chapetto <br/>
 Lic. David Petrocelli <br/>
 
 ## Integrantes del grupo
-Larena Estaban Nicolás <br/>
-Ledesma Arnaldo Federico <br/>
-Cravero Cristian <br/>
+| Alumno | N°. Legajo |
+| ------ | ------ |
+|Larena Estaban Nicolás|154582|
+|Ledesma Arnaldo Federico|156020|
+|Cravero Cristian|81171|
 
 ## Acerca del proyecto
 
@@ -40,6 +58,11 @@ El proyecto fue desarrollado para el sector de nutrición del Hospital Nacional 
 </p>
 
 ## Demo
+* http://agile-retreat-65340.herokuapp.com/
+* Credenciales
+    * Número de documento: **40000000**
+    * Contraseña: **12345678**
+
 
 ## Guía de instalación
 
@@ -53,8 +76,25 @@ El proyecto fue desarrollado para el sector de nutrición del Hospital Nacional 
 
 
 ## Manual de usuario
+* [Manual de usuario e instalación](Documentacion/Manual_de_usuario_alimentación.pdf)
 
 ## Screenshots
+### Desktop
+<img src="images/screenshots/Screenshot1.png" width="700" height="360"></img>
+<img src="images/screenshots/Screenshot2.png" width="700" height="360"></img>
+<img src="images/screenshots/Screenshot3.png" width="700" height="360"></img></br>
+### Mobile
+<img src="images/screenshots/Screenshot6.png" width="200" height="360"></img>
+<img src="images/screenshots/Screenshot5.png" width="200" height="360"></img>
+<img src="images/screenshots/Screenshot4.png" width="200" height="360"></img></br>
+*Los datos mostrados no son reales, tienen fines ilustrativos.*
+
+
+## Documentación
+* [Especificación General de Requerimientos](Documentacion/EGR_Grupo1_Sommer.pdf)
+* [Manual de usuario e instalación](Documentacion/Manual_de_usuario_alimentación.pdf)
+* [Carta de cumplimiento de PPS](Documentacion/Carta_de_cumplimiento_de_PPS.pdf)
+* [Proyecto de Enterprise Architect](https://github.com/FedericoLedesma/Seminario-Integracion-Profesional/blob/master/Documentacion/Sistema_Alimentacion_EA.eap)
 
 ## Licencia
 
