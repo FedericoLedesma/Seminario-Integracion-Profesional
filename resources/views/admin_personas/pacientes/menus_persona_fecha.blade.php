@@ -84,7 +84,16 @@ Raciones consumidas
 
 	    <h4>Persona: {{$persona->get_name()}} {{$persona->get_apellido()}}</h4>
 	      @include('layouts.error')
-
+<div>
+{!!Form::open(['route'=>'pacientes.historial.raciones-pdf','method'=>'POST','target'=>"_blank"]) !!}	
+<input type="hidden" name="persona_id" value={{$persona->get_id()}}>
+<input type="hidden" name="fecha_desde" value={{$fecha_desde}}>
+<input type="hidden" name="fecha_hasta" value={{$fecha_hasta}}>
+<input type="hidden" name="busqueda_horario_por" value={{$horario_id}}>
+{!!	Form::submit('Imprimir',['class'=>'btn btn-success'])!!}
+{!! Form::close() !!}
+<br>
+</div>
 <div>
 	@if($query)
 		<div id="alert" name="alert-raciones" class="alert alert-info">Menús consumidos por: {{$busqueda_por}} {{$query}}</div>

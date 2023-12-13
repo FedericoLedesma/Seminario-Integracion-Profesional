@@ -239,8 +239,10 @@ Crear menús para Pacientes
 							</div>
 						</div>
 						<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva ración</a>
 								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
+								
 						</div>
 
 				</div>

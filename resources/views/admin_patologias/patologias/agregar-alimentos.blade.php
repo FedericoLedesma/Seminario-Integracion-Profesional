@@ -88,6 +88,7 @@
 
             </div>
             <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <a href="" class="btn btn-primary nuevoAlimento" >Guardar</a>
             </div>
         </div>

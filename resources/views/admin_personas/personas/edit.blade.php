@@ -177,7 +177,8 @@ Editar Persona
          	 		</div>
             </div>
             <div class="modal-footer">
-                <a href="" data-id="{{$persona}}" class="btn btn-primary agregar_patologias" >Guardar</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <a href="" data-id="{{$persona}}" class="btn btn-primary agregar_patologias" >Guardar</a>
             </div>
         </div>
     </div>
