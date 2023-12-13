@@ -73,7 +73,10 @@
 							<tr>
 								<td>{{$patologia->name}}</td>
 								<td>{{$patologia->descripcion}}</td>
-								<td>{{$patologia->tipo_patologia_id}}</td>
+								<td>@if($patologia->tipoPatologia)
+									{{$patologia->tipoPatologia->name}}
+									@endif
+								</td>
 								<td>{!!link_to_route('patologias.show', $title = 'VER', $parameters = [$patologia],['class' => 'btn btn-info'], $attributes = [])!!}
 									<button type="submit" class="btn btn-danger eliminar" data-token="{{ csrf_token() }}" data-id="{{ $patologia }}">Eliminar</button>
 								</td>

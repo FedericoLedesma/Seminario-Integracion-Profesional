@@ -42,7 +42,7 @@ Historial de paciente
             </td>
         @else
           <td>
-            <a href="{{action('HistorialInternacionController@update_add_paciente', $historial->get_id())}}" class="btn btn-primary">Agregar uno</a>
+            <a href="{{action('HistorialInternacionController@update_add_paciente', $historial->get_id())}}" class="btn btn-primary">Agregar</a>
           </td>
         @endif
 			</tr>

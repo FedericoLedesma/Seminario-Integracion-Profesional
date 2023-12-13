@@ -213,6 +213,56 @@ class DatabaseSeeder extends Seeder
     $r6 = Racion::create([
       'name'=>'Sopa',
     ]);
+    $r7 = Racion::create([
+      'name'=>'Ensalada de pollo con espinaca',
+    ]);
+    $r8 = Racion::create([
+      'name'=>'Pata de pollo con pure de papa',
+    ]);
+
+    $r9 = Racion::create([
+      'name'=>'Pata de pollo con pure de batata',
+    ]);
+
+    $r10 = Racion::create([
+      'name'=>'Pechuga de pollo con pure zapallo y aceite de oliva',
+    ]);
+
+    $r11 = Racion::create([
+      'name'=>'Pollo con arroz',
+    ]);
+
+    $r12 = Racion::create([
+      'name'=>'Salmón al horno con pure',
+    ]);
+
+    $r13 = Racion::create([
+      'name'=>'Manzana rallada',
+    ]);
+
+    $r14 = Racion::create([
+      'name'=>'Jugo de naranja',
+    ]);
+
+    $r15 = Racion::create([
+      'name'=>'Tarta de acelga',
+    ]);
+
+    $r16 = Racion::create([
+      'name'=>'Churrasco con ensalada de pepino',
+    ]);
+
+    $r17 = Racion::create([
+      'name'=>'Matecocido con galletitas',
+    ]);
+
+    $r18 = Racion::create([
+      'name'=>'Matecocido con galletitas',
+    ]);
+
+    $r19 = Racion::create([
+      'name'=>'Leche con cereal sin azúcar',
+    ]);
 
     $a1 = Alimento::create([
       'name'=>'Lechuga'
@@ -246,6 +296,16 @@ class DatabaseSeeder extends Seeder
     $u3= Unidad::create([
       'name'=>'Litros'
     ]);
+    $alimentos = ['Pollo','Pescado','Arroz integral','Avena integral','Quinoa','Maiz integral','Manzana','Naranja',
+    'Pera','Espinaca','Acelga','Repollo','Zanahoria','Pepino','Zapallo','Papa','Tomate','Queso','Leche descremada',
+    'Leche de almendras','Yogurt','Leche de soja','Leche de avena','Matecocido','Te','Pan (con sal)','Pure de tomate', 
+    'Morron','Pan (sin sal)','Banana','Aceite de oliva','Azucar','Lentejas','Garbanzos','Batata','Cereal (sin azucar)',
+    'Cereal (con azucar)'];
+    foreach ($alimentos as $x) {
+      $alimento = Alimento::create([
+        'name' => $x,
+      ]);
+    }
     $r1->add_alimento($a2,100,$u2->id);
     $r1->add_alimento($a5,100,$u2->id);
     $r2->add_alimento($a2,200,$u2->id);
@@ -847,7 +907,7 @@ class DatabaseSeeder extends Seeder
       Log::debug('Método cargar raciones disponibles: se encontró un horario racion: '.$x);
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-21',
+          'fecha'=>date('Y-m-d',strtotime("-0 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -858,7 +918,7 @@ class DatabaseSeeder extends Seeder
       $rd->save();
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-20',
+          'fecha'=>date('Y-m-d',strtotime("-1 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -869,7 +929,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 19
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-19',
+          'fecha'=>date('Y-m-d',strtotime("-2 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -880,7 +940,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 18
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-18',
+          'fecha'=>date('Y-m-d',strtotime("-4 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -891,7 +951,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 17
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-17',
+          'fecha'=>date('Y-m-d',strtotime("-5 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -902,7 +962,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 16
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-16',
+          'fecha'=>date('Y-m-d',strtotime("-6 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -913,7 +973,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 15
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-15',
+          'fecha'=>date('Y-m-d',strtotime("-7 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -924,7 +984,7 @@ class DatabaseSeeder extends Seeder
       //Raciones para el 14
       $data = [
           'horario_racion_id'=>$x->get_horario_racion_id(),
-          'fecha'=>'2020-5-14',
+          'fecha'=>date('Y-m-d',strtotime("-8 days")),
           'stock_original'=>10,
           /*'cantidad_restante'=>10,
           'cantidad_realizados'=>0,*/
@@ -940,7 +1000,7 @@ class DatabaseSeeder extends Seeder
     static::cargar_raciones_disponibles();
     $data = [
       'paciente_id'=>5,
-      'fecha_ingreso'=>'2020-1-1',
+      'fecha_ingreso'=>date('Y-m-d',strtotime("-1 days")),
       'peso'=>70,
       'fecha_egreso'=>null,
     ];
@@ -948,7 +1008,7 @@ class DatabaseSeeder extends Seeder
     $h1->save();
     $data = [
       'paciente_id'=>6,
-      'fecha_ingreso'=>'2020-1-1',
+      'fecha_ingreso'=>date('Y-m-d',strtotime("-2 days")),
       'peso'=>70,
       'fecha_egreso'=>null,
     ];
@@ -956,7 +1016,7 @@ class DatabaseSeeder extends Seeder
     $h2->save();
     $data = [
       'paciente_id'=>7,
-      'fecha_ingreso'=>'2020-1-1',
+      'fecha_ingreso'=>date('Y-m-d',strtotime("-3 days")),
       'peso'=>80,
       'fecha_egreso'=>null,
     ];
@@ -964,7 +1024,7 @@ class DatabaseSeeder extends Seeder
     $h3->save();
     $data = [
       'paciente_id'=>8,
-      'fecha_ingreso'=>'2020-5-1',
+      'fecha_ingreso'=>date('Y-m-d',strtotime("-4 days")),
       'peso'=>70,
       'fecha_egreso'=>null,
     ];
@@ -972,7 +1032,7 @@ class DatabaseSeeder extends Seeder
     $h4->save();
     $data = [
       'paciente_id'=>9,
-      'fecha_ingreso'=>'2020-5-10',
+      'fecha_ingreso'=>date('Y-m-d',strtotime("-5 days")),
       'peso'=>70,
       'fecha_egreso'=>null,
     ];
@@ -1127,42 +1187,42 @@ class DatabaseSeeder extends Seeder
     $data=[
       'paciente_id'=>5,
       'cama_id'=>$cama1->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-1 days"))
     ];
     $paci_cama= new PacienteCama($data);
     $paci_cama->save();
     $data=[
       'paciente_id'=>6,
       'cama_id'=>$cama2->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-2 days"))
     ];
     $paci2_cama= new PacienteCama($data);
     $paci2_cama->save();
     $data=[
       'paciente_id'=>7,
       'cama_id'=>$cama3->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-3 days"))
     ];
     $paci1_cama= new PacienteCama($data);
     $paci1_cama->save();
     $data=[
       'paciente_id'=>8,
       'cama_id'=>$cama1h1s2->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-1 days"))
     ];
     $paci3_cama= new PacienteCama($data);
     $paci3_cama->save();
     $data=[
       'paciente_id'=>9,
       'cama_id'=>$cama2h1s2->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-1 days"))
     ];
     $paci4_cama= new PacienteCama($data);
     $paci4_cama->save();
     $data=[
       'paciente_id'=>10,
       'cama_id'=>$cama3h1s2->id,
-      'fecha'=>'2020-02-02'
+      'fecha'=>date('Y-m-d',strtotime("-1 days"))
     ];
     $paci5_cama= new PacienteCama($data);
     $paci5_cama->save();

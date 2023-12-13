@@ -28,6 +28,7 @@ class TipoPatologia extends Model
   public function delete(){
     $destroy = static::where('id', $this->id)->delete();
   }
-
+  public function get_name(){return $this->name;}
+  public function get_id(){return $this->id;}
 
 }

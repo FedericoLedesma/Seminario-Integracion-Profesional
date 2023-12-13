@@ -85,6 +85,7 @@ class PatologiaController extends Controller
         $patologia=Patologia::create([
             'name' => ucwords($data['name']),
             'descripcion'=>$data['descripcion'],
+            'tipo_patologia_id'=>$data['tipo_patologia_id']
 
           ]);
 

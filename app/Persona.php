@@ -121,6 +121,9 @@ class Persona extends Model
         return false;
       }
     }
+    public function get_historiales_paciente_cama_activos(){
+      return $this->get_historial_internacion_activo()->get_paciente_camas();
+    }
 
     /**
      * Funcion que tiene como objetivo agregar una patología.
@@ -491,4 +494,8 @@ class Persona extends Model
     }
     return $paciente->historial_activo_generar_informe_get_renglones();
   }
+  public function have_acompanante(){return ($this->get_acompanante_actual()<>null);}
+  public function get_acompanante_actual(){return Acompanante::get_acompanante_actual($this->get_id());}
+  public function get_acompanantes_historial_activo(){return $this->get_historial_internacion_activo()->get_acompanantes();}
+  public function get_acompanantes_historial_activo_id(){return $this->get_historial_internacion_activo()->get_id();}
 }

@@ -124,4 +124,12 @@ class Patologia extends Model
       return $this->hasOne('App\Dieta');
 
     }
+
+    public function tipoPatologia()
+    {
+      return $this->belongsTo('App\TipoPatologia', 'tipo_patologia_id');
+    }
+    public function get_tipo_patologia_id(){return $this->tipo_patologia_id;}
+    public function get_tipo_patologia(){return TipoPatologia::find($this->get_tipo_patologia_id());}
+    public function get_tipo_patologia_name(){return $this->get_tipo_patologia()->get_name();}
 }
