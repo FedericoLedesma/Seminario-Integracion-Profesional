@@ -242,7 +242,8 @@ div.blueTable {
                     </table>
                   </div>
                   <div class="modal-footer">
-                         <a href="" data-id="{{$racionDisponible}}" data-user={{Auth::user()}} class="btn btn-primary guardarStock" >Guardar</a>
+				  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <a href="" data-id="{{$racionDisponible}}" data-user={{Auth::user()}} class="btn btn-primary guardarStock" >Guardar</a>
                   </div>
                 </div>
               </div>

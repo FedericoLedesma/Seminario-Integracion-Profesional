@@ -126,7 +126,8 @@ Editar ración
 
 						</div>
 						<div class="modal-footer">
-								<a href="" data-racion="{{$racion}}" class="btn btn-primary guardarHorarioRacion" >Guardar</a>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<a href="" data-racion="{{$racion}}" class="btn btn-primary guardarHorarioRacion" >Guardar</a>
 						</div>
 				</div>
 		</div>

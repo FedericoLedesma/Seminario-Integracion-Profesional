@@ -13,6 +13,8 @@ use App\Racion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
+use DateTime;
 
 class MenuPersonaController extends Controller
 {
@@ -401,12 +403,12 @@ class MenuPersonaController extends Controller
         $menuPersona->save();
         return response()->json([
               'estado'=>'true',
-              'success' => 'Se registro exitosamente como realizado',
+              'success' => 'Se registro exitosamente como entregado',
           ]);
       }else{
         return response()->json([
               'estado'=>'false',
-              'success' => 'Ya está registrado como realizado',
+              'success' => 'Ya está registrado como entregado',
           ]);
       }
 
@@ -475,8 +477,35 @@ class MenuPersonaController extends Controller
       }
       $persona = Persona::find($persona_id);
       $horarios=array();
-      return view('admin_personas.pacientes.menus_persona_fecha',compact('menus','query','busqueda_por','horarios','persona'));
+      return view('admin_personas.pacientes.menus_persona_fecha',compact('menus','query','busqueda_por','horarios','persona','fecha_desde','fecha_hasta','horario_id'));
     }
+
+    public function getMenuDePersonaPDF(Request $request){
+      Log::info($request);
+      $menus=MenuPersona::all();
+      $persona_id=$request->get('persona_id');
+      $query="";
+      $fecha_desde=$request->get('fecha_desde');
+      $fecha_hasta=$request->get('fecha_hasta');
+      $horario_id=$request->get('busqueda_horario_por');
+      $busqueda_por="";
+      $user=Auth::user();
+      $c=new DateTime(date("Y-m-d H:i:s"));
+      $creado=$c->format('d-m-Y H:i:s');
+      if($horario_id=="0"){
+        //Se buscara por toodos los Horarios
+        $menus=MenuPersona::buscar_entre_fechas_persona_id($persona_id,$fecha_desde,$fecha_hasta);
+      }else {
+        $menus=MenuPersona::buscar_entre_fechas_persona_id_horario_id($persona_id,$fecha_desde,$fecha_hasta,$horario_id);
+      }
+      $persona = Persona::find($persona_id);
+      $horarios=array();
+      //$pdf = PDF::loadView('informe.informe_raciones', compact('raciones','cantidad_raciones','raciones_a_preparar','cantidad_raciones_a_preparar','query','busqueda_por','creado','user'));
+      $pdf = PDF::loadView('informe.informe_historial_pacientes',compact('menus','query','busqueda_por','horarios','persona','creado','user'));
+      return $pdf->stream();
+    }
+
+
 
     public function getHorarios(Request $request)
     {

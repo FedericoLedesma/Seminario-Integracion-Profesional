@@ -21,7 +21,10 @@
 			        </tr>
               <tr>
         				<td>Tipo de patología </td>
-        				<td>{{$patologia->tipo_patologia_id}}</td>
+        				<td>@if($patologia->tipoPatologia)
+								{{$patologia->tipoPatologia->name}}
+							@endif
+						</td>
         			</tr>
               <tr>
         				<td>Nombre </td>

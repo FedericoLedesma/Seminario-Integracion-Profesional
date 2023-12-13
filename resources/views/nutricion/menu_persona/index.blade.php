@@ -189,7 +189,7 @@ MENÚS DE PERSONAS (PLANILLAS)
 								<th scope="col">Horario</th>
 								<th scope="col">Ración</th>
 								<th scope="col">Fecha</th>
-								<th scope="col">Realizado</th>
+								<th scope="col">Entregado</th>
 								<th scope="col">Acción</th>
 
 							</tr>

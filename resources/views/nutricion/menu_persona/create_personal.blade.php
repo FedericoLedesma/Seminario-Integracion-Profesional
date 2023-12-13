@@ -219,8 +219,9 @@ Crear menús para Personal
 							</div>
 						</div>
 						<div class="modal-footer">
-								<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Ración</a>
-								<a href="" class="btn btn-success guardar_menu" >Guardar</a>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>	
+							<a href ="{{ route('raciones.create') }}" class="btn btn-primary" target="_blank">Nueva Ración</a>
+							<a href="" class="btn btn-success guardar_menu" >Guardar</a>	
 						</div>
 
 				</div>
