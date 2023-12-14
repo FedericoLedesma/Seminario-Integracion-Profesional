@@ -2,8 +2,10 @@
 FROM php:7.2-apache
 
 # Instala las extensiones necesarias
-RUN docker-php-ext-install pdo pdo_mysql mbstring \
-    pdo_pgsql
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo_pgsql pdo_mysql zip
 
 
 # Instala Composer globalmente
