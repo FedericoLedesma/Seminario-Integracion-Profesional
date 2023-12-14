@@ -2,7 +2,8 @@
 FROM php:7.2-apache
 
 # Instala las extensiones necesarias
-RUN docker-php-ext-install pdo pdo_mysql mbstring
+RUN docker-php-ext-install pdo pdo_mysql mbstring \
+    pdo_pgsql
 
 
 # Instala Composer globalmente
