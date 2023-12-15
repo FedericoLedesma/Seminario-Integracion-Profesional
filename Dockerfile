@@ -31,7 +31,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 
 # Establece los permisos adecuados y ejecuta comandos al levantar el contenedor
-CMD ["bash", "-c", "composer update && chown www-data:www-data -R ./storage && php artisan migrate && php artisan db:seed && chown www-data:www-data -R ./storage && php artisan key:generate"]
+CMD ["bash", "-c", "composer update && php artisan key:generate"]
 #composer update && chown www-data:www-data -R ./storage && php artisan migrate && php artisan db:seed && chown www-data:www-data -R ./storage && php artisan key:generate && apache2-foreground
 # Expone el puerto 80 para Apache
 EXPOSE 80
