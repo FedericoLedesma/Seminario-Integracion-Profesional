@@ -56,6 +56,8 @@ El proyecto fue desarrollado para el sector de nutrición del Hospital Nacional 
 <img src="images/bootstrap_logo.png" alt="Logo" width="160"></img>
 <img src="images/adminlte_logo.svg" alt="Logo" width="300"></img>
 <img src="images/godaddy-logo.png" alt="Logo" width="300"></img>
+<img src="images/docker-logo.jpg" alt="Logo" width="300"></img>
+<img src="images/google-cloud-platform-logo.jpg" alt="Logo" width="300"></img>
 </p>
 
 ## Demo
